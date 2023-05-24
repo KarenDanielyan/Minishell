@@ -30,9 +30,9 @@ CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address
 
 INVOKE		=	libft
 
-LFLAGS		=	-L./libft -lft -lreadline
+LFLAGS		=	-L./libft -lft -L/usr/local/lib -lreadline
 
-IFLAGS		=	-I./include -I./libft
+IFLAGS		=	-I./include -I./libft -I/usr/local/include
 
 MGOALS		=	$(filter-out bonus, $(MAKECMDGOALS))
 
