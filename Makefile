@@ -4,19 +4,21 @@ INCLUDE		=	./include
 
 BUILD		=	./build
 
-DIR			=	./src
+SRC			=	./src
 
 SUBDIRS		=	
 
 DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 				) Makefile
 
-SRC			=	$(patsubst %.c, $(SRC)/%.c,\
+SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				main.c)
 
-SRC			+=	
+SRCS		+=	
 
-OBJS		=	$(patsubst $(SRC)/*/%.c, $(BUILD)/%.o, $(SRCS))
+OBJS		=	$(patsubst $(SRC)/%.c, $(BUILD)/%.o, $(SRCS))
+
+OBJS		+=	$(filter-out %.c, $(patsubst $(SRC)/*/%.c, $(BUILD)/%.o, $(SRCS)))
 
 # Compilation options
 
@@ -48,7 +50,11 @@ all:		wait_msg $(INVOKE) $(NAME)
 $(BUILD):
 				@mkdir -p $(BUILD)
 
-$(BUILD)/%.o:	$(DIR)/*/%.c $(DEP)
+$(BUILD)/%.o:	$(SRC)/%.c $(DEP)
+					@echo "${YELLOW}Compiling $<.${RESET}"
+					@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+
+$(BUILD)/%.o:	$(SRC)/*/%.c $(DEP)
 					@echo "${YELLOW}Compiling $<.${RESET}"
 					@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
@@ -61,7 +67,7 @@ libft:
 				@$(MAKE) $(MGOALS) -C libft
 
 wait_msg:
-				@echo "${BLUE}Please wait for so_long to compile.${RESET}"
+				@echo "${BLUE}Please wait for minishell to compile.${RESET}"
 
 clean:		$(INVOKE)
 				@echo "${YELLOW}Cleaning Build...${RESET}"
