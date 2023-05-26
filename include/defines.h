@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/26 19:08:11 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/26 19:21:11 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ typedef struct s_word
 }	t_word;
 
 /**
- * @brief	List of word.
+ * @brief	List of words.
  * 
  */
 typedef struct s_wordl
 {
 	struct s_word	*word;
 	struct s_wordl	*next;
-}
+}	t_wordl;
 
 #endif
