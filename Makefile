@@ -6,7 +6,7 @@ BUILD		=	./build
 
 SRC			=	./src
 
-SUBDIRS		=	
+SUBDIRS		=	input
 
 DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 				) Makefile
@@ -14,9 +14,14 @@ DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				main.c)
 
+SRCS		+=	$(patsubst %.c, $(SRC)/input/%.c,\
+				loop.c)
+
 SRCS		+=	
 
 OBJS		=	$(patsubst $(SRC)/%.c, $(BUILD)/%.o, $(SRCS))
+
+OBJS		=	$(patsubst $(SRC)/*/%.c, $(BUILD)/%.o, $(SRCS))
 
 OBJS		+=	$(filter-out %.c, $(patsubst $(SRC)/*/%.c, $(BUILD)/%.o, $(SRCS)))
 
