@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/26 19:21:11 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:52:32 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,12 @@ typedef struct s_wordl
 	struct s_word	*word;
 	struct s_wordl	*next;
 }	t_wordl;
+
+typedef struct s_btree
+{
+	struct s_wordl	*value;
+	struct s_btree	*left;
+	struct s_btree	*right;
+}	t_btree;
 
 #endif

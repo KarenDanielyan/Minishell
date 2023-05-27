@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:57:14 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/05/26 18:01:18 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:53:53 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <readline/readline.h>
 #include "minishell.h"
 
-void	true_loop()
+void	true_loop(void)
 {
-	char *str;
+	char	*str;
 
 	while (1)
 	{
