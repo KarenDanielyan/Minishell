@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:57:14 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/05/27 15:37:38 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:06:43 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ void	true_loop(void)
 {
 	int		fd;
 	char	*str;
+	char	*filename;
 
-	fd = open("src/input/.History", O_CREAT | O_RDWR | O_APPEND);
+
+	filename = ft_strjoin(getenv("HOME"), "/.minishell_history");
+	fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0666);
+	free(filename);
 	while (1)
 	{
 		str = readline("minishell-3.2$ ");
