@@ -6,7 +6,7 @@ BUILD		=	./build
 
 SRC			=	./src
 
-SUBDIRS		=	input
+SUBDIRS		=	Builtins Init input
 
 DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 				) Makefile
@@ -17,13 +17,10 @@ SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 SRCS		+=	$(patsubst %.c, $(SRC)/input/%.c,\
 				loop.c)
 
-SRCS		+=	
+OBJS		=	$(patsubst %.c, $(BUILD)/%.o,\
+				main.c)
 
-OBJS		=	$(patsubst $(SRC)/%.c, $(BUILD)/%.o, $(SRCS))
-
-OBJS		=	$(patsubst $(SRC)/*/%.c, $(BUILD)/%.o, $(SRCS))
-
-OBJS		+=	$(filter-out %.c, $(patsubst $(SRC)/*/%.c, $(BUILD)/%.o, $(SRCS)))
+OBJS		+=	$(filter-out %.c, $(patsubst $(SRC)/input/%.c, $(BUILD)/%.o, $(SRCS)))
 
 # Compilation options
 
