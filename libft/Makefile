@@ -1,6 +1,6 @@
 NAME		=	libft.a
 
-DEP			= 	libft.h Makefile
+DEP			= 	libft.h get_next_line.h Makefile
 
 SOURCES		=	$(shell find . -maxdepth 1 -name '*.c')
 
