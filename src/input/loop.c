@@ -6,28 +6,40 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:57:14 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/05/27 17:17:19 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:49:02 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	show_history(void)
+/**
+ * @brief		showing history
+ * 
+ * 	this function again opne history file and when
+ * 	we writing "history" word he show us all comandin inside it
+ * 
+ */
+void	history(void)
 {
+	int		i;
 	int		fd;
 	char	*line;
 	char	*filename;
 
+	i = 1;
+	line = NULL;
 	filename = ft_strjoin(getenv("HOME"), "/.minishell_history");
 	fd = open(filename, O_RDONLY);
-	line = get_next_line(fd);
-	while (line != NULL)
+	while (1)
 	{
-		ft_putstr_fd(line, STDOUT_FILENO);
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		printf ("%d	%s", i++, line);
 		free(line);
 		line = NULL;
-		line = get_next_line(fd);
 	}
+	close(fd);
 }
 
 /**
@@ -52,8 +64,8 @@ void	true_loop(void)
 		{
 			add_history(str);
 			ft_putendl_fd(str, fd);
-			if (ft_strcmp(str, "a") == 0)
-				show_history();
+			if (ft_strcmp(str, "history") == 0)
+				history();
 		}
 	}
 }
