@@ -10,7 +10,7 @@
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [{ "name": "config", "value": "debug" }],
-      "externalConsole": false,
+      "externalConsole": true,
       "MIMode": "lldb"
     },
     {

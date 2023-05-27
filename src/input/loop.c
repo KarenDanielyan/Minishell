@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:57:14 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/05/27 16:43:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:17:19 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	show_history(void)
+{
+	int		fd;
+	char	*line;
+	char	*filename;
+
+	filename = ft_strjoin(getenv("HOME"), "/.minishell_history");
+	fd = open(filename, O_RDONLY);
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		ft_putstr_fd(line, STDOUT_FILENO);
+		free(line);
+		line = NULL;
+		line = get_next_line(fd);
+	}
+}
 
 /**
  * @brief		Readline while loop
@@ -34,6 +52,8 @@ void	true_loop(void)
 		{
 			add_history(str);
 			ft_putendl_fd(str, fd);
+			if (ft_strcmp(str, "a") == 0)
+				show_history();
 		}
 	}
 }
