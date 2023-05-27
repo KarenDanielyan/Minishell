@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/05/26 21:39:47 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:38:29 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "minishell.h"
 # include <libft.h>
 # include <stdio.h>
 # include <libft.h>

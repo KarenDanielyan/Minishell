@@ -6,16 +6,16 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/05/26 21:43:15 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:38:48 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+int	main(int ac, char **av, char **env)
 {
-	(void)argc;
-	(void)argv;
+	(void)ac;
+	(void)av;
 	(void)env;
 	true_loop();
 	return (0);
