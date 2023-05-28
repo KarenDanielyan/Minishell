@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/28 14:34:45 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:46:21 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,41 @@
 # define DEFINES_H
 
 # define HIST_FILE "/.minishell_history"
+# define ASSIGN_OP '='
+
+/**
+ * @brief	Variable scope enumeration.
+ * 
+ * @param LOCAL		Variable declared in a local scope.
+ * @param EXPORT	Variable declared with an export keyword.
+ * 					Meaning, that variable should be inherited
+ * 					by the child processes.
+ * @param SHELL		Variables declared by the shell itself.
+ * 					Meaning, that this variables are not environmental,
+ * 					but should be defined upon invokation of minishell.
+ */
+typedef enum e_scope
+{
+	LOCAL,
+	EXPORT,
+	SHELL
+}	t_scope;
 
 typedef enum e_token
 {
-	io_here,
-	io_file_in,
-	io_file_out,
-	op_pipe,
-	and_if,
-	or_if,
-	left_paren,
-	right_paren,
-	op_squote_open,
-	op_squote_close,
-	op_dquote_open,
-	op_dquote_close,
-	op_param,
-	word
+	IO_HERE,
+	IO_FILE,
+	OP_PARAM,
+	OP_PIPE,
+	AND_IF,
+	OR_IF,
+	LEFT_PAREN,
+	RIGHT_PAREN,
+	SQUOTE_OPEN,
+	SQUOTE_CLOSE,
+	DQUOTE_OPEN,
+	DQUOTE_CLOSE,
+	WORD
 }	t_token;
 
 /**
@@ -54,12 +72,5 @@ typedef struct s_wordl
 	struct s_word	*word;
 	struct s_wordl	*next;
 }	t_wordl;
-
-typedef struct s_btree
-{
-	struct s_wordl	*value;
-	struct s_btree	*left;
-	struct s_btree	*right;
-}	t_btree;
 
 #endif

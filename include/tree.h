@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   tree.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/05/28 17:35:23 by kdaniely         ###   ########.fr       */
+/*   Created: 2023/05/28 16:16:38 by kdaniely          #+#    #+#             */
+/*   Updated: 2023/05/28 16:17:09 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef TREE_H
+# define TREE_H
 
-# include "list.h"
-# include "tree.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdint.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <libft.h>
-
-void	history(void);
-
-t_list	*init(char **env);
+typedef struct s_btree
+{
+	struct s_wordl	*value;
+	struct s_btree	*left;
+	struct s_btree	*right;
+}	t_btree;
 
 #endif
