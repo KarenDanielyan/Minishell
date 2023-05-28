@@ -28,7 +28,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address
+CFLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
 
 INVOKE		=	libft
 
@@ -76,7 +76,7 @@ clean:		$(INVOKE)
 				@$(RM) $(BUILD)
 				@echo "${GREEN}Done.${RESET}"
 
-fclean:		printf libft
+fclean:		libft
 				@echo "${YELLOW}Cleaning Everyting...${RESET}"
 				@$(RM) $(BUILD)
 				@$(RM) $(NAME)

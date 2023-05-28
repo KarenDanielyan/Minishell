@@ -3,14 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:57:14 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/05/27 16:43:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:49:02 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/**
+ * @brief		showing history
+ * 
+ * 	this function again opne history file and when
+ * 	we writing "history" word he show us all comandin inside it
+ * 
+ */
+void	history(void)
+{
+	int		i;
+	int		fd;
+	char	*line;
+	char	*filename;
+
+	i = 1;
+	line = NULL;
+	filename = ft_strjoin(getenv("HOME"), "/.minishell_history");
+	fd = open(filename, O_RDONLY);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		printf ("%d	%s", i++, line);
+		free(line);
+		line = NULL;
+	}
+	close(fd);
+}
 
 /**
  * @brief		Readline while loop
@@ -34,6 +64,8 @@ void	true_loop(void)
 		{
 			add_history(str);
 			ft_putendl_fd(str, fd);
+			if (ft_strcmp(str, "history") == 0)
+				history();
 		}
 	}
 }
