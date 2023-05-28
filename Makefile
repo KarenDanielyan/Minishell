@@ -12,15 +12,13 @@ DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 				) Makefile
 
 SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
-				main.c)
-
-SRCS		+=	$(patsubst %.c, $(SRC)/input/%.c,\
-				loop.c)
+				main.c) \
+				$(patsubst %.c, $(SRC)/BuiltIns/%.c,\
+				history.c)
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o,\
-				main.c)
-
-OBJS		+=	$(filter-out %.c, $(patsubst $(SRC)/input/%.c, $(BUILD)/%.o, $(SRCS)))
+				main.c) \
+				$(filter-out %.c, $(patsubst $(SRC)/BuiltIns/%.c, $(BUILD)/%.o, $(SRCS)))
 
 # Compilation options
 
