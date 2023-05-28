@@ -6,12 +6,14 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/27 14:52:32 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/28 14:34:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
+
+# define HIST_FILE "/.minishell_history"
 
 typedef enum e_token
 {
@@ -23,7 +25,6 @@ typedef enum e_token
 	or_if,
 	left_paren,
 	right_paren,
-	op_pipe,
 	op_squote_open,
 	op_squote_close,
 	op_dquote_open,
