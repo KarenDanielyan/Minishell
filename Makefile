@@ -6,19 +6,22 @@ BUILD		=	./build
 
 SRC			=	./src
 
-SUBDIRS		=	Builtins Init input
-
 DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
-				) Makefile
+				defines.h list.h \
+				tree.h minishell.h) Makefile
 
 SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				main.c) \
 				$(patsubst %.c, $(SRC)/BuiltIns/%.c,\
-				history.c)
+				history.c) \
+				$(patsubst %.c, $(SRC)/Init/%.c,\
+				init.c)
+
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o,\
 				main.c) \
-				$(filter-out %.c, $(patsubst $(SRC)/BuiltIns/%.c, $(BUILD)/%.o, $(SRCS)))
+				$(filter-out %.c, $(patsubst $(SRC)/BuiltIns/%.c, $(BUILD)/%.o, $(SRCS))) \
+				$(filter-out %.c, $(patsubst $(SRC)/Init/%.c, $(BUILD)/%.o, $(SRCS)))
 
 # Compilation options
 

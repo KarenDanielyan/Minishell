@@ -6,14 +6,14 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 14:30:44 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/28 14:31:01 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:14:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief	showing history
+ * @brief
  * 
  * 			History builtin prints on the screen the contents
  * 			of the history file.
