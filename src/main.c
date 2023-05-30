@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/05/28 18:16:05 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:00:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	true_loop(t_list *var_l)
 	int		fd;
 	char	*str;
 	char	*filename;
-	
+
 	(void)var_l;
 	filename = ft_strjoin(getenv("HOME"), HIST_FILE);
 	fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0666);
@@ -39,7 +39,7 @@ void	true_loop(t_list *var_l)
 
 int	main(int ac, char **av, char **env)
 {
-	int	fd;
+	int		fd;
 	t_list	*var_l;
 
 	if (ac != 2)
@@ -57,7 +57,7 @@ int	main(int ac, char **av, char **env)
 		}
 		close(fd);
 	}
-	var_l = init(env);
+	var_l = env_init(env);
 	true_loop(var_l);
 	return (0);
 }

@@ -6,12 +6,14 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/28 17:46:21 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:55:55 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
+
+# include <stddef.h>
 
 # define HIST_FILE "/.minishell_history"
 # define ASSIGN_OP '='
