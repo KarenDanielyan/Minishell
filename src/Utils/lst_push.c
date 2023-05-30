@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:01:31 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/28 18:07:51 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:56:23 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,20 @@ void	lst_push_back(t_list **lst, t_list *new)
 	}
 	else
 		*lst = new;
+}
+
+void	lst_push_on(t_list **lst, t_list *new, int loc)
+{
+	t_list	*loc_node;
+
+	loc_node = NULL;
+	if (loc <= lst_size(*lst))
+	{
+		loc_node = get_node(*lst, loc);
+		new->prev = loc_node;
+		new->next = loc_node->next;
+		loc_node->next = new;
+		if (loc != lst_size(*lst))
+			(new->next)->prev = new;
+	}
 }

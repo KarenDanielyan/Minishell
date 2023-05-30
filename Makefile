@@ -15,13 +15,17 @@ SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/BuiltIns/%.c,\
 				history.c) \
 				$(patsubst %.c, $(SRC)/Init/%.c,\
-				init.c)
+				init.c) \
+				$(patsubst %.c, $(SRC)/Utils/%.c,\
+				lst_new.c lst_get.c lst_push.c \
+				lst_last.c lst_size.c lst_clear.c \
+				get_env.c)
 
 
-OBJS		=	$(patsubst %.c, $(BUILD)/%.o,\
-				main.c) \
+OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
 				$(filter-out %.c, $(patsubst $(SRC)/BuiltIns/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/Init/%.c, $(BUILD)/%.o, $(SRCS)))
+				$(filter-out %.c, $(patsubst $(SRC)/Init/%.c, $(BUILD)/%.o, $(SRCS))) \
+				$(filter-out %.c, $(patsubst $(SRC)/Utils/%.c, $(BUILD)/%.o, $(SRCS)))
 
 # Compilation options
 

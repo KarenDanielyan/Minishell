@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:26:31 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/28 17:38:48 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:41:01 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 *
 *	Return Value: None
 */
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	lst_clear(t_list **lst, void (*del)(void *))
 {
 	t_list	*a;
 
@@ -30,7 +30,9 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		while (*lst)
 		{
 			a = (*lst)->next;
-			ft_lstdelone(*lst, del);
+			del(a->joined);
+			del(a->key);
+			del(a->value);
 			*lst = a;
 		}
 	}

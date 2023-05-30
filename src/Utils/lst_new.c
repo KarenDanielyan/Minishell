@@ -6,12 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:34:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/28 18:08:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:54:31 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include <libft.h>
+#include <stdio.h>
 
 /**
  * @brief New node function
