@@ -3,3 +3,7 @@ build
 libft/build
 libft/libft.a
 src/input/.History
+readline/*.o
+readline/shlib/*.so
+readline/shlib/*.dylib
+readline/*.a
