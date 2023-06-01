@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lst_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:01:31 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/30 15:56:23 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/05/30 21:44:17 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
-
+#include <stdio.h>
 /*
 *	Reference: DNE
 *
