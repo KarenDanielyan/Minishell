@@ -37,9 +37,9 @@ CFLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
 
 INVOKE		=	libft
 
-LFLAGS		=	-L./libft -lft -L/usr/local/lib -lreadline
+LFLAGS		=	-Llib/libft -lft -L/usr/local/lib -lreadline
 
-IFLAGS		=	-I./include -I./libft -I/usr/local/include
+IFLAGS		=	-Iinclude -Ilib/libft -I/usr/local/include
 
 MGOALS		=	$(filter-out bonus, $(MAKECMDGOALS))
 
@@ -71,7 +71,7 @@ $(NAME):	$(BUILD) $(OBJS)
 				@echo "${GREEN}Build Successfull.${RESET}"
 
 libft:
-				@$(MAKE) $(MGOALS) -C libft
+				@$(MAKE) $(MGOALS) -C lib/libft
 
 wait_msg:
 				@echo "${BLUE}Please wait for minishell to compile.${RESET}"
