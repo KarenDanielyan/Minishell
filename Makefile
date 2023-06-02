@@ -13,13 +13,13 @@ DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				main.c) \
 				$(patsubst %.c, $(SRC)/BuiltIns/%.c,\
-				history.c) \
+				history.c pwd.c cd.c) \
 				$(patsubst %.c, $(SRC)/Init/%.c,\
 				init.c) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
 				lst_new.c lst_get.c lst_push.c \
 				lst_last.c lst_size.c lst_clear.c \
-				get_env.c)
+				get_env.c) 
 
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
@@ -33,7 +33,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-g -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
 
 INVOKE		=	libft
 
