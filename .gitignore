@@ -1,9 +1,8 @@
 minishell
 build
-libft/build
-libft/libft.a
-src/input/.History
-readline/*.o
-readline/shlib/*.so
-readline/shlib/*.dylib
-readline/*.a
+lib/libft/build
+lib/libft/libft.a
+lib/readline/*.o
+lib/readline/shlib/*.so
+lib/readline/shlib/*.dylib
+lib/readline/*.a
