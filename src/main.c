@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/02 21:32:16 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:51:51 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,14 @@ void	true_loop(t_list *var_l)
 		if (ft_strcmp(str, "history") == 0)
 			history();
 		if (ft_strcmp(split[0], "cd") == 0)
-		{	
 			cd(split[1], var_l);
-		}
 		if (ft_strcmp(str, "pwd") == 0)
 			pwd();
 		if (ft_strcmp(str, "env") == 0)
 			env(var_l);
 		free(split[0]);
 		free(split[1]);
+		free(split);
 	}
 }
 

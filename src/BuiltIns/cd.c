@@ -3,88 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/03 15:31:42 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:32:13 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *finde(t_list *env, char *key)
+t_list	*lst_get_by_key(t_list *var_list, char *key)
 {
-	t_list *temp;
-
-	temp = env;
-	while(temp)
+	while(var_list)
 	{
-		if (ft_strcmp(key, env->key) == 0)
-			return(ft_strdup(env->value));
-		temp = temp->next;
+		if (ft_strcmp(key, var_list->key) == 0)
+			return (var_list);
+		var_list = var_list->next;
 	}	
 	return (NULL);
 }
 
-void change1(t_list *env, char *new)
+/**
+ * @brief 
+ * 
+ * @param key 
+ * @param value Use strdup before passing the argument.
+ */
+void	lst_write(t_list *var_list, char *key, char *value)
 {
-	t_list *temp;
-	char	*rem;
-	
-	temp = env;
-	rem = ft_strdup(new);
-	while (temp)
-	{
-		if(ft_strcmp("PWD", temp->key) == 0)
-		{
-			free(temp->joined);
-			free(temp->value);
-			temp->value = rem;
-			temp->joined = ft_strjoin("PWD=",rem);
-			break;
-		}
-		temp = temp->next;
-	}	
-}
+	char	*tmp;
 
-void change2(t_list *env,char *new)
-{
-	t_list *temp;
-
-	temp = env;
-	while (temp)
+	while(var_list)
 	{
-		if(ft_strcmp("OLDPWD",temp->key) == 0)
+		if (ft_strcmp(var_list->key, key) == 0)
 		{
-			free(temp->joined);
-			free(temp->value);
-			temp->value = new;
-			temp->joined = (ft_strjoin("OLDPWD=", new));
-			break;
+			free(var_list->joined);
+			free(var_list->value);
+			var_list->value=value;
+			tmp = ft_strjoin(key, "=");
+			var_list->joined = ft_strjoin(tmp, value);
 		}
-		temp = temp->next;
+		var_list = var_list->next;
 	}
-	lst_push_back(&env, lst_new(EXPORT, ft_strjoin("OLDPWD=", new)));//sxala ashxatum
+	if (!var_list)
+	{
+		tmp = ft_strjoin(key, "=");
+		lst_push_back(&var_list, lst_new(EXPORT, ft_strjoin(tmp, value)));
+	}
+	free(tmp);
 }
 
-void cd(const char *path, t_list *env)
+void	cd(const char *path, t_list *var_list)
 {
-	t_list *temp;
-	char	*rem_pwd;
-	char	*pwd;
+	char	*current_pwd;
+	char	*new_pwd;
 	
-	temp = env;
-	rem_pwd = finde(env, "PWD");
+	current_pwd = ft_strdup(lst_get_by_key(var_list, "PWD")->value);
 	if (chdir(path) != 0)
 		perror("bash: cd: a");
-	pwd = getcwd(NULL, 0);
-	if(pwd == NULL)
-		perror("getcwd() error");
-	// change1(env, pwd);
-	change2(env, rem_pwd);
-	free(pwd);
-	free(rem_pwd);
-	
-	
+	new_pwd = getcwd(NULL, 0);
+	if(!new_pwd)
+		perror("getcwd()");
+	lst_write(var_list, "PWD", new_pwd);
+	lst_write(var_list, "OLDPWD", current_pwd);
+	system("leaks minishell");
 }
-
