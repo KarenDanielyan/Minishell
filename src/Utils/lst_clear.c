@@ -6,21 +6,20 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:26:31 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/30 13:41:01 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/03 14:33:02 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-/*
-*	Reference: DNE
-*
-*	Description: Deletes and frees the given node and every
-*	successor of that node, using the function ’del’ and free().
-*	Finally, the pointer to the list must be set to NULL.
-*
-*	Return Value: None
-*/
+/**
+ * @brief		Deletes and frees the given node and every successor
+ * 				of that node, using the function `del` and free().
+ * 				Finally, the pointer to the list is set to NULL.
+ * 
+ * @param lst	A linked list.
+ * @param del	Deletion function pointer.
+ */
 void	lst_clear(t_list **lst, void (*del)(void *))
 {
 	t_list	*a;
@@ -33,6 +32,7 @@ void	lst_clear(t_list **lst, void (*del)(void *))
 			del(a->joined);
 			del(a->key);
 			del(a->value);
+			free(*lst);
 			*lst = a;
 		}
 	}

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   lst_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:01:31 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/30 21:44:17 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/03 14:25:58 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include <stdio.h>
-/*
-*	Reference: DNE
-*
-*	Description: Adds the node ’new’ at the beginning of the list.
-*
-*	Return value: None
-*/
+
+/**
+ * @brief		Adds the nde 'new' at the beginning of the list.
+ * 
+ * @param lst	The linked list.
+ * @param new	The new node to be added to the list.
+ */
 void	lst_push_front(t_list **lst, t_list *new)
 {
 	if (lst)
@@ -30,13 +30,12 @@ void	lst_push_front(t_list **lst, t_list *new)
 	}
 }
 
-/*
-*	Reference: DNE
-*
-*	Description: Adds the node ’new’ at the end of the list.
-*
-*	Return Value: None
-*/
+/**
+ * @brief		Adds the node 'new' at the end of the list.
+ * 
+ * @param lst	The linked list.
+ * @param new	The node to be added to the list.
+ */
 void	lst_push_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
@@ -51,6 +50,16 @@ void	lst_push_back(t_list **lst, t_list *new)
 		*lst = new;
 }
 
+/**
+ * @brief		Adds the node 'new' into the position 'loc' in the list.
+ * 
+ * @param lst	The linked list.
+ * @param new	The node to be added to the list.
+ * @param loc	Index of the place where node should be added.
+ * 
+ * @note	The new node will be pushed as the next element of the node under
+ * 			the index `loc`.
+ */
 void	lst_push_on(t_list **lst, t_list *new, int loc)
 {
 	t_list	*loc_node;

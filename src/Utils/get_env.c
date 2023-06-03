@@ -6,15 +6,20 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:42:52 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/30 15:57:21 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/03 14:57:47 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "list.h"
 
 static int	get_env_len(t_list *var_list);
 
+/**
+ * @brief Get the environment as a string array.
+ * 
+ * @param var_list	A variable linked list.
+ * @return char**	Environment variables represented as a string array.
+ */
 char	**get_env(t_list	*var_list)
 {
 	char	**envp;
@@ -34,6 +39,9 @@ char	**get_env(t_list	*var_list)
 	return (envp);
 }
 
+/**
+ * @brief Get the number of environment variables.
+ */
 static int	get_env_len(t_list *var_list)
 {
 	int		len;
