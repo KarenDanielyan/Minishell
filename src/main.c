@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/03 21:02:44 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/03 21:30:45 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	main(int ac, char **av, char **env)
 		close(fd);
 	}
 	var_l = env_init(env);
-
 	true_loop(var_l);
 
 	return (0);

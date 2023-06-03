@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:34:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/03 20:36:55 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/03 21:30:08 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ t_list	*lst_new(int type, char *key_val)
 	new->type = type;
 	new->prev = NULL;
 	new->next = NULL;
-	free(split[0]);
-	free(split[1]);
-	free(split);
+	free_2d(split);
 	return (new);
 }
