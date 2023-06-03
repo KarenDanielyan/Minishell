@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/02 21:46:40 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/03 21:02:19 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_list	*env_init(char **env)
 {
 	t_list	*var_list;
-
+	
 	var_list = NULL;
 	while (*env)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/03 15:51:51 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/03 21:02:44 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	true_loop(t_list *var_l)
 	char	*filename;
 	char	**split;
 
-	// (void)var_l;
+	
+	(void)var_l;
 	filename = ft_strjoin(getenv("HOME"), HIST_FILE);
 	fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0666);
 	free(filename);
@@ -60,14 +61,15 @@ void	true_loop(t_list *var_l)
 		free(split[0]);
 		free(split[1]);
 		free(split);
+		free(str);
 	}
 }
 
 int	main(int ac, char **av, char **env)
 {
 	int		fd;
-	t_list	*var_l;
-	
+	t_list	*var_l=NULL;
+	(void)env;
 	if (ac == 2)
 	{
 		fd = open(av[1], O_RDONLY);
@@ -84,7 +86,9 @@ int	main(int ac, char **av, char **env)
 		close(fd);
 	}
 	var_l = env_init(env);
+
 	true_loop(var_l);
+
 	return (0);
 }
 

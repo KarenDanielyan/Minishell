@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:34:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/30 21:26:26 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/03 20:36:55 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@ t_list	*lst_new(int type, char *key_val)
 	}
 	split = ft_split(key_val, ASSIGN_OP);
 	new->joined = key_val;
-	new->key = split[0];
-	new->value = split[1];
+	new->key = ft_strdup(split[0]);
+	new->value = ft_strdup(split[1]);
 	new->type = type;
 	new->prev = NULL;
 	new->next = NULL;
+	free(split[0]);
+	free(split[1]);
+	free(split);
 	return (new);
 }

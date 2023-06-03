@@ -6,12 +6,12 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:01:31 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/30 21:44:17 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/03 20:35:04 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
-#include <stdio.h>
+#include "minishell.h"
 /*
 *	Reference: DNE
 *
@@ -49,6 +49,7 @@ void	lst_push_back(t_list **lst, t_list *new)
 	}
 	else
 		*lst = new;
+
 }
 
 void	lst_push_on(t_list **lst, t_list *new, int loc)

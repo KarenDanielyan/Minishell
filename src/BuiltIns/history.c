@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 14:30:44 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/28 16:14:24 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/03 19:28:25 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	history(void)
 		line = NULL;
 	}
 	close(fd);
+
 }
