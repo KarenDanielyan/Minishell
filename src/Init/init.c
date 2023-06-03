@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/30 21:34:30 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:46:40 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*env_init(char **env)
 	var_list = NULL;
 	while (*env)
 	{
-		lst_push_back(&var_list, lst_new(EXPORT, *env));
+		lst_push_back(&var_list, lst_new(EXPORT, ft_strdup(*env)));
 		env ++;
 	}
 	return (var_list);

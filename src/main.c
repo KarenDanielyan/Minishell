@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/02 15:08:37 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:32:16 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	true_loop(t_list *var_l)
 	char	*filename;
 	char	**split;
 
-	(void)var_l;
+	// (void)var_l;
 	filename = ft_strjoin(getenv("HOME"), HIST_FILE);
 	fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0666);
 	free(filename);
@@ -53,10 +53,12 @@ void	true_loop(t_list *var_l)
 			history();
 		if (ft_strcmp(split[0], "cd") == 0)
 		{	
-			cd(split[1]);
+			cd(split[1], var_l);
 		}
 		if (ft_strcmp(str, "pwd") == 0)
 			pwd();
+		if (ft_strcmp(str, "env") == 0)
+			env(var_l);
 		free(split[0]);
 		free(split[1]);
 	}

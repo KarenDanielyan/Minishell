@@ -13,7 +13,7 @@ DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				main.c) \
 				$(patsubst %.c, $(SRC)/BuiltIns/%.c,\
-				history.c pwd.c cd.c) \
+				history.c env.c pwd.c cd.c) \
 				$(patsubst %.c, $(SRC)/Init/%.c,\
 				init.c) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
