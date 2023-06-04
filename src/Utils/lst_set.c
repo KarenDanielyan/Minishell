@@ -6,17 +6,19 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 16:59:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/03 19:24:48 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/04 20:47:56 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include <libft.h>
-
+#include <stdio.h>
 void	lst_set(t_list *var_list, char *key, char *value)
 {
 	char	*tmp;
+	t_list	*temp;
 
+	temp = var_list;
 	while(var_list)
 	{
 		if (ft_strcmp(var_list->key, key) == 0)
@@ -30,11 +32,11 @@ void	lst_set(t_list *var_list, char *key, char *value)
 		}
 		var_list = var_list->next;
 	}
-	if (!var_list)
+	if (var_list == NULL)
 	{
 		tmp = ft_strjoin(key, "=");
-		lst_push_back(&var_list, lst_new(EXPORT, ft_strjoin(tmp, value)));
+		lst_push_back(&temp, lst_new(EXPORT, ft_strjoin(tmp, value)));
 	}
+	var_list = temp;
 	free(tmp);
-	// key = NULL;
 }
