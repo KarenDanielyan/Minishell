@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/04 20:05:49 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:36:02 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void	true_loop(t_list *var_l)
 	while (1)
 	{
 		str = readline("minishell-3.2$ ");
+		if (ft_strlen(str) == 0)
+		{
+			free(str);
+			continue ;
+		}
 		if (!str)
 			break ;
 		add_history(str);
@@ -56,14 +61,13 @@ void	true_loop(t_list *var_l)
 			pwd();
 		if (ft_strcmp(split[0], "unset") == 0)
 		{
-			unset_by_key(&var_l, split[1]);
+			unset(&var_l, split[1]);
 		}
 		if (ft_strcmp(str, "env") == 0)
 			env(var_l);
 		free(split[0]);
 		free(split[1]);
 		free(split);
-		// free(str);
 	}
 }
 

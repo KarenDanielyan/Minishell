@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:15:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/04 20:05:58 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:14:07 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	lst_set(t_list *var_list, char *key, char *value);
 void	lst_clear(t_list **lst, void (*del)(void *));
 void	lst_push_front(t_list **lst, t_list *new);
 void	lst_push_back(t_list **lst, t_list *new);
+void	lst_pop(t_list **lst, t_list *to_pop);
 
 #endif

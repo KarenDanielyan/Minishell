@@ -12,20 +12,23 @@ DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 
 SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				main.c) \
+				$(patsubst %.c, $(SRC)/List/%.c,\
+				lst_clear.c lst_get.c lst_last.c \
+				lst_new.c lst_pop.c lst_push.c \
+				lst_set.c lst_size.c) \
 				$(patsubst %.c, $(SRC)/BuiltIns/%.c,\
 				history.c env.c pwd.c cd.c unset.c) \
 				$(patsubst %.c, $(SRC)/Init/%.c,\
 				init.c) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
-				lst_new.c lst_get.c lst_push.c \
-				lst_last.c lst_size.c lst_clear.c \
-				get_env.c lst_set.c) 
+				get_env.c)
 
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
 				$(filter-out %.c, $(patsubst $(SRC)/BuiltIns/%.c, $(BUILD)/%.o, $(SRCS))) \
 				$(filter-out %.c, $(patsubst $(SRC)/Init/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/Utils/%.c, $(BUILD)/%.o, $(SRCS)))
+				$(filter-out %.c, $(patsubst $(SRC)/Utils/%.c, $(BUILD)/%.o, $(SRCS))) \
+				$(filter-out %.c, $(patsubst $(SRC)/List/%.c, $(BUILD)/%.o, $(SRCS)))
 
 # Compilation options
 
