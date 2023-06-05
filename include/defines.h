@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/30 20:33:05 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/04 21:47:51 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 
 # define HIST_FILE "/.minishell_history"
 # define ASSIGN_OP '='
-
+# define FIRST	1
+# define LAST 	2
+# define MIDDLE 3
 /**
  * @brief	Variable scope enumeration.
  * 

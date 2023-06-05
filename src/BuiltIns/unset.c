@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:47:20 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/04 18:17:31 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:49:27 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,33 @@ void unset_by_key(t_list **var_l, char *key)
 	if(delete == NULL)
 		return ;
 	//if in the list is only one node
-	if(!delete->prev && !delete->next)
+	if(delete->prev == NULL && delete->next == NULL)
 		free_node(delete);
 	//if we need to remove the first node
-	if(!delete->prev && delete->next)
+	if(delete->next != NULL && delete->prev == NULL)
 	{
-		tp = *var_l;
-		*var_l = (*var_l)->next;
-		free_node(tp);
+		printf("MTELA1\n");
+		(*var_l) = (*var_l)->next;
+		(*var_l)->prev = NULL;
+		delete->next = NULL;
+		free_node(delete);
 	}
-	//if we need to remove the last node
-	if(!delete->next && delete->prev)
+
+	if(delete->next == NULL && delete->prev)
 	{
-		tp = *var_l;
+	// if we need to remove the last node
+	printf("MTELA2\n");
+		tp = (*var_l);
 		tp = lst_last(tp);
 		tp = tp->prev;
 		tp->next = NULL;
 		delete->prev = NULL;
 		free_node(delete);
 	}
-	//if we need to remove middle nodes;
 	if(delete->next && delete->prev)
 	{
+	//if we need to remove middle nodes;
+	printf("MTELA3\n");
 		tp = delete;
 		temp = delete;
 		tp = delete->prev;
