@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/kdaniely/Minishell/readline
+BUILD_DIR = /Users/kdaniely/Minishell/lib/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -48,7 +48,7 @@ MV = mv
 
 SHELL = /bin/sh
 
-prefix = /usr/local
+prefix = /Users/kdaniely/Minishell/lib/rl_kdaniely
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share

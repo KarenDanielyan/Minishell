@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 8.2
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /usr/local
+prefix = /Users/kdaniely/Minishell/lib/rl_kdaniely
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /Users/kdaniely/Minishell/readline
+BUILD_DIR = /Users/kdaniely/Minishell/lib/readline
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c

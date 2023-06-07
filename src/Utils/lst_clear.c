@@ -6,11 +6,12 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:26:31 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/03 14:33:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/07 16:23:16 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+#include <stdlib.h>
 
 /**
  * @brief		Deletes and frees the given node and every successor
