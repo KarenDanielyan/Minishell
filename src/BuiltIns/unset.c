@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_get.c                                          :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 14:32:28 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/03 14:30:37 by kdaniely         ###   ########.fr       */
+/*   Created: 2023/06/04 16:47:20 by dohanyan          #+#    #+#             */
+/*   Updated: 2023/06/07 16:12:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "minishell.h"
 
-/**
- * @brief			Get the node of a linked list under the position `loc`.
- * 
- * @param lst		A linked list.
- * @param loc		Position of a node in a list.
- * @return t_list*	Pointer to the node in a list.
- */
-t_list	*get_node(t_list *lst, int loc)
+
+void unset(t_list **var_list, char *key)
 {
-	if (lst && loc < lst_size(lst))
-	{
-		while (loc--)
-		{
-			lst = lst->next;
-		}
-		return (lst);
-	}
-	return (NULL);
+	t_list	*delete;
+
+	delete = lst_get_by_key(*var_list, key);
+	lst_pop(var_list, delete);
 }

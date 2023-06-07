@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   lst_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/07 17:13:10 by kdaniely         ###   ########.fr       */
+/*   Created: 2023/05/30 14:32:28 by kdaniely          #+#    #+#             */
+/*   Updated: 2023/06/07 17:06:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "list.h"
+#include <libft.h>
 
-t_list	*env_init(char **env)
+t_list	*lst_get_by_key(t_list *var_list, char *key)
 {
-	t_list	*var_list;
-	
-	var_list = NULL;
-	while (*env)
+	while(var_list)
 	{
-		lst_push_back(&var_list, lst_new(EXPORT, ft_strdup(*env)));
-		env ++;
+		if (ft_strcmp(key, var_list->key) == 0)
+			return (var_list);
+		var_list = var_list->next;
+	}	
+	return (NULL);
+}
+
+t_list	*get_node(t_list *lst, int loc)
+{
+	if (lst && loc < lst_size(lst))
+	{
+		while (loc--)
+		{
+			lst = lst->next;
+		}
+		return (lst);
 	}
-	lst_push_back(&var_list, lst_new(SHELL, IFS));
-	lst_push_back(&var_list, lst_new(SHELL, PS1));
-	lst_push_back(&var_list, lst_new(SHELL, PS2));
-	lst_push_back(&var_list, lst_new(SHELL, PS4));
-	return (var_list);
+	return (NULL);
 }

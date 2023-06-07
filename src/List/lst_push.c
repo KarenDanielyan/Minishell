@@ -6,19 +6,19 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:01:31 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/03 14:25:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:08:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include <stdio.h>
-
-/**
- * @brief		Adds the nde 'new' at the beginning of the list.
- * 
- * @param lst	The linked list.
- * @param new	The new node to be added to the list.
- */
+/*
+*	Reference: DNE
+*
+*	Description: Adds the node ’new’ at the beginning of the list.
+*
+*	Return value: None
+*/
 void	lst_push_front(t_list **lst, t_list *new)
 {
 	if (lst)
@@ -30,12 +30,13 @@ void	lst_push_front(t_list **lst, t_list *new)
 	}
 }
 
-/**
- * @brief		Adds the node 'new' at the end of the list.
- * 
- * @param lst	The linked list.
- * @param new	The node to be added to the list.
- */
+/*
+*	Reference: DNE
+*
+*	Description: Adds the node ’new’ at the end of the list.
+*
+*	Return Value: None
+*/
 void	lst_push_back(t_list **lst, t_list *new)
 {
 	t_list	*last;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:15:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/05/30 15:59:15 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:14:07 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ int		lst_size(t_list *lst);
 t_list	*lst_last(t_list *lst);
 t_list	*get_node(t_list *lst, int loc);
 t_list	*lst_new(int type, char *key_val);
+t_list	*lst_get_by_key(t_list *var_list, char *key);
 
+void	lst_set(t_list *var_list, char *key, char *value);
 void	lst_clear(t_list **lst, void (*del)(void *));
 void	lst_push_front(t_list **lst, t_list *new);
 void	lst_push_back(t_list **lst, t_list *new);
+void	lst_pop(t_list **lst, t_list *to_pop);
 
 #endif
