@@ -6,3 +6,4 @@ lib/readline/*.o
 lib/readline/shlib/*.so
 lib/readline/shlib/*.dylib
 lib/readline/*.a
+all
