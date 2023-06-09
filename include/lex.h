@@ -6,14 +6,14 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/09 17:41:23 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/09 19:25:18 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEX_H
 # define LEX_H
 
-#include "defines.h"
+# include "defines.h"
 
 /**
  * @brief	Atomic entity of our lexical analysis
@@ -44,15 +44,14 @@ typedef struct s_wordl
  */
 typedef struct s_tokl
 {
-	struct s_word		*word;
-	struct s_toklist	*prev;
-	struct s_toklist	*next;
+	struct s_word	*word;
+	struct s_tokl	*prev;
+	struct s_tokl	*next;
 }	t_tokl;
-
 
 t_word	*word_new(char *str, int type, int flags);
 
-void	tok_push(t_tokl **tok_l);
+void	tok_push(t_tokl **tok_l, t_word *word);
 void	tok_pop(t_tokl **tok_l);
 t_tokl	*tok_last(t_tokl *tok_l);
 

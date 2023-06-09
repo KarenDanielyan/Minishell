@@ -7,7 +7,7 @@ BUILD		=	./build
 SRC			=	./src
 
 DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
-				defines.h list.h \
+				defines.h list.h lex.h \
 				tree.h minishell.h) Makefile
 
 SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
@@ -21,14 +21,17 @@ SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/Init/%.c,\
 				init.c) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
-				get_env.c)
+				get_env.c) \
+				$(patsubst %.c, $(SRC)/Lexer/%.c,\
+				word_lists.c)
 
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
 				$(filter-out %.c, $(patsubst $(SRC)/BuiltIns/%.c, $(BUILD)/%.o, $(SRCS))) \
 				$(filter-out %.c, $(patsubst $(SRC)/Init/%.c, $(BUILD)/%.o, $(SRCS))) \
 				$(filter-out %.c, $(patsubst $(SRC)/Utils/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/List/%.c, $(BUILD)/%.o, $(SRCS)))
+				$(filter-out %.c, $(patsubst $(SRC)/List/%.c, $(BUILD)/%.o, $(SRCS))) \
+				$(filter-out %.c, $(patsubst $(SRC)/Lexer/%.c, $(BUILD)/%.o, $(SRCS)))
 
 # Compilation options
 
