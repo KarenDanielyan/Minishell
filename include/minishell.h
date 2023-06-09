@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/05 16:36:12 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:46:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@
 # include <fcntl.h>
 # include <libft.h>
 
-void	history(void);
 
 t_list	*env_init(char **env);
+
+/* Built-Ins */
+void	history(void);
 void	pwd(void);
 void	cd(const char *path,t_list *env);
 void	env(t_list *env);
 void	unset(t_list **var_l,char *key);
+
 /* Utils */
 char	**get_env(t_list *var_list);
 

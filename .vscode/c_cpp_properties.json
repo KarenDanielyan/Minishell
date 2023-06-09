@@ -3,8 +3,9 @@
         {
             "name": "linux-gcc-x64",
             "includePath": [
-                "${workspaceFolder}/include"
-                "${workspaceFolder}/libft/**"
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/lib/libft",
+                "${workspaceFolder}/lib/readline"
             ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c99",
@@ -15,7 +16,8 @@
             "name": "macos-clang-x64",
             "includePath": [
                 "${workspaceFolder}/include",
-                "${workspaceFolder}/libft/**"
+                "${workspaceFolder}/lib/libft",
+                "${workspaceFolder}/lib/readline"
             ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c99",

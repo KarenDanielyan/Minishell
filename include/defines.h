@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/07 17:02:39 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:54:31 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef enum e_scope
 	SHELL
 }	t_scope;
 
-typedef enum e_token
+typedef enum e_type
 {
 	IO_HERE,
 	IO_FILE,
@@ -55,28 +55,58 @@ typedef enum e_token
 	DQUOTE_OPEN,
 	DQUOTE_CLOSE,
 	WORD
-}	t_token;
+}	t_type;
 
 /**
- * @brief	Atomic entity of our lexical analysis
+ * @brief Flags for tokens
  * 
- * @param token_type	What type of word is this? (ex. command io_here, etc.)
- * @param value			The word itself (ex. ">", "<<", "cat")
+ * @def W_HASDOLLAR		Dollar Sign Present
+ * @def W_SQUOTED		Is quoted with a single quote
+ * @def W_DQUOTED		Is quoted with a double quote
+ * @def W_TILDEEXP		Perform tilde expansion on this assignment word.
+ * @def W_NOTILDE		Do not perform tilde expansion.
+ * @def W_ASSIGNMENT	This word is a variable assignment.
+ * @def W_ASSIGNRHS		Word is rhs of an assignment statement.
+ * @def W_ASSIGNLHS		Word is lhs of an assignment statement.
+ * @def W_ASSIGNBLTIN	Word is a builtin command that takes assignments.
+ * @def W_NOASSNTILDE	Don't do tilde expansion like an assignment statement.
+ * @def W_EXPANDRHS		Expanding word in $paramOPword or ${paramOPword}.
+ * @def W_ASSIGNARG		Word is assignment argument to command.
+ * @def W_HASQUOTEDNULL	Word has a quoted null.
+ * @def W_SAWQUOTEDNULL	Word contained a quoted null that was removed.
+ * @def W_NOBRACE		Do not perform brace expansion.
+ * @def W_COMPLETE		Word is being expansed for completetion.
+ * @def W_CHKLOCAL		Check for loacal variables on assignment.
+ * @def W_FORCELOCAL	Force assignment to be local variables.
  */
-typedef struct s_word
-{
-	int		token_type;
-	char	*value;
-}	t_word;
+# define W_HASDOLLAR		1
+# define W_SQUOTED			2
+# define W_DQUOTED			4
+# define W_TILDEEXP			8
+# define W_NOTILDE			16
+# define W_ASSIGNMENT		32
+# define W_ASSIGNRHS		64
+# define W_ASSIGNLHS		128
+# define W_ASSIGNBLTIN		256
+# define W_NOASSNTILDE		512
+# define W_EXPANDRHS		1024
+# define W_ASSIGNARG		2048
+# define W_HASQUOTEDNULL	4096
+# define W_SAWQUOTEDNULL	8192
+# define W_NOBRACE			16384
+# define W_COMPLETE			32768
+# define W_CHKLOCAL			65536
+# define W_FORCELOCAL		131072
 
 /**
- * @brief	List of words.
+ * @brief Possible values for subshell_environment.
  * 
+ * @def SUBSHELL_ASYNC	Subshell cause by `command &`
+ * @def SUBSHELL_PAREN	Subshell caused by ( ... )
+ * @def SUBSHELL_PIPE	Subshell from a pipeline element.
  */
-typedef struct s_wordl
-{
-	struct s_word	*word;
-	struct s_wordl	*next;
-}	t_wordl;
+# define SUBSHELL_ASYNC	0x01
+# define SUBSHELL_PAREN	0x02
+# define SUBSHELL_PIPE	0x10
 
 #endif
