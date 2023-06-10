@@ -22,7 +22,7 @@ topdir = ..
 srcdir = .
 
 
-prefix = /Users/kdaniely/Minishell/lib/rl_kdaniely
+prefix = /Users/dohanyan/Desktop/Minishell/lib/rl
 
 datarootdir = ${prefix}/share
 
@@ -49,7 +49,7 @@ RM = rm -f
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 
-BUILD_DIR = /Users/kdaniely/Minishell/lib/readline
+BUILD_DIR = /Users/dohanyan/Desktop/Minishell/lib/readline
 TEXINPUTDIR = $(srcdir)
 
 MAKEINFO    = LANGUAGE= makeinfo
@@ -154,16 +154,15 @@ history.ps:	history.dvi
 # This leaves readline.html and rlman.html -- rlman.html is for www.gnu.org
 #
 readline.html:	${RLSRC}
-	$(MAKEINFO) -o $@ --html --no-split -I$(TEXINPUTDIR) $(srcdir)/rlman.texi
-
-rlman.html:	${RLSRC}
-	$(MAKEINFO) -o $@ --html --no-split -I$(TEXINPUTDIR) $(srcdir)/rlman.texi
+	$(TEXI2HTML) -menu -monolithic -I $(TEXINPUTDIR) $(srcdir)/rlman.texi
+	sed -e 's:rlman.html:readline.html:g' rlman.html > readline.html
+	$(RM) rlman.html
 
 rluserman.html:	${RLSRC}
-	$(MAKEINFO) --html --no-split -I$(TEXINPUTDIR) $(srcdir)/rluserman.texi
+	$(TEXI2HTML) -menu -monolithic -I $(TEXINPUTDIR) $(srcdir)/rluserman.texi
 
 history.html:	${HISTSRC}
-	$(MAKEINFO) --html --no-split -I$(TEXINPUTDIR) $(srcdir)/history.texi
+	$(TEXI2HTML) -menu -monolithic -I $(TEXINPUTDIR) $(srcdir)/history.texi
 
 readline.0: readline.3
 

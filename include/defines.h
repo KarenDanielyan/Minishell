@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/09 16:54:31 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:46:04 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define HIST_FILE "/.minishell_history"
 # define IFS "IFS= \t\n"
-# define PS1 "PS1=minishell-0.1& "
+# define PS1 "PS1=minishell-4.2$ "
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
 # define ASSIGN_OP '='

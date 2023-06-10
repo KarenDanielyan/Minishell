@@ -43,9 +43,9 @@ CFLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
 
 INVOKE		=	libft
 
-LFLAGS		=	-Llib/libft -lft -Llib/rl_kdaniely/lib -lreadline
+LFLAGS		=	-Llib/libft -lft -lreadline #-Llib/rl/lib -lreadline.8 -lhistory
 
-IFLAGS		=	-Iinclude -Ilib/libft -Ilib/rl_kdaniely/include/readline
+IFLAGS		=	-Iinclude -Ilib/libft -Ilib/rl/include/readline
 
 MGOALS		=	$(filter-out bonus, $(MAKECMDGOALS))
 
