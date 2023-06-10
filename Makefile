@@ -43,9 +43,9 @@ CFLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
 
 INVOKE		=	libft
 
-LFLAGS		=	-Llib/libft -lft -Llib/rl_kdaniely/lib -lreadline
+LFLAGS		=	-Llib/libft -lft -Llib/readline/lib -lreadline -lhistory
 
-IFLAGS		=	-Iinclude -Ilib/libft -Ilib/rl_kdaniely/include/readline
+IFLAGS		=	-Iinclude -Ilib/libft -Ilib/readline/include
 
 MGOALS		=	$(filter-out bonus, $(MAKECMDGOALS))
 
@@ -93,6 +93,9 @@ fclean:		libft
 				@$(RM) $(NAME)
 				@echo "${GREEN}Done.${RESET}"
 
+configure:
+			./configure.sh readline
+
 re:			fclean all
 
-.PHONY:		wait_msg libft fclean clean all re
+.PHONY:		wait_msg configure libft fclean clean all re
