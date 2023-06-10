@@ -9,3 +9,10 @@ lib/readline-8.1/*.a
 lib/readline-8.1/*.a
 lib/readline
 lib/readline/**
+lib/readline-8.1/Makefile
+lib/readline-8.1/config.log
+lib/readline-8.1/config.status
+lib/readline-8.1/doc/Makefile
+lib/readline-8.1/examples/Makefile
+lib/readline-8.1/readline.pc
+lib/readline-8.1/shlib/Makefile
