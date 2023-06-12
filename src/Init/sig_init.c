@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   sig_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 14:30:44 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/12 13:30:10 by kdaniely         ###   ########.fr       */
+/*   Created: 2023/06/12 14:00:53 by kdaniely          #+#    #+#             */
+/*   Updated: 2023/06/12 14:03:17 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * @brief
- * 
- * 			History builtin prints on the screen the contents
- * 			of the history file.
- */
-void	history(t_list *var_list)
-{
-	int		i;
-	int		fd;
-	char	*line;
-	char	*filename;
+static void	ft_irc(int signum);
 
-	i = 1;
-	line = NULL;
-	filename = lst_get_by_key(var_list, "HISTFILE")->value;
-	fd = open(filename, O_RDONLY);
-	while (1)
+void	sig_init(void)
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = &ft_irc;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &sa, NULL);
+}
+
+static void	ft_irc(int signum)
+{
+	if (signum == SIGINT)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		printf ("%d	%s", i++, line);
-		free(line);
-		line = NULL;
+		rl_replace_line("", 0);
+		rl_done = -475836;
 	}
-	close(fd);
 }

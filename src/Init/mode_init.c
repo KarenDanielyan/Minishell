@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   mode_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/07 17:13:10 by kdaniely         ###   ########.fr       */
+/*   Created: 2023/06/12 13:36:56 by kdaniely          #+#    #+#             */
+/*   Updated: 2023/06/12 13:39:18 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*env_init(char **env)
+void	mode_init(int ac, char **av)
 {
-	t_list	*var_list;
-	
-	var_list = NULL;
-	while (*env)
+	int	fd;
+
+	if (ac == 2)
 	{
-		lst_push_back(&var_list, lst_new(EXPORT, ft_strdup(*env)));
-		env ++;
+		fd = open(av[1], O_RDONLY);
+		if (fd < 0)
+		{
+			perror("open");
+			exit(EXIT_FAILURE);
+		}
+		if (dup2(fd, STDIN_FILENO) < 0)
+		{
+			perror("dup2");
+			exit(EXIT_FAILURE);
+		}
+		close(fd);
 	}
-	lst_push_back(&var_list, lst_new(SHELL, IFS));
-	lst_push_back(&var_list, lst_new(SHELL, PS1));
-	lst_push_back(&var_list, lst_new(SHELL, PS2));
-	lst_push_back(&var_list, lst_new(SHELL, PS4));
-	return (var_list);
 }

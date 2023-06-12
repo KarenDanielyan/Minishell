@@ -19,9 +19,10 @@ SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/BuiltIns/%.c,\
 				history.c env.c pwd.c cd.c unset.c) \
 				$(patsubst %.c, $(SRC)/Init/%.c,\
-				init.c) \
+				env_init.c mode_init.c sig_init.c \
+				) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
-				get_env.c) \
+				get_env.c print_logo.c) \
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
 				word_lists.c)
 
