@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atull.c                                         :+:      :+:    :+:   */
+/*   ft_atul.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:13:56 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/08 16:45:05 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:27:23 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static short	is_whitespace(const char *chr)
 */
 unsigned long	ft_atul(const char *str)
 {
-	long long		num;
+	long long	num;
 	short		sign;
 	const char	*c;
 

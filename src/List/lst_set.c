@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 16:59:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/05 15:38:23 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:26:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ void	lst_set(t_list *var_list, char *key, char *value)
 	t_list	*i;
 
 	i = var_list;
-	while(i)
+	while (i)
 	{
 		if (ft_strcmp(i->key, key) == 0)
 		{
 			free(i->joined);
 			free(i->value);
-			i->value=value;
+			i->value = value;
 			tmp = ft_strjoin(key, "=");
 			i->joined = ft_strjoin(tmp, value);
-			break;
+			break ;
 		}
 		i = i->next;
 	}

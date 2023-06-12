@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 17:43:01 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/09 19:24:14 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:24:20 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	tok_pop(t_tokl **tok_l)
 {
 	t_tokl	*last;
 
-	
 	if (tok_l && *tok_l)
 	{
 		last = tok_last(*tok_l);

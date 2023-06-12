@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/12 13:40:41 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:23:13 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*env_init(char **env)
 {
 	t_list	*var_list;
 	char	*hist;
-	
+
 	var_list = NULL;
 	while (*env)
 	{

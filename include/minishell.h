@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/12 14:10:16 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:27:11 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,5 @@ void	unset(t_list **var_l, char *key);
 void	print_logo(void);
 
 char	**get_env(t_list *var_list);
-
 
 #endif

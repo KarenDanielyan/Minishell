@@ -6,14 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:47:20 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/07 16:12:24 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:22:53 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-void unset(t_list **var_list, char *key)
+void	unset(t_list **var_list, char *key)
 {
 	t_list	*delete;
 
