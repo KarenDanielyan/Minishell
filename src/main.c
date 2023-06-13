@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/12 14:11:33 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:05:43 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	true_loop(t_list *var_list, int fd)
 	char	*str;
 
 	sig_init();
+	rl_catch_signals = 0;
+	rl_event_hook = &handler;
 	while (1)
 	{
 		str = readline(lst_get_by_key(var_list, "PS1")->value);
