@@ -69,5 +69,6 @@ int	main(int ac, char **av, char **env)
 	filename = lst_get_by_key(var_list, "HISTFILE")->value;
 	fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0666);
 	true_loop(var_list, fd);
+	lst_clear(&var_list, &free);
 	return (0);
 }

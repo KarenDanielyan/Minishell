@@ -34,9 +34,12 @@ t_list	*lst_new(int type, char *key_val)
 		perror("malloc");
 		return (NULL);
 	}
+	new->key = NULL;
+	new->value = NULL;
 	split = ft_split(key_val, ASSIGN_OP);
 	new->joined = key_val;
-	new->key = ft_strdup(split[0]);
+	if (split[0])
+		new->key = ft_strdup(split[0]);
 	if (split[1])
 		new->value = ft_strdup(split[1]);
 	new->type = type;

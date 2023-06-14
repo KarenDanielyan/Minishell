@@ -109,4 +109,7 @@ typedef enum e_type
 # define SUBSHELL_PAREN	0x02
 # define SUBSHELL_PIPE	0x10
 
+# define W_SUBSHELL_PAREN	131072 * 2 * SUBSHELL_PAREN
+# define W_SUBSHELL_PIPE	131072 * 2 * SUBSHELL_PIPE
+
 #endif

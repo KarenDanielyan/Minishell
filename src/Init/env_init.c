@@ -24,11 +24,11 @@ t_list	*env_init(char **env)
 		env ++;
 	}
 	hist = ft_strjoin(getenv("HOME"), HISTFILE);
-	lst_push_back(&var_list, lst_new(SHELL, "?=0"));
-	lst_push_back(&var_list, lst_new(SHELL, IFS));
-	lst_push_back(&var_list, lst_new(SHELL, PS1));
-	lst_push_back(&var_list, lst_new(SHELL, PS2));
-	lst_push_back(&var_list, lst_new(SHELL, PS4));
+	lst_push_back(&var_list, lst_new(SHELL, ft_strdup("?=0")));
+	lst_push_back(&var_list, lst_new(SHELL, ft_strdup(IFS)));
+	lst_push_back(&var_list, lst_new(SHELL, ft_strdup(PS1)));
+	lst_push_back(&var_list, lst_new(SHELL, ft_strdup(PS2)));
+	lst_push_back(&var_list, lst_new(SHELL, ft_strdup(PS4)));
 	lst_push_back(&var_list, lst_new(SHELL, ft_strjoin("HISTFILE=", hist)));
 	free(hist);
 	return (var_list);

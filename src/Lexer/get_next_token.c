@@ -11,7 +11,10 @@
 /* ************************************************************************** */
 
 #include "lex.h"
+#include "list.h"
+#include <libft.h>
 
+int	is_whitespace(char c);
 
 /**
  * @brief		Get the next token object
@@ -23,15 +26,29 @@
  * 			NOTE:	Function will return NULL, when either string has ended,
  * 					or there are no more tokens to get from the string.
  */
-t_word	*get_next_token(char const *str)
+// t_word	*get_next_token(char const *str, t_list *var_list)
+// {
+// 	static char	*s;
+// 	static int	flags;
+
+// 	if (!s)
+// 		s = (char *)str;
+// 	while (s)	// Magic happens here;
+// 	{
+// 		while (is_whitespace(*s))
+// 			s ++;
+// 		if (ft_strchr("\'\"", *s))
+// 		{
+			
+// 		}
+// 	}
+// }
+
+
+
+int	is_whitespace(char c)
 {
-	static char *s;
-
-	if (!s)
-		s = (char *)str;
-
-	while (s)	// Magic happens here;
-	{
-		while (ft_strchr())
-	}
+	if (ft_strchr(" \t\n\v", c))
+		return (1);
+	return (0);
 }

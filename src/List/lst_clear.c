@@ -11,7 +11,9 @@
 /* ************************************************************************** */
 
 #include "list.h"
+#include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * @brief		Deletes and frees the given node and every successor
@@ -30,9 +32,12 @@ void	lst_clear(t_list **lst, void (*del)(void *))
 		while (*lst)
 		{
 			a = (*lst)->next;
-			del(a->joined);
-			del(a->key);
-			del(a->value);
+			if ((*lst)->joined)
+				del((*lst)->joined);
+			if((*lst)->key)
+				del((*lst)->key);
+			if ((*lst)->value)
+				del((*lst)->value);
 			free(*lst);
 			*lst = a;
 		}

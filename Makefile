@@ -44,7 +44,7 @@ CFLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
 
 INVOKE		=	libft
 
-LFLAGS		=	-Llib/libft -lft -Llib/readline/lib -lreadline -lhistory
+LFLAGS		=	-Llib/libft -lft -Llib/readline/lib -lreadline -lhistory -ltinfo
 
 IFLAGS		=	-Iinclude -Ilib/libft -Ilib/readline/include
 
