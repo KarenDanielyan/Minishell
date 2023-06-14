@@ -14,6 +14,7 @@
 # define LEX_H
 
 # include "defines.h"
+# include "list.h"
 
 /**
  * @brief	Atomic entity of our lexical analysis
@@ -57,6 +58,6 @@ t_tokl	*tok_last(t_tokl *tok_l);
 
 
 /* The lexical analysis function. */
-t_word	*get_next_token(char *str);
+t_word	*get_next_token(char const *str, t_list *var_list);
 
 #endif

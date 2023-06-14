@@ -26,25 +26,22 @@ int	is_whitespace(char c);
  * 			NOTE:	Function will return NULL, when either string has ended,
  * 					or there are no more tokens to get from the string.
  */
-// t_word	*get_next_token(char const *str, t_list *var_list)
-// {
-// 	static char	*s;
-// 	static int	flags;
+t_word	*get_next_token(char const *str, t_list *var_list)
+{
+	static char	*s;
+	//static int	flags;
 
-// 	if (!s)
-// 		s = (char *)str;
-// 	while (s)	// Magic happens here;
-// 	{
-// 		while (is_whitespace(*s))
-// 			s ++;
-// 		if (ft_strchr("\'\"", *s))
-// 		{
-			
-// 		}
-// 	}
-// }
-
-
+	if (!s)
+		s = (char *)str;
+	(void)var_list;
+	while (s)	// Magic happens here;
+	{
+		while (is_whitespace(*s))
+			s ++;
+		break ;
+	}
+	return (NULL);
+}
 
 int	is_whitespace(char c)
 {
