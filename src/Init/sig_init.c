@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   sig_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:00:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/12 14:23:23 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:05:56 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	ft_irc(int signum);
+
+int handler(void)
+{
+	return (0);
+}
 
 void	sig_init(void)
 {

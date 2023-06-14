@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:10:00 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/12 14:21:47 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:20:02 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	env(t_list *env)
 	temp = env;
 	while (temp)
 	{
-		printf("%s\n", temp->joined);
+		if (temp->type == EXPORT)
+			printf("%s\n", temp->joined);
 		temp = temp->next;
 	}
 }
