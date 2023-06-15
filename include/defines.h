@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/12 13:31:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:47:25 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
 # define ASSIGN_OP '='
+# define OPERATORS "=<>|()&"
+# define QUOTES "\'\""
 
 /**
  * @brief	Variable scope enumeration.

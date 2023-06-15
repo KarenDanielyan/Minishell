@@ -2,6 +2,8 @@ NAME		=	minishell
 
 INCLUDE		=	./include
 
+PLATFORM	=	$(shell uname -s)
+
 BUILD		=	./build
 
 SRC			=	./src
@@ -44,7 +46,11 @@ CFLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
 
 INVOKE		=	libft
 
-LFLAGS		=	-Llib/libft -lft -Llib/readline/lib -lreadline -lhistory -ltinfo
+LFLAGS		=	-Llib/libft -lft -Llib/readline/lib -lreadline -lhistory
+
+ifeq ($(PLATFORM), Linux)
+	LFLAGS	+=	-ltinfo
+endif
 
 IFLAGS		=	-Iinclude -Ilib/libft -Ilib/readline/include
 
