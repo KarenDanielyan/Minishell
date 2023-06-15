@@ -2,6 +2,8 @@ NAME		=	minishell
 
 INCLUDE		=	./include
 
+PLATFORM	=	$(shell uname -s)
+
 BUILD		=	./build
 
 SRC			=	./src
@@ -24,7 +26,7 @@ SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
 				get_env.c print_logo.c) \
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
-				word_lists.c)
+				word_lists.c get_next_token.c)
 
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
@@ -45,6 +47,10 @@ CFLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
 INVOKE		=	libft
 
 LFLAGS		=	-Llib/libft -lft -Llib/readline/lib -lreadline -lhistory
+
+ifeq ($(PLATFORM), Linux)
+	LFLAGS	+=	-ltinfo
+endif
 
 IFLAGS		=	-Iinclude -Ilib/libft -Ilib/readline/include
 
