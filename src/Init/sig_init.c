@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:00:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/13 17:05:56 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:44:37 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	sig_init(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
+	rl_catch_signals = 0;
+	rl_event_hook = &handler;
 }
 
 static void	ft_irc(int signum)
@@ -34,6 +36,6 @@ static void	ft_irc(int signum)
 	if (signum == SIGINT)
 	{
 		rl_replace_line("", 0);
-		rl_done = -475836;
+		rl_done = 42;
 	}
 }
