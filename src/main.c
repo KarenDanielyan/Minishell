@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/13 17:05:43 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:00:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ int	main(int ac, char **av, char **env)
 	char	*filename;
 
 	print_logo();
+	rl_readline_name = "Minishell";
+	rl_instream = stdin;
+	if (isatty(STDERR_FILENO))
+		rl_outstream = stderr;
 	mode_init(ac, av);
 	var_list = env_init(env);
 	filename = lst_get_by_key(var_list, "HISTFILE")->value;

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:37:52 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/02/19 14:44:54 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:05:35 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static short	is_whitespace(const char *chr)
 *
 *	Return Value: The converted value or 0 on error.
 */
-long	ft_atol(const char *str)
+long long	ft_atol(const char *str)
 {
 	long		num;
 	short		sign;

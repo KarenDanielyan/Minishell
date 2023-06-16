@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/15 19:03:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:59:32 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define PIPE_OP '|'
 # define IN_OP '<'
 # define OUT_OP '>'
-# define IO_HERE "<<"
-# define IO_APPEND ">>"
+# define HEREDOC_OP "<<"
+# define APPEND_OP ">>"
 # define AND_LIST "&&"
 # define OR_LIST "||"
 

@@ -2,6 +2,8 @@ NAME		=	minishell
 
 INCLUDE		=	./include
 
+LIBFT		=	lib/libft/libft.a
+
 PLATFORM	=	$(shell uname -s)
 
 BUILD		=	./build
@@ -26,7 +28,7 @@ SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
 				get_env.c print_logo.c) \
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
-				word_lists.c get_next_token.c)
+				word_lists.c) # get_next_token.c)
 
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
@@ -78,7 +80,7 @@ $(BUILD)/%.o:	$(SRC)/*/%.c $(DEP)
 					@echo "${YELLOW}Compiling $<.${RESET}"
 					@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-$(NAME):	$(BUILD) $(OBJS)
+$(NAME):	$(BUILD) $(OBJS) $(LIBFT)
 				@echo "${GREEN}Building minishell.${RESET}"
 				@$(CC) $(CFLAGS) $(OBJS) $(IFLAGS) -o $(NAME) $(LFLAGS)
 				@echo "${GREEN}Build Successfull.${RESET}"

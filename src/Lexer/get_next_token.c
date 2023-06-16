@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:17:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/15 19:12:16 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:34:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,10 @@ t_word	*get_next_token(char const *str)
 t_word	*get_operator_token(char **s, int *flags)
 {
 	t_word	*op_token;
-
-	op_token = NULL;
-	if (ft_strncmp(*s, AND_LIST, 2) == 0)
-		return (NULL);
-	if (ft_strncmp(*s, OR_LIST, 2) == 0)
-		return (NULL);
-	if (ft_strncmp(*s, IO_HERE, 2) == 0)
-		return (NULL);
-	if (ft_strncmp(*s, IO_APPEND, 2) == 0)
-		return (NULL);
-	if (*s == PIPE_OP)
-		return (NULL);
-	if (*s == IN_OP)
-		return (NULL);
-	return (op_token);
+	char	*word;
+	
+	while (is_whitespace(**s) || !ft_isalpha(**s))
+		ft_strappend
 }
 
 t_word	*get_quote_token(char **s, int *flags)
