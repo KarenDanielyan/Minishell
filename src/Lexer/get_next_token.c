@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:17:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/16 18:34:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/16 22:20:47 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_word	*get_next_token(char const *str)
 	{
 		while (is_whitespace(*s))
 			s ++;
-		if (ft_strchr(QUOTES, *s) && (flags ^ (W_SQUOTED | W_DQUOTED)))
+		if (ft_strchr(QUOTES, *s) && (flags ^ (W_SQUOTE | W_DQUOTE)))
 			token = get_quote_token(&s, &flags);
 		if (ft_strchr(OPERATORS, *s) && token == NULL)
 			token = get_operator_token(&s, &flags);
@@ -50,40 +50,6 @@ t_word	*get_next_token(char const *str)
 			token = get_word(&s, &flags);
 	}
 	return (NULL);
-}
-
-t_word	*get_operator_token(char **s, int *flags)
-{
-	t_word	*op_token;
-	char	*word;
-	
-	while (is_whitespace(**s) || !ft_isalpha(**s))
-		ft_strappend
-}
-
-t_word	*get_quote_token(char **s, int *flags)
-{
-	t_word	quote_token;
-
-	quote_token = NULL;
-	if (*s == '\'')
-	{
-		if (*flags ^ W_SQUOTED)
-			quote_token = word_new(ft_substr(*s, 0, 1), SQUOTE_OPEN);
-		else
-			quote_token = word_new(ft_substr(*s, 0, 1), SQUOTE_CLOSE);
-		*flags = *flags ^ W_SQUOTED;
-	}
-	if (*s == '\"')
-	{
-		if (*flafs ^ W_DQUOTED)
-			quote_token = word_new(ft_substr(*s, 0, 1), DQUOTE_OPEN);
-		else if (*flags & W_DQUOTED)
-			quote_token = word_new(ft_substr(*s, 0, 1), SQUOTE_CLOSE);
-		*flags = *flags ^ W_DQUOTED;
-	}
-	*s++;
-	return (quote_token);
 }
 
 int	is_whitespace(char c)

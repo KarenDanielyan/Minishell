@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/16 18:59:32 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/16 22:20:22 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@
 # define PS1 "PS1=minishell-4.2$ "
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
-# define OPERATORS "=<>|()&*"
 # define QUOTES "\'\""
 
 /* Implemented Operators */
-# define WIDLCARD_OP '*'
+# define OPERATORS "=<>|()&"
 # define ASSIGN_OP '='
 # define PIPE_OP '|'
 # define IN_OP '<'
@@ -55,26 +54,29 @@ typedef enum e_scope
 typedef enum e_type
 {
 	IO_HERE,
+	IO_APPEND,
 	IO_FILE,
 	OP_PARAM,
 	OP_PIPE,
 	AND_IF,
 	OR_IF,
+	VARASSIGN,
 	LEFT_PAREN,
 	RIGHT_PAREN,
 	SQUOTE_OPEN,
 	SQUOTE_CLOSE,
 	DQUOTE_OPEN,
 	DQUOTE_CLOSE,
-	WORD
+	WORD,
+	NOTOP
 }	t_type;
 
 /**
  * @brief Flags for tokens
  * 
  * @def W_HASDOLLAR		Dollar Sign Present
- * @def W_SQUOTED		Is quoted with a single quote
- * @def W_DQUOTED		Is quoted with a double quote
+ * @def W_SQUOTE		Is quoted with a single quote
+ * @def W_DQUOTE		Is quoted with a double quote
  * @def W_TILDEEXP		Perform tilde expansion on this assignment word.
  * @def W_NOTILDE		Do not perform tilde expansion.
  * @def W_ASSIGNMENT	This word is a variable assignment.
@@ -92,8 +94,8 @@ typedef enum e_type
  * @def W_FORCELOCAL	Force assignment to be local variables.
  */
 # define W_HASDOLLAR		1
-# define W_SQUOTED			2
-# define W_DQUOTED			4
+# define W_SQUOTE			2
+# define W_DQUOTE			4
 # define W_TILDEEXP			8
 # define W_NOTILDE			16
 # define W_ASSIGNMENT		32
