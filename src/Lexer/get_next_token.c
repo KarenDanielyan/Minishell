@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:17:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/16 22:20:47 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:06:05 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "list.h"
 #include <libft.h>
 
-int		is_whitespace(char c);
 t_word	*get_quote_token(char **s, int *flags);
 t_word	*get_operator_token(char **s, int *flags);
 t_word	*get_word(char **s, int *flags);
@@ -38,9 +37,9 @@ t_word	*get_next_token(char const *str)
 	if (!s)
 		s = (char *)str;
 	token = NULL;
-	while (s)	// Magic happens here
+	while (s)
 	{
-		while (is_whitespace(*s))
+		while (ft_iswhitespace(*s))
 			s ++;
 		if (ft_strchr(QUOTES, *s) && (flags ^ (W_SQUOTE | W_DQUOTE)))
 			token = get_quote_token(&s, &flags);
@@ -49,12 +48,5 @@ t_word	*get_next_token(char const *str)
 		if (token == NULL)
 			token = get_word(&s, &flags);
 	}
-	return (NULL);
-}
-
-int	is_whitespace(char c)
-{
-	if (ft_strchr(" \t\n\v", c))
-		return (1);
-	return (0);
+	return (token);
 }

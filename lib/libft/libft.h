@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 22:21:00 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/16 19:25:03 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:13:55 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int			ft_isascii(int c);
 int			ft_isprint(int c);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
+int			ft_iswhitespace(char c);
 int			ft_atoi(const char *str);
 int			ft_strappend(char **str, char c);
 int			ft_strcmp(const char *s1, const char *s2);
