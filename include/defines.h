@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/16 22:20:22 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:12:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define APPEND_OP ">>"
 # define AND_LIST "&&"
 # define OR_LIST "||"
+# define SUBSHELL_OPEN '('
+# define SUBSHELL_CLOSE ')'
 
 /**
  * @brief	Variable scope enumeration.
@@ -74,56 +76,49 @@ typedef enum e_type
 /**
  * @brief Flags for tokens
  * 
- * @def W_HASDOLLAR		Dollar Sign Present
- * @def W_SQUOTE		Is quoted with a single quote
- * @def W_DQUOTE		Is quoted with a double quote
- * @def W_TILDEEXP		Perform tilde expansion on this assignment word.
- * @def W_NOTILDE		Do not perform tilde expansion.
- * @def W_ASSIGNMENT	This word is a variable assignment.
- * @def W_ASSIGNRHS		Word is rhs of an assignment statement.
- * @def W_ASSIGNLHS		Word is lhs of an assignment statement.
- * @def W_ASSIGNBLTIN	Word is a builtin command that takes assignments.
- * @def W_NOASSNTILDE	Don't do tilde expansion like an assignment statement.
- * @def W_EXPANDRHS		Expanding word in $paramOPword or ${paramOPword}.
- * @def W_ASSIGNARG		Word is assignment argument to command.
- * @def W_HASQUOTEDNULL	Word has a quoted null.
- * @def W_SAWQUOTEDNULL	Word contained a quoted null that was removed.
- * @def W_NOBRACE		Do not perform brace expansion.
- * @def W_COMPLETE		Word is being expansed for completetion.
- * @def W_CHKLOCAL		Check for loacal variables on assignment.
- * @def W_FORCELOCAL	Force assignment to be local variables.
+ * @def W_HASDOLLAR			Dollar Sign Present
+ * @def W_SQUOTE			Is quoted with a single quote
+ * @def W_DQUOTE			Is quoted with a double quote
+ * @def W_TILDEEXP			Perform tilde expansion on this assignment word.
+ * @def W_NOTILDE			Do not perform tilde expansion.
+ * @def W_ASSIGNMENT		This word is a variable assignment.
+ * @def W_ASSIGNRHS			Word is rhs of an assignment statement.
+ * @def W_ASSIGNLHS			Word is lhs of an assignment statement.
+ * @def W_ASSIGNBLTIN		Word is a builtin command that takes assignments.
+ * @def W_NOASSNTILDE		Don't do tilde expansion like an assignment statement.
+ * @def W_EXPANDRHS			Expanding word in $paramOPword or ${paramOPword}.
+ * @def W_ASSIGNARG			Word is assignment argument to command.
+ * @def W_HASQUOTEDNULL		Word has a quoted null.
+ * @def W_SAWQUOTEDNULL		Word contained a quoted null that was removed.
+ * @def W_NOBRACE			Do not perform brace expansion.
+ * @def W_COMPLETE			Word is being expansed for completetion.
+ * @def W_CHKLOCAL			Check for loacal variables on assignment.
+ * @def W_FORCELOCAL		Force assignment to be local variables.
+ * @def W_SUBSHELL_PIPE		Subshell from a pipeline element.
+ * @def W_SUBSHELL_PAREN	Subshell caused by ( ... ).
  */
-# define W_HASDOLLAR		1
-# define W_SQUOTE			2
-# define W_DQUOTE			4
-# define W_TILDEEXP			8
-# define W_NOTILDE			16
-# define W_ASSIGNMENT		32
-# define W_ASSIGNRHS		64
-# define W_ASSIGNLHS		128
-# define W_ASSIGNBLTIN		256
-# define W_NOASSNTILDE		512
-# define W_EXPANDRHS		1024
-# define W_ASSIGNARG		2048
-# define W_HASQUOTEDNULL	4096
-# define W_SAWQUOTEDNULL	8192
-# define W_NOBRACE			16384
-# define W_COMPLETE			32768
-# define W_CHKLOCAL			65536
-# define W_FORCELOCAL		131072
-
-/**
- * @brief Possible values for subshell_environment.
- * 
- * @def SUBSHELL_ASYNC	Subshell cause by `command &`
- * @def SUBSHELL_PAREN	Subshell caused by ( ... )
- * @def SUBSHELL_PIPE	Subshell from a pipeline element.
- */
-# define SUBSHELL_ASYNC	0x01
-# define SUBSHELL_PAREN	0x02
-# define SUBSHELL_PIPE	0x10
-
-# define W_SUBSHELL_PAREN	131072 * 2 * SUBSHELL_PAREN
-# define W_SUBSHELL_PIPE	131072 * 2 * SUBSHELL_PIPE
+enum e_flags
+{
+	W_HASDOLLAR			= (1 << 0),
+	W_SQUOTE			= (1 << 1),
+	W_DQUOTE			= (1 << 2),
+	W_TILDEEXP			= (1 << 3),
+	W_NOTILDE			= (1 << 4),
+	W_ASSIGNMENT		= (1 << 5),
+	W_ASSIGNRHS			= (1 << 6),
+	W_ASSIGNLHS			= (1 << 7),
+	W_ASSIGNBLTIN		= (1 << 8),
+	W_NOASSNTILDE		= (1 << 9),
+	W_EXPANDRHS			= (1 << 10),
+	W_ASSIGNARG			= (1 << 11),
+	W_HASQUOTEDNULL		= (1 << 12),
+	W_SAWQUOTEDNULL		= (1 << 13),
+	W_NOBRACE			= (1 << 14),
+	W_COMPLETE			= (1 << 15),
+	W_CHKLOCAL			= (1 << 16),
+	W_FORCELOCAL		= (1 << 17),
+	W_SUBSHELL_PAREN	= (1 << 18),
+	W_SUBSHELL_PIPE		= (1 << 19)
+};
 
 #endif
