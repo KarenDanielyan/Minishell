@@ -2,6 +2,8 @@ NAME		=	minishell
 
 INCLUDE		=	./include
 
+LIBFT		=	lib/libft/libft.a
+
 PLATFORM	=	$(shell uname -s)
 
 BUILD		=	./build
@@ -78,7 +80,7 @@ $(BUILD)/%.o:	$(SRC)/*/%.c $(DEP)
 					@echo "${YELLOW}Compiling $<.${RESET}"
 					@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-$(NAME):	$(BUILD) $(OBJS)
+$(NAME):	$(BUILD) $(OBJS) $(LIBFT)
 				@echo "${GREEN}Building minishell.${RESET}"
 				@$(CC) $(CFLAGS) $(OBJS) $(IFLAGS) -o $(NAME) $(LFLAGS)
 				@echo "${GREEN}Build Successfull.${RESET}"

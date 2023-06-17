@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/13 17:48:55 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:50:38 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	switch_case(t_list *var_list, char *str)
 	if (ft_strcmp(split[0], "cd") == 0)
 		cd(split[1], var_list);
 	if (ft_strcmp(split[0], "exit") == 0)
-		my_exit(var_list,split[1]);
+		my_exit(var_list, split[1]);
 	if (ft_strcmp(str, "pwd") == 0)
 		pwd();
 	if (ft_strcmp(split[0], "unset") == 0)
@@ -44,7 +44,10 @@ void	true_loop(t_list *var_list, int fd)
 	{
 		str = readline(lst_get_by_key(var_list, "PS1")->value);
 		if (!str)
+		{
+			write (2, "exit", 4);
 			break ;
+		}
 		if (!(*str))
 		{
 			free(str);
@@ -62,7 +65,6 @@ int	main(int ac, char **av, char **env)
 	int		fd;
 	t_list	*var_list;
 	char	*filename;
-
 	print_logo();
 	mode_init(ac, av);
 	var_list = env_init(env);
