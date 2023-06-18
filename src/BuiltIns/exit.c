@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/17 20:17:19 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:18:39 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,19 @@ void	my_exit(t_list *var_list, char *num)
 	char		*siz;
 	char		*s;
 
+	if (!num)
+		exit(EXIT_SUCCESS);
 	siz = check_size(num);
 	if (ft_strlen(siz) > 19)
 	{
-		printf("minishell: exit: %s numeric argument required", num);
+		dprintf(STDERR_FILENO, "minishell: exit: %s numeric argument required", num);
 		exit(1);
 	}
 	rv = ft_atul(num);
 	s = ft_itul(rv);
 	if (ft_strcmp(s, (siz)) != 0)
 	{
-		printf("minishell: exit: %s numeric argument required", num);
+		dprintf(STDERR_FILENO, "minishell: exit: %s numeric argument required", num);
 		exit(EXIT_FAILURE);
 	}
 	lst_set(var_list, "?", ft_itoa(rv % 256));

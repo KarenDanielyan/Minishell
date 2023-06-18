@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/16 15:50:38 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:17:42 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	switch_case(t_list *var_list, char *str)
 		history(var_list);
 	if (ft_strcmp(split[0], "cd") == 0)
 		cd(split[1], var_list);
+	if (ft_strcmp(split[0], "echo") == 0)
+		echo(split);
 	if (ft_strcmp(split[0], "exit") == 0)
 		my_exit(var_list, split[1]);
 	if (ft_strcmp(str, "pwd") == 0)
@@ -51,6 +53,7 @@ void	true_loop(t_list *var_list, int fd)
 		if (!(*str))
 		{
 			free(str);
+
 			continue ;
 		}
 		add_history(str);

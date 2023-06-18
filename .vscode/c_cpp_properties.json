@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/lib/libft",
-                "${workspaceFolder}/lib/readline"
+                "${workspaceFolder}/lib/readline",
+                "${workspaceFolder}/lib/printf/include"
             ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c99",
@@ -17,7 +18,8 @@
             "includePath": [
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/lib/libft",
-                "${workspaceFolder}/lib/readline"
+                "${workspaceFolder}/lib/readline",
+                "${workspaceFolder}/lib/printf/include"
             ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c99",
