@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin2.c                                      :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:59:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/18 17:03:57 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:52:28 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 /*
-	this fucntion is the same as the ft_strjoin
-	with one difference he frees s1 
+*	Reference: DNE
+*
+*	Description: This function does the same as ft_strjoin(),
+*	except that it frees memory allocated under *s1.
+*
+*	Return Value: The new string, NULL if allocation fails.
 */
-char	*ft_strjoin2(char *s1, char *s2)
+char	*ft_strjoin_free(char *s1, char const *s2)
 {
 	int		s1_i;
 	int		s2_i;

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 22:21:00 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/19 13:45:54 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:52:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char		*ft_itoa(int n);
 char		*ft_itul(long long n);
 char		**ft_strdup_2d(char const **s);
 char		**ft_split(char const *s, char c);
+char		*ft_strjoin_free(char *s1, char const *s2);
 char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_strjoin2(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));

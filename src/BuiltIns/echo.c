@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 20:22:03 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/18 18:21:04 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:53:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	echo(char **split)
 		i++;
 	while (split[i])
 	{
-		word = ft_strjoin2(word, split[i]);
+		word = ft_strjoin_free(word, split[i]);
 		if (i != split_siz(split) - 1)
-			word = ft_strjoin2(word, " ");
+			word = ft_strjoin_free(word, " ");
 		i++;
 	}
 	ft_putstr_fd(word, STDOUT_FILENO);

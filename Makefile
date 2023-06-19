@@ -50,9 +50,9 @@ RM			=	rm -rf
 
 CFLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
 
-INVOKE		=	libft
+INVOKE		=	libft printf
 
-LFLAGS		=	-Llib/libft -lft -Llib/readline/lib -lreadline -lhistory
+LFLAGS		=	-Llib/libft -lft -Llib/printf -lftprintf -Llib/readline/lib -lreadline -lhistory
 
 ifeq ($(PLATFORM), Linux)
 	LFLAGS	+=	-ltinfo

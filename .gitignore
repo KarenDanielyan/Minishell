@@ -2,6 +2,8 @@ minishell
 build
 lib/libft/build
 lib/libft/libft.a
+lib/printf/build
+lib/printf/libftprintf.a
 lib/readline-8.1/*.o
 lib/readline-8.1/shlib/*.so
 lib/readline-8.1/shlib/*.dylib
