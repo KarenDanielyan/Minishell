@@ -6,12 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 22:57:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/17 20:06:17 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:49:50 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
 #include <libft.h>
+#include <stdio.h>
 
 /**
  * @brief	Everything excepts quotes and operators are words.
@@ -28,6 +29,7 @@ t_word	*get_word(char **s, int *flags)
 	char	*word;
 
 	word_token = NULL;
+	word = NULL;
 	if (s)
 	{
 		while (*s && !ft_strchr(OPERATORS, **s) && !ft_strchr(QUOTES, **s) \

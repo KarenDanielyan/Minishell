@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/18 21:19:58 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:41:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "lex.h"
 # include "list.h"
 # include "tree.h"
 # include <stdint.h>
