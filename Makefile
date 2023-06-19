@@ -13,10 +13,14 @@ BUILD		=	./build
 SRC			=	./src
 
 DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
-				defines.h list.h lex.h \
-				tree.h minishell.h) Makefile
+				debug.h defines.h list.h \
+				lex.h tree.h minishell.h) \
+				Makefile
 
-SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
+SRCS		=	$(patsubst %.c, $(SRC)/Debug/%.c,\
+				get_type.c print_messages.c)
+
+SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				main.c) \
 				$(patsubst %.c, $(SRC)/List/%.c,\
 				lst_clear.c lst_get.c lst_last.c \
@@ -32,7 +36,7 @@ SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
 				word_lists.c operator_token.c \
 				quote_token.c word_token.c \
-				get_next_token.c)
+				get_next_token.c) \
 
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
@@ -40,7 +44,8 @@ OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
 				$(filter-out %.c, $(patsubst $(SRC)/Init/%.c, $(BUILD)/%.o, $(SRCS))) \
 				$(filter-out %.c, $(patsubst $(SRC)/Utils/%.c, $(BUILD)/%.o, $(SRCS))) \
 				$(filter-out %.c, $(patsubst $(SRC)/List/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/Lexer/%.c, $(BUILD)/%.o, $(SRCS)))
+				$(filter-out %.c, $(patsubst $(SRC)/Lexer/%.c, $(BUILD)/%.o, $(SRCS))) \
+				$(filter-out %.c, $(patsubst $(SRC)/Debug/%.c, $(BUILD)/%.o, $(SRCS)))
 
 # Compilation options
 

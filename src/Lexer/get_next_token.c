@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:17:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/19 13:53:45 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:57:43 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_word	*get_next_token(char const *str)
 	if (!s)
 		s = (char *)str;
 	token = NULL;
-	while (s)
+	if (s)
 	{
 		while (ft_iswhitespace(*s))
 			s ++;

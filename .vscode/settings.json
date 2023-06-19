@@ -71,7 +71,10 @@
     "lex.h": "c",
     "sstream": "c",
     "locale": "c",
-    "ratio": "c"
+    "ratio": "c",
+    "stdio.h": "c",
+    "string.h": "c",
+    "debug.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
