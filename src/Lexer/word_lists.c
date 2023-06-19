@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 17:43:01 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/19 15:51:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:18:14 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,16 @@ void	tok_push(t_tokl **tok_l, t_word *word)
 	t_tokl	*token;
 
 	token = (t_tokl *)malloc(sizeof(t_tokl));
+	token->prev = NULL;
+	token->next = NULL;
 	token->word = word;
 	if (tok_l && *tok_l)
+	{
 		token->prev = *tok_l;
+		tok_last(*tok_l)->next = token;
+	}
 	else
 		*tok_l = token;
-	token->next = NULL;
 }
 
 void	tok_pop(t_tokl **tok_l)

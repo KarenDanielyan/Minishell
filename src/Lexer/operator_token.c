@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 21:01:55 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/17 18:44:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:21:35 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ t_word	*get_operator_token(char **s, int *flags)
 	char	*tmp;
 	char	*word;
 
+	word = NULL;
+	tmp = NULL;
+	op_token = NULL;
 	if (!s || !(*s) || !flags)
 		return (NULL);
 	ft_strappend(&word, **s);
