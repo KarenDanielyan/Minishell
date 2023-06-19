@@ -4,6 +4,8 @@ INCLUDE		=	./include
 
 LIBFT		=	lib/libft/libft.a
 
+PRINTF		= 	lib/printf/libftprintf.a
+
 PLATFORM	=	$(shell uname -s)
 
 BUILD		=	./build
@@ -24,7 +26,7 @@ SRCS		=	$(patsubst %.c, $(SRC)/%.c,\
 				history.c env.c pwd.c cd.c unset.c) \
 				$(patsubst %.c, $(SRC)/Init/%.c,\
 				env_init.c mode_init.c sig_init.c \
-				) \
+				exit.c echo.c) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
 				get_env.c print_logo.c) \
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
@@ -56,7 +58,7 @@ ifeq ($(PLATFORM), Linux)
 	LFLAGS	+=	-ltinfo
 endif
 
-IFLAGS		=	-Iinclude -Ilib/libft -Ilib/readline/include
+IFLAGS		=	-Iinclude -Ilib/libft -Ilib/printf/include -Ilib/readline/include
 
 MGOALS		=	$(filter-out bonus, $(MAKECMDGOALS))
 
@@ -82,13 +84,16 @@ $(BUILD)/%.o:	$(SRC)/*/%.c $(DEP)
 					@echo "${YELLOW}Compiling $<.${RESET}"
 					@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-$(NAME):	$(BUILD) $(OBJS) $(LIBFT)
+$(NAME):	$(BUILD) $(OBJS) $(LIBFT) $(PRINTF)
 				@echo "${GREEN}Building minishell.${RESET}"
 				@$(CC) $(CFLAGS) $(OBJS) $(IFLAGS) -o $(NAME) $(LFLAGS)
 				@echo "${GREEN}Build Successfull.${RESET}"
 
 libft:
 				@$(MAKE) $(MGOALS) -C lib/libft
+
+printf:
+				@$(MAKE) $(MGOALS) -C lib/printf
 
 wait_msg:
 				@echo "${BLUE}Please wait for minishell to compile.${RESET}"
@@ -109,4 +114,4 @@ configure:
 
 re:			fclean all
 
-.PHONY:		wait_msg configure libft fclean clean all re
+.PHONY:		all clean fclean re wait_msg libft printf configure

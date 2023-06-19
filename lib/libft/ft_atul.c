@@ -6,11 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:13:56 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/16 19:15:46 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:44:18 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
+
 #define OFFSET '0'
 
 static short	is_num(const char *chr)
@@ -39,9 +41,9 @@ static short	is_whitespace(const char *chr)
 */
 unsigned long long	ft_atul(const char *str)
 {
-	long long	num;
-	short		sign;
-	const char	*c;
+	long long		num;
+	unsigned long	sign;
+	const char		*c;
 
 	sign = 1;
 	c = str;
@@ -62,5 +64,5 @@ unsigned long long	ft_atul(const char *str)
 		num += (int)(*c - OFFSET);
 		c++;
 	}
-	return ((unsigned long)(sign * num));
+	return (sign * num);
 }

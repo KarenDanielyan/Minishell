@@ -68,7 +68,10 @@
     "list.h": "c",
     "defines.h": "c",
     "stdlib.h": "c",
-    "lex.h": "c"
+    "lex.h": "c",
+    "sstream": "c",
+    "locale": "c",
+    "ratio": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

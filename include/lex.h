@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/15 14:47:43 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:14:52 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_word	*word_new(char *str, int type, int flags);
 void	tok_push(t_tokl **tok_l, t_word *word);
 void	tok_pop(t_tokl **tok_l);
 t_tokl	*tok_last(t_tokl *tok_l);
-
 
 /* The lexical analysis function. */
 t_word	*get_next_token(char const *str);
