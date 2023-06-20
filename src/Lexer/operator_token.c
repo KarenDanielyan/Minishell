@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 21:01:55 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/20 17:21:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:26:57 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_word	*get_operator_token(char **s, int *flags)
 	tmp = NULL;
 	if (!s || !(*s) || !flags)
 		return (NULL);
-	while (ft_strchr(OPERATORS, **s))
+	while (**s && ft_strchr(OPERATORS, **s))
 	{
 		ft_strappend(&tmp, **s);
 		if (word && get_type(word) != NOTOP && get_type(tmp) == NOTOP)
