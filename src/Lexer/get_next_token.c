@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:17:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/19 15:43:36 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:26:12 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_word	*get_word(char **s, int *flags);
  * 			NOTE:	Function will return NULL, when either string has ended,
  * 					or there are no more tokens to get from the string.
  */
+
 t_word	*get_next_token(char const *str)
 {
 	static char	*s;

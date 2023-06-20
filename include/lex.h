@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/19 15:41:07 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:12:58 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_wordl
  */
 typedef struct s_tokl
 {
-	struct s_word	*word;
+	struct s_word	*word; 
 	struct s_tokl	*prev;
 	struct s_tokl	*next;
 }	t_tokl;
