@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/17 15:12:08 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:30:35 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 # define OR_LIST "||"
 # define SUBSHELL_OPEN '('
 # define SUBSHELL_CLOSE ')'
+
+/* Special Symbols */
+# define TILDE '~'
 
 /**
  * @brief	Variable scope enumeration.
