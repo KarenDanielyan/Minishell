@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 19:12:55 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/19 15:49:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:27:22 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 int	ft_strappend(char **str, char c)
 {
 	const char	s[] = {c, '\0'};
-	char		*tmp;
 
 	if (str)
 	{
@@ -32,14 +31,9 @@ int	ft_strappend(char **str, char c)
 			*str = ft_strdup(s);
 		else
 		{
-			tmp = *str;
-			*str = ft_strjoin(*str, s);
+			*str = ft_strjoin_free(*str, s);
 			if (*str == NULL)
-			{
-				*str = tmp;
 				return (1);
-			}
-			free(tmp);
 		}
 	}
 	return (0);

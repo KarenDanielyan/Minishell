@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/19 17:12:58 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:08:51 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,9 @@ t_tokl	*tok_last(t_tokl *tok_l);
 
 t_tokl	*lex(char *str);
 t_word	*get_next_token(char const *str);
+
+t_word	*get_quote_token(char **s, int *flags);
+t_word	*get_operator_token(char **s, int *flags);
+t_word	*get_word(char **s, int *flags);
 
 #endif

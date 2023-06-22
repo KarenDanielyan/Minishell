@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/19 15:41:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:31:13 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,16 @@ void	env(t_list *env);
 void	unset(t_list **var_l, char *key);
 void	my_exit(t_list *var_list, char *status);
 void	echo(char **split);
+
 /* Utils */
 void	print_logo(void);
+
 char	**get_env(t_list *var_list);
-/* signal */
+
+int	is_quote(char c, int *flags);
+int	is_name(char *str);
+
+/* Signal */
 int	handler(void);
 
 #endif

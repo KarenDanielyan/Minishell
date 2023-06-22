@@ -32,7 +32,7 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				env_init.c mode_init.c sig_init.c \
 				exit.c echo.c) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
-				get_env.c print_logo.c) \
+				get_env.c print_logo.c is_token.c) \
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
 				word_lists.c operator_token.c \
 				quote_token.c word_token.c \
