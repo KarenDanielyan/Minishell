@@ -6,17 +6,17 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:17:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/22 14:32:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:13:22by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lex.h"
+#include "minishell.h"
 #include "list.h"
 #include <libft.h>
 #include <stdio.h>
 
 static t_word	*gnt_init(char **s, const char *str);
-static void		gnt_cleanup(char **s, int *flags);
+static t_word	*gnt_cleanup(char **s, int *flags);
 
 /**
  * @brief		Get the next token object
@@ -32,25 +32,21 @@ t_word	*get_next_token(char const *str)
 {
 	static char	*s;
 	static int	flags;
-	t_word		*token;
 
 	if (!s)
-		gnt_init(&s, str);
-	token = NULL;
+		return (gnt_init(&s, str));
 	if (s && *s)
 	{
 		while (*s && ft_iswhitespace(*s))
 			s++;
-		if (*s && ft_strchr(QUOTES, *s) && (flags ^ (W_SQUOTE | W_DQUOTE)))
-			token = get_quote_token(&s, &flags);
-		if (*s && ft_strchr(OPERATORS, *s) && token == NULL)
-			token = get_operator_token(&s, &flags);
-		if (*s && token == NULL)
-			token = get_word(&s, &flags);
+		if (*s && is_quote(*s, &flags))
+			return (get_quote_token(&s, &flags));
+		if (*s && ft_strchr(OPERATORS, *s))
+			return (get_operator_token(&s, &flags));
+		if (*s)
+			return (get_word(&s, &flags));
 	}
-	else
-		gnt_cleanup(&s, &flags);
-	return (token);
+	return (gnt_cleanup(&s, &flags));
 }
 
 static t_word	*gnt_init(char **s, const char *str)
@@ -60,8 +56,9 @@ static t_word	*gnt_init(char **s, const char *str)
 }
 
 
-static void gnt_cleanup(char **s, int *flags)
+static t_word	*gnt_cleanup(char **s, int *flags)
 {
 	*s = NULL;
 	*flags = 0;
+	return (NULL);
 }

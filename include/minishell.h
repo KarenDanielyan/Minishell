@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/22 17:10:00 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:31:13 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	print_logo(void);
 
 char	**get_env(t_list *var_list);
 
+int	is_quote(char c, int *flags);
 int	is_name(char *str);
 
 /* Signal */
