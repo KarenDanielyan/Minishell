@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 21:02:26 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/16 23:01:13 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:23:16 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_word	*get_quote_token(char **s, int *flags)
 		if (*flags ^ W_DQUOTE)
 			quote_token = word_new(ft_substr(*s, 0, 1), DQUOTE_OPEN, *flags);
 		else if (*flags & W_DQUOTE)
-			quote_token = word_new(ft_substr(*s, 0, 1), SQUOTE_CLOSE, *flags);
+			quote_token = word_new(ft_substr(*s, 0, 1), DQUOTE_CLOSE, *flags);
 		*flags = *flags ^ W_DQUOTE;
 	}
 	(*s)++;

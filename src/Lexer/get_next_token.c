@@ -37,7 +37,7 @@ t_word	*get_next_token(char const *str)
 		return (gnt_init(&s, str));
 	if (s && *s)
 	{
-		while (*s && ft_iswhitespace(*s))
+		while (*s && ft_iswhitespace(*s) && !(flags & (W_SQUOTE | W_DQUOTE)))
 			s++;
 		if (*s && is_quote(*s, &flags))
 			return (get_quote_token(&s, &flags));
