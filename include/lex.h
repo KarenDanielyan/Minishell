@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/19 15:41:07 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:31:11 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,9 @@ t_tokl	*tok_last(t_tokl *tok_l);
 
 t_tokl	*lex(char *str);
 t_word	*get_next_token(char const *str);
+
+t_word	*get_quote_token(char **s, int *flags);
+t_word	*get_operator_token(char **s, int *flags);
+t_word	*get_word(char **s, int *flags);
 
 #endif

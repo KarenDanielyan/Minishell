@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:17:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/20 17:01:48 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:32:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 #include <libft.h>
 #include <stdio.h>
 
-t_word	*get_quote_token(char **s, int *flags);
-t_word	*get_operator_token(char **s, int *flags);
-t_word	*get_word(char **s, int *flags);
+static t_word	*gnt_init(char **s, const char *str);
+static void		gnt_cleanup(char **s, int *flags);
 
 /**
  * @brief		Get the next token object
@@ -36,7 +35,7 @@ t_word	*get_next_token(char const *str)
 	t_word		*token;
 
 	if (!s)
-		s = (char *)str;
+		gnt_init(&s, str);
 	token = NULL;
 	if (s && *s)
 	{
@@ -50,9 +49,19 @@ t_word	*get_next_token(char const *str)
 			token = get_word(&s, &flags);
 	}
 	else
-	{
-		flags = 0;
-		s = NULL;
-	}
+		gnt_cleanup(&s, &flags);
 	return (token);
+}
+
+static t_word	*gnt_init(char **s, const char *str)
+{
+	*s = (char *)str;
+	return (NULL);
+}
+
+
+static void gnt_cleanup(char **s, int *flags)
+{
+	*s = NULL;
+	*flags = 0;
 }
