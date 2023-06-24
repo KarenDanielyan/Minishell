@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 22:57:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/22 19:32:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/24 13:18:05 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ t_word	*get_param_word_token(char **s, int *flags)
 	word = NULL;
 	ft_strappend(&word, **s);
 	tmp = ft_strdup(word);
-	(*s) ++;
+	(*s)++;
 	while (**s)
 	{
 		ft_strappend(&tmp, **s);
 		if (!is_name(tmp))
 			break ;
 		ft_strappend(&word, **s);
-		(*s) ++;
+		(*s)++;
 	}
 	free(tmp);
 	return (word_new(word, WORD, (*flags | W_HASDOLLAR)));
