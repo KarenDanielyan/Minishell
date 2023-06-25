@@ -1,21 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/04 16:47:20 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/23 18:21:20 by dohanyan         ###   ########.fr       */
+/*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
+/*   Updated: 2023/06/25 15:00:44 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	unset(t_list **var_list, char *key)
-{
-	t_list	*delete;
-
-	delete = lst_get_by_key(*var_list, key);
-	lst_pop(var_list, delete);
-}
+// void export(t_list *var_list , )

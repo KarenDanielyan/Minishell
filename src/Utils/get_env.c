@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:42:52 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/03 14:57:47 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:06:32 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ static int	get_env_len(t_list *var_list);
  * 
  * @param var_list	A variable linked list.
  * @return char**	Environment variables represented as a string array.
+ * 
+ * WARNING:			This array works directily with the variable list
+ * 					and should not be freed.
  */
 char	**get_env(t_list	*var_list)
 {

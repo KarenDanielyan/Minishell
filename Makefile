@@ -30,7 +30,7 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				history.c env.c pwd.c cd.c unset.c) \
 				$(patsubst %.c, $(SRC)/Init/%.c,\
 				env_init.c mode_init.c sig_init.c \
-				exit.c echo.c) \
+				exit.c echo.c export.c) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
 				get_env.c print_logo.c is_token.c) \
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
@@ -53,7 +53,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		=	-g -Wall -Wextra -Werror #-fsanitize=address
 
 INVOKE		=	libft printf
 

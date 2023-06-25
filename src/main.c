@@ -6,11 +6,26 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/22 18:09:50 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/25 22:40:56 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void free_tokl(t_tokl *tokens)
+{
+	t_tokl	*rem;
+
+	rem = NULL;
+	while (tokens)
+	{
+		rem = tokens->next;
+		free(tokens->word->value);
+		free(tokens->word);
+		free(tokens);
+		tokens = rem;
+	}
+}
 
 static void	switch_case(t_list *var_list, char *str)
 {
@@ -40,7 +55,9 @@ static void	switch_case(t_list *var_list, char *str)
 void	true_loop(t_list *var_list, int fd)
 {
 	char	*str;
+	t_tokl	*tokens;
 
+	tokens = NULL;
 	sig_init();
 	while (1)
 	{
@@ -57,9 +74,11 @@ void	true_loop(t_list *var_list, int fd)
 		}
 		add_history(str);
 		ft_putendl_fd(str, fd);
-		lex(str);
+		tokens = lex(str);
 		switch_case(var_list, str);
+		free_tokl(tokens);
 		free(str);
+		system("leaks minishell");
 	}
 }
 
