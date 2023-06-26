@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/12 14:20:41 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/25 23:48:59 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,16 @@ void	cd(const char *path, t_list *var_list)
 
 	if (!lst_get_by_key(var_list, "PWD"))
 		return ;
+	if (!lst_get_by_key(var_list, "HOME"))
+	{
+		ft_dprintf(STDERR_FILENO, "bash: cd: HOME not set\n");
+		return ;
+	}
+	if (!path)
+		path = lst_get_by_key(var_list,"HOME")->value;
 	current_pwd = ft_strdup(lst_get_by_key(var_list, "PWD")->value);
 	if (chdir(path) != 0)
-		perror("bash: cd: a");
+		perror("bash: cd");
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 		perror("getcwd()");

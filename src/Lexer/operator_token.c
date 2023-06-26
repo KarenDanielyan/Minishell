@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 21:01:55 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/20 20:26:57 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:12:37 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,21 @@ static int	get_type(char *op)
 
 static void	check_flags_change(int *flags, int token_type)
 {
+	static int	subhsell_depth;
+
 	if (token_type == LEFT_PAREN)
+	{
 		*flags = *flags | W_SUBSHELL_PAREN;
+		subhsell_depth ++;
+	}
 	if (token_type == RIGHT_PAREN)
-		*flags = *flags ^ W_SUBSHELL_PAREN;
+	{
+		subhsell_depth --;
+		if (subhsell_depth == 0)
+			*flags = *flags ^ W_SUBSHELL_PAREN;
+		if (*flags & W_SUBSHELL_PIPE)
+			*flags = *flags ^ W_SUBSHELL_PIPE;
+	}
 	if (token_type == OP_PIPE)
 		*flags = *flags | W_SUBSHELL_PIPE;
 	if (token_type == AND_IF && (*flags & W_SUBSHELL_PIPE))

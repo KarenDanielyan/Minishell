@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/25 22:40:56 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/25 23:41:31 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void free_tokl(t_tokl *tokens)
 static void	switch_case(t_list *var_list, char *str)
 {
 	char	**split;
-
+	
 	split = ft_split(str, ' ');
 	if (ft_strcmp(str, "history") == 0)
 		history(var_list);
@@ -78,7 +78,7 @@ void	true_loop(t_list *var_list, int fd)
 		switch_case(var_list, str);
 		free_tokl(tokens);
 		free(str);
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 }
 

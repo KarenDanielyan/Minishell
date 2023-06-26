@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 14:17:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/25 21:39:37 by dohanyan         ###   ########.fr       */
+/*   Created: 2023/06/24 13:17:27 by kdaniely          #+#    #+#             */
+/*   Updated: 2023/06/26 17:00:34 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_word	*get_next_token(char const *str)
 		return (gnt_init(&s, str));
 	if (s && *s)
 	{
-		while (*s && ft_iswhitespace(*s))
+		while (*s && ft_iswhitespace(*s) && !(flags & (W_SQUOTE | W_DQUOTE)))
 			s++;
 		if (*s && is_quote(*s, &flags))
 			return (get_quote_token(&s, &flags));
@@ -55,7 +55,6 @@ static t_word	*gnt_init(char **s, const char *str)
 	*s = (char *)str;
 	return (NULL);
 }
-
 
 static t_word	*gnt_cleanup(char **s, int *flags)
 {
