@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/22 17:53:21 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/22 21:27:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # define PS1 "PS1=minishell-4.2$ "
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
-# define QUOTES "\'\""
 
 /* Implemented Operators */
 # define OPERATORS "=<>|()&"
+# define QUOTES "\'\""
 # define ASSIGN_OP '='
 # define PIPE_OP '|'
 # define IN_OP '<'
