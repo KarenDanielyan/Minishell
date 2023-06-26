@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 21:18:24 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/03/31 01:38:25 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/26 18:34:32 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	len2;
 	char	*join;
 
-	if (!s1 || !s2)
-		return (NULL);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	join = (char *)malloc((len1 + len2 + 1) * sizeof(char));
@@ -49,5 +47,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	join_strcpy(join, s1);
 	join_strcpy(join + len1, s2);
 	*(join + len1 + len2) = '\0';
+	if (!(*join))
+	{
+		free(join);
+		join = NULL;
+	}
 	return (join);
 }
