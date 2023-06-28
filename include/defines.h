@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/26 17:00:24 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/28 18:22:25 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define HISTFILE "/.minishell_history"
 # define IFS "IFS= \t\n"
-# define PS1 "PS1=\e[38;5;63mminishell-4.2$\e[0m "
+# define PS1 "PS1=minishell-4.2 "
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
 

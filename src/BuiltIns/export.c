@@ -6,10 +6,13 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/25 15:00:44 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/28 21:31:56 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void export(t_list *var_list , )
+// void export(t_list *var_list, t_wordl* args)
+// {
+	
+// }

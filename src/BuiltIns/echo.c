@@ -3,41 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 20:22:03 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/19 13:53:08 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/28 17:19:47 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	check_flag(char *flag);
+static int	check_flag(t_wordl *temp);
 
-static int	split_siz(char **split);
-
-void	echo(char **split)
+void	echo(t_wordl *wordl)
 {
-	int		i;
 	int		flag;
 	char	*word;
-
-	i = 1;
+	t_wordl	*temp;
+	
 	word = NULL;
-	if (!split[i])
+	temp = NULL;
+	if (wordl->next)
+		temp = wordl->next;
+	if (!temp)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		return ;
 	}
-	flag = check_flag(split[i]);
+	flag = check_flag(temp);
 	if (flag)
-		i++;
-	while (split[i])
+		temp = temp->next;
+	while (temp)
 	{
-		word = ft_strjoin_free(word, split[i]);
-		if (i != split_siz(split) - 1)
+		word = ft_strjoin_free(word, temp->word->value);
+		if (temp->next)
 			word = ft_strjoin_free(word, " ");
-		i++;
+		temp = temp->next;
 	}
 	ft_putstr_fd(word, STDOUT_FILENO);
 	if (!flag)
@@ -45,26 +45,18 @@ void	echo(char **split)
 	free(word);
 }
 
-static int	check_flag(char *flag)
+static int	check_flag(t_wordl *temp)
 {
 	size_t	i;
 
 	i = 0;
-	if (flag[i] == '-')
+	if (!temp)
+		return (0);
+	if (temp->word->value[i] == '-')
 		i++;
-	while (flag[i] && flag[i] == 'n')
+	while (temp->word->value[i] && temp->word->value[i] == 'n')
 		i++;
-	if (i == ft_strlen(flag))
+	if (i == ft_strlen(temp->word->value))
 		return (1);
 	return (0);
-}
-
-static int	split_siz(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-		i++;
-	return (i);
 }

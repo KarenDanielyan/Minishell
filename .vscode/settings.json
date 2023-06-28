@@ -74,7 +74,8 @@
     "ratio": "c",
     "stdio.h": "c",
     "string.h": "c",
-    "debug.h": "c"
+    "debug.h": "c",
+    "__node_handle": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

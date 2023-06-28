@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/18 21:18:39 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/28 20:01:34 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,30 @@
 
 static char	*check_size(char *num);
 
-void	my_exit(t_list *var_list, char *num)
+void	my_exit(t_list *var_list, t_wordl *wordl)
 {
 	uint64_t	rv;
 	char		*siz;
 	char		*s;
 
-	if (!num)
+	if (!wordl->next)
 		exit(EXIT_SUCCESS);
-	siz = check_size(num);
+	if (wordl_size(wordl) > 2 && ft_isdigit(wordl->next->word->value[0]))
+	{
+		ft_dprintf(STDERR_FILENO, "Minishell: exit: too many arguments\n");
+		return ;
+	}
+	siz = check_size(wordl->next->word->value);
 	if (ft_strlen(siz) > 19)
 	{
-		dprintf(STDERR_FILENO, "minishell: exit: %s numeric argument required", num);
-		exit(1);
+		dprintf(STDERR_FILENO, "minishell: exit: %s numeric argument required\n", wordl->next->word->value);
+		exit(EXIT_FAILURE);
 	}
-	rv = ft_atul(num);
+	rv = ft_atul(wordl->next->word->value); 
 	s = ft_itul(rv);
-	if (ft_strcmp(s, (siz)) != 0)
+	if (ft_strcmp(s, siz) != 0)
 	{
-		dprintf(STDERR_FILENO, "minishell: exit: %s numeric argument required", num);
+		dprintf(STDERR_FILENO, "minishell: exit: %s numeric argument required\n", wordl->next->word->value);
 		exit(EXIT_FAILURE);
 	}
 	lst_set(var_list, "?", ft_itoa(rv % 256));
@@ -45,7 +50,8 @@ static char	*check_size(char *num)
 	char	*sign;
 
 	i = 0;
-	sign = NULL;
+	// sign = NULL;
+	sign = "";
 	if (num[i] == '-' || num[i] == '+')
 	{
 		sign = "-";

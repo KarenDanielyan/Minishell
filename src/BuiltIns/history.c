@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 14:30:44 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/12 13:30:10 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/27 20:59:49 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * 			History builtin prints on the screen the contents
  * 			of the history file.
  */
-void	history(t_list *var_list)
+void	history(t_wordl *wordl, t_list *var_list)
 {
 	int		i;
 	int		fd;
@@ -27,6 +27,12 @@ void	history(t_list *var_list)
 
 	i = 1;
 	line = NULL;
+	if (wordl_size(wordl) > 1)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: history: %s numeric argument required\n",
+			wordl->next->word->value);
+		return ;
+	}
 	filename = lst_get_by_key(var_list, "HISTFILE")->value;
 	fd = open(filename, O_RDONLY);
 	while (1)
