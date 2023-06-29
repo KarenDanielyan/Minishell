@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 22:57:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/24 13:18:05 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/29 22:05:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,56 @@ t_word	*get_param_word_token(char **s, int *flags);
  */
 t_word	*get_word(char **s, int *flags)
 {
-	t_word	*word_token;
+	t_wordl	*word_token;
 	char	*word;
+	char	*follow;
 
 	word_token = NULL;
 	word = NULL;
-	if (s && *s)
+	follow = NULL;
+	if (s)
 	{
-		if (**s == DOLLAR_SIGN && !word)
-			return (get_param_word_token(s, flags));
-		while (**s)
+		while (*s)
 		{
-			if (is_quote(**s, flags) || ft_strchr(OPERATORS, **s)
-				|| (ft_iswhitespace(**s) && !(*flags & (W_SQUOTE | W_DQUOTE))))
+			if (is_quote(**s, flags))
+				wordl_push_back(&word_token, get_quote_token(s, flags));
+			else if (**s == DOLLAR_SIGN)
+				wordl_push_back(&word_token, get_param_word_token(s, flags));
+			else if (ft_strchr(OPERATORS, **s) || (ft_iswhitespace(**s) && !(*flags & (W_SQUOTE | W_DQUOTE))))
 				break ;
-			ft_strappend(&word, **s);
-			(*s)++;
+			else
+			{
+				
+			}
 		}
-		word_token = word_new(word, WORD, *flags);
 	}
 	return (word_token);
 }
+
+t_word	*get_just_word_token(char **s, int *flags)
+{
+	char	*word;
+
+	while (**s && !is_quote(**s, flags) && !ft_strchr(OPERATORS, **s)
+		&& !(ft_iswhitespace(**s) && !(*flags & (W_SQUOTE | W_DQUOTE))))
+	{
+		ft_strappend(&word, **s);
+		(*s)++;
+	}
+	return (word_new(word, WORD, (*flags | W_HASDOLLAR)));
+}
+
+	// if (**s == DOLLAR_SIGN && !word)
+	// 	return (get_param_word_token(s, flags));
+	// while (**s)
+	// {
+	// 	if (is_quote(**s, flags) || ft_strchr(OPERATORS, **s)
+	// 		|| (ft_iswhitespace(**s) && !(*flags & (W_SQUOTE | W_DQUOTE))))
+	// 		break ;
+	// 	ft_strappend(&word, **s);
+	// 	(*s)++;
+	// }
+	// word_token = word_new(word, WORD, *flags);
 
 t_word	*get_param_word_token(char **s, int *flags)
 {

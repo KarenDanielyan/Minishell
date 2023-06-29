@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 21:01:55 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/26 16:12:37 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/29 21:52:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@ static void	check_flags_change(int *flags, int token_type);
  * 	||
  * 	>> or >
  * 	<< or <
- * 	=
  * 	'(' and ')'
  */
-t_word	*get_operator_token(char **s, int *flags)
+t_wordl	*get_operator_token(char **s, int *flags)
 {
-	t_word	*op_token;
+	t_wordl	*op_wordl;
 	char	*tmp;
 	char	*word;
 
@@ -47,9 +46,9 @@ t_word	*get_operator_token(char **s, int *flags)
 		(*s)++;
 	}
 	free(tmp);
-	op_token = word_new(word, get_type(word), *flags);
+	op_wordl = wordl_new(word_new(word, get_type(word), *flags));
 	check_flags_change(flags, get_type(word));
-	return (op_token);
+	return (op_wordl);
 }
 
 static int	get_type(char *op)
@@ -59,11 +58,7 @@ static int	get_type(char *op)
 	len = ft_strlen(op);
 	if (len == 1 && *op == PIPE_OP)
 		return (OP_PIPE);
-	if (len == 1 && *op == ASSIGN_OP)
-		return (VARASSIGN);
-	if (len == 1 && *op == IN_OP)
-		return (IO_FILE);
-	if (len == 1 && *op == OUT_OP)
+	if (len == 1 && (*op == IN_OP || *op == OUT_OP))
 		return (IO_FILE);
 	if (len == 1 && *op == SUBSHELL_OPEN)
 		return (LEFT_PAREN);

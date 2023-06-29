@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 13:17:27 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/24 13:17:38 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/29 21:40:48 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_word	*gnt_cleanup(char **s, int *flags);
  * 			NOTE:	Function will return NULL, when either string has ended,
  * 					or there are no more tokens to get from the string.
  */
-t_word	*get_next_token(char const *str)
+t_wordl	*get_next_token(char const *str)
 {
 	static char	*s;
 	static int	flags;
@@ -37,10 +37,8 @@ t_word	*get_next_token(char const *str)
 		return (gnt_init(&s, str));
 	if (s && *s)
 	{
-		while (*s && ft_iswhitespace(*s) && !(flags & (W_SQUOTE | W_DQUOTE)))
+		while (*s && ft_iswhitespace(*s))
 			s++;
-		if (*s && is_quote(*s, &flags))
-			return (get_quote_token(&s, &flags));
 		if (*s && ft_strchr(OPERATORS, *s))
 			return (get_operator_token(&s, &flags));
 		if (*s)
@@ -49,13 +47,13 @@ t_word	*get_next_token(char const *str)
 	return (gnt_cleanup(&s, &flags));
 }
 
-static t_word	*gnt_init(char **s, const char *str)
+static t_wordl	*gnt_init(char **s, const char *str)
 {
 	*s = (char *)str;
 	return (NULL);
 }
 
-static t_word	*gnt_cleanup(char **s, int *flags)
+static t_wordl	*gnt_cleanup(char **s, int *flags)
 {
 	*s = NULL;
 	*flags = 0;

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/28 14:47:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/29 21:42:09 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define PS4 "PS4=+ "
 
 /* Implemented Operators */
-# define OPERATORS "=<>|()&"
+# define OPERATORS "<>|()&"
 # define QUOTES "\'\""
 # define ASSIGN_OP '='
 # define PIPE_OP '|'

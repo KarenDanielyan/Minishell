@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/29 21:18:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/29 21:51:54 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ t_tokl	*tok_last(t_tokl *tok_l);
 /* The lexical analysis function. */
 
 t_tokl	*lex(char *str);
-t_word	*get_next_token(char const *str);
+t_wordl	*get_next_token(char const *str);
 
 t_word	*get_quote_token(char **s, int *flags);
-t_word	*get_operator_token(char **s, int *flags);
+t_wordl	*get_operator_token(char **s, int *flags);
 t_word	*get_word(char **s, int *flags);
 
 /* Wordlist API */
