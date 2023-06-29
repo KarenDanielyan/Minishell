@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/22 14:31:11 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/29 20:35:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_wordl
  */
 typedef struct s_tokl
 {
-	struct s_word	*word;
+	struct s_wordl	*word;
 	struct s_tokl	*prev;
 	struct s_tokl	*next;
 }	t_tokl;

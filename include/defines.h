@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/22 21:27:30 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/28 14:47:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@
 # define SUBSHELL_OPEN '('
 # define SUBSHELL_CLOSE ')'
 # define DOLLAR_SIGN '$'
-#define UNDERSCORE '_'
-#define SQUOTE '\''
-#define DQUOTE '\"'
+# define UNDERSCORE '_'
+# define SQUOTE '\''
+# define DQUOTE '\"'
 
 /* Special Symbols */
 # define TILDE '~'
