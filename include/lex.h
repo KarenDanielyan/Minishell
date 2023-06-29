@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/29 20:35:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/29 21:18:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,16 @@ typedef struct s_wordl
  */
 typedef struct s_tokl
 {
-	struct s_wordl	*word;
+	struct s_wordl	*wordl;
 	struct s_tokl	*prev;
 	struct s_tokl	*next;
 }	t_tokl;
 
 t_word	*word_new(char *str, int type, int flags);
 
-void	tok_push(t_tokl **tok_l, t_word *word);
+void	word_delete(t_word *word);
+
+void	tok_push(t_tokl **tok_l, t_wordl *wordl);
 void	tok_pop(t_tokl **tok_l);
 t_tokl	*tok_last(t_tokl *tok_l);
 
@@ -64,5 +66,13 @@ t_word	*get_next_token(char const *str);
 t_word	*get_quote_token(char **s, int *flags);
 t_word	*get_operator_token(char **s, int *flags);
 t_word	*get_word(char **s, int *flags);
+
+/* Wordlist API */
+t_wordl	*wordl_new(t_word *word);
+t_wordl	*wordl_last(t_wordl *wordl);
+
+void	wordl_clear(t_wordl *wordl);
+void	wordl_push_back(t_wordl **wordl, t_word *word);
+void	wordl_push_front(t_wordl **wordl, t_word *word);
 
 #endif

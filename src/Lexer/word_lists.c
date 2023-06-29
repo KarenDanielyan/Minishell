@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 17:43:01 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/19 16:18:14 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/29 21:18:21 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,24 @@ t_tokl	*tok_last(t_tokl *tok_l)
 	return (tok_l);
 }
 
-void	tok_push(t_tokl **tok_l, t_word *word)
+void	tok_push(t_tokl **tok_l, t_wordl *wordl)
 {
 	t_tokl	*token;
 
-	token = (t_tokl *)malloc(sizeof(t_tokl));
-	token->prev = NULL;
-	token->next = NULL;
-	token->word = word;
-	if (tok_l && *tok_l)
+	if (tok_l)
 	{
-		token->prev = *tok_l;
-		tok_last(*tok_l)->next = token;
+		token = (t_tokl *)malloc(sizeof(t_tokl));
+		token->prev = NULL;
+		token->next = NULL;
+		token->wordl = wordl;
+		if (*tok_l)
+		{
+			token->prev = *tok_l;
+			tok_last(*tok_l)->next = token;
+		}
+		else
+			*tok_l = token;
 	}
-	else
-		*tok_l = token;
 }
 
 void	tok_pop(t_tokl **tok_l)
@@ -70,7 +73,7 @@ void	tok_pop(t_tokl **tok_l)
 	if (tok_l && *tok_l)
 	{
 		last = tok_last(*tok_l);
-		word_delete(last->word);
+		wordl_clear(last->wordl);
 		last->prev->next = NULL;
 		free(last);
 	}
