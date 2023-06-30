@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 12:40:32 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 19:08:46by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,22 @@
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
 
-/* Implemented Operators */
 # define OPERATORS "<>|()&"
 # define QUOTES "\'\""
-# define ASSIGN_OP '='
+
+/* Terminal Symbols */
+# define EQUALS '='
 # define PIPE_OP '|'
-# define IN_OP '<'
-# define OUT_OP '>'
-# define HEREDOC_OP "<<"
-# define APPEND_OP ">>"
-# define AND_LIST "&&"
-# define OR_LIST "||"
-# define SUBSHELL_OPEN '('
-# define SUBSHELL_CLOSE ')'
+# define LESS '<'
+# define GREAT '>'
+# define DLESS "<<"
+# define DGREAT ">>"
+# define AND_IF "&&"
+# define OR_IF "||"
+# define LPAREN '('
+# define RPAREN ')'
 # define DOLLAR_SIGN '$'
-# define UNDERSCORE '_'
+# define USCORE '_'
 # define SQUOTE '\''
 # define DQUOTE '\"'
 
@@ -67,8 +68,8 @@ typedef enum e_type
 	IO_FILE,
 	OP_PARAM,
 	OP_PIPE,
-	AND_IF,
-	OR_IF,
+	AND_OP,
+	OR_OP,
 	VARASSIGN,
 	LEFT_PAREN,
 	RIGHT_PAREN,

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:04:29 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/22 19:10:41 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 19:13:16 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_name(char *str)
 	{
 		if (*str == DOLLAR_SIGN)
 			str ++;
-		if (ft_isalpha(*str) || *str == UNDERSCORE)
+		if (ft_isalpha(*str) || *str == USCORE)
 		{
 			while (*str)
 			{

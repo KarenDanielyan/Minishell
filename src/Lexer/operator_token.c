@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 21:01:55 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 17:06:28 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 20:29:24by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,42 +59,43 @@ static int	get_type(char *op)
 	len = ft_strlen(op);
 	if (len == 1 && *op == PIPE_OP)
 		return (OP_PIPE);
-	if (len == 1 && (*op == IN_OP || *op == OUT_OP))
+	if (len == 1 && (*op == LESS || *op == GREAT))
 		return (IO_FILE);
-	if (len == 1 && *op == SUBSHELL_OPEN)
+	if (len == 1 && *op == LPAREN)
 		return (LEFT_PAREN);
-	if (len == 1 && *op == SUBSHELL_CLOSE)
+	if (len == 1 && *op == RPAREN)
 		return (RIGHT_PAREN);
-	if (ft_strcmp(op, AND_LIST) == 0)
-		return (AND_IF);
-	if (ft_strcmp(op, OR_LIST) == 0)
-		return (OR_IF);
-	if (ft_strcmp(op, APPEND_OP) == 0)
+	if (ft_strcmp(op, AND_IF) == 0)
+		return (AND_OP);
+	if (ft_strcmp(op, OR_IF) == 0)
+		return (OR_OP);
+	if (ft_strcmp(op, DGREAT) == 0)
 		return (IO_APPEND);
-	if (ft_strcmp(op, HEREDOC_OP) == 0)
+	if (ft_strcmp(op, DLESS) == 0)
 		return (IO_HERE);
 	return (NOTOP);
 }
 
 static void	check_flags_change(int *flags, int token_type)
 {
-	static int	subhsell_depth;
+	static int	subshell_depth;
 
 	if (token_type == LEFT_PAREN)
 	{
 		*flags = *flags | W_SUBSHELL_PAREN;
-		subhsell_depth ++;
+		subshell_depth ++;
 	}
 	if (token_type == RIGHT_PAREN)
 	{
-		subhsell_depth --;
-		if (subhsell_depth == 0)
+		subshell_depth --;
+		if (subshell_depth == 0)
 			*flags = *flags ^ W_SUBSHELL_PAREN;
 		if (*flags & W_SUBSHELL_PIPE)
 			*flags = *flags ^ W_SUBSHELL_PIPE;
 	}
 	if (token_type == OP_PIPE)
 		*flags = *flags | W_SUBSHELL_PIPE;
-	if (token_type == AND_IF && (*flags & W_SUBSHELL_PIPE))
+	if ((token_type == AND_OP || token_type == OR_OP)
+		&& (*flags & W_SUBSHELL_PIPE))
 		*flags = *flags ^ W_SUBSHELL_PIPE;
 }
