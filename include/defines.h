@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/29 21:42:09 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 12:40:32 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,28 @@ typedef enum e_type
  * @def W_NOTILDE			Do not perform tilde expansion.
  * @def W_ASSIGNMENT		This word is a variable assignment.
  * @def W_ASSIGNRHS			Word is rhs of an assignment statement.
+ * 							(NOTE: DEPRICATED)
  * @def W_ASSIGNLHS			Word is lhs of an assignment statement.
+ * 							(NOTE: DEPRICATED)
  * @def W_ASSIGNBLTIN		Word is a builtin command that takes assignments.
+ * 							(NOTE: DEPRICATED)
  * @def W_NOASSNTILDE		Don't do tilde expansion like an assignment statement.
- * @def W_EXPANDRHS			Expanding word in $paramOPword or ${paramOPword}.
+ * 							(NOTE: DEPRICATED)
+ * @def W_PARAMEXP			Expanding word in $param.
  * @def W_ASSIGNARG			Word is assignment argument to command.
+ * 							(NOTE: DEPRICATED)
  * @def W_HASQUOTEDNULL		Word has a quoted null.
+ * 							(NOTE: DEPRICATED)
  * @def W_SAWQUOTEDNULL		Word contained a quoted null that was removed.
+ * 							(NOTE: DEPRICATED)
  * @def W_NOBRACE			Do not perform brace expansion.
+ * 							(NOTE: DEPRICATED)
  * @def W_COMPLETE			Word is being expansed for completetion.
+ * 							(NOTE: DEPRICATED)
  * @def W_CHKLOCAL			Check for loacal variables on assignment.
+ * 							(NOTE: DEPRICATED)
  * @def W_FORCELOCAL		Force assignment to be local variables.
+ * 							(NOTE: DEPRICATED)
  * @def W_SUBSHELL_PIPE		Subshell from a pipeline element.
  * @def W_SUBSHELL_PAREN	Subshell caused by ( ... ).
  */
@@ -116,7 +127,7 @@ enum e_flags
 	W_ASSIGNLHS			= (1 << 7),
 	W_ASSIGNBLTIN		= (1 << 8),
 	W_NOASSNTILDE		= (1 << 9),
-	W_EXPANDRHS			= (1 << 10),
+	W_PARMEXP			= (1 << 10),
 	W_ASSIGNARG			= (1 << 11),
 	W_HASQUOTEDNULL		= (1 << 12),
 	W_SAWQUOTEDNULL		= (1 << 13),

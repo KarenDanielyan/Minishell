@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 22:57:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/29 22:05:45 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:28:47 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <libft.h>
 #include <stdio.h>
 
-t_word	*get_param_word_token(char **s, int *flags);
+static t_word	*get_just_word(char **s, int *flags);
+static t_word	*get_quoted_word(char **s, int *flags);
 
 /**
  * @brief	Everything excepts quotes and operators are words.
@@ -25,76 +26,84 @@ t_word	*get_param_word_token(char **s, int *flags);
  * @param flags		Laws to be enforced while recognizign the token.
  * @return t_word*	Word token.
  */
-t_word	*get_word(char **s, int *flags)
+t_wordl	*get_word(char **s, int *flags, int *type)
 {
 	t_wordl	*word_token;
 	char	*word;
-	char	*follow;
 
 	word_token = NULL;
 	word = NULL;
-	follow = NULL;
 	if (s)
 	{
 		while (*s)
 		{
-			if (is_quote(**s, flags))
-				wordl_push_back(&word_token, get_quote_token(s, flags));
-			else if (**s == DOLLAR_SIGN)
-				wordl_push_back(&word_token, get_param_word_token(s, flags));
-			else if (ft_strchr(OPERATORS, **s) || (ft_iswhitespace(**s) && !(*flags & (W_SQUOTE | W_DQUOTE))))
+			if (ft_strchr(OPERATORS, **s) \
+				|| (ft_iswhitespace(**s) && !(*flags & (W_SQUOTE | W_DQUOTE))))
 				break ;
+			else if (is_quote(**s, flags))
+				wordl_push_back(&word_token, get_quoted_word(s, flags));
 			else
-			{
-				
-			}
+				wordl_push_back(&word_token, get_just_word(s, flags));
 		}
 	}
+	*type = WORD;
 	return (word_token);
 }
 
-t_word	*get_just_word_token(char **s, int *flags)
+static t_word	*get_just_word(char **s, int *flags)
 {
 	char	*word;
+	int		flag;
 
+	flag = *flags;
+	word = NULL;
 	while (**s && !is_quote(**s, flags) && !ft_strchr(OPERATORS, **s)
 		&& !(ft_iswhitespace(**s) && !(*flags & (W_SQUOTE | W_DQUOTE))))
 	{
 		ft_strappend(&word, **s);
+		if (**s == DOLLAR_SIGN)
+			flag = flag | W_HASDOLLAR | W_PARMEXP;
+		if (**s == TILDE)
+			flag = flag | W_TILDEEXP;
 		(*s)++;
 	}
-	return (word_new(word, WORD, (*flags | W_HASDOLLAR)));
+	return (word_new(word, flag));
 }
 
-	// if (**s == DOLLAR_SIGN && !word)
-	// 	return (get_param_word_token(s, flags));
-	// while (**s)
-	// {
-	// 	if (is_quote(**s, flags) || ft_strchr(OPERATORS, **s)
-	// 		|| (ft_iswhitespace(**s) && !(*flags & (W_SQUOTE | W_DQUOTE))))
-	// 		break ;
-	// 	ft_strappend(&word, **s);
-	// 	(*s)++;
-	// }
-	// word_token = word_new(word, WORD, *flags);
+static void	check_flag_change(char c, int *flags, int *flag)
+{
+	if (c == SQUOTE && is_quote(c, flags))
+		*flags = *flags ^ W_SQUOTE;
+	if (c == DQUOTE && is_quote(c, flags))
+		*flags = *flags ^ W_DQUOTE;
+	if (c == DOLLAR_SIGN)
+		*flag = *flag | W_HASDOLLAR | W_PARMEXP;
+	if (c == TILDE)
+		*flag = *flag | W_NOTILDE;
+}
 
-t_word	*get_param_word_token(char **s, int *flags)
+static t_word	*get_quoted_word(char **s, int *flags)
 {
 	char	*word;
-	char	*tmp;
+	int		flag;
 
 	word = NULL;
-	ft_strappend(&word, **s);
-	tmp = ft_strdup(word);
-	(*s)++;
-	while (**s)
+	flag = 0;
+	if (s && *s)
 	{
-		ft_strappend(&tmp, **s);
-		if (!is_name(tmp))
-			break ;
-		ft_strappend(&word, **s);
-		(*s)++;
+		if (**s == SQUOTE)
+			flag = flag | W_SQUOTE;
+		if (**s == DQUOTE)
+			flag = flag | W_DQUOTE;
+		while (**s)
+		{
+			ft_strappend(&word, **s);
+			check_flag_change(**s, flags, &flag);
+			(*s)++;
+			if (!ft_strchr(OPERATORS, **s) && !(flag & *flags))
+				break ;
+		}
+		return (word_new(word, (*flags | flag)));
 	}
-	free(tmp);
-	return (word_new(word, WORD, (*flags | W_HASDOLLAR)));
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:50:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/19 15:20:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 12:49:41 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 #include "list.h"
 #include "tree.h"
 
-void	print_tokens(t_tokl	*token_list);
+void	print_tokens(t_token	*token_list);
 
 
 /* Utils */

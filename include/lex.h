@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/29 21:51:54 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:10:06 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@
 /**
  * @brief	Atomic entity of our lexical analysis
  * 
- * @param token_type	What type of word is this? (ex. command io_here, etc.)
  * @param flags			Flags for the word (refer to defines.h so see possible values).
  * @param value			The word itself (ex. ">", "<<", "cat")
  */
 typedef struct s_word
 {
-	int		type;
 	int		flags;
 	char	*value;
 }	t_word;
@@ -40,32 +38,33 @@ typedef struct s_wordl
 }	t_wordl;
 
 /**
- * @brief	Generated tokens list. Lexer will return this
- * 			after tokenizing the input.
+ * @brief		Generated tokens list. Lexer will return this
+ * 				after tokenizing the input.
+ * @param type	What type of word is this? (ex. command io_here, etc.)
  */
-typedef struct s_tokl
+typedef struct s_token
 {
+	int		type;
 	struct s_wordl	*wordl;
-	struct s_tokl	*prev;
-	struct s_tokl	*next;
-}	t_tokl;
+	struct s_token	*prev;
+	struct s_token	*next;
+}	t_token;
 
-t_word	*word_new(char *str, int type, int flags);
+t_word	*word_new(char *str, int flags);
 
 void	word_delete(t_word *word);
 
-void	tok_push(t_tokl **tok_l, t_wordl *wordl);
-void	tok_pop(t_tokl **tok_l);
-t_tokl	*tok_last(t_tokl *tok_l);
+void	tok_push(t_token **tok_l, t_wordl *wordl, int type);
+void	tok_pop(t_token **tok_l);
+t_token	*tok_last(t_token *tok_l);
 
 /* The lexical analysis function. */
 
-t_tokl	*lex(char *str);
-t_wordl	*get_next_token(char const *str);
+t_token	*lex(char *str);
+t_wordl	*get_next_token(char const *str, int *type);
 
-t_word	*get_quote_token(char **s, int *flags);
-t_wordl	*get_operator_token(char **s, int *flags);
-t_word	*get_word(char **s, int *flags);
+t_wordl	*get_operator_token(char **s, int *flags, int *type);
+t_wordl	*get_word(char **s, int *flags, int *type);
 
 /* Wordlist API */
 t_wordl	*wordl_new(t_word *word);

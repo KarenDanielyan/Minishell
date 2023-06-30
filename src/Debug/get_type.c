@@ -6,13 +6,32 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 15:14:07 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/19 15:22:10 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:11:19 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "debug.h"
 
+static char	*get_type_1(int type);
+
 char	*get_type(int type)
+{
+	if (type >= 0 && type <= 9)
+		return (get_type_1(type));
+	if (type == 10)
+		return ("SQUOTE_OPEN");
+	if (type == 11)
+		return ("SQUOTE_CLOSE");
+	if (type == 12)
+		return ("DQUOTE_OPEN");
+	if (type == 13)
+		return ("DQUOTE_CLOSE");
+	if (type == 14)
+		return ("WORD");
+	return ("NOTOP");
+}
+
+static char	*get_type_1(int type)
 {
 	if (type == 0)
 		return ("IO_HERE");
@@ -34,15 +53,5 @@ char	*get_type(int type)
 		return ("LEFT_PAREN");
 	if (type == 9)
 		return ("RIGHT_PAREN");
-	if (type == 10)
-		return ("SQUOTE_OPEN");
-	if (type == 11)
-		return ("SQUOTE_CLOSE");
-	if (type == 12)
-		return ("DQUOTE_OPEN");
-	if (type == 13)
-		return ("DQUOTE_CLOSE");
-	if (type == 14)
-		return ("WORD");
-	return ("NOTOP");
+	return (NULL);
 }

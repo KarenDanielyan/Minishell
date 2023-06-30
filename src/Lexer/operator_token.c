@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 21:01:55 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/29 21:52:52 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:06:28 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	check_flags_change(int *flags, int token_type);
  * 	<< or <
  * 	'(' and ')'
  */
-t_wordl	*get_operator_token(char **s, int *flags)
+t_wordl	*get_operator_token(char **s, int *flags, int *type)
 {
 	t_wordl	*op_wordl;
 	char	*tmp;
@@ -46,8 +46,9 @@ t_wordl	*get_operator_token(char **s, int *flags)
 		(*s)++;
 	}
 	free(tmp);
-	op_wordl = wordl_new(word_new(word, get_type(word), *flags));
-	check_flags_change(flags, get_type(word));
+	op_wordl = wordl_new(word_new(word, *flags));
+	*type = get_type(word);
+	check_flags_change(flags, *type);
 	return (op_wordl);
 }
 

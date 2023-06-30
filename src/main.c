@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/20 14:08:14 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:11:50 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	main(int ac, char **av, char **env)
 	int		fd;
 	t_list	*var_list;
 	char	*filename;
+
 	print_logo();
 	rl_readline_name = "Minishell";
 	rl_instream = stdin;

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 01:00:25 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/20 14:40:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:24:20 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 *
 *	Return Value: On success, ft_strdup returns a pointer to
 *	the duplicated string. It returns NULL if insufficient
-*	memory was available.q
+*	memory was available.
 */
 char	*ft_strdup(const char *s)
 {

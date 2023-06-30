@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:26:31 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/07 16:23:16 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:05:34 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	lst_clear(t_list **lst, void (*del)(void *))
 			a = (*lst)->next;
 			if ((*lst)->joined)
 				del((*lst)->joined);
-			if((*lst)->key)
+			if ((*lst)->key)
 				del((*lst)->key);
 			if ((*lst)->value)
 				del((*lst)->value);

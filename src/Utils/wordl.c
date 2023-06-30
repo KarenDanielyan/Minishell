@@ -6,13 +6,12 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 20:48:29 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/29 21:08:54 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:05:19 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
 #include <libft.h>
-
 
 t_wordl	*wordl_new(t_word *word)
 {
@@ -61,7 +60,7 @@ void	wordl_push_front(t_wordl **wordl, t_word *word)
 void	wordl_clear(t_wordl *wordl)
 {
 	t_wordl	*tmp;
-	
+
 	while (wordl)
 	{
 		tmp = wordl->next;
