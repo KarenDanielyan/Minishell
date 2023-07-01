@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/02 00:39:43 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/02 00:49:11 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,5 @@ t_Node	*new_SuffixNode(t_Node *value);
 t_Node	*newIORedirectNode(t_IOType type, t_Node *filename);
 
 t_Node	*newWordNode(t_wordl *word);
-
-/* Destructors */
-void	drop_Nodes(t_Node **node);
 
 #endif
