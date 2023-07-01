@@ -39,7 +39,7 @@ static short	is_whitespace(const char *chr)
 *
 *	Return Value: The converted value or 0 on error.
 */
-unsigned long long	ft_atul(const char *str)
+uint64_t	ft_atul(const char *str)
 {
 	long long		num;
 	unsigned long	sign;

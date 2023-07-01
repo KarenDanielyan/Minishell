@@ -140,4 +140,10 @@ enum e_flags
 	W_SUBSHELL_PIPE		= (1 << 19)
 };
 
+typedef struct s_pipe
+{
+	int	in;
+	int	out;
+}	t_pipe;
+
 #endif

@@ -29,10 +29,8 @@ static t_word	*get_quoted_word(char **s, int *flags);
 t_wordl	*get_word(char **s, int *flags, int *type)
 {
 	t_wordl	*word_token;
-	char	*word;
 
 	word_token = NULL;
-	word = NULL;
 	if (s)
 	{
 		while (*s)

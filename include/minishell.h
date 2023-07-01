@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/01 19:30:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/02 00:43:33 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "lex.h"
-# include "list.h"
 # include <stdint.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -28,6 +27,12 @@
 void	sig_init(void);
 t_list	*env_init(char **env);
 void	mode_init(int ac, char **av);
+
+/* Parsing */
+void	*parse(t_token	*scanner);
+
+/* Drop Function */
+void	drop(void *tree);
 
 /* Built-Ins */
 void	history(t_list *var_list);

@@ -37,7 +37,7 @@ static short	is_whitespace(const char *chr)
 *
 *	Return Value: The converted value or 0 on error.
 */
-long long	ft_atol(const char *str)
+int64_t	ft_atol(const char *str)
 {
 	long		num;
 	short		sign;

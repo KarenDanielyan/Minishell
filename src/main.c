@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/30 18:11:50 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/02 00:46:05 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	switch_case(t_list *var_list, char *str)
 void	true_loop(t_list *var_list, int fd)
 {
 	char	*str;
+	t_token	*scanner;
 
 	sig_init();
 	while (1)
@@ -47,7 +48,7 @@ void	true_loop(t_list *var_list, int fd)
 		str = readline(lst_get_by_key(var_list, "PS1")->value);
 		if (!str)
 		{
-			write (2, "exit", 4);
+			write (2, "exit\n", 5);
 			break ;
 		}
 		if (!(*str))
@@ -57,9 +58,11 @@ void	true_loop(t_list *var_list, int fd)
 		}
 		add_history(str);
 		ft_putendl_fd(str, fd);
-		lex(str);
+		scanner = lex(str);
 		switch_case(var_list, str);
 		free(str);
+		while(scanner)
+			tok_pop(&scanner);
 	}
 }
 
