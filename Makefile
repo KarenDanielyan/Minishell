@@ -14,7 +14,7 @@ SRC			=	./src
 
 DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 				debug.h defines.h list.h \
-				lex.h tree.h minishell.h) \
+				lex.h minishell.h parser.h) \
 				Makefile
 
 SRCS		=	$(patsubst %.c, $(SRC)/Debug/%.c,\

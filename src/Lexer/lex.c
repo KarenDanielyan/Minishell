@@ -6,11 +6,12 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 15:27:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 12:54:34 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:50:25 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
+#include "parser.h"
 #include "debug.h"
 
 static void	check_flag(t_token *tokens, t_wordl *word);

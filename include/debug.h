@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:50:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 12:49:41 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:30:14 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 #include "defines.h"
 #include "lex.h"
 #include "list.h"
-#include "tree.h"
 
 void	print_tokens(t_token	*token_list);
 
