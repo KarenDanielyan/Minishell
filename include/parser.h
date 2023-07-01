@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/02 01:47:51 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/02 02:12:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef enum e_IOType
 typedef struct s_NodeList
 {
 	t_Node				*node;
-	struct s_nodelist	*next;
+	struct s_NodeList	*next;
 }	t_NodeList;
 
 typedef struct s_ListNode
@@ -145,6 +145,8 @@ t_Node	*new_ListNode(t_ListType type, t_Node *left, t_Node *right);
 t_Node	*new_SimpleCommandNode(int flags, t_Node *word, t_Node *suffix);
 
 t_Node	*new_CommandNode(t_CmdType type, t_Node *prefix, t_Node *command);
+
+t_NodeList	*new_NodeList(t_Node *node);
 
 /* Parsing Functions */
 t_Node	*parseWord(t_token **scanner);

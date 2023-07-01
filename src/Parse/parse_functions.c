@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:13:45 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/02 01:54:43 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/02 02:13:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_Node	*parseListPrime(t_token **scanner, t_Node *expr)
 	t_ListType	type;
 	t_Node		*pipeline;
 
-	if (*scanner && (*scanner)->type == AND_IF || (*scanner)->type == OR_IF)
+	if (*scanner && ((*scanner)->type == AND_OP || (*scanner)->type == OR_OP))
 	{
-		if ((*scanner)->type == AND_IF)
+		if ((*scanner)->type == AND_OP)
 			type = AND;
 		else
 			type = OR;
@@ -36,6 +36,8 @@ t_Node	*parseListPrime(t_token **scanner, t_Node *expr)
 		pipeline = parsePipeline(scanner);
 		return (parseListPrime(scanner, new_ListNode(type, expr, pipeline)));
 	}
+	else
+		return (expr);
 }
 
 static t_PipelineNode	*pipeline_last(t_PipelineNode *head);
@@ -50,7 +52,7 @@ t_Node	*parsePipeline(t_token **scanner)
 	while ((*scanner)->type == PIPE_OP)
 	{
 		token_consume(scanner);
-		pipeline_last(head->value.pipeline)->next = parseCommand(scanner);
+		pipeline_last(&(head->value.pipeline))->next = new_NodeList(parseCommand(scanner));
 	}
 	return (head);
 }

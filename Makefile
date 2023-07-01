@@ -39,7 +39,7 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				word_token.c lex.c \
 				get_next_token.c) \
 				$(patsubst %.c, $(SRC)/Parse/%.c,\
-				parser.c) \
+				parser.c parse_functions.c) \
 
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
