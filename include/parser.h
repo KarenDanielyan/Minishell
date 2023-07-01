@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/02 00:49:11 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/02 01:47:51 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,22 +128,48 @@ typedef struct s_Node
 }	t_Node;
 
 /* Constructors */
-t_Node	*new_ListNode(t_ListType type, t_Node *left, t_Node *right);
-
-t_Node	*new_PipelineNode(t_Node *command);
-
-t_Node	*new_CommandNode(t_CmdType type, t_Node *prefix, t_Node *command);
-
-t_Node	*new_SimpleCommandNode(int flags, t_Node *word, t_Node *suffix);
-
-t_Node	*new_CompundCommandNode(t_Node *list, t_Node *suffix);
+t_Node	*newWordNode(t_wordl *word);
 
 t_Node	*new_PrefixNode(t_Node *value);
 
 t_Node	*new_SuffixNode(t_Node *value);
 
+t_Node	*new_PipelineNode(t_Node *command);
+
 t_Node	*newIORedirectNode(t_IOType type, t_Node *filename);
 
-t_Node	*newWordNode(t_wordl *word);
+t_Node	*new_CompundCommandNode(t_Node *list, t_Node *suffix);
+
+t_Node	*new_ListNode(t_ListType type, t_Node *left, t_Node *right);
+
+t_Node	*new_SimpleCommandNode(int flags, t_Node *word, t_Node *suffix);
+
+t_Node	*new_CommandNode(t_CmdType type, t_Node *prefix, t_Node *command);
+
+/* Parsing Functions */
+t_Node	*parseWord(t_token **scanner);
+
+t_Node	*parseList(t_token **scanner);
+
+t_Node	*parseSuffix(t_token **scanner);
+
+t_Node	*parsePrefix(t_token **scanner);
+
+t_Node	*parseCommand(t_token **scanner);
+
+t_Node	*parsePipeline(t_token **scanner);
+
+t_Node	*parseIORedirect(t_token **scanner);
+
+t_Node	*parseSimpleCommand(t_token **scanner);
+
+t_Node	*parseCommpoundCommand(t_token **scanner);
+
+t_Node	*parseListPrime(t_token **scanner, t_Node *expr);
+
+/* TODO: Add peek and consume functions */
+t_token	token_peek(t_token *scanner);
+
+void	token_consume(t_token **scanner);
 
 #endif

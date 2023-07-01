@@ -36,8 +36,10 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				wordl.c) \
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
 				word_lists.c operator_token.c \
-				word_token.c \
-				get_next_token.c lex.c) \
+				word_token.c lex.c \
+				get_next_token.c) \
+				$(patsubst %.c, $(SRC)/Parse/%.c,\
+				parser.c) \
 
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
@@ -46,7 +48,8 @@ OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
 				$(filter-out %.c, $(patsubst $(SRC)/Utils/%.c, $(BUILD)/%.o, $(SRCS))) \
 				$(filter-out %.c, $(patsubst $(SRC)/List/%.c, $(BUILD)/%.o, $(SRCS))) \
 				$(filter-out %.c, $(patsubst $(SRC)/Lexer/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/Debug/%.c, $(BUILD)/%.o, $(SRCS)))
+				$(filter-out %.c, $(patsubst $(SRC)/Debug/%.c, $(BUILD)/%.o, $(SRCS))) \
+				$(filter-out %.c, $(patsubst $(SRC)/Parse/%.c, $(BUILD)/%.o, $(SRCS)))
 
 # Compilation options
 
