@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 15:14:07 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 18:11:19 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/02 14:22:29 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static char	*get_type_1(int type)
 	if (type == 7)
 		return ("VARASSIGN");
 	if (type == 8)
-		return ("LEFT_PAREN");
+		return ("SUBSHELL_OPEN");
 	if (type == 9)
-		return ("RIGHT_PAREN");
+		return ("SUBSHELL_CLOSE");
 	return (NULL);
 }

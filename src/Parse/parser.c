@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/02 01:19:05 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/02 12:28:44 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 
 void	*parse(t_token *scanner)
 {
-	return ((void *)parseList(&scanner));
+	return ((void *)parse_list(&scanner));
 }

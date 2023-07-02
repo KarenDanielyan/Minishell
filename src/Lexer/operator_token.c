@@ -62,9 +62,9 @@ static int	get_type(char *op)
 	if (len == 1 && (*op == LESS || *op == GREAT))
 		return (IO_FILE);
 	if (len == 1 && *op == LPAREN)
-		return (LEFT_PAREN);
+		return (SUBSHELL_OPEN);
 	if (len == 1 && *op == RPAREN)
-		return (RIGHT_PAREN);
+		return (SUBSHELL_CLOSE);
 	if (ft_strcmp(op, AND_IF) == 0)
 		return (AND_OP);
 	if (ft_strcmp(op, OR_IF) == 0)
@@ -80,12 +80,12 @@ static void	check_flags_change(int *flags, int token_type)
 {
 	static int	subshell_depth;
 
-	if (token_type == LEFT_PAREN)
+	if (token_type == SUBSHELL_OPEN)
 	{
 		*flags = *flags | W_SUBSHELL_PAREN;
 		subshell_depth ++;
 	}
-	if (token_type == RIGHT_PAREN)
+	if (token_type == SUBSHELL_CLOSE)
 	{
 		subshell_depth --;
 		if (subshell_depth == 0)

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/02 00:43:33 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/02 14:52:14 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+/**
+ * TODO: Implmement error detection and recovery routines.
+*/
 
 /* Initialization */
 void	sig_init(void);
