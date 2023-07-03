@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/28 18:22:25 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/03 17:32:27 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define PS1 "PS1=minishell-4.2 "
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
+# define DL "declare -x"
 
 /* Implemented Operators */
 # define OPERATORS "=<>|()&"
@@ -35,9 +36,10 @@
 # define SUBSHELL_OPEN '('
 # define SUBSHELL_CLOSE ')'
 # define DOLLAR_SIGN '$'
-#define UNDERSCORE '_'
-#define SQUOTE '\''
-#define DQUOTE '\"'
+# define UNDERSCORE '_'
+# define SQUOTE '\''
+# define DQUOTE '\"'
+# define DQUOTE_S "\""
 
 /* Special Symbols */
 # define TILDE '~'

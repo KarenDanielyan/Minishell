@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/28 20:23:26 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/03 22:34:24 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ void	env(t_list *env);
 void	unset(t_list **var_list, t_wordl *wordl);
 void	my_exit(t_list *var_list, t_wordl *wordl);
 void	echo(t_wordl *wordl);
+void	export(t_list *var_list, t_wordl* args);
 
 /* Utils */
 void	print_logo(void);
 
 char	**get_env(t_list *var_list);
+char	**get_env_key(t_list	*var_list);
 
 int	is_quote(char c, int *flags);
 int	is_name(char *str);

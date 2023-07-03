@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 21:18:24 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/28 18:38:59 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:09:21 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ static void	join_strcpy(char *dest, const char *src)
 	int	i;
 
 	i = 0;
-	while (*(src + i))
+	if (dest && src)
 	{
-		*(dest + i) = *(src + i);
-		i++;
+		while (*(src + i))
+		{
+			*(dest + i) = *(src + i);
+			i++;
+		}
 	}
 }
 
@@ -39,8 +42,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	len2;
 	char	*join;
 
-	if (!s1 || !s2)
-		return (NULL);
+	// if (!s1 || !s2)
+	// 	return (NULL);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	join = (char *)malloc((len1 + len2 + 1) * sizeof(char));
@@ -49,10 +52,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	join_strcpy(join, s1);
 	join_strcpy(join + len1, s2);
 	*(join + len1 + len2) = '\0';
-	// if (!(*join))
-	// {
-	// 	free(join);
-	// 	join = NULL;
-	// }
+	if (!(*join))
+	{
+		free(join);
+		join = NULL;
+	}
 	return (join);
 }

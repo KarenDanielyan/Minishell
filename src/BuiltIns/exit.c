@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/28 20:01:34 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:03:16 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ static char	*check_size(char *num)
 	char	*sign;
 
 	i = 0;
-	// sign = NULL;
-	sign = "";
+	sign = NULL;
 	if (num[i] == '-' || num[i] == '+')
 	{
 		sign = "-";

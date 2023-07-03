@@ -6,26 +6,26 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/28 20:31:13 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/01 17:58:46 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static void free_tokl(t_tokl *tokens)
-// {
-// 	t_tokl	*rem;
+static void free_tokl(t_tokl *tokens)
+{
+	t_tokl	*rem;
 
-// 	rem = NULL;
-// 	while (tokens)
-// 	{
-// 		rem = tokens->next;
-// 		free(tokens->word->value);
-// 		free(tokens->word);
-// 		free(tokens);
-// 		tokens = rem;
-// 	}
-// }
+	rem = NULL;
+	while (tokens)
+	{
+		rem = tokens->next;
+		free(tokens->word->value);
+		free(tokens->word);
+		free(tokens);
+		tokens = rem;
+	}
+}
 
 t_wordl *add_toempty(t_wordl *node, t_word *word)
 {
@@ -73,7 +73,6 @@ static void	switch_case(t_list *var_list, char *str)
 	split = ft_split(str, ' ');
 	wordl = NULL;
 	word = NULL;
-	(void)var_list;
 	while (split[i]) 
 	{
 		word = add_word(word,split[i], WORD, 0);
@@ -97,6 +96,10 @@ static void	switch_case(t_list *var_list, char *str)
 		pwd();
 	if (ft_strcmp(wordl->word->value, "unset") == 0)
 		unset(&var_list, wordl);
+	if (ft_strcmp(wordl->word->value, "export") == 0)
+	{
+		export(var_list, wordl);
+	}
 	if (ft_strcmp(wordl->word->value, "env") == 0)
 		env(var_list);
 	free_2d(split);
@@ -127,9 +130,9 @@ void	true_loop(t_list *var_list, int fd)
 		}
 		add_history(str);
 		ft_putendl_fd(str, fd);
-		//tokens = lex(str);
+		tokens = lex(str);
 		switch_case(var_list, str);
-	//	free_tokl(tokens);
+		free_tokl(tokens);
 		free(str);
 	}
 }
