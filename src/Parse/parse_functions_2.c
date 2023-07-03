@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/03 21:06:36 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 02:32:25 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ t_node	*parse_command(t_token **scanner)
 	{
 		type = CompoundCommand;
 		command_node = parse_commpound_command(scanner);
-		type = CompoundCommand;
 	}
 	else
 	{
 		type = SimpleCommand;
 		command_node = parse_simple_command(scanner);
-		type = SimpleCommand;
 	}
 	return (new_command_node(type, prefix_node, command_node));
 }
