@@ -40,7 +40,7 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				get_next_token.c) \
 				$(patsubst %.c, $(SRC)/Parse/%.c,\
 				parser.c parse_functions.c \
-				parse_functions_2.c ) \
+				node_list.c parse_functions_2.c ) \
 
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \

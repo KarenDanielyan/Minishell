@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:13:45 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/02 15:37:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:37:01 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,24 @@ t_node	*parse_list_prime(t_token **scanner, t_node *expr)
 		return (expr);
 }
 
-static t_pipelinenode	*pipeline_last(t_pipelinenode *head);
-
 t_node	*parse_pipeline(t_token **scanner)
 {
-	t_node	*head;
 	t_node	*command;
 
 	command = parse_command(scanner);
-	head = new_PipelineNode(command);
-	while ((*scanner)->type == PIPE_OP)
-	{
-		token_consume(scanner);
-		list_last(&(head->value.pipeline))->next \
-			= new_NodeList(parse_command(scanner));
-	}
-	return (head);
+	return (parse_pipeline_prime(scanner, command));
 }
 
-t_pipelinenode	*list_last(t_pipelinenode *head)
+t_node	*parse_pipeline_prime(t_token **scanner, t_node *expr)
 {
-	if (head)
+	t_node	*command;
+
+	if (*scanner && (*scanner)->type == OP_PIPE)
 	{
-		while (head->next)
-			head = head->next;
+		token_consume(scanner);
+		command = parse_command(scanner);
+		return (parse_pipeline_prime(scanner, new_PipelineNode(expr, command)));
 	}
-	return (head);
+	else
+		return (expr);
 }

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/02 15:24:45 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:39:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_node	*parse_simple_command(t_token **scanner)
 	t_node	*cmd;
 	t_node	*suffix;
 
-	cmd = parseWord(scanner);
+	cmd = parse_word(scanner);
 	suffix = parse_suffix(scanner);
 	return (new_SimpleCommandNode(cmd, suffix));
 }

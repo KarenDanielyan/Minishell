@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/02 16:34:39 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:49:35 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 # include "lex.h"
 
 typedef struct s_Node			t_node;
-typedef struct s_ListNode		t_listnode;
-typedef struct s_CommandNode	t_commandnode;
-typedef struct s_NodeList		t_pipelinenode;
-typedef struct s_sCommandNode	t_scommandnode;
-typedef struct s_cCommandNode	t_ccommandnode;
+typedef struct s_NodeList		t_nodel;
+typedef struct s_ListNode		t_lnode;
+typedef struct s_CommandNode	t_cnode;
+typedef struct s_PipelineNode	t_pipenode;
+typedef struct s_sCommandNode	t_scnode;
+typedef struct s_cCommandNode	t_ccnode;
 typedef struct s_NodeList		t_prefixnode;
 typedef struct s_NodeList		t_suffixnode;
 typedef struct s_IORedirectNode	t_ionode;
@@ -70,34 +71,42 @@ typedef struct s_NodeList
 {
 	t_node				*node;
 	struct s_NodeList	*next;
-}	t_nodelist;
+}	t_nodel;
 
 typedef struct s_ListNode
 {
 	t_ListType	type;
 	t_node		*left;
 	t_node		*right;
-}	t_listnode;
+}	t_lnode;
+
+typedef struct s_PipelineNode
+{
+	int	in_fd;
+	int	out_fd;
+	t_node	*left;
+	t_node	*right;
+}	t_pipenode;
 
 typedef struct s_CommandNode
 {
 	t_CmdType	type;
 	t_node		*prefix;
 	t_node		*command;
-}	t_commandnode;
+}	t_cnode;
 
 typedef struct s_sCommandNode
 {
 	t_pipe		pipe;
 	t_node		*word;
 	t_node		*suffix;
-}	t_scommandnode;
+}	t_scnode;
 
 typedef struct s_cCommandNode
 {
 	t_node	*list;
 	t_node	*suffix;
-}	t_ccommandnode;
+}	t_ccnode;
 
 typedef struct s_IORedirectNode
 {
@@ -108,11 +117,11 @@ typedef struct s_IORedirectNode
 
 typedef union u_NodeValue
 {
-	t_listnode		list;
-	t_pipelinenode	pipeline;
-	t_commandnode	cmd;
-	t_scommandnode	s_cmd;
-	t_ccommandnode	c_cmd;
+	t_lnode		list;
+	t_pipenode	pipeline;
+	t_cnode	cmd;
+	t_scnode	s_cmd;
+	t_ccnode	c_cmd;
 	t_ionode		redirs;
 	t_prefixnode	*prefix;
 	t_suffixnode	*suffix;
@@ -128,11 +137,11 @@ typedef struct s_Node
 /* Constructors */
 t_node		*new_WordNode(t_wordl *word);
 
-t_node		*new_SuffixNode(t_node *value);
+t_node		*new_SuffixNode(t_nodel *value);
 
-t_node		*new_PipelineNode(t_node *command);
+t_node		*new_PrefixNode(t_nodel *value);
 
-t_node		*new_PrefixNode(t_nodelist *value);
+t_node		*new_PipelineNode(t_node *left, t_node *right);
 
 t_node		*new_IORedirectNode(t_IOType type, t_node *filename);
 
@@ -144,7 +153,7 @@ t_node		*new_ListNode(t_ListType type, t_node *left, t_node *right);
 
 t_node		*new_CommandNode(t_CmdType type, t_node *prefix, t_node *command);
 
-t_nodelist	*new_NodeList(t_node *node);
+t_nodel		*new_NodeList(t_node *node);
 
 /* Parsing Functions */
 t_node		*parse_word(t_token **scanner);
@@ -167,12 +176,14 @@ t_node		*parse_commpound_command(t_token **scanner);
 
 t_node		*parse_list_prime(t_token **scanner, t_node *expr);
 
+t_node		*parse_pipeline_prime(t_token **scanner, t_node *expr);
+
 /* TODO: Add peek and consume functions */
 t_token		token_peek(t_token *scanner);
 
 void		token_consume(t_token **scanner);
 
 /* Utils */
-t_nodelist	*list_last(t_nodelist *head);
+t_nodel		*list_last(t_nodel *head);
 
 #endif

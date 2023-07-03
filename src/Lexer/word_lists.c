@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 17:43:01 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/01 23:36:55 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:36:41 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	tok_push(t_token **tok_l, t_wordl *wordl, int type)
 		else
 			*tok_l = token;
 	}
-	printf("New token Address: %p\n", token->wordl);
 }
 
 void	tok_pop(t_token **tok_l)
