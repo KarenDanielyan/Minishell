@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:50:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/01 19:30:14 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 02:02:13 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@
 #include "defines.h"
 #include "lex.h"
 #include "list.h"
+#include "parser.h"
 
 void	print_tokens(t_token	*token_list);
+void	print_tree(t_node *node, char *ident, int is_last);
 
 
 /* Utils */

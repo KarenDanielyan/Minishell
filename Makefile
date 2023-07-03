@@ -18,7 +18,8 @@ DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 				Makefile
 
 SRCS		=	$(patsubst %.c, $(SRC)/Debug/%.c,\
-				get_type.c print_messages.c)
+				get_type.c print_messages.c \
+				tree_print.c)
 
 SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				main.c) \

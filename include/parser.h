@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/03 21:21:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 01:27:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef enum e_NodeType
 	CmdSuffixNode,
 	IORedirectNode,
 	WordNode
-}	t_NodeType;
+}	t_nodetype;
 
 typedef enum e_ListType
 {
@@ -130,7 +130,7 @@ typedef union u_NodeValue
 
 typedef struct s_Node
 {
-	t_NodeType	type;
+	t_nodetype	type;
 	t_NodeValue	value;
 }	t_node;
 

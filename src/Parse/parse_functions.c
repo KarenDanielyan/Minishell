@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:13:45 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/03 23:05:08 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 00:57:59 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	token_consume(t_token **scanner)
 
 	token = (*scanner);
 	(*scanner) = (*scanner)->next;
-	(*scanner)->prev = NULL;
+	if (*scanner)
+		(*scanner)->prev = NULL;
 	wordl_clear(token->wordl);
 	free(token);
 }
