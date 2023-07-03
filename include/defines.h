@@ -21,6 +21,8 @@
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
 
+# define NEWLINE '\n'
+
 # define OPERATORS "<>|()&"
 # define QUOTES "\'\""
 
@@ -78,7 +80,7 @@ typedef enum e_type
 	DQUOTE_OPEN,
 	DQUOTE_CLOSE,
 	WORD,
-	NOTOP
+	UNKNOWN
 }	t_type;
 
 /**

@@ -40,7 +40,7 @@ t_wordl	*get_operator_token(char **s, int *flags, int *type)
 	while (**s && ft_strchr(OPERATORS, **s))
 	{
 		ft_strappend(&tmp, **s);
-		if (word && get_type(word) != NOTOP && get_type(tmp) == NOTOP)
+		if (word && get_type(word) != UNKNOWN && get_type(tmp) == UNKNOWN)
 			break ;
 		ft_strappend(&word, **s);
 		(*s)++;
@@ -73,7 +73,7 @@ static int	get_type(char *op)
 		return (IO_APPEND);
 	if (ft_strcmp(op, DLESS) == 0)
 		return (IO_HERE);
-	return (NOTOP);
+	return (UNKNOWN);
 }
 
 static void	check_flags_change(int *flags, int token_type)

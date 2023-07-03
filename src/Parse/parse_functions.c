@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:13:45 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/03 16:37:01 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/03 23:05:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_node	*parse_list_prime(t_token **scanner, t_node *expr)
 			type = OR;
 		token_consume(scanner);
 		pipeline = parse_pipeline(scanner);
-		return (parse_list_prime(scanner, new_ListNode(type, expr, pipeline)));
+		return (parse_list_prime(scanner, new_list_node(type, expr, pipeline)));
 	}
 	else
 		return (expr);
@@ -56,8 +56,19 @@ t_node	*parse_pipeline_prime(t_token **scanner, t_node *expr)
 	{
 		token_consume(scanner);
 		command = parse_command(scanner);
-		return (parse_pipeline_prime(scanner, new_PipelineNode(expr, command)));
+		return (parse_pipeline_prime(scanner, new_pipeline_node(expr, command)));
 	}
 	else
 		return (expr);
+}
+
+void	token_consume(t_token **scanner)
+{
+	t_token	*token;
+
+	token = (*scanner);
+	(*scanner) = (*scanner)->next;
+	(*scanner)->prev = NULL;
+	wordl_clear(token->wordl);
+	free(token);
 }

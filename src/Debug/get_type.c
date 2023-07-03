@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 15:14:07 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/02 14:22:29 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/03 21:03:00 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_type(int type)
 		return ("DQUOTE_CLOSE");
 	if (type == 14)
 		return ("WORD");
-	return ("NOTOP");
+	return ("UNKNOWN");
 }
 
 static char	*get_type_1(int type)

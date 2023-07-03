@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/03 16:49:35 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/03 21:21:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef enum e_CmdType
 {
 	SimpleCommand,
 	CompoundCommand
-}	t_CmdType;
+}	t_cmdtype;
 
 typedef enum e_IOType
 {
@@ -90,7 +90,7 @@ typedef struct s_PipelineNode
 
 typedef struct s_CommandNode
 {
-	t_CmdType	type;
+	t_cmdtype	type;
 	t_node		*prefix;
 	t_node		*command;
 }	t_cnode;
@@ -117,12 +117,12 @@ typedef struct s_IORedirectNode
 
 typedef union u_NodeValue
 {
-	t_lnode		list;
-	t_pipenode	pipeline;
-	t_cnode	cmd;
-	t_scnode	s_cmd;
-	t_ccnode	c_cmd;
-	t_ionode		redirs;
+	t_lnode			list;
+	t_pipenode		pipeline;
+	t_cnode			cmd;
+	t_scnode		s_cmd;
+	t_ccnode		c_cmd;
+	t_ionode		io;
 	t_prefixnode	*prefix;
 	t_suffixnode	*suffix;
 	t_wordnode		*word;
@@ -130,30 +130,30 @@ typedef union u_NodeValue
 
 typedef struct s_Node
 {
-	t_NodeType	node_type;
+	t_NodeType	type;
 	t_NodeValue	value;
 }	t_node;
 
 /* Constructors */
-t_node		*new_WordNode(t_wordl *word);
+t_node		*new_word_node(t_wordl *word);
 
-t_node		*new_SuffixNode(t_nodel *value);
+t_node		*new_suffix_node(t_nodel *value);
 
-t_node		*new_PrefixNode(t_nodel *value);
+t_node		*new_prefix_node(t_nodel *value);
 
-t_node		*new_PipelineNode(t_node *left, t_node *right);
+t_node		*new_pipeline_node(t_node *left, t_node *right);
 
-t_node		*new_IORedirectNode(t_IOType type, t_node *filename);
+t_node		*new_io_redirect_node(t_IOType type, t_node *filename);
 
-t_node		*new_SimpleCommandNode(t_node *word, t_node *suffix);
+t_node		*new_scommand_node(t_node *word, t_node *suffix);
 
-t_node		*new_CompundCommandNode(t_node *list, t_node *suffix);
+t_node		*new_ccommand_node(t_node *list, t_node *suffix);
 
-t_node		*new_ListNode(t_ListType type, t_node *left, t_node *right);
+t_node		*new_list_node(t_ListType type, t_node *left, t_node *right);
 
-t_node		*new_CommandNode(t_CmdType type, t_node *prefix, t_node *command);
+t_node		*new_command_node(t_cmdtype type, t_node *prefix, t_node *command);
 
-t_nodel		*new_NodeList(t_node *node);
+t_nodel		*new_node_list(t_node *node);
 
 /* Parsing Functions */
 t_node		*parse_word(t_token **scanner);
@@ -178,9 +178,7 @@ t_node		*parse_list_prime(t_token **scanner, t_node *expr);
 
 t_node		*parse_pipeline_prime(t_token **scanner, t_node *expr);
 
-/* TODO: Add peek and consume functions */
-t_token		token_peek(t_token *scanner);
-
+/* TODO: Add consume function */
 void		token_consume(t_token **scanner);
 
 /* Utils */
