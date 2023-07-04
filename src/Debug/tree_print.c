@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:22:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 17:47:23 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:12:36 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	print_tree_prime_three(t_node *node, char *ident);
 static void	print_tree_prime_two(t_node *node, char *ident);
 static void	print_tree_prime(t_node *node, char *ident);
 
+void		print_value(t_node	*node);
+
 void	print_tree(t_node *node, char *ident, int last)
 {
 	char	*marker;
@@ -26,7 +28,8 @@ void	print_tree(t_node *node, char *ident, int last)
 		marker = "└──";
 	else
 		marker = "├──";
-	printf ("%s%s%s\n", ident, marker, get_node_type(node->type));
+	printf ("%s%s%s", ident, marker, get_node_type(node->type));
+	print_value(node);
 	if (last)
 		ident = ft_strjoin(ident, "     ");
 	else

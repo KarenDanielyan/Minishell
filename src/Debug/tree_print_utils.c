@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:01:47 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 16:15:39 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:13:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,32 @@ char	*get_node_type(t_nodetype type)
 	if (type == WordNode)
 		return ("\033[32mWordNode\033[0m");
 	return (NULL);
+}
+
+void	print_value(t_node *node)
+{
+	t_wordl	*tmp;
+
+	if (node)
+	{
+		printf(": ");
+		if (node->type == ListNode)
+		{
+			if(node->value.list.type == AND)
+				printf("{%s}", AND_IF);
+			else
+				printf("{%s}", OR_IF);
+		}
+		else if (node->type == WordNode)
+		{
+			tmp = node->value.word;
+			while(tmp)
+			{
+				printf("\033[32m{%s}\033[0m → ", tmp->word->value);
+				tmp = tmp->next;
+			}
+			printf("NULL");
+		}
+	}
+	printf("\n");
 }
