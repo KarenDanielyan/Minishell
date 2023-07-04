@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:15:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/05 16:14:07 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/04 21:12:03 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,15 @@ void	lst_clear(t_list **lst, void (*del)(void *));
 void	lst_push_front(t_list **lst, t_list *new);
 void	lst_push_back(t_list **lst, t_list *new);
 void	lst_pop(t_list **lst, t_list *to_pop);
+
+/* Wordlist API */
+t_wordl	*wordl_new(t_word *word);
+t_wordl	*wordl_last(t_wordl *wordl);
+
+void	wordl_clear(t_wordl *wordl);
+void	wordl_push_back(t_wordl **wordl, t_word *word);
+void	wordl_push_front(t_wordl **wordl, t_word *word);
+
+int		wordl_size(t_wordl *head);
 
 #endif

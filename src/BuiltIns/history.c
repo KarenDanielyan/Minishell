@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 14:30:44 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/27 20:59:49 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/04 21:06:34 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lex.h"
 
 /**
  * @brief

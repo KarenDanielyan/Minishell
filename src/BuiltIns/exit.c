@@ -6,11 +6,12 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/04 20:48:30 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 21:09:05 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lex.h"
 
 #define EINARG "minishell: exit: %s numeric argument required"
 
@@ -32,14 +33,14 @@ void	my_exit(t_list *var_list, t_wordl *wordl)
 	siz = check_size(wordl->next->word->value);
 	if (ft_strlen(siz) > 19)
 	{
-		ft_dprintf(STDERR_FILENO, EINARG, num);
+		ft_dprintf(STDERR_FILENO, EINARG, wordl->next->word->value);
 		exit(1);
 	}
 	rv = ft_atul(wordl->next->word->value); 
 	s = ft_itul(rv);
 	if (ft_strcmp(s, siz) != 0)
 	{
-		ft_dprintf(STDERR_FILENO, EINARG, num);
+		ft_dprintf(STDERR_FILENO, EINARG, wordl->next->word->value);
 		exit(EXIT_FAILURE);
 	}
 	lst_set(var_list, "?", ft_itoa(rv % 256));

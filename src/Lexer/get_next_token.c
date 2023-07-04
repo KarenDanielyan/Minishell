@@ -6,14 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 13:17:27 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 20:48:46 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 21:12:54 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "lex.h"
+#include "list.h"
 #include <libft.h>
-#include <stdio.h>
 
 static t_wordl	*gnt_init(char **s, const char *str);
 static t_wordl	*gnt_cleanup(char **s, int *flags);

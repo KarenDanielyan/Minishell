@@ -6,10 +6,11 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 20:48:29 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 18:05:19 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 21:14:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "list.h"
 #include "lex.h"
 #include <libft.h>
 

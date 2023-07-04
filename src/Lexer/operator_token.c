@@ -6,11 +6,12 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:47:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 17:47:57 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 21:13:42 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
+#include "list.h"
 #include <libft.h>
 
 static int	get_type(char *op);
