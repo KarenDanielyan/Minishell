@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/12 17:49:37 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 17:50:37 by kdaniely         ###   ########.fr       */
+/*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
+/*   Updated: 2023/07/04 20:41:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
 
 # define HISTFILE "/.minishell_history"
 # define IFS "IFS= \t\n"
-# define PS1 "PS1=minishell-4.2$ "
+# define PS1 "PS1=minishell-4.2 "
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
-
+# define DL "declare -x"
 # define NEWLINE '\n'
 
-# define OPERATORS "<>|()&"
+/* Implemented Operators */
+# define OPERATORS "=<>|()&"
 # define QUOTES "\'\""
 
 /* Terminal Symbols */
@@ -39,9 +40,10 @@
 # define LPAREN '('
 # define RPAREN ')'
 # define DOLLAR_SIGN '$'
-# define USCORE '_'
-# define SQUOTE '\''
-# define DQUOTE '\"'
+#  define USCORE '_'
+#  define SQUOTE '\''
+#  define DQUOTE '\"'
+# define DQUOTE_S "\""
 
 /* Special Symbols */
 # define TILDE '~'

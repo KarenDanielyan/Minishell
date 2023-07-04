@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/12 14:20:41 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/06/28 16:31:26 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,27 @@
  * @param key 
  * @param value Use strdup before passing the argument.
  */
-void	cd(const char *path, t_list *var_list)
+void	cd(t_wordl *wordl, t_list *var_list)
 {
+	char 	*path;
 	char	*current_pwd;
 	char	*new_pwd;
 
+	path = NULL;
+	if (wordl->next)
+		path = wordl->next->word->value;
 	if (!lst_get_by_key(var_list, "PWD"))
 		return ;
+	if (!lst_get_by_key(var_list, "HOME"))
+	{
+		ft_dprintf(STDERR_FILENO, "bash: cd: HOME not set\n");
+		return ;
+	}
+	if (!path)
+		path = lst_get_by_key(var_list,"HOME")->value;
 	current_pwd = ft_strdup(lst_get_by_key(var_list, "PWD")->value);
 	if (chdir(path) != 0)
-		perror("bash: cd: a");
+		perror("Minishell: cd");
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 		perror("getcwd()");

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/04 17:50:11 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 20:47:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,20 @@ void	*parse(t_token	*scanner);
 void	drop(void *tree);
 
 /* Built-Ins */
-void	history(t_list *var_list);
+void	history(t_wordl *wordl,t_list *var_list);
 void	pwd(void);
-void	cd(const char *path, t_list *env);
+void	cd(t_wordl *wordl, t_list *var_list);
 void	env(t_list *env);
-void	unset(t_list **var_l, char *key);
-void	my_exit(t_list *var_list, char *status);
-void	echo(char **split);
+void	unset(t_list **var_list, t_wordl *wordl);
+void	my_exit(t_list *var_list, t_wordl *wordl);
+void	echo(t_wordl *wordl);
+void	export(t_list *var_list, t_wordl* args);
 
 /* Utils */
 void	print_logo(void);
 
 char	**get_env(t_list *var_list);
+char	**get_env_key(t_list	*var_list);
 
 int		is_quote(char c, int *flags);
 int		is_name(char *str);

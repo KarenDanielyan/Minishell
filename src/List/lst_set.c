@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   lst_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 16:59:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/12 14:26:08 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:48:45 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include <libft.h>
 #include <stdio.h>
+
+#define EQUALS '='
 
 /**
  * @brief 
@@ -36,7 +38,8 @@ void	lst_set(t_list *var_list, char *key, char *value)
 			free(i->joined);
 			free(i->value);
 			i->value = value;
-			tmp = ft_strjoin(key, "=");
+			if (ft_strchr(key, EQUALS))
+				tmp = ft_strjoin(key, "=");
 			i->joined = ft_strjoin(tmp, value);
 			break ;
 		}
