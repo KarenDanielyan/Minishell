@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/04 21:09:25 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 00:15:00 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,24 @@ void ft_sort(char **env)
 	}
 }
 
-void ft_default(char **env,t_list *var_list)
+void ft_default(char **env, t_list *var_list)
 {
-	int i;
+	int		i;
+	t_list	*tmp;
 	
 	i = 0;
 	ft_sort(env);
 	while (env[i])
 	{
-		printf("%s %s=\"%s\"\n", DL, *(env + i), lst_get_by_key(var_list, *(env + i))->value);
+		tmp = lst_get_by_key(var_list, *(env + i));
+		printf("%s %s", DL, *(env + i));
+		if (ft_strchr(tmp->joined, EQUALS))
+		{
+			printf("=\"");
+			if(tmp->value)
+				printf("%s", tmp->value);
+			printf("\"\n");
+		}
 		i ++;
 	}
 }
@@ -59,10 +68,11 @@ void export(t_list *var_list, t_wordl* args)
 		ft_default(env, var_list);
 	while (temp)
 	{
-		split = ft_split(temp->word->value, '=');
+		split = ft_split(temp->word->value, EQUALS);
 		if (!is_name(split[0]))
-			printf("Minishell: export: `%s': not a valid identifier",args->word->value);
-		lst_set(var_list, split[0], split[1]);
+			printf("Minishell: export: `%s': not a valid identifier\n", \
+				temp->word->value);
+		lst_set_by_word(var_list, temp->word->value);
 		free_2d(split);
 		temp = temp->next;
 	}
