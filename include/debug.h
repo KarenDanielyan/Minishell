@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:50:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 02:02:13 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:49:09 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,23 @@
 *	find problems easier during production.
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <string.h>
-#include <unistd.h>
-#include "minishell.h"
-#include "defines.h"
-#include "lex.h"
-#include "list.h"
-#include "parser.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <stdint.h>
+# include <string.h>
+# include <unistd.h>
+# include "minishell.h"
+# include "defines.h"
+# include "lex.h"
+# include "list.h"
+# include "parser.h"
 
 void	print_tokens(t_token	*token_list);
 void	print_tree(t_node *node, char *ident, int is_last);
 
-
 /* Utils */
 char	*get_type(int type);
+char	*get_node_type(t_nodetype type);
+int		is_last(t_node *node);
 
-# endif
+#endif

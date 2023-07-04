@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:13:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 13:08:20 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 14:37:58 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_node	*parse_suffix(t_token **scanner)
 t_node	*parse_word(t_token **scanner)
 {
 	t_wordl	*word_token;
-	
+
 	word_token = (*scanner)->wordl;
 	(*scanner)->wordl = NULL;
 	token_consume(scanner);
@@ -51,9 +51,10 @@ static t_nodel	*parse_helper(t_token **scanner, int type)
 	{
 		while (*scanner)
 		{
-			if ((*scanner)->type == IO_FILE ||(*scanner)->type == IO_APPEND \
+			if ((*scanner)->type == IO_FILE || (*scanner)->type == IO_APPEND \
 				|| (*scanner)->type == IO_HERE)
-				nodelist_push(&node_list, new_node_list(parse_ioredirect(scanner)));
+				nodelist_push(&node_list, \
+					new_node_list(parse_ioredirect(scanner)));
 			else if ((*scanner)->type == WORD && type == CmdSuffixNode)
 				nodelist_push(&node_list, new_node_list(parse_word(scanner)));
 			else

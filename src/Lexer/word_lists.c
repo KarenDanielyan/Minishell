@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 17:43:01 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/03 16:36:41 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:48:10 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	tok_pop(t_token **tok_l)
 	{
 		last = tok_last(*tok_l);
 		wordl_clear(last->wordl);
-		if(last->prev)
+		if (last->prev)
 			last->prev->next = NULL;
 		else
 			*tok_l = NULL;

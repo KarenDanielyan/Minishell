@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   node_list.c                                        :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 16:34:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 14:35:05 by kdaniely         ###   ########.fr       */
+/*   Created: 2023/07/04 17:25:08 by kdaniely          #+#    #+#             */
+/*   Updated: 2023/07/04 17:41:41 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include <libft.h>
-#include <stdio.h>
+#include "minishell.h"
 
-t_nodel	*list_last(t_nodel *head)
+char	*get_line(t_list *var_list, int fd)
 {
-	if (head)
-	{
-		while (head->next)
-			head = head->next;
-	}
-	return (head);
-}
+	char	*str;
 
-t_nodel	*new_node_list(t_node *node)
-{
-	t_nodel	*nodel;
-
-	nodel = (t_nodel *)malloc(sizeof(t_nodel));
-	if (!node)
+	str = readline(lst_get_by_key(var_list, "PS1")->value);
+	if (!str)
 	{
-		perror("malloc()");
-		exit(EXIT_FAILURE);
+		write (2, "exit\n", 5);
+		exit(EXIT_SUCCESS);
 	}
-	nodel->node = node;
-	nodel->next = NULL;
-	return (nodel);
+	if (!(*str))
+	{
+		free(str);
+		return (NULL);
+	}
+	add_history(str);
+	ft_putendl_fd(str, fd);
+	return (str);
 }

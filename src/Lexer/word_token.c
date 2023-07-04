@@ -6,13 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 22:57:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 18:28:47 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:18:33 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "lex.h"
 #include "minishell.h"
 #include <libft.h>
-#include <stdio.h>
 
 static t_word	*get_just_word(char **s, int *flags);
 static t_word	*get_quoted_word(char **s, int *flags);

@@ -6,15 +6,15 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/02 14:52:14 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:50:11 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "lex.h"
-# include <stdint.h>
+# include "defines.h"
+# include "list.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <libft.h>
@@ -31,6 +31,12 @@
 void	sig_init(void);
 t_list	*env_init(char **env);
 void	mode_init(int ac, char **av);
+
+/* Get next prompt*/
+char	*get_line(t_list *var_list, int fd);
+
+/* Lexical Analysis */
+t_token	*lex(char *s);
 
 /* Parsing */
 void	*parse(t_token	*scanner);
@@ -52,10 +58,10 @@ void	print_logo(void);
 
 char	**get_env(t_list *var_list);
 
-int	is_quote(char c, int *flags);
-int	is_name(char *str);
+int		is_quote(char c, int *flags);
+int		is_name(char *str);
 
 /* Signal */
-int	handler(void);
+int		handler(void);
 
 #endif

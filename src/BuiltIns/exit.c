@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/18 21:18:39 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:46:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#define EINARG "minishell: exit: %s numeric argument required"
 
 static char	*check_size(char *num);
 
@@ -25,14 +27,14 @@ void	my_exit(t_list *var_list, char *num)
 	siz = check_size(num);
 	if (ft_strlen(siz) > 19)
 	{
-		dprintf(STDERR_FILENO, "minishell: exit: %s numeric argument required", num);
+		ft_dprintf(STDERR_FILENO, EINARG, num);
 		exit(1);
 	}
 	rv = ft_atul(num);
 	s = ft_itul(rv);
 	if (ft_strcmp(s, (siz)) != 0)
 	{
-		dprintf(STDERR_FILENO, "minishell: exit: %s numeric argument required", num);
+		ft_dprintf(STDERR_FILENO, EINARG, num);
 		exit(EXIT_FAILURE);
 	}
 	lst_set(var_list, "?", ft_itoa(rv % 256));

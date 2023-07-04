@@ -19,7 +19,7 @@ DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 
 SRCS		=	$(patsubst %.c, $(SRC)/Debug/%.c,\
 				get_type.c print_messages.c \
-				tree_print.c)
+				tree_print.c tree_print_utils.c)
 
 SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				main.c) \
@@ -28,10 +28,11 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				lst_new.c lst_pop.c lst_push.c \
 				lst_set.c lst_size.c) \
 				$(patsubst %.c, $(SRC)/BuiltIns/%.c,\
-				history.c env.c pwd.c cd.c unset.c) \
+				history.c env.c pwd.c cd.c unset.c \
+				echo.c exit.c) \
 				$(patsubst %.c, $(SRC)/Init/%.c,\
 				env_init.c mode_init.c sig_init.c \
-				exit.c echo.c) \
+				input.c ) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
 				get_env.c print_logo.c is_token.c \
 				wordl.c) \

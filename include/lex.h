@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 20:25:34 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 16:22:10 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,6 @@
 
 # include "defines.h"
 # include "list.h"
-
-/**
- * @brief	Atomic entity of our lexical analysis
- * 
- * @param flags			Flags for the word (refer to defines.h so see possible values).
- * @param value			The word itself (ex. ">", "<<", "cat")
- */
-typedef struct s_word
-{
-	int		flags;
-	char	*value;
-}	t_word;
-
-/**
- * @brief	Wordlist.
- */
-typedef struct s_wordl
-{
-	struct s_word	*word;
-	struct s_wordl	*next;
-}	t_wordl;
-
-/**
- * @brief		Generated tokens list. Lexer will return this
- * 				after tokenizing the input.
- * @param type	What type of word is this? (ex. command io_here, etc.)
- */
-typedef struct s_token
-{
-	t_type		type;
-	struct s_wordl	*wordl;
-	struct s_token	*prev;
-	struct s_token	*next;
-}	t_token;
 
 t_word	*word_new(char *str, int flags);
 

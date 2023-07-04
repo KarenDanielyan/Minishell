@@ -6,10 +6,11 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/04 13:28:31 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:44:59 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "list.h"
 #include "minishell.h"
 
 static void	switch_case(t_list *var_list, char *str)
@@ -46,19 +47,7 @@ void	true_loop(t_list *var_list, int fd)
 	sig_init();
 	while (1)
 	{
-		str = readline(lst_get_by_key(var_list, "PS1")->value);
-		if (!str)
-		{
-			write (2, "exit\n", 5);
-			break ;
-		}
-		if (!(*str))
-		{
-			free(str);
-			continue ;
-		}
-		add_history(str);
-		ft_putendl_fd(str, fd);
+		str = get_line(var_list, fd);
 		scanner = lex(str);
 		parse(scanner);
 		(void)node;
@@ -67,6 +56,7 @@ void	true_loop(t_list *var_list, int fd)
 	}
 }
 
+/* TODO: proper non-Interactive mode */
 int	main(int ac, char **av, char **env)
 {
 	int		fd;

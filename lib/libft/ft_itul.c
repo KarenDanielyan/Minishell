@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itul.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 20:02:20 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/17 20:15:08 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:51:38 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*zerocase(char *m)
 	return (m);
 }
 
-static char*	line(int len, char *p, long long n)
+static char	*line(int len, char *p, long long n)
 {
 	unsigned long long	a;
 

@@ -6,12 +6,12 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 13:17:27 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 17:11:01 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:18:57 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "list.h"
+#include "lex.h"
 #include <libft.h>
 #include <stdio.h>
 

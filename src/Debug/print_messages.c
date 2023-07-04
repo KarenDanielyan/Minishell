@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:59:08 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 18:54:37 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 15:02:53 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	print_tokens(t_token	*token_list)
 	while (token_list)
 	{
 		printf("%p\n", token_list);
-		printf("\033[34mToken Type:	\033[32m%s\n\033[0m", get_type(token_list->type));
+		printf("\033[34mToken Type:	\033[32m%s\n\033[0m", \
+			get_type(token_list->type));
 		print_wordl(token_list->wordl);
 		printf("↓\n");
 		token_list = token_list->next;
