@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/03 22:57:30 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:12:12 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void ft_sort(char **env)
 	int i;
 	int j;
 
-	i = 0;
-	len = ft_strlen_2d((const char **)env);
 	len = ft_strlen_2d((const char **)env);
 	i = 0;
 	while (i < len -1)
@@ -46,16 +44,26 @@ void ft_default(char **env,t_list *var_list)
 		printf("%s %s=\"%s\"\n", DL, *(env + i), lst_get_by_key(var_list, *(env + i))->value);
 		i ++;
 	}
-	free(env);
 }
 
 void export(t_list *var_list, t_wordl* args)
 {
+	char	**split;
 	char	**env;
 	t_wordl *temp;
 
 	temp = args->next;
 	env = get_env_key(var_list);
 	if (!temp)
-		ft_default(env,var_list);
+		ft_default(env, var_list);
+	while (temp)
+	{
+		split = ft_split(temp->word->value, '=');
+		if (!is_name(split[0]))
+			printf("Minishell: export: `%s': not a valid identifier",args->word->value);
+		lst_set(var_list, split[0], split[1]);
+		free_2d(split);
+		temp = temp->next;
+	}
+	free(env);
 }
