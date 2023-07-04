@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:22:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 02:21:25 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 13:43:02 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,23 @@ static void print_tree_prime(t_node *node, char *ident)
 {
 	if (node->type == ListNode)
 	{
-		print_tree(node->value.list.left, ident, is_last(node));
-		print_tree(node->value.list.right, ident, is_last(node));
+		print_tree(node->value.list.left, ident, is_last(node->value.list.left));
+		print_tree(node->value.list.right, ident, is_last(node->value.list.right));
 	}
 	else if (node->type == PipelineNode)
 	{
-		print_tree(node->value.pipeline.left, ident, is_last(node));
-		print_tree(node->value.pipeline.right, ident, is_last(node));
+		print_tree(node->value.pipeline.left, ident, is_last(node->value.pipeline.left));
+		print_tree(node->value.pipeline.right, ident, is_last(node->value.pipeline.right));
 	}
 	else if (node->type == CommandNode)
 	{
-		print_tree(node->value.cmd.prefix, ident, is_last(node));
-		print_tree(node->value.cmd.command, ident, is_last(node));
+		print_tree(node->value.cmd.prefix, ident, is_last(node->value.cmd.prefix));
+		print_tree(node->value.cmd.command, ident, is_last(node->value.cmd.command));
 	}
 	else if (node->type == SimpleCommandNode)
 	{
-		print_tree(node->value.s_cmd.word, ident, is_last(node));
-		print_tree(node->value.s_cmd.suffix, ident, is_last(node));
+		print_tree(node->value.s_cmd.word, ident, is_last(node->value.s_cmd.word));
+		print_tree(node->value.s_cmd.suffix, ident, is_last(node->value.s_cmd.suffix));
 	}
 	else
 		print_tree_prime_two(node, ident);
@@ -68,8 +68,8 @@ static void print_tree_prime_two(t_node *node, char *ident)
 
 	if (node->type == CompoundCommandNode)
 	{
-		print_tree(node->value.c_cmd.list, ident, is_last(node));
-		print_tree(node->value.c_cmd.suffix, ident, is_last(node));
+		print_tree(node->value.c_cmd.list, ident, is_last(node->value.c_cmd.list));
+		print_tree(node->value.c_cmd.suffix, ident, is_last(node->value.c_cmd.suffix));
 	}
 	else if (node->type == CmdPrefixNode || node->type == CmdSuffixNode)
 	{
@@ -86,11 +86,10 @@ static void print_tree_prime_two(t_node *node, char *ident)
 
 static int	is_last(t_node *node)
 {
-	if (node->type == WordNode || node->type == CmdSuffixNode 
-		|| node->type == SimpleCommandNode || node->type == CompoundCommandNode)
-		return (1);
-	else
-		return (0);
+	//if (node)
+		return (node->is_last);
+	//else
+	//	return (1);
 }
 
 static char *get_node_type(t_nodetype type)

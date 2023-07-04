@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:13:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 02:27:10 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 13:08:20 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static t_nodel	*parse_helper(t_token **scanner, int type)
 			else
 				break ;
 		}
+		if (node_list)
+			list_last(node_list)->node->is_last = 1;
 	}
 	return (node_list);
 }
@@ -71,5 +73,6 @@ static void	nodelist_push(t_nodel **head, t_nodel *to_push)
 			list_last(*head)->next = to_push;
 		else
 			*head = to_push;
+		to_push->node->is_last = 0;
 	}
 }

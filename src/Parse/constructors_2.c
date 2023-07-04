@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:50:38 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/03 21:16:20 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 13:20:56 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_node	*new_prefix_node(t_nodel *value)
 	t_node	*node;
 
 	node = alloc_and_check();
+	node->is_last = 0;
 	node->type = CmdPrefixNode;
 	node->value.prefix = value;
 	return (node);
@@ -42,6 +43,7 @@ t_node	*new_suffix_node(t_nodel *value)
 	t_node	*node;
 
 	node = alloc_and_check();
+	node->is_last = 1;
 	node->type = CmdSuffixNode;
 	node->value.suffix = value;
 	return (node);
@@ -67,5 +69,6 @@ static t_node	*alloc_and_check(void)
 		perror("malloc()");
 		exit(EXIT_FAILURE);
 	}
+	node->is_last = 0;
 	return (node);
 }

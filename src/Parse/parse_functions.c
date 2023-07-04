@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:13:45 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 00:57:59 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 13:02:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_node	*parse_list_prime(t_token **scanner, t_node *expr)
 			type = OR;
 		token_consume(scanner);
 		pipeline = parse_pipeline(scanner);
+		expr->is_last = 0;
+		pipeline->is_last = 1;
 		return (parse_list_prime(scanner, new_list_node(type, expr, pipeline)));
 	}
 	else
@@ -56,6 +58,8 @@ t_node	*parse_pipeline_prime(t_token **scanner, t_node *expr)
 	{
 		token_consume(scanner);
 		command = parse_command(scanner);
+		expr->is_last = 0;
+		command->is_last = 1;
 		return (parse_pipeline_prime(scanner, new_pipeline_node(expr, command)));
 	}
 	else

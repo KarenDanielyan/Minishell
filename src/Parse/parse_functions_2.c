@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 02:32:25 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 12:58:05 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ t_node	*parse_commpound_command(t_token **scanner)
 
 	token_consume(scanner);
 	list_node = parse_list(scanner);
+	list_node->is_last = 0;
 	token_consume(scanner);
 	suffix = parse_suffix(scanner);
+	suffix->is_last = 1;
 	return (new_ccommand_node(list_node, suffix));
 }
 
@@ -51,6 +53,8 @@ t_node	*parse_simple_command(t_token **scanner)
 	t_node	*suffix;
 
 	cmd = parse_word(scanner);
+	cmd->is_last = 0;
 	suffix = parse_suffix(scanner);
+	cmd->is_last = 1;
 	return (new_scommand_node(cmd, suffix));
 }

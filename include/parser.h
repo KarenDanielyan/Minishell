@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 01:27:30 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 12:46:50 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef union u_NodeValue
 
 typedef struct s_Node
 {
+	int			is_last;
 	t_nodetype	type;
 	t_NodeValue	value;
 }	t_node;
