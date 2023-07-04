@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:29:47 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 13:21:08 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 14:33:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ static t_node	*alloc_and_check(void)
 		perror("malloc()");
 		exit(EXIT_FAILURE);
 	}
-	node->is_last = 0;
+	node->is_last = -42;
 	return (node);
 }

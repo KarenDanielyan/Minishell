@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:32:47 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 13:20:45 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 14:33:17 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_node	*new_command_node(t_cmdtype type, t_node *prefix, t_node *command)
 	t_node	*node;
 
 	node = alloc_and_check();
+	node->is_last = 1;
 	node->type = CommandNode;
 	node->value.cmd.type = type;
 	node->value.cmd.prefix = prefix;
@@ -46,6 +47,7 @@ t_node	*new_scommand_node(t_node *word, t_node *suffix)
 	t_node	*node;
 
 	node = alloc_and_check();
+	node->is_last = 1;
 	node->type = SimpleCommandNode;
 	node->value.s_cmd.word = word;
 	node->value.s_cmd.suffix = suffix;
@@ -57,6 +59,7 @@ t_node	*new_ccommand_node(t_node *list, t_node *suffix)
 	t_node	*node;
 
 	node = alloc_and_check();
+	node->is_last = 1;
 	node->type = CompoundCommandNode;
 	node->value.c_cmd.list = list;
 	node->value.c_cmd.suffix = suffix;
@@ -73,6 +76,6 @@ static t_node	*alloc_and_check(void)
 		perror("malloc()");
 		exit(EXIT_FAILURE);
 	}
-	node->is_last = 0;
+	node->is_last = -42;
 	return (node);
 }
