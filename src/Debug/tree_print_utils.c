@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:01:47 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 18:13:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/04 23:34:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,27 @@ void	print_value(t_node *node)
 		if (node->type == ListNode)
 		{
 			if(node->value.list.type == AND)
-				printf("{%s}", AND_IF);
+				printf("\033[37m{%s}\033[0m", AND_IF);
 			else
 				printf("{%s}", OR_IF);
+		}
+		else if (node->type == IORedirectNode)
+		{
+			if (node->value.io.type == IN)
+				printf("\033[37m%c\033[0m", LESS);
+			if (node->value.io.type == OUT)
+				printf("\033[37m%c\033[0m", GREAT);
+			if (node->value.io.type == APPEND)
+				printf("\033[37m%s\033[0m", DGREAT);
+			if (node->value.io.type == HERE)
+				printf("\033[37m%s\033[0m", DGREAT);
 		}
 		else if (node->type == WordNode)
 		{
 			tmp = node->value.word;
 			while(tmp)
 			{
-				printf("\033[32m{%s}\033[0m → ", tmp->word->value);
+				printf("\033[37m{%s}\033[0m → ", tmp->word->value);
 				tmp = tmp->next;
 			}
 			printf("NULL");
