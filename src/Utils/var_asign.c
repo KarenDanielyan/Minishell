@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_asign.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:13:16 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/05 16:58:53 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/06 01:31:05 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 
 char	**get_key_value(char *assign_word)
 {
-	char **split;
-
+	char	**split;
 
 	split = (char **)malloc(3 * sizeof(char *));
 	split[2] = NULL;
 	if (ft_strchr(assign_word, EQUALS))
 	{
-		split[0] = ft_substr(assign_word, 0, ft_strchr(assign_word, EQUALS) - assign_word);
+		split[0] = ft_substr(assign_word, 0, \
+			(ft_strchr(assign_word, EQUALS) - assign_word));
 		split[1] = ft_strdup(ft_strchr(assign_word, EQUALS) + 1);
 	}
 	else
@@ -34,7 +34,7 @@ char	**get_key_value(char *assign_word)
 	return (split);
 }
 
-int		is_assign_word(t_wordl *head)
+int	is_assign_word(t_wordl *head)
 {
 	while (head)
 	{

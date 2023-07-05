@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/05 23:17:32 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 01:16:21 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_token	*lex(char *s);
 void	*parse(t_token	*scanner);
 
 /* Drop Function */
-//void	drop(void *tree);
+void	drop(t_node *tree);
 
 /* Built-Ins */
 void	history(t_wordl *wordl,t_list *var_list);

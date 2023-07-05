@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:13:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 14:37:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 01:22:58 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_node	*parse_word(t_token **scanner)
 {
 	t_wordl	*word_token;
 
+	if ((*scanner)->type != WORD)
+		return (parse_error(*scanner));
 	word_token = (*scanner)->wordl;
 	(*scanner)->wordl = NULL;
 	token_consume(scanner);

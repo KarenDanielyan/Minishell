@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:58:40 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/03 21:11:50 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 01:24:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@ t_node	*parse_ioredirect(t_token **scanner)
 		if (*((*scanner)->wordl->word->value) == GREAT)
 			type = OUT;
 	}
-	if ((*scanner)->type == IO_APPEND)
+	else if ((*scanner)->type == IO_APPEND)
 		type = APPEND;
-	if ((*scanner)->type == IO_HERE)
+	else if ((*scanner)->type == IO_HERE)
 		type = HERE;
+	else
+		return (parse_error(*scanner));
 	token_consume(scanner);
+	if ((*scanner)->type != WORD)
+		return (parse_error(*scanner));
 	filename = (*scanner)->wordl;
 	(*scanner)->wordl = NULL;
 	token_consume(scanner);

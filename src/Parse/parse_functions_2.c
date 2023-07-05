@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/05 23:17:25 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 01:21:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ t_node	*parse_commpound_command(t_token **scanner)
 	t_node	*list_node;
 	t_node	*suffix;
 
+	if ((*scanner)->type != SUBSHELL_OPEN)
+		return (parse_error(*scanner));
 	token_consume(scanner);
 	list_node = parse_list(scanner);
 	list_node->is_last = 0;
-	// if ((*scanner)->type != SUBSHELL_CLOSE)
-	// {
-	// 	drop(list_node);
-	// 	return (NULL);
-	// }
+	if ((*scanner)->type != SUBSHELL_CLOSE)
+	{
+		drop(list_node);
+		return (parse_error(*scanner));
+	}
 	token_consume(scanner);
 	suffix = parse_suffix(scanner);
 	suffix->is_last = 1;
