@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/05 20:48:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 23:55:17 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ typedef struct s_NodeList		t_prefixnode;
 typedef struct s_NodeList		t_suffixnode;
 typedef struct s_IORedirectNode	t_ionode;
 typedef struct s_wordl			t_wordnode;
+typedef char *					t_errornode;
 
 typedef enum e_NodeType
 {
@@ -213,7 +214,8 @@ typedef enum e_NodeType
 	CmdPrefixNode,
 	CmdSuffixNode,
 	IORedirectNode,
-	WordNode
+	WordNode,
+	ErrorNode
 }	t_nodetype;
 
 typedef enum e_ListType

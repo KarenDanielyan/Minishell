@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/05 20:35:09 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/05 23:16:50 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	true_loop(t_list *var_list, int fd)
 		if (!str)
 			continue ;
 		scanner = lex(str);
-		parse(scanner);
+		(void)scanner;
+		//parse(scanner);
 		switch_case(var_list, str);
 		free(str);
 	}

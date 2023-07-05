@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/05 16:50:29 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/05 23:17:32 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_token	*lex(char *s);
 void	*parse(t_token	*scanner);
 
 /* Drop Function */
-void	drop(void *tree);
+//void	drop(void *tree);
 
 /* Built-Ins */
 void	history(t_wordl *wordl,t_list *var_list);

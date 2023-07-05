@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 22:57:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 17:18:33 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 23:34:28 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static t_word	*get_just_word(char **s, int *flags)
 {
 	char	*word;
 	int		flag;
+	t_word	*w;
 
 	flag = *flags;
 	word = NULL;
@@ -65,7 +66,9 @@ static t_word	*get_just_word(char **s, int *flags)
 			flag = flag | W_TILDEEXP;
 		(*s)++;
 	}
-	return (word_new(word, flag));
+	w = word_new(word, flag);
+	free(word);
+	return (w);
 }
 
 static void	check_flag_change(char c, int *flags, int *flag)
@@ -76,14 +79,17 @@ static void	check_flag_change(char c, int *flags, int *flag)
 		*flags = *flags ^ W_DQUOTE;
 	if (c == DOLLAR_SIGN)
 		*flag = *flag | W_HASDOLLAR | W_PARMEXP;
-	if (c == TILDE)
-		*flag = *flag | W_NOTILDE;
+	if (c == TILDE && !(*flag & (W_SQUOTE | W_DQUOTE)))
+		*flag = *flag | W_TILDEEXP;
+	if (c == EQUALS && !(*flag & (W_SQUOTE | W_DQUOTE)))
+		*flag = *flag | W_ASSIGNMENT;
 }
 
 static t_word	*get_quoted_word(char **s, int *flags)
 {
 	char	*word;
 	int		flag;
+	t_word	*w;
 
 	word = NULL;
 	flag = 0;
@@ -101,7 +107,9 @@ static t_word	*get_quoted_word(char **s, int *flags)
 			if (!ft_strchr(OPERATORS, **s) && !(flag & *flags))
 				break ;
 		}
-		return (word_new(word, (*flags | flag)));
+		w = word_new(word, (*flags | flag));
+		free(word);
+		return (w);
 	}
 	return (NULL);
 }
