@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lst_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:37:46 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/05 15:26:11 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 16:51:42 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+#include "minishell.h"
 #include <libft.h>
 #include <stdio.h>
 
@@ -63,7 +64,7 @@ void	lst_set_by_word(t_list *var_list, char *assign_word)
 	char	*tmp;
 	t_list	*var;
 
-	split = ft_split(assign_word, EQUALS);
+	split = get_key_value(assign_word);
 	var = lst_get_by_key(var_list, split[0]);
 	if (ft_strchr(assign_word, EQUALS))
 		tmp = ft_strjoin(split[0], EQUALS_S);

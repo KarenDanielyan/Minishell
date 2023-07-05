@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/05 02:28:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 20:35:09 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	switch_case(t_list *var_list, char *str)
 	if (ft_strcmp(wordl->word->value, "env") == 0)
 		env(var_list);
 	free_2d(split);
+	wordl_clear(wordl);
 }
 
 /**
