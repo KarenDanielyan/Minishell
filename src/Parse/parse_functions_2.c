@@ -6,12 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 14:54:57 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 21:07:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
 #include "list.h"
+#include "parser.h"
+#include <ft_printf.h>
 
 t_node	*parse_command(t_token **scanner)
 {
@@ -41,6 +42,11 @@ t_node	*parse_commpound_command(t_token **scanner)
 	token_consume(scanner);
 	list_node = parse_list(scanner);
 	list_node->is_last = 0;
+	if ((*scanner)->type != SUBSHELL_CLOSE)
+	{
+		drop(list_node);
+		return (NULL);
+	}
 	token_consume(scanner);
 	suffix = parse_suffix(scanner);
 	suffix->is_last = 1;
@@ -52,6 +58,8 @@ t_node	*parse_simple_command(t_token **scanner)
 	t_node	*cmd;
 	t_node	*suffix;
 
+	if ((*scanner)->type != WORD)
+		return (NULL);
 	cmd = parse_word(scanner);
 	cmd->is_last = 0;
 	suffix = parse_suffix(scanner);

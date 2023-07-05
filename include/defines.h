@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/05 15:00:07 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 20:48:02 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <stddef.h>
 # include <stdint.h>
+
+# define ERROR_MSG "Minishell: syntax Error near unexpected token "
 
 # define HISTFILE "/.minishell_history"
 # define IFS "IFS= \t\n"

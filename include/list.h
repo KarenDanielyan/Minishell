@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:15:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 23:54:44 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 21:02:48 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,7 @@ void	wordl_push_back(t_wordl **wordl, t_word *word);
 void	wordl_push_front(t_wordl **wordl, t_word *word);
 
 int		wordl_size(t_wordl *head);
+
+void	drop(t_node *tree);
 
 #endif
