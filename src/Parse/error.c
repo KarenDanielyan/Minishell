@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 00:20:23 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 01:29:50 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 02:37:14 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_node	*parse_error(t_token *scanner)
 		word = wordl_join(scanner->wordl);
 		str = ft_strjoin(ERROR_MSG, word->value);
 		ft_strappend(&str, SQUOTE);
-		ft_strappend(&str, '\n');
 		word_delete(word);
 	}
 	node = new_error_node(str);

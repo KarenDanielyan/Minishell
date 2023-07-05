@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:42:52 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/05 14:34:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 02:22:00 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**get_env_key(t_list	*var_list)
 		}
 		var_list = var_list->next;
 	}
-		*tmp = NULL;
+	*tmp = NULL;
 	return (envp);
 }
 

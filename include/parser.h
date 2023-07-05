@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 01:17:30 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 02:47:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,13 @@ void		token_consume(t_token **scanner);
 /* Utils */
 t_nodel		*list_last(t_nodel *head);
 
-/* Drop Function */
+
+/* Drop Functions */
 void	drop(t_node *tree);
+void	node_list_drop(t_nodel *list);
+
+/* Syntax Checkers */
+void	check_syntax_prime(t_node *self, int *visit);
+void	node_list_check_syntax(t_nodel *list, int *visit);
 
 #endif
