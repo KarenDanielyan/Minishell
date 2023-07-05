@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/04 20:47:52 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 16:50:29 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ void	print_logo(void);
 
 char	**get_env(t_list *var_list);
 char	**get_env_key(t_list	*var_list);
+char	**get_key_value(char *assign_word);
 
+int		is_assign_word(t_wordl *head);
 int		is_quote(char c, int *flags);
 int		is_name(char *str);
 

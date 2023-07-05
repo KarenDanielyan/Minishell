@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   word_lists.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 17:43:01 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 20:48:59 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 20:32:35 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "libft.h"
 
 t_word	*word_new(char *str, int flags)
 {
@@ -24,7 +25,7 @@ t_word	*word_new(char *str, int flags)
 		perror("malloc()");
 		exit(EXIT_FAILURE);
 	}
-	word->value = str;
+	word->value = ft_strdup(str);
 	word->flags = flags;
 	return (word);
 }
