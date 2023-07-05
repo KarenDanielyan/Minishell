@@ -80,7 +80,7 @@
     "stdio.h": "c",
     "string.h": "c",
     "debug.h": "c",
-    "parser.h": "c",,
+    "parser.h": "c",
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
