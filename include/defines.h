@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 20:41:52 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 15:00:07 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define NEWLINE '\n'
 
 /* Implemented Operators */
-# define OPERATORS "=<>|()&"
+# define OPERATORS "<>|()&"
 # define QUOTES "\'\""
 
 /* Terminal Symbols */
@@ -40,9 +40,9 @@
 # define LPAREN '('
 # define RPAREN ')'
 # define DOLLAR_SIGN '$'
-#  define USCORE '_'
-#  define SQUOTE '\''
-#  define DQUOTE '\"'
+# define USCORE '_'
+# define SQUOTE '\''
+# define DQUOTE '\"'
 # define DQUOTE_S "\""
 
 /* Special Symbols */

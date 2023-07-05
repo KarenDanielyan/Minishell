@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:42:52 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/03 22:34:11 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/05 14:34:02 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**get_env(t_list	*var_list)
 
 	envp = (char **)malloc((get_env_len(var_list) + 1) * sizeof(char *));
 	tmp = envp;
-	while (var_list)//tmp che var_list
+	while (var_list)
 	{
 		if (var_list->type == EXPORT)
 		{
@@ -50,7 +50,7 @@ char	**get_env_key(t_list	*var_list)
 
 	envp = (char **)malloc((get_env_len(var_list) + 1) * sizeof(char *));
 	tmp = envp;
-	while (var_list)//tmp che var_list
+	while (var_list)
 	{
 		if (var_list->type == EXPORT)
 		{

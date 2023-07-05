@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/04 21:01:18 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 02:28:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,15 @@ void	true_loop(t_list *var_list, int fd)
 {
 	char	*str;
 	t_token	*scanner;
-	void	*node;
 
 	sig_init();
 	while (1)
 	{
 		str = get_line(var_list, fd);
+		if (!str)
+			continue ;
 		scanner = lex(str);
-		node = parse(scanner);
+		parse(scanner);
 		switch_case(var_list, str);
 		free(str);
 	}

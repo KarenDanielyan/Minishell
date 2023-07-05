@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/05 00:15:00 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 14:32:03 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ void ft_default(char **env, t_list *var_list)
 			printf("=\"");
 			if(tmp->value)
 				printf("%s", tmp->value);
-			printf("\"\n");
+			printf("\"");
 		}
+		printf("\n");
 		i ++;
 	}
 }
