@@ -6,10 +6,11 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 16:34:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 15:22:10 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 16:25:34 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "parser.h"
 #include <libft.h>
 #include <stdio.h>
@@ -54,14 +55,10 @@ void	node_list_drop(t_nodel *list)
 
 void	node_list_check_syntax(t_nodel *list, int *visit)
 {
-	t_nodel	*tmp;
-
 	while (list)
 	{
-		tmp = list->next;
 		check_syntax_prime(list->node, visit);
-		free(list);
-		list = tmp;
+		list = list->next;
 	}
 }
 
@@ -69,7 +66,7 @@ void	node_list_visit(t_nodel *list, void (*op)(t_node *self))
 {
 	while (list)
 	{
-		op(list->node);
+		visit(list->node, op);
 		list = list->next;
 	}
 }
