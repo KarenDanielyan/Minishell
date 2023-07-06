@@ -81,6 +81,7 @@
     "string.h": "c",
     "debug.h": "c",
     "parser.h": "c",
+    "list": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 01:10:37 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:20:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stddef.h>
 # include <stdint.h>
 
-# define ERROR_MSG "minishell: syntax Error near unexpected token `"
+# define ERROR_MSG "minishell: syntax error near unexpected token `"
 # define ERROR_EOL "minishell: syntax error: unexpected end of line\n"
 
 # define HISTFILE "/.minishell_history"

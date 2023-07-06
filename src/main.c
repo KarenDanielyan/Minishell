@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/06 16:15:14 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:11:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ void	true_loop(t_list *var_list, int fd)
 			continue ;
 		scanner = lex(str);
 		tree = parse(scanner);
-		//check_syntax(tree);
+		check_syntax(tree);
 		visit(tree, drop);
 		switch_case(var_list, str);
 		free(str);
+		system("leaks minishell");
 	}
 }
 

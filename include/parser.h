@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 16:03:52 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:14:59 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_nodel		*list_last(t_nodel *head);
 
 /* Drop Functions */
 void	drop(t_node *tree);
-void	node_list_drop(t_nodel *list);
+void	node_list_clear(t_nodel *list, void (*del)(t_node *node));
 
 /* Syntax Checkers */
 void	check_syntax_prime(t_node *self, int *visit);

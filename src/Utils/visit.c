@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:42:04 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 16:07:32 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:16:17 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	visit_prime2(t_node *self, void (*op)(t_node *self));
  * 			the generated abstract syntax tree.
  * 			function pointer op point to the function to be
  * 			executed on the node self.
- * 
  */
 void	visit(t_node *self, void (*op)(t_node *self))
 {	
@@ -67,12 +66,12 @@ static void	visit_prime2(t_node *self, void (*op)(t_node *self))
 		visit(self->value.s_cmd.word, op);
 		visit(self->value.s_cmd.suffix, op);
 	}
-	else if (self->type == IORedirectNode)
-		visit(self->value.io.filename, op);
 	else if (self->type == CmdPrefixNode)
 		node_list_visit(self->value.prefix, op);
 	else if (self->type == CmdSuffixNode)
 		node_list_visit(self->value.suffix, op);
+	else if (self->type == IORedirectNode)
+		visit(self->value.io.filename, op);
 	else if (self->type == WordNode)
 		return ;
 }
