@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 16:34:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 02:48:19 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:22:10 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,14 @@ void	node_list_check_syntax(t_nodel *list, int *visit)
 		check_syntax_prime(list->node, visit);
 		free(list);
 		list = tmp;
+	}
+}
+
+void	node_list_visit(t_nodel *list, void (*op)(t_node *self))
+{
+	while (list)
+	{
+		op(list->node);
+		list = list->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:13:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 01:22:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:27:29 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,19 @@ t_node	*parse_suffix(t_token **scanner)
 t_node	*parse_word(t_token **scanner)
 {
 	t_wordl	*word_token;
+	t_node	*node;
 
-	if ((*scanner)->type != WORD)
-		return (parse_error(*scanner));
-	word_token = (*scanner)->wordl;
-	(*scanner)->wordl = NULL;
-	token_consume(scanner);
-	return (new_word_node(word_token));
+	node = NULL;
+	if (*scanner)
+	{
+		if ((*scanner)->type != WORD)
+			return (parse_error(scanner));
+		word_token = (*scanner)->wordl;
+		(*scanner)->wordl = NULL;
+		token_consume(scanner);
+		node = new_word_node(word_token);
+	}
+	return (node);
 }
 
 static t_nodel	*parse_helper(t_token **scanner, int type)

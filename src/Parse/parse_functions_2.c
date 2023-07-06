@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 03:05:52 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:25:39 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ t_node	*parse_command(t_token **scanner)
 	t_node		*command_node;
 
 	if (!(*scanner))
-		return (parse_error(*scanner));
+		return (NULL);
 	prefix_node = parse_prefix(scanner);
-	if ((*scanner)->type == SUBSHELL_OPEN)
+	if ((*scanner) && (*scanner)->type == SUBSHELL_OPEN)
 	{
 		type = CompoundCommand;
 		command_node = parse_commpound_command(scanner);
@@ -42,15 +42,15 @@ t_node	*parse_commpound_command(t_token **scanner)
 	t_node	*suffix;
 	t_node	*ccmd;
 
-	if ((*scanner)->type != SUBSHELL_OPEN)
-		return (parse_error(*scanner));
+	if (!(*scanner))
+		return (NULL);
 	token_consume(scanner);
 	list_node = parse_list(scanner);
 	list_node->is_last = 0;
-	if ((*scanner)->type != SUBSHELL_CLOSE)
+	if (!(*scanner) || (*scanner)->type != SUBSHELL_CLOSE)
 	{
 		drop(list_node);
-		return (parse_error(*scanner));
+		return (parse_error(scanner));
 	}
 	token_consume(scanner);
 	suffix = parse_suffix(scanner);
@@ -66,8 +66,10 @@ t_node	*parse_simple_command(t_token **scanner)
 	t_node	*suffix;
 	t_node	*scmd;
 
+	if (!(*scanner))
+		return (NULL);
 	if ((*scanner)->type != WORD)
-		return (parse_error(*scanner));
+		return (parse_error(scanner));
 	cmd = parse_word(scanner);
 	cmd->is_last = 0;
 	suffix = parse_suffix(scanner);

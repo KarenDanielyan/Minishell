@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 02:47:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 16:03:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ t_node		*parse_pipeline(t_token **scanner);
 t_node		*parse_command(t_token **scanner);
 t_node		*parse_prefix(t_token **scanner);
 t_node		*parse_suffix(t_token **scanner);
+t_node		*parse_error(t_token **scanner);
 t_node		*parse_word(t_token **scanner);
 t_node		*parse_list(t_token **scanner);
-t_node		*parse_error(t_token *scanner);
 
 void		token_consume(t_token **scanner);
 
@@ -57,5 +57,6 @@ void	node_list_drop(t_nodel *list);
 /* Syntax Checkers */
 void	check_syntax_prime(t_node *self, int *visit);
 void	node_list_check_syntax(t_nodel *list, int *visit);
+void	node_list_visit(t_nodel *list, void (*op)(t_node *self));
 
 #endif

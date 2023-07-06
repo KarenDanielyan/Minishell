@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:13:45 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/05 19:48:15 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:21:09 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_node	*parse_list(t_token **scanner)
 {
 	t_node	*pipeline;
 
+	if (!(*scanner))
+		return (NULL);
 	pipeline = parse_pipeline(scanner);
 	return (parse_list_prime(scanner, pipeline));
 }
@@ -46,6 +48,8 @@ t_node	*parse_pipeline(t_token **scanner)
 {
 	t_node	*command;
 
+	if (!(*scanner))
+		return (NULL);
 	command = parse_command(scanner);
 	return (parse_pipeline_prime(scanner, command));
 }

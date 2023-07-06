@@ -7,7 +7,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/minishell",
       "args": [],
-      "stopAtEntry": false,
+      "stopAtEntry": true,
       "cwd": "${workspaceFolder}",
       "environment": [{ "name": "config", "value": "debug" }],
       "externalConsole": true,
