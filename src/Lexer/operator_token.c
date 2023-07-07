@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:47:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 21:13:42 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/05 23:38:15 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_wordl	*get_operator_token(char **s, int *flags, int *type)
 	op_wordl = wordl_new(word_new(word, *flags));
 	*type = get_type(word);
 	check_flags_change(flags, *type);
+	free(word);
 	return (op_wordl);
 }
 

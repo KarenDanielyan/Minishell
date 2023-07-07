@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/05 15:00:07 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:20:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <stddef.h>
 # include <stdint.h>
+
+# define ERROR_MSG "minishell: syntax error near unexpected token `"
+# define ERROR_EOL "minishell: syntax error: unexpected end of line\n"
 
 # define HISTFILE "/.minishell_history"
 # define IFS "IFS= \t\n"
@@ -211,7 +214,8 @@ typedef enum e_NodeType
 	CmdPrefixNode,
 	CmdSuffixNode,
 	IORedirectNode,
-	WordNode
+	WordNode,
+	ErrorNode
 }	t_nodetype;
 
 typedef enum e_ListType
@@ -299,6 +303,7 @@ typedef union u_NodeValue
 	t_prefixnode	*prefix;
 	t_suffixnode	*suffix;
 	t_wordnode		*word;
+	char			*error;
 }	t_NodeValue;
 
 typedef struct s_Node

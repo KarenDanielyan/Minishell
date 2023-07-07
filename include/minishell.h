@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/05 16:50:29 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:27:58 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ char	*get_line(t_list *var_list, int fd);
 t_token	*lex(char *s);
 
 /* Parsing */
+void	drop(t_node *tree);
 void	*parse(t_token	*scanner);
+void	check_syntax(t_node *self);
 
-/* Drop Function */
-void	drop(void *tree);
+/* Tree Visit Function */
+void	visit(t_node *self, void (*op)(t_node *self));
 
 /* Built-Ins */
 void	history(t_wordl *wordl,t_list *var_list);

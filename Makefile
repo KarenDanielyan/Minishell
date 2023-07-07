@@ -35,7 +35,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				input.c ) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
 				get_env.c print_logo.c is_token.c \
-				wordl.c wordl_2.c var_asign.c) \
+				wordl.c wordl_2.c var_asign.c \
+				visit.c) \
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
 				word_lists.c operator_token.c \
 				word_token.c lex.c \
@@ -45,7 +46,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				node_list.c parse_functions_2.c \
 				parse_functions_3.c parse_functions_4.c \
 				constructors.c constructors_2.c \
-				constructors_3.c) \
+				constructors_3.c error.c drop.c \
+				check_syntax.c) \
 
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
@@ -63,7 +65,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
 INVOKE		=	libft printf
 

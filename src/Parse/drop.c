@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   drop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 16:29:39 by kdaniely         ###   ########.fr       */
+/*   Created: 2023/07/06 02:25:20 by kdaniely          #+#    #+#             */
+/*   Updated: 2023/07/06 17:17:57 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "parser.h"
-#include "debug.h"
+#include <libft.h>
 
-void	*parse(t_token *scanner)
+void	drop(t_node *node)
 {
-	t_node	*node;
-	int		err;
-
-	err = 0;
-	node = parse_list(&scanner, &err);
-	print_tree(node, "", 1);
-	return ((void *)node);
+	if (node)
+	{
+		if (node->type == WordNode)
+			wordl_clear(node->value.word);
+		else if (node->type == ErrorNode)
+			free(node->value.error);
+		else if (node->type == CmdPrefixNode)
+			node_list_clear(node->value.prefix, NULL);
+		else if (node->type == CmdSuffixNode)
+			node_list_clear(node->value.suffix, NULL);
+		free(node);
+	}
 }

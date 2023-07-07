@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 21:14:17 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 01:15:37 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 # include "defines.h"
 # include "list.h"
-
-t_word	*word_new(char *str, int flags);
-
-void	word_delete(t_word *word);
 
 void	tok_push(t_token **tok_l, t_wordl *wordl, int type);
 void	tok_pop(t_token **tok_l);

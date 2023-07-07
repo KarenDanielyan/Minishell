@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/07 16:50:53 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:54:44 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	true_loop(t_list *var_list, int fd)
 {
 	char	*str;
 	t_token	*scanner;
+	t_node	*tree;
 
 	sig_init();
 	while (1)
@@ -100,9 +101,12 @@ void	true_loop(t_list *var_list, int fd)
 			continue ;
 		scanner = lex(str);
 		check_tokens(scanner);
-		parse(scanner);
+		tree = parse(scanner);
+		visit(tree, check_syntax);
+		visit(tree, drop);
 		switch_case(var_list,str);
 		free(str);
+		//system("leaks minishell");
 	}
 }
 

@@ -6,10 +6,11 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 16:34:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 14:35:05 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:27:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "parser.h"
 #include <libft.h>
 #include <stdio.h>
@@ -37,4 +38,36 @@ t_nodel	*new_node_list(t_node *node)
 	nodel->node = node;
 	nodel->next = NULL;
 	return (nodel);
+}
+
+void	node_list_clear(t_nodel *list, void (*del)(t_node *node))
+{
+	t_nodel	*tmp;
+
+	while (list)
+	{
+		tmp = list->next;
+		if (del)
+			del(list->node);
+		free(list);
+		list = tmp;
+	}
+}
+
+void	node_list_check_syntax(t_nodel *list)
+{
+	while (list)
+	{
+		check_syntax(list->node);
+		list = list->next;
+	}
+}
+
+void	node_list_visit(t_nodel *list, void (*op)(t_node *self))
+{
+	while (list)
+	{
+		visit(list->node, op);
+		list = list->next;
+	}
 }

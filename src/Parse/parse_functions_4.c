@@ -6,32 +6,48 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:58:40 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/03 21:11:50 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:42:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <libft.h>
 
-t_node	*parse_ioredirect(t_token **scanner)
+static t_node	*check_type(t_token **scanner, t_IOType *type, int *err);
+
+t_node	*parse_ioredirect(t_token **scanner, int *err)
 {
 	t_IOType	type;
-	t_wordl		*filename;
+	t_node		*node;
 
+	node = NULL;
+	if (*err == 0)
+	{
+		node = check_type(scanner, &type, err);
+		if (node)
+			return (node);
+		token_consume(scanner);
+		if ((*scanner)->type != WORD)
+			return (parse_error(scanner, err));
+		node = new_io_redirect_node(type, parse_word(scanner, err));
+	}
+	return (node);
+}
+
+static t_node	*check_type(t_token **scanner, t_IOType *type, int *err)
+{
 	if ((*scanner)->type == IO_FILE)
 	{
-		if (*((*scanner)->wordl->word->value) == LESS)
-			type = IN;
-		if (*((*scanner)->wordl->word->value) == GREAT)
-			type = OUT;
+	if (*((*scanner)->wordl->word->value) == LESS)
+		*type = IN;
+	if (*((*scanner)->wordl->word->value) == GREAT)
+		*type = OUT;
 	}
-	if ((*scanner)->type == IO_APPEND)
-		type = APPEND;
-	if ((*scanner)->type == IO_HERE)
-		type = HERE;
-	token_consume(scanner);
-	filename = (*scanner)->wordl;
-	(*scanner)->wordl = NULL;
-	token_consume(scanner);
-	return (new_io_redirect_node(type, new_word_node(filename)));
+	else if ((*scanner)->type == IO_APPEND)
+		*type = APPEND;
+	else if ((*scanner)->type == IO_HERE)
+		*type = HERE;
+	else
+		return (parse_error(scanner, err));
+	return (NULL);
 }
