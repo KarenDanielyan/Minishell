@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/07 21:25:20 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 23:15:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,62 @@ static void	switch_case(t_list *var_list, char *str)
 	wordl_clear(wordl);
 }
 
+
+int check_quotes(t_wordl *args)
+{
+	while (args)
+	{
+		if (ft_strchr(args->word->value, DQUOTE))
+		{
+			if (ft_strchr(args->word->value, DQUOTE) == ft_strrchr(args->word->value, DQUOTE))
+			{
+				ft_dprintf(STDERR_FILENO, "%s", ERROR_QUOTES);
+				return (0);
+			}
+		}
+		if (ft_strchr(args->word->value, SQUOTE))
+		{
+			if (ft_strchr(args->word->value, SQUOTE) == ft_strrchr(args->word->value, SQUOTE))
+			{
+				ft_dprintf(STDERR_FILENO, "%s", ERROR_QUOTES);
+				return (0);
+			}
+		}
+		args = args->next;
+	}
+	return (1);
+}
+
+void check_tokens(t_token *scanner)
+{
+	int		flag;
+	t_token	*temp;
+	int		count_subshell;
+
+	flag = 0;
+	temp = scanner;
+	count_subshell = 0;
+	while (temp)
+	{
+		if (temp->type == SUBSHELL_OPEN)
+			count_subshell++;
+		if (temp->type == SUBSHELL_CLOSE)
+			count_subshell--;
+		if (temp->type == WORD)
+		{
+			if (!check_quotes(temp->wordl))
+				return ;
+		}
+		temp = temp->next;
+	}
+	if (count_subshell != 0)
+		ft_dprintf(STDERR_FILENO, "%s\n", ERROR_PAREN);
+}
+
 /**
  * @brief	Readline while loop
  */
+
 void	true_loop(t_list *var_list, int fd)
 {
 	char	*str;
@@ -61,10 +114,11 @@ void	true_loop(t_list *var_list, int fd)
 		if (!str)
 			continue ;
 		scanner = lex(str);
+		check_tokens(scanner);
 		tree = parse(scanner);
 		visit(tree, check_syntax);
 		visit(tree, drop);
-		switch_case(var_list, str);
+		switch_case(var_list,str);
 		free(str);
 	}
 }

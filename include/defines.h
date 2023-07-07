@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 20:16:16 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 23:15:11 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # define ERROR_MSG "minishell: syntax error near unexpected token `"
 # define ERROR_EOL "minishell: syntax error: unexpected end of line."
+# define ERROR_QUOTES "minishell: syntax error: quotes are not closed."
+# define ERROR_PAREN "minishell: syntax error: parenthesis are not closed."
 
 # define HISTFILE "/.minishell_history"
 # define IFS "IFS= \t\n"
