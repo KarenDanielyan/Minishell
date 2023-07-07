@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 02:27:37 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 16:28:29 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 19:58:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	check_syntax(t_node *self)
 		if (self->type == ErrorNode)
 			ft_dprintf(2, "%s\n", self->value.error);
 		else if (self->type == CmdPrefixNode)
-			node_list_check_syntax(self->value.prefix);
+			node_list_check_syntax(self->value.prefix, NULL);
 		else if (self->type == CmdSuffixNode)
-			node_list_check_syntax(self->value.suffix);
+			node_list_check_syntax(self->value.suffix, NULL);
 	}
 	else
 		return ;

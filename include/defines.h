@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 17:20:24 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 20:16:16 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdint.h>
 
 # define ERROR_MSG "minishell: syntax error near unexpected token `"
-# define ERROR_EOL "minishell: syntax error: unexpected end of line\n"
+# define ERROR_EOL "minishell: syntax error: unexpected end of line."
 
 # define HISTFILE "/.minishell_history"
 # define IFS "IFS= \t\n"
@@ -227,7 +227,8 @@ typedef enum e_ListType
 typedef enum e_CmdType
 {
 	SimpleCommand,
-	CompoundCommand
+	CompoundCommand,
+	EmptyCommand
 }	t_cmdtype;
 
 typedef enum e_IOType

@@ -6,12 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 16:05:35 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 20:48:44 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include "parser.h"
+#include "minishell.h"
 #include <ft_printf.h>
 
 t_node	*parse_command(t_token **scanner, int *err)
@@ -25,13 +26,18 @@ t_node	*parse_command(t_token **scanner, int *err)
 		prefix_node = parse_prefix(scanner, err);
 		if ((*scanner) && (*scanner)->type == SUBSHELL_OPEN)
 		{
-		type = CompoundCommand;
-		command_node = parse_commpound_command(scanner, err);
+			type = CompoundCommand;
+			command_node = parse_commpound_command(scanner, err);
 		}
-		else
+		else if (*scanner)
 		{
 			type = SimpleCommand;
 			command_node = parse_simple_command(scanner, err);
+		}
+		else
+		{
+			type = EmptyCommand;
+			command_node = NULL;
 		}
 		return (new_command_node(type, prefix_node, command_node));
 	}
@@ -44,14 +50,14 @@ t_node	*parse_commpound_command(t_token **scanner, int *err)
 	t_node	*suffix;
 	t_node	*ccmd;
 
-	if (err)
+	if (*err == 0)
 	{
 		token_consume(scanner);
 		list_node = parse_list(scanner, err);
 		list_node->is_last = 0;
 		if (!(*scanner) || (*scanner)->type != SUBSHELL_CLOSE)
 		{
-			drop(list_node);
+			visit(list_node, drop);
 			return (parse_error(scanner, err));
 		}
 		token_consume(scanner);
@@ -72,7 +78,7 @@ t_node	*parse_simple_command(t_token **scanner, int *err)
 
 	if (*err == 0)
 	{
-		if ((*scanner)->type != WORD)
+		if (!(*scanner) || (*scanner)->type != WORD)
 			return (parse_error(scanner, err));
 		cmd = parse_word(scanner, err);
 		cmd->is_last = 0;

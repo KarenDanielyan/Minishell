@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 22:05:43 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/03 22:46:26 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/07 21:26:10 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_swap(void **a, void **b)
+void	ft_swap(void **a, void **b)
 {
 	void	*tmp;
 

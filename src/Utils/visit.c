@@ -6,13 +6,12 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:42:04 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 17:16:17 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 21:10:53 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
-
 
 static void	visit_prime(t_node *self, void (*op)(t_node *self));
 static void	visit_prime2(t_node *self, void (*op)(t_node *self));

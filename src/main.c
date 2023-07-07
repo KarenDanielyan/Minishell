@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/07 16:39:56 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 21:25:20 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 
 static void	switch_case(t_list *var_list, char *str)
 {
-	t_wordl *wordl;
+	t_wordl	*wordl;
 	char	**split;
 	int		i;
-	
+
 	split = ft_split(str, ' ');
 	wordl = NULL;
 	i = -1;
-	while (split[++i]) 
+	while (split[++i])
 		wordl_push_back(&wordl, word_new(*(split + i), 0));
 	if (ft_strcmp(wordl->word->value, "history") == 0)
 		history(wordl, var_list);
@@ -32,7 +32,7 @@ static void	switch_case(t_list *var_list, char *str)
 	if (ft_strcmp(wordl->word->value, "echo") == 0)
 		echo(wordl);
 	if (ft_strcmp(wordl->word->value, "exit") == 0)
-		my_exit(var_list, wordl); 
+		my_exit(var_list, wordl);
 	if (ft_strcmp(wordl->word->value, "pwd") == 0)
 		pwd();
 	if (ft_strcmp(wordl->word->value, "unset") == 0)
@@ -66,7 +66,6 @@ void	true_loop(t_list *var_list, int fd)
 		visit(tree, drop);
 		switch_case(var_list, str);
 		free(str);
-		//system("leaks minishell");
 	}
 }
 
