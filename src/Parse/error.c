@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 00:20:23 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 14:36:09 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:47:29 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_node	*new_error_node(char *msg)
 	return (node);
 }
 
-t_node	*parse_error(t_token **scanner)
+t_node	*parse_error(t_token **scanner, int *err)
 {
 	char	*str;
 	t_word	*word;
@@ -46,6 +46,7 @@ t_node	*parse_error(t_token **scanner)
 			tok_pop(scanner);
 	}
 	node = new_error_node(str);
+	*err = 1;
 	free(str);
 	return (node);
 }

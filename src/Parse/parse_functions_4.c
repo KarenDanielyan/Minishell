@@ -6,39 +6,35 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:58:40 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 14:33:20 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:42:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <libft.h>
 
-static t_node	*check_type(t_token **scanner, t_IOType *type);
+static t_node	*check_type(t_token **scanner, t_IOType *type, int *err);
 
-t_node	*parse_ioredirect(t_token **scanner)
+t_node	*parse_ioredirect(t_token **scanner, int *err)
 {
 	t_IOType	type;
-	t_wordl		*filename;
 	t_node		*node;
 
 	node = NULL;
-	if (*scanner)
+	if (*err == 0)
 	{
-		node = check_type(scanner, &type);
+		node = check_type(scanner, &type, err);
 		if (node)
 			return (node);
 		token_consume(scanner);
 		if ((*scanner)->type != WORD)
-			return (parse_error(scanner));
-		filename = (*scanner)->wordl;
-		(*scanner)->wordl = NULL;
-		token_consume(scanner);
-		node = new_io_redirect_node(type, new_word_node(filename));
+			return (parse_error(scanner, err));
+		node = new_io_redirect_node(type, parse_word(scanner, err));
 	}
 	return (node);
 }
 
-static t_node	*check_type(t_token **scanner, t_IOType *type)
+static t_node	*check_type(t_token **scanner, t_IOType *type, int *err)
 {
 	if ((*scanner)->type == IO_FILE)
 	{
@@ -52,6 +48,6 @@ static t_node	*check_type(t_token **scanner, t_IOType *type)
 	else if ((*scanner)->type == IO_HERE)
 		*type = HERE;
 	else
-		return (parse_error(scanner));
+		return (parse_error(scanner, err));
 	return (NULL);
 }

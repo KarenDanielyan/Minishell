@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 17:14:59 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:27:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ t_node		*new_list_node(t_ListType type, t_node *left, t_node *right);
 t_node		*new_command_node(t_cmdtype type, t_node *prefix, t_node *command);
 
 /* Parsing Functions */
-t_node		*parse_pipeline_prime(t_token **scanner, t_node *expr);
-t_node		*parse_list_prime(t_token **scanner, t_node *expr);
-t_node		*parse_commpound_command(t_token **scanner);
-t_node		*parse_simple_command(t_token **scanner);
-t_node		*parse_ioredirect(t_token **scanner);
-t_node		*parse_pipeline(t_token **scanner);
-t_node		*parse_command(t_token **scanner);
-t_node		*parse_prefix(t_token **scanner);
-t_node		*parse_suffix(t_token **scanner);
-t_node		*parse_error(t_token **scanner);
-t_node		*parse_word(t_token **scanner);
-t_node		*parse_list(t_token **scanner);
+t_node		*parse_pipeline_prime(t_token **scanner, t_node *expr, int *err);
+t_node		*parse_list_prime(t_token **scanner, t_node *expr, int *err);
+t_node		*parse_commpound_command(t_token **scanner, int *err);
+t_node		*parse_simple_command(t_token **scanner, int *err);
+t_node		*parse_ioredirect(t_token **scanner, int *err);
+t_node		*parse_pipeline(t_token **scanner, int *err);
+t_node		*parse_command(t_token **scanner, int *err);
+t_node		*parse_prefix(t_token **scanner, int *err);
+t_node		*parse_suffix(t_token **scanner, int *err);
+t_node		*parse_error(t_token **scanner, int *err);
+t_node		*parse_word(t_token **scanner, int *err);
+t_node		*parse_list(t_token **scanner, int *err);
 
 void		token_consume(t_token **scanner);
 
@@ -55,8 +55,7 @@ void	drop(t_node *tree);
 void	node_list_clear(t_nodel *list, void (*del)(t_node *node));
 
 /* Syntax Checkers */
-void	check_syntax_prime(t_node *self, int *visit);
-void	node_list_check_syntax(t_nodel *list, int *visit);
+void	node_list_check_syntax(t_nodel *list);
 void	node_list_visit(t_nodel *list, void (*op)(t_node *self));
 
 #endif

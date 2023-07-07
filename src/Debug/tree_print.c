@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:22:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 18:12:36 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:35:56 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,16 @@ void	print_tree(t_node *node, char *ident, int last)
 		marker = "└──";
 	else
 		marker = "├──";
-	printf ("%s%s%s", ident, marker, get_node_type(node->type));
-	print_value(node);
+	if (node)
+	{
+		printf ("%s%s%s", ident, marker, get_node_type(node->type));
+		print_value(node);
+	}
+	else
+	{
+		printf("%s%s%s", ident, marker, "NULL");
+		return ;
+	}
 	if (last)
 		ident = ft_strjoin(ident, "     ");
 	else
@@ -40,6 +48,8 @@ void	print_tree(t_node *node, char *ident, int last)
 
 static void	print_tree_prime(t_node *node, char *ident)
 {
+	if (!node)
+		return ;
 	if (node->type == ListNode)
 	{
 		print_tree(node->value.list.left, ident, \

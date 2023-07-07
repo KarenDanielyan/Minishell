@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/06 15:28:30 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:27:58 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_token	*lex(char *s);
 /* Parsing */
 void	drop(t_node *tree);
 void	*parse(t_token	*scanner);
-int		check_syntax(t_node *self);
+void	check_syntax(t_node *self);
 
 /* Tree Visit Function */
 void	visit(t_node *self, void (*op)(t_node *self));

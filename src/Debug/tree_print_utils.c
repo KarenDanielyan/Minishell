@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:01:47 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 23:34:52 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:35:16 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*get_node_type(t_nodetype type)
 		return ("\033[34mCmdSuffixNode\033[0m");
 	if (type == WordNode)
 		return ("\033[32mWordNode\033[0m");
+	if (type == ErrorNode)
+		return ("\033[31mErrorNode\033[0m");
 	return (NULL);
 }
 
