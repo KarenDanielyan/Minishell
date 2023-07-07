@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/07 18:57:52 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/07 22:13:42 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	switch_case(t_list *var_list, char *str)
 }
 
 
-int check_cooats(t_wordl *args)
+int check_quotes(t_wordl *args)
 {
 	while (args)
 	{
@@ -54,7 +54,7 @@ int check_cooats(t_wordl *args)
 		{
 			if (ft_strchr(args->word->value, DQUOTE) == ft_strrchr(args->word->value, DQUOTE))
 			{
-				ft_dprintf(STDERR_FILENO, "minishell: syntax error: quotes are not closed\n");
+				ft_dprintf(STDERR_FILENO, "%s", ERROR_QUOTES);
 				return (0);
 			}
 		}
@@ -62,7 +62,7 @@ int check_cooats(t_wordl *args)
 		{
 			if (ft_strchr(args->word->value, SQUOTE) == ft_strrchr(args->word->value, SQUOTE))
 			{
-				ft_dprintf(STDERR_FILENO, "minishell: syntax error: quotes are not closed\n");
+				ft_dprintf(STDERR_FILENO, "%s", ERROR_QUOTES);
 				return (0);
 			}
 		}
@@ -88,13 +88,13 @@ void check_tokens(t_token *scanner)
 			count_subshell--;
 		if (temp->type == WORD)
 		{
-			if (!check_cooats(temp->wordl))
+			if (!check_quotes(temp->wordl))
 				return ;
 		}
 		temp = temp->next;
 	}
 	if (count_subshell != 0)
-		ft_dprintf(STDERR_FILENO, "minishell: syntax error: subshell are not closed\n");
+		ft_dprintf(STDERR_FILENO, "%s\n", ERROR_PAREN);
 }
 
 /**
