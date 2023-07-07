@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:22:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 16:35:56 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:43:31 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_tree(t_node *node, char *ident, int last)
 	}
 	else
 	{
-		printf("%s%s%s", ident, marker, "NULL");
+		printf("%s%s%s\n", ident, marker, " NULL");
 		return ;
 	}
 	if (last)

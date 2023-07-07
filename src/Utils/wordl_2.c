@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:02:25 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 01:13:25 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:42:47 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	wordl_size(t_wordl *head)
 */
 t_word	*wordl_join(t_wordl *wordl)
 {
+	t_word	*word;
 	char	*val;
 	int		flags;
 
@@ -47,5 +48,7 @@ t_word	*wordl_join(t_wordl *wordl)
 		flags = flags | wordl->word->flags;
 		wordl = wordl->next;
 	}
-	return (word_new(val, flags));
+	word= word_new(val, flags);
+	free(val);
+	return (word);
 }
