@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/05 20:35:09 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:50:53 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,45 @@ static void	switch_case(t_list *var_list, char *str)
 /**
  * @brief	Readline while loop
  */
+
+int check_cooats(t_wordl *args)
+{
+	while (args->word)
+	{
+		if(ft_strchr(args->word->value, DQUOTE)== NULL || ft_strrchr(args->word->value, DQUOTE))
+		{
+			ft_dprintf(STDERR_FILENO,"minishell quote is not close\n");
+			return (0);
+		}
+		args = args->next;
+	}
+	return (1);
+}
+
+void check_tokens(t_token *scanner)
+{
+	int flag;
+	t_token *temp;
+	int count_subshell;
+
+	flag = 0;
+	temp = scanner;
+	count_subshell = 0;
+	while (temp)
+	{
+		if (temp->type == SUBSHELL_OPEN)
+			count_subshell++;
+		if (temp->type == SUBSHELL_CLOSE)
+			count_subshell--;
+		if (temp->type == WORD)
+		{
+			if (!check_cooats(temp->wordl))
+				break;
+		}
+		temp = temp->next;
+	}
+}
+
 void	true_loop(t_list *var_list, int fd)
 {
 	char	*str;
@@ -60,8 +99,9 @@ void	true_loop(t_list *var_list, int fd)
 		if (!str)
 			continue ;
 		scanner = lex(str);
+		check_tokens(scanner);
 		parse(scanner);
-		switch_case(var_list, str);
+		switch_case(var_list,str);
 		free(str);
 	}
 }
