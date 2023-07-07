@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/07 16:54:44 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/07 18:57:52 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,26 @@ static void	switch_case(t_list *var_list, char *str)
 	wordl_clear(wordl);
 }
 
-/**
- * @brief	Readline while loop
- */
 
 int check_cooats(t_wordl *args)
 {
-	while (args->word)
+	while (args)
 	{
-		if(ft_strchr(args->word->value, DQUOTE)== NULL || ft_strrchr(args->word->value, DQUOTE))
+		if (ft_strchr(args->word->value, DQUOTE))
 		{
-			ft_dprintf(STDERR_FILENO,"minishell quote is not close\n");
-			return (0);
+			if (ft_strchr(args->word->value, DQUOTE) == ft_strrchr(args->word->value, DQUOTE))
+			{
+				ft_dprintf(STDERR_FILENO, "minishell: syntax error: quotes are not closed\n");
+				return (0);
+			}
+		}
+		if (ft_strchr(args->word->value, SQUOTE))
+		{
+			if (ft_strchr(args->word->value, SQUOTE) == ft_strrchr(args->word->value, SQUOTE))
+			{
+				ft_dprintf(STDERR_FILENO, "minishell: syntax error: quotes are not closed\n");
+				return (0);
+			}
 		}
 		args = args->next;
 	}
@@ -65,9 +73,9 @@ int check_cooats(t_wordl *args)
 
 void check_tokens(t_token *scanner)
 {
-	int flag;
-	t_token *temp;
-	int count_subshell;
+	int		flag;
+	t_token	*temp;
+	int		count_subshell;
 
 	flag = 0;
 	temp = scanner;
@@ -81,11 +89,17 @@ void check_tokens(t_token *scanner)
 		if (temp->type == WORD)
 		{
 			if (!check_cooats(temp->wordl))
-				break;
+				return ;
 		}
 		temp = temp->next;
 	}
+	if (count_subshell != 0)
+		ft_dprintf(STDERR_FILENO, "minishell: syntax error: subshell are not closed\n");
 }
+
+/**
+ * @brief	Readline while loop
+ */
 
 void	true_loop(t_list *var_list, int fd)
 {
