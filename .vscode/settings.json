@@ -82,7 +82,8 @@
     "debug.h": "c",
     "parser.h": "c",
     "list": "c",
-    "__node_handle": "c"
+    "__node_handle": "c",
+    "expand.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

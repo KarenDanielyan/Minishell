@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 19:59:48 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 02:36:46 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ void	drop(t_node *tree);
 void	node_list_clear(t_nodel *list, void (*del)(t_node *node));
 
 /* Syntax Checkers */
+void	check_syntax(t_node *self);
 void	node_list_check_syntax(t_nodel *list, void (*check)(t_node *node));
+
+/* Visit Function for nodelists */
 void	node_list_visit(t_nodel *list, void (*op)(t_node *self));
 
 #endif

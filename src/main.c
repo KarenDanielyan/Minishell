@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/07 23:15:24 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 02:46:59 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,9 @@ int check_quotes(t_wordl *args)
 
 void check_tokens(t_token *scanner)
 {
-	int		flag;
 	t_token	*temp;
 	int		count_subshell;
 
-	flag = 0;
 	temp = scanner;
 	count_subshell = 0;
 	while (temp)
@@ -115,10 +113,11 @@ void	true_loop(t_list *var_list, int fd)
 			continue ;
 		scanner = lex(str);
 		check_tokens(scanner);
-		tree = parse(scanner);
-		visit(tree, check_syntax);
-		visit(tree, drop);
+		tree = parse(scanner, var_list);
+		if (tree == NULL)
+			continue ;
 		switch_case(var_list,str);
+		visit(tree, drop);
 		free(str);
 	}
 }

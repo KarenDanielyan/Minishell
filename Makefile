@@ -48,6 +48,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				constructors.c constructors_2.c \
 				constructors_3.c error.c drop.c \
 				check_syntax.c) \
+				$(patsubst %.c, $(SRC)/Expansions/%.c,\
+				expand.c)
 
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
@@ -57,7 +59,8 @@ OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
 				$(filter-out %.c, $(patsubst $(SRC)/List/%.c, $(BUILD)/%.o, $(SRCS))) \
 				$(filter-out %.c, $(patsubst $(SRC)/Lexer/%.c, $(BUILD)/%.o, $(SRCS))) \
 				$(filter-out %.c, $(patsubst $(SRC)/Debug/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/Parse/%.c, $(BUILD)/%.o, $(SRCS)))
+				$(filter-out %.c, $(patsubst $(SRC)/Parse/%.c, $(BUILD)/%.o, $(SRCS))) \
+				$(filter-out %.c, $(patsubst $(SRC)/Expansions/%.c, $(BUILD)/%.o, $(SRCS)))
 
 # Compilation options
 
@@ -65,7 +68,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -g3 # -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g3  -fsanitize=address
 
 INVOKE		=	libft printf
 
