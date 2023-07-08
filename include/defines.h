@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 15:30:44 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 21:18:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 # define ERROR_QUOTES "minishell: syntax error: quotes are not closed."
 # define ERROR_PAREN "minishell: syntax error: parenthesis are not closed."
 
+# define TILDE_VAR "TILDE"
 # define HISTFILE "/.minishell_history"
 # define IFS "IFS= \t\n"
-# define PS1 "PS1=minishell-4.2 "
+# define PS1 "PS1=minishell-4.2$> "
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
 # define DL "declare -x"
@@ -68,7 +69,8 @@ typedef enum e_scope
 {
 	LOCAL,
 	EXPORT,
-	SHELL
+	SHELL,
+	PRIVATE
 }	t_scope;
 
 /**

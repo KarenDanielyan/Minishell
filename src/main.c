@@ -6,13 +6,14 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/08 15:53:05 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 21:20:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include "lex.h"
 #include "minishell.h"
+#include "debug.h"
 
 static void	switch_case(t_list *var_list, char *str)
 {
@@ -54,7 +55,7 @@ int	check_quotes(t_wordl *args)
 			if (ft_strchr(args->word->value, DQUOTE) \
 				== ft_strrchr(args->word->value, DQUOTE))
 			{
-				ft_dprintf(STDERR_FILENO, "%s", ERROR_QUOTES);
+				ft_dprintf(STDERR_FILENO, "%s\n", ERROR_QUOTES);
 				return (0);
 			}
 		}
@@ -63,7 +64,7 @@ int	check_quotes(t_wordl *args)
 			if (ft_strchr(args->word->value, SQUOTE) \
 				== ft_strrchr(args->word->value, SQUOTE))
 			{
-				ft_dprintf(STDERR_FILENO, "%s", ERROR_QUOTES);
+				ft_dprintf(STDERR_FILENO, "%s\n", ERROR_QUOTES);
 				return (0);
 			}
 		}
@@ -115,6 +116,9 @@ void	true_loop(t_list *var_list, int fd)
 		ctl.tree = parse(ctl.scanner, ctl.var_list);
 		if (ctl.tree == NULL)
 			continue ;
+		visit(&ctl, ctl.tree, expand);
+		printf("After expansion:\n");
+		print_tree(ctl.tree, "", 1);
 		switch_case(ctl.var_list, ctl.input);
 		visit(NULL, ctl.tree, drop);
 		free(ctl.input);
