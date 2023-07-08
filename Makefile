@@ -12,6 +12,9 @@ BUILD		=	./build
 
 SRC			=	./src
 
+SUBDIRS		=	BuiltIns Debug Expansions \
+				Init Lexer List Parse Utils
+
 DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 				debug.h defines.h list.h \
 				lex.h minishell.h parser.h) \
@@ -48,16 +51,14 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				constructors.c constructors_2.c \
 				constructors_3.c error.c drop.c \
 				check_syntax.c) \
+				$(patsubst %.c, $(SRC)/Expansions/%.c,\
+				expand.c)
 
 
-OBJS		=	$(patsubst %.c, $(BUILD)/%.o, main.c) \
-				$(filter-out %.c, $(patsubst $(SRC)/BuiltIns/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/Init/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/Utils/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/List/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/Lexer/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/Debug/%.c, $(BUILD)/%.o, $(SRCS))) \
-				$(filter-out %.c, $(patsubst $(SRC)/Parse/%.c, $(BUILD)/%.o, $(SRCS)))
+OBJS		=	$(foreach dir, $(SUBDIRS), \
+				$(patsubst $(SRC)/$(dir)/%.c, $(BUILD)/%.o, \
+				$(filter $(SRC)/$(dir)/%.c, $(SRCS)))) \
+				$(patsubst %.c, $(BUILD)/%.o, main.c)
 
 # Compilation options
 
@@ -65,7 +66,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g3  -fsanitize=address
 
 INVOKE		=	libft printf
 

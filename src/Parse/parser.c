@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 16:29:39 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:28:37 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 #include "parser.h"
 #include "debug.h"
 
-void	*parse(t_token *scanner)
+/**
+ * @brief	parse() consumes the sequence of tokens and returns
+ * 			an abstract syntax tree on successfull parsing.
+ * 
+ * 			If parsing encounters an error, it wil set the err flag as 1,
+ * 			indicating that syntax error was encountered during parsing.
+*/
+void	*parse(t_token *scanner, t_list *var_list)
 {
 	t_node	*node;
 	int		err;
@@ -22,5 +29,12 @@ void	*parse(t_token *scanner)
 	err = 0;
 	node = parse_list(&scanner, &err);
 	print_tree(node, "", 1);
+	if (err != 0)
+	{
+		visit(NULL, node, check_syntax);
+		visit(NULL, node, drop);
+		lst_set(var_list, "?", "2");
+		node = NULL;
+	}
 	return ((void *)node);
 }

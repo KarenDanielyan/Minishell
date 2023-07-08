@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/07 22:13:42 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:53:05 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 
 static void	switch_case(t_list *var_list, char *str)
 {
-	t_wordl *wordl;
+	t_wordl	*wordl;
 	char	**split;
 	int		i;
-	
+
 	split = ft_split(str, ' ');
 	wordl = NULL;
 	i = -1;
-	while (split[++i]) 
+	while (split[++i])
 		wordl_push_back(&wordl, word_new(*(split + i), 0));
 	if (ft_strcmp(wordl->word->value, "history") == 0)
 		history(wordl, var_list);
@@ -32,7 +32,7 @@ static void	switch_case(t_list *var_list, char *str)
 	if (ft_strcmp(wordl->word->value, "echo") == 0)
 		echo(wordl);
 	if (ft_strcmp(wordl->word->value, "exit") == 0)
-		my_exit(var_list, wordl); 
+		my_exit(var_list, wordl);
 	if (ft_strcmp(wordl->word->value, "pwd") == 0)
 		pwd();
 	if (ft_strcmp(wordl->word->value, "unset") == 0)
@@ -45,14 +45,14 @@ static void	switch_case(t_list *var_list, char *str)
 	wordl_clear(wordl);
 }
 
-
-int check_quotes(t_wordl *args)
+int	check_quotes(t_wordl *args)
 {
 	while (args)
 	{
 		if (ft_strchr(args->word->value, DQUOTE))
 		{
-			if (ft_strchr(args->word->value, DQUOTE) == ft_strrchr(args->word->value, DQUOTE))
+			if (ft_strchr(args->word->value, DQUOTE) \
+				== ft_strrchr(args->word->value, DQUOTE))
 			{
 				ft_dprintf(STDERR_FILENO, "%s", ERROR_QUOTES);
 				return (0);
@@ -60,7 +60,8 @@ int check_quotes(t_wordl *args)
 		}
 		if (ft_strchr(args->word->value, SQUOTE))
 		{
-			if (ft_strchr(args->word->value, SQUOTE) == ft_strrchr(args->word->value, SQUOTE))
+			if (ft_strchr(args->word->value, SQUOTE) \
+				== ft_strrchr(args->word->value, SQUOTE))
 			{
 				ft_dprintf(STDERR_FILENO, "%s", ERROR_QUOTES);
 				return (0);
@@ -71,13 +72,11 @@ int check_quotes(t_wordl *args)
 	return (1);
 }
 
-void check_tokens(t_token *scanner)
+void	check_tokens(t_token *scanner)
 {
-	int		flag;
 	t_token	*temp;
 	int		count_subshell;
 
-	flag = 0;
 	temp = scanner;
 	count_subshell = 0;
 	while (temp)
@@ -100,27 +99,25 @@ void check_tokens(t_token *scanner)
 /**
  * @brief	Readline while loop
  */
-
 void	true_loop(t_list *var_list, int fd)
 {
-	char	*str;
-	t_token	*scanner;
-	t_node	*tree;
+	t_control	ctl;
 
 	sig_init();
+	ctl.var_list = var_list;
 	while (1)
 	{
-		str = get_line(var_list, fd);
-		if (!str)
+		ctl.input = get_line(ctl.var_list, fd);
+		if (!ctl.input)
 			continue ;
-		scanner = lex(str);
-		check_tokens(scanner);
-		tree = parse(scanner);
-		visit(tree, check_syntax);
-		visit(tree, drop);
-		switch_case(var_list,str);
-		free(str);
-		//system("leaks minishell");
+		ctl.scanner = lex(ctl.input);
+		check_tokens(ctl.scanner);
+		ctl.tree = parse(ctl.scanner, ctl.var_list);
+		if (ctl.tree == NULL)
+			continue ;
+		switch_case(ctl.var_list, ctl.input);
+		visit(NULL, ctl.tree, drop);
+		free(ctl.input);
 	}
 }
 

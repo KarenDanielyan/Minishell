@@ -6,25 +6,26 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 02:25:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 17:17:57 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:36:21 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <libft.h>
 
-void	drop(t_node *node)
+void	drop(t_control *ctl, t_node *self)
 {
-	if (node)
+	(void)ctl;
+	if (self)
 	{
-		if (node->type == WordNode)
-			wordl_clear(node->value.word);
-		else if (node->type == ErrorNode)
-			free(node->value.error);
-		else if (node->type == CmdPrefixNode)
-			node_list_clear(node->value.prefix, NULL);
-		else if (node->type == CmdSuffixNode)
-			node_list_clear(node->value.suffix, NULL);
-		free(node);
+		if (self->type == WordNode)
+			wordl_clear(self->value.word);
+		else if (self->type == ErrorNode)
+			free(self->value.error);
+		else if (self->type == CmdPrefixNode)
+			node_list_clear(self->value.prefix, NULL);
+		else if (self->type == CmdSuffixNode)
+			node_list_clear(self->value.suffix, NULL);
+		free(self);
 	}
 }

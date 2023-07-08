@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 22:39:20 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:11:44 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,15 @@ void		token_consume(t_token **scanner);
 t_nodel		*list_last(t_nodel *head);
 
 /* Drop Functions */
-void	drop(t_node *tree);
-void	node_list_clear(t_nodel *list, void (*del)(t_node *node));
+void		drop(t_control *ctl, t_node *self);
+void		node_list_clear(t_nodel *list, void (*del)(t_node *node));
 
 /* Syntax Checkers */
-void	node_list_check_syntax(t_nodel *list);
-void	node_list_visit(t_nodel *list, void (*op)(t_node *self));
+void		check_syntax(t_control *ctl, t_node *self);
+void		node_list_check_syntax(t_nodel *list, void (*check)(t_node *node));
+
+/* Visit Function for nodelists */
+void		node_list_visit(t_control *ctl, t_nodel *list, \
+			void (*op)(t_control *ctl, t_node *self));
 
 #endif

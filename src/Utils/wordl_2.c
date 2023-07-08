@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:02:25 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 22:23:51 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:11:13 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_word	*wordl_join(t_wordl *wordl)
 		flags = flags | wordl->word->flags;
 		wordl = wordl->next;
 	}
-	word= word_new(val, flags);
+	word = word_new(val, flags);
 	free(val);
 	return (word);
 }

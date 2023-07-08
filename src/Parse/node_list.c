@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 16:34:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 16:27:45 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:33:53 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,22 @@ void	node_list_clear(t_nodel *list, void (*del)(t_node *node))
 	}
 }
 
-void	node_list_check_syntax(t_nodel *list)
+void	node_list_check_syntax(t_nodel *list, void (*check)(t_node *node))
 {
 	while (list)
 	{
-		check_syntax(list->node);
+		if (check)
+			check(list->node);
 		list = list->next;
 	}
 }
 
-void	node_list_visit(t_nodel *list, void (*op)(t_node *self))
+void	node_list_visit(t_control *ctl, t_nodel *list, \
+	void (*op)(t_control *ctl, t_node *self))
 {
 	while (list)
 	{
-		visit(list->node, op);
+		visit(ctl, list->node, op);
 		list = list->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:13:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 15:56:14 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 21:23:42 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static t_nodel	*parse_helper(t_token **scanner, int type, int *err)
 				nodelist_push(&node_list, \
 					new_node_list(parse_ioredirect(scanner, err)));
 			else if ((*scanner)->type == WORD && type == CmdSuffixNode)
-				nodelist_push(&node_list, new_node_list(parse_word(scanner, err)));
+				nodelist_push(&node_list, \
+				new_node_list(parse_word(scanner, err)));
 			else
 				break ;
 		}
