@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 21:18:30 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 00:24:34 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,17 @@
 
 /* Special Symbols */
 # define TILDE '~'
+
+/* Platform Specific Defines */
+# ifdef __linux__
+
+#  define SYNTAX_ERR "2"
+
+# elif __APPLE__
+
+#  define SYNTAX_ERR "258"
+
+# endif
 
 /**
  * @brief	Variable scope enumeration.
