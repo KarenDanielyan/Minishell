@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/28 16:31:26 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/07 22:25:04 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	cd(t_wordl *wordl, t_list *var_list)
 		return ;
 	}
 	if (!path)
-		path = lst_get_by_key(var_list,"HOME")->value;
+		path = lst_get_by_key(var_list, "HOME")->value;
 	current_pwd = ft_strdup(lst_get_by_key(var_list, "PWD")->value);
 	if (chdir(path) != 0)
 		perror("Minishell: cd");

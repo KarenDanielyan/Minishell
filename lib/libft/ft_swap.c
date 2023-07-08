@@ -6,13 +6,13 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 22:05:43 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/03 22:46:26 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:09:24 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_swap(void **a, void **b)
+void	ft_swap(void **a, void **b)
 {
 	void	*tmp;
 

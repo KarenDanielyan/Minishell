@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/07 16:27:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 22:40:06 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	check_syntax(t_node *self);
 void	visit(t_node *self, void (*op)(t_node *self));
 
 /* Built-Ins */
-void	history(t_wordl *wordl,t_list *var_list);
+void	history(t_wordl *wordl, t_list *var_list);
 void	pwd(void);
 void	cd(t_wordl *wordl, t_list *var_list);
 void	env(t_list *env);
 void	unset(t_list **var_list, t_wordl *wordl);
 void	my_exit(t_list *var_list, t_wordl *wordl);
 void	echo(t_wordl *wordl);
-void	export(t_list *var_list, t_wordl* args);
+void	export(t_list *var_list, t_wordl *args);
 
 /* Utils */
 void	print_logo(void);

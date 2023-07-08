@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wordl_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:02:25 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 16:42:47 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/07 22:23:51 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@ int	wordl_size(t_wordl *head)
 	int	i;
 
 	i = 0;
-	if (head)
+	while (head)
 	{
-		while (head->next)
-		{
-			head = head->next;
-			i ++;
-		}
+		head = head->next;
+		i ++;
 	}
 	return (i);
 }
+
 
 /**
  * @brief	wordl_join() allocates and return a word,
