@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 23:15:11 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:30:44 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,26 @@ typedef enum e_scope
 	EXPORT,
 	SHELL
 }	t_scope;
+
+/**
+ * @brief Variable list structure.
+ * 
+ * @param type		Determines the scope of the variable.
+ * @param joined	string of key-value pair joined with an '='. Ex: 'var=foo'
+ * @param key		Variable name.
+ * @param value		Value of the varaible.
+ * @param prev		Previous variable the variable list.
+ * @param next		Next variable in the variable list.
+ */
+typedef struct s_list
+{
+	t_scope			type;
+	char			*joined;
+	char			*key;
+	char			*value;
+	struct s_list	*prev;
+	struct s_list	*next;
+}	t_list;
 
 typedef enum e_type
 {
@@ -315,5 +335,13 @@ typedef struct s_Node
 	t_nodetype	type;
 	t_NodeValue	value;
 }	t_node;
+
+typedef struct s_control
+{
+	t_list	*var_list;
+	char	*input;
+	t_token	*scanner;
+	t_node	*tree;
+}	t_control;
 
 #endif

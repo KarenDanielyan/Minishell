@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 20:48:44 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:35:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_node	*parse_commpound_command(t_token **scanner, int *err)
 		list_node->is_last = 0;
 		if (!(*scanner) || (*scanner)->type != SUBSHELL_CLOSE)
 		{
-			visit(list_node, drop);
+			visit(NULL, list_node, drop);
 			return (parse_error(scanner, err));
 		}
 		token_consume(scanner);

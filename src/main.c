@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/08 02:46:59 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:53:05 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ static void	switch_case(t_list *var_list, char *str)
 	wordl_clear(wordl);
 }
 
-
-int check_quotes(t_wordl *args)
+int	check_quotes(t_wordl *args)
 {
 	while (args)
 	{
 		if (ft_strchr(args->word->value, DQUOTE))
 		{
-			if (ft_strchr(args->word->value, DQUOTE) == ft_strrchr(args->word->value, DQUOTE))
+			if (ft_strchr(args->word->value, DQUOTE) \
+				== ft_strrchr(args->word->value, DQUOTE))
 			{
 				ft_dprintf(STDERR_FILENO, "%s", ERROR_QUOTES);
 				return (0);
@@ -60,7 +60,8 @@ int check_quotes(t_wordl *args)
 		}
 		if (ft_strchr(args->word->value, SQUOTE))
 		{
-			if (ft_strchr(args->word->value, SQUOTE) == ft_strrchr(args->word->value, SQUOTE))
+			if (ft_strchr(args->word->value, SQUOTE) \
+				== ft_strrchr(args->word->value, SQUOTE))
 			{
 				ft_dprintf(STDERR_FILENO, "%s", ERROR_QUOTES);
 				return (0);
@@ -71,7 +72,7 @@ int check_quotes(t_wordl *args)
 	return (1);
 }
 
-void check_tokens(t_token *scanner)
+void	check_tokens(t_token *scanner)
 {
 	t_token	*temp;
 	int		count_subshell;
@@ -98,27 +99,25 @@ void check_tokens(t_token *scanner)
 /**
  * @brief	Readline while loop
  */
-
 void	true_loop(t_list *var_list, int fd)
 {
-	char	*str;
-	t_token	*scanner;
-	t_node	*tree;
+	t_control	ctl;
 
 	sig_init();
+	ctl.var_list = var_list;
 	while (1)
 	{
-		str = get_line(var_list, fd);
-		if (!str)
+		ctl.input = get_line(ctl.var_list, fd);
+		if (!ctl.input)
 			continue ;
-		scanner = lex(str);
-		check_tokens(scanner);
-		tree = parse(scanner, var_list);
-		if (tree == NULL)
+		ctl.scanner = lex(ctl.input);
+		check_tokens(ctl.scanner);
+		ctl.tree = parse(ctl.scanner, ctl.var_list);
+		if (ctl.tree == NULL)
 			continue ;
-		switch_case(var_list,str);
-		visit(tree, drop);
-		free(str);
+		switch_case(ctl.var_list, ctl.input);
+		visit(NULL, ctl.tree, drop);
+		free(ctl.input);
 	}
 }
 
