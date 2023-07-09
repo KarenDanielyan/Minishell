@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 22:21:00 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/03 22:46:37 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 19:38:29 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char		*ft_itoa(int n);
 char		*ft_itul(long long n);
 char		**ft_strdup_2d(char const **s);
 char		**ft_split(char const *s, char c);
+char		**ft_split_2(char const *s, char *charset);
 char		*ft_strjoin_free(char *s1, char const *s2);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);

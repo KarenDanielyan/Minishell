@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 18:51:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 20:15:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,16 @@
 
 # define TILDE_VAR "TILDE"
 # define HISTFILE "/.minishell_history"
-# define IFS "IFS= \t\n"
 # define PS1 "PS1=minishell-4.2$> "
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
 # define DL "declare -x"
 # define NEWLINE '\n'
+
+/* Everything related to field splitting */
+# define IFS "IFS"
+# define IFS_VAL " \t\n"
+# define IFS_INIT "IFS=:"
 
 /* Implemented Operators */
 # define OPERATORS "<>|()&"
