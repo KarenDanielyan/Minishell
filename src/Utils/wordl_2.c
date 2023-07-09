@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wordl_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:02:25 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 19:18:37 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/10 01:23:06 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,14 @@ t_word	*wordl_join(t_wordl *wordl)
 	word = word_new(val, flags);
 	free(val);
 	return (word);
+}
+
+t_wordl	*wordl_find_prev(t_wordl *head, t_wordl *current)
+{
+	if (head)
+	{
+		while (head && head->next != current)
+			head = head->next;
+	}
+	return (head);
 }

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 15:33:30 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 18:10:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 00:09:47 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	quote_removal(t_node *self)
 			free(temp->word->value);
 			temp->word->value = tmp;
 		}
+		tmp = NULL;
 		temp = temp->next;
 	}
 }

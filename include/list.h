@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:15:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 15:29:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 01:08:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	lst_pop(t_list **lst, t_list *to_pop);
 /* Wordlist API */
 t_wordl	*wordl_new(t_word *word);
 t_wordl	*wordl_last(t_wordl *wordl);
+t_wordl	*wordl_find_prev(t_wordl *head, t_wordl *current);
 
 t_word	*wordl_join(t_wordl *wordl);
 
