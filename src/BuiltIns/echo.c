@@ -6,13 +6,14 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 20:22:03 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/08 20:28:15 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 15:10:32 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	check_flag(t_wordl *temp);
+static char	*create(t_wordl *temp);
 
 void	echo(t_wordl *wordl)
 {
@@ -32,13 +33,7 @@ void	echo(t_wordl *wordl)
 	flag = check_flag(temp);
 	if (flag)
 		temp = temp->next;
-	while (temp)
-	{
-		word = ft_strjoin_free(word, temp->word->value);
-		if (temp->next)
-			word = ft_strjoin_free(word, " ");
-		temp = temp->next;
-	}
+	word = create(temp);
 	ft_putstr_fd(word, STDOUT_FILENO);
 	if (!flag)
 		ft_putstr_fd("\n", STDOUT_FILENO);
@@ -59,4 +54,19 @@ static int	check_flag(t_wordl *temp)
 	if (i == ft_strlen(temp->word->value))
 		return (1);
 	return (0);
+}
+
+static char	*create(t_wordl *temp)
+{
+	char	*word;
+
+	word = NULL;
+	while (temp)
+	{
+		word = ft_strjoin_free(word, temp->word->value);
+		if (temp->next)
+			word = ft_strjoin_free(word, " ");
+		temp = temp->next;
+	}
+	return (word);
 }

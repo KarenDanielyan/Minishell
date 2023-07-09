@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 14:42:41 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 14:52:26 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	tok_pop(t_token **tok_l);
 t_token	*tok_last(t_token *tok_l);
 
 /* Token Checker */
-int	check_tokens(t_token *scanner);
+int		check_tokens(t_token *scanner);
 
 /* The lexical analysis function. */
 

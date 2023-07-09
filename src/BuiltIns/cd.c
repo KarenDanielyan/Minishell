@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 13:48:51 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 15:19:06 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
  * @param key 
  * @param value Use strdup before passing the argument.
  */
+
+static void	set_values(t_list *var_list, char *new_pwd, char *current_pwd);
+
 void	cd(t_wordl *wordl, t_list *var_list)
 {
 	char	*path;
@@ -42,8 +45,13 @@ void	cd(t_wordl *wordl, t_list *var_list)
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 		perror("getcwd()");
-	lst_set(var_list, "PWD", new_pwd);
-	lst_set(var_list, "OLDPWD", current_pwd);
+	set_values(var_list, new_pwd, current_pwd);
 	free(new_pwd);
 	free(current_pwd);
+}
+
+static void	set_values(t_list *var_list, char *new_pwd, char *current_pwd)
+{
+	lst_set(var_list, "PWD", new_pwd);
+	lst_set(var_list, "OLDPWD", current_pwd);
 }

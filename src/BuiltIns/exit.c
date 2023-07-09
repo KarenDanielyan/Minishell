@@ -6,16 +6,15 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/08 20:28:26 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 15:46:06 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lex.h"
 
-#define EINARG "minishell: exit: %s numeric argument required"
-
 static char	*check_size(char *num);
+static void	check_valid(t_wordl *wordl);
 
 void	my_exit(t_list *var_list, t_wordl *wordl)
 {
@@ -23,13 +22,7 @@ void	my_exit(t_list *var_list, t_wordl *wordl)
 	char		*siz;
 	char		*s;
 
-	if (!wordl->next)
-		exit(EXIT_SUCCESS);
-	if (wordl_size(wordl) > 2 && ft_isdigit(wordl->next->word->value[0]))
-	{
-		ft_dprintf(STDERR_FILENO, "Minishell: exit: too many arguments\n");
-		return ;
-	}
+	check_valid(wordl);
 	siz = check_size(wordl->next->word->value);
 	if (ft_strlen(siz) > 19)
 	{
@@ -65,4 +58,15 @@ static char	*check_size(char *num)
 			i++;
 	}
 	return (ft_strjoin(sign, (num + i)));
+}
+
+static void	check_valid(t_wordl *wordl)
+{
+	if (!wordl->next)
+		exit(EXIT_SUCCESS);
+	if (wordl_size(wordl) > 2 && ft_isdigit(wordl->next->word->value[0]))
+	{
+		ft_dprintf(STDERR_FILENO, "Minishell: exit: too many arguments\n");
+		return ;
+	}
 }

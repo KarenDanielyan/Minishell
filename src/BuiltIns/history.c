@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 14:30:44 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 20:29:59 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 15:02:12 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ void	history(t_wordl *wordl, t_list *var_list)
 	line = NULL;
 	if (wordl_size(wordl) > 1)
 	{
-		ft_dprintf(STDERR_FILENO,
-			"minishell: history: %s numeric argument required\n",
-			wordl->next->word->value);
+		ft_dprintf(STDERR_FILENO, "minishell: history: %s %s\n",
+			wordl->next->word->value, ERROR_HIS);
 		return ;
 	}
 	filename = lst_get_by_key(var_list, "HISTFILE")->value;
