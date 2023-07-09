@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 02:55:38 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 17:59:25 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 23:28:22 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	expand(t_control *ctl, t_node *self)
 	{
 		tilde_exp(self, ctl->var_list);
 		param_exp(self, ctl->var_list);
-		//field_splitting(self, ctl->var_list);
+		field_splitting(self, ctl->var_list);
 		//glob_exp(self);
 		quote_removal(self);
 	}
