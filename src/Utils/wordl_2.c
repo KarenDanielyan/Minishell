@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:02:25 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 01:23:06 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 03:04:10 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,16 @@ t_wordl	*wordl_find_prev(t_wordl *head, t_wordl *current)
 			head = head->next;
 	}
 	return (head);
+}
+
+t_wordl	*wordl_dup_one(t_wordl *node)
+{
+	t_wordl	*new;
+
+	new = (t_wordl *)malloc(sizeof(t_wordl));
+	if (!new)
+		return (NULL);
+	new->word = word_new(node->word->value, node->word->flags);
+	new->next = NULL;
+	return (new);
 }

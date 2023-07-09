@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 23:33:56 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/10 02:32:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,21 +181,22 @@ enum e_flags
 	W_TILDEEXP			= (1 << 3),
 	W_NOTILDE			= (1 << 4),
 	W_SPLIT				= (1 << 5),
-	W_ASSIGNMENT		= (1 << 6),
-	W_ASSIGNRHS			= (1 << 7),
-	W_ASSIGNLHS			= (1 << 8),
-	W_ASSIGNBLTIN		= (1 << 9),
-	W_NOASSNTILDE		= (1 << 10),
-	W_PARMEXP			= (1 << 11),
-	W_ASSIGNARG			= (1 << 12),
-	W_HASQUOTEDNULL		= (1 << 13),
-	W_SAWQUOTEDNULL		= (1 << 14),
-	W_NOBRACE			= (1 << 15),
-	W_COMPLETE			= (1 << 16),
-	W_CHKLOCAL			= (1 << 17),
-	W_FORCELOCAL		= (1 << 18),
-	W_SUBSHELL_PAREN	= (1 << 19),
-	W_SUBSHELL_PIPE		= (1 << 20)
+	W_FILEEXP			= (1 << 6),
+	W_ASSIGNMENT		= (1 << 7),
+	W_ASSIGNRHS			= (1 << 8),
+	W_ASSIGNLHS			= (1 << 9),
+	W_ASSIGNBLTIN		= (1 << 10),
+	W_NOASSNTILDE		= (1 << 11),
+	W_PARMEXP			= (1 << 12),
+	W_ASSIGNARG			= (1 << 13),
+	W_HASQUOTEDNULL		= (1 << 14),
+	W_SAWQUOTEDNULL		= (1 << 15),
+	W_NOBRACE			= (1 << 16),
+	W_COMPLETE			= (1 << 17),
+	W_CHKLOCAL			= (1 << 18),
+	W_FORCELOCAL		= (1 << 19),
+	W_SUBSHELL_PAREN	= (1 << 20),
+	W_SUBSHELL_PIPE		= (1 << 21)
 };
 
 typedef struct s_pipe
