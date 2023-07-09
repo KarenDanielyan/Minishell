@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/08 19:11:54 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 14:47:36 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ t_token	*lex(char *s);
 /* Parsing */
 void	drop(t_control *ctl, t_node *self);
 void	*parse(t_token	*scanner, t_list *var_list);
+
+/* Expansions */
+void	expand(t_control *ctl, t_node *self);
 
 /* Tree Visit Function */
 void	visit(t_control *ctl, t_node *self, \

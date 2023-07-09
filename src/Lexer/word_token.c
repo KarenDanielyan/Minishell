@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 22:57:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/05 23:34:28 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 21:21:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	check_flag_change(char c, int *flags, int *flag)
 	if (c == DOLLAR_SIGN)
 		*flag = *flag | W_HASDOLLAR | W_PARMEXP;
 	if (c == TILDE && !(*flag & (W_SQUOTE | W_DQUOTE)))
-		*flag = *flag | W_TILDEEXP;
+			*flag = *flag | W_TILDEEXP;
 	if (c == EQUALS && !(*flag & (W_SQUOTE | W_DQUOTE)))
 		*flag = *flag | W_ASSIGNMENT;
 }

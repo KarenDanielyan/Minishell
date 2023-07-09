@@ -6,13 +6,14 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 14:44:49 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 14:47:16 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include "lex.h"
 #include "minishell.h"
+#include "debug.h"
 
 static void	switch_case(t_list *var_list, char *str)
 {
@@ -65,6 +66,9 @@ void	true_loop(t_list *var_list, int fd)
 		ctl.tree = parse(ctl.scanner, ctl.var_list);
 		if (ctl.tree == NULL)
 			continue ;
+		//visit(&ctl, ctl.tree, expand);
+		printf("After expansion:\n");
+		print_tree(ctl.tree, "", 1);
 		switch_case(ctl.var_list, ctl.input);
 		visit(NULL, ctl.tree, drop);
 		free(ctl.input);

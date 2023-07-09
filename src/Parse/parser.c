@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 14:27:51 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 14:48:15 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*parse(t_token *scanner, t_list *var_list)
 	{
 		visit(NULL, node, check_syntax);
 		visit(NULL, node, drop);
-		lst_set(var_list, "?", "2");
+		lst_set(var_list, "?", SYNTAX_ERR);
 		node = NULL;
 	}
 	return ((void *)node);
