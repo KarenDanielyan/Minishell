@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 14:50:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 16:53:07 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ typedef enum e_type
  * @def W_DQUOTE			Is quoted with a double quote
  * @def W_TILDEEXP			Perform tilde expansion on this assignment word.
  * @def W_NOTILDE			Do not perform tilde expansion.
+ * @def W_SPLIT				Field splitting was performed on the word.
+ * @def W_FILEEXP			Filename expansion was performed on the word.
  * @def W_ASSIGNMENT		This word is a variable assignment.
  * @def W_ASSIGNRHS			Word is rhs of an assignment statement.
  * 							(NOTE: DEPRICATED)
@@ -169,21 +171,22 @@ enum e_flags
 	W_DQUOTE			= (1 << 2),
 	W_TILDEEXP			= (1 << 3),
 	W_NOTILDE			= (1 << 4),
-	W_ASSIGNMENT		= (1 << 5),
-	W_ASSIGNRHS			= (1 << 6),
-	W_ASSIGNLHS			= (1 << 7),
-	W_ASSIGNBLTIN		= (1 << 8),
-	W_NOASSNTILDE		= (1 << 9),
-	W_PARMEXP			= (1 << 10),
-	W_ASSIGNARG			= (1 << 11),
-	W_HASQUOTEDNULL		= (1 << 12),
-	W_SAWQUOTEDNULL		= (1 << 13),
-	W_NOBRACE			= (1 << 14),
-	W_COMPLETE			= (1 << 15),
-	W_CHKLOCAL			= (1 << 16),
-	W_FORCELOCAL		= (1 << 17),
-	W_SUBSHELL_PAREN	= (1 << 18),
-	W_SUBSHELL_PIPE		= (1 << 19)
+	W_SPLIT				= (1 << 5),
+	W_ASSIGNMENT		= (1 << 6),
+	W_ASSIGNRHS			= (1 << 7),
+	W_ASSIGNLHS			= (1 << 8),
+	W_ASSIGNBLTIN		= (1 << 9),
+	W_NOASSNTILDE		= (1 << 10),
+	W_PARMEXP			= (1 << 11),
+	W_ASSIGNARG			= (1 << 12),
+	W_HASQUOTEDNULL		= (1 << 13),
+	W_SAWQUOTEDNULL		= (1 << 14),
+	W_NOBRACE			= (1 << 15),
+	W_COMPLETE			= (1 << 16),
+	W_CHKLOCAL			= (1 << 17),
+	W_FORCELOCAL		= (1 << 18),
+	W_SUBSHELL_PAREN	= (1 << 19),
+	W_SUBSHELL_PIPE		= (1 << 20)
 };
 
 typedef struct s_pipe
