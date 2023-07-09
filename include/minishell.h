@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 14:47:36 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 19:55:41 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	mode_init(int ac, char **av);
 char	*get_line(t_list *var_list, int fd);
 
 /* Lexical Analysis */
-t_token	*lex(char *s);
+t_token	*lex(char *s,t_list *var_list);
 
 /* Parsing */
 void	drop(t_control *ctl, t_node *self);

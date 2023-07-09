@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:47:20 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 18:51:17 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 22:42:51 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@ void	unset(t_list **var_list, t_wordl *wordl)
 		if (is_name(temp->word->value))
 		{
 			delete = lst_get_by_key(*var_list, temp->word->value);
-			if (delete->type != PRIVATE)
+			if (delete && delete->type != PRIVATE)
 				lst_pop(var_list, delete);
 		}
 		else
+		{
 			ft_dprintf(2, ERR_UNSET, temp->word->value);
+			lst_set(*var_list, ECODE, "1");
+		}
 		temp = temp->next;
 	}
 }

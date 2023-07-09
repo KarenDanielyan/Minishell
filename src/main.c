@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 17:57:29 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 19:55:21 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	true_loop(t_list *var_list, int fd)
 		ctl.input = get_line(ctl.var_list, fd);
 		if (!ctl.input)
 			continue ;
-		ctl.scanner = lex(ctl.input);
+		ctl.scanner = lex(ctl.input, var_list);
 		if (ctl.scanner == NULL)
 			continue ;
 		ctl.tree = parse(ctl.scanner, ctl.var_list);

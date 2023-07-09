@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:09:13 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 14:52:26 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 19:56:34 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		check_tokens(t_token *scanner);
 
 /* The lexical analysis function. */
 
-t_token	*lex(char *str);
+t_token	*lex(char *str, t_list *var_list);
 t_wordl	*get_next_token(char const *str, int *type);
 
 t_wordl	*get_operator_token(char **s, int *flags, int *type);

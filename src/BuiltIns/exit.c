@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 15:46:06 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 23:31:36 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	my_exit(t_list *var_list, t_wordl *wordl)
 		ft_dprintf(STDERR_FILENO, EINARG, wordl->next->word->value);
 		exit(EXIT_FAILURE);
 	}
-	lst_set(var_list, "?", ft_itoa(rv % 256));
 	exit(rv % 256);
 }
 

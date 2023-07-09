@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 15:27:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 14:44:00 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 20:09:48 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	check_flag(t_token *tokens, t_wordl *word);
 
-t_token	*lex(char *s)
+t_token	*lex(char *s, t_list *var_list)
 {
 	t_token	*tokens;
 	t_wordl	*wordl;
@@ -38,6 +38,7 @@ t_token	*lex(char *s)
 	{
 		while(tokens)
 			tok_pop(&(tokens));
+		lst_set(var_list, ECODE, SYNTAX_ERR);
 	}
 	return (tokens);
 }

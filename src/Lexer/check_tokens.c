@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:40:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 14:44:12 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 19:55:00 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	check_tokens(t_token *scanner)
 		{
 			if (!check_quotes(temp->wordl))
 				return (1);
-			
 		}
 		temp = temp->next;
 	}
