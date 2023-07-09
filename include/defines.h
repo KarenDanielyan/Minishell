@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 16:53:07 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 17:57:15 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 # include <stddef.h>
 # include <stdint.h>
 
+# define EINARG "minishell: exit: %s numeric argument required"
 # define ERROR_MSG "minishell: syntax error near unexpected token `"
 # define ERROR_EOL "minishell: syntax error: unexpected end of line."
-# define ERROR_QUOTES "minishell: syntax error: quotes are not closed."
-# define ERROR_PAREN "minishell: syntax error: parenthesis are not closed."
+# define ERROR_QUOTES "minishell: unexpected EOL while looking for matching `"
+# define ERROR_HIS "numeric argument required"
 
 # define TILDE_VAR "TILDE"
 # define HISTFILE "/.minishell_history"
@@ -49,6 +50,7 @@
 # define DOLLAR_SIGN '$'
 # define USCORE '_'
 # define SQUOTE '\''
+# define SQUOTE_S "\'"
 # define DQUOTE '\"'
 # define DQUOTE_S "\""
 
@@ -232,7 +234,6 @@ typedef struct s_token
 }	t_token;
 
 /* ****** Defines for syntax analysis and parsing ****** */
-
 typedef struct s_Node			t_node;
 typedef struct s_NodeList		t_nodel;
 typedef struct s_ListNode		t_lnode;

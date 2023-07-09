@@ -43,7 +43,7 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
 				word_lists.c operator_token.c \
 				word_token.c lex.c \
-				get_next_token.c) \
+				get_next_token.c check_tokens.c) \
 				$(patsubst %.c, $(SRC)/Parse/%.c,\
 				parser.c parse_functions.c \
 				node_list.c parse_functions_2.c \
@@ -52,7 +52,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				constructors_3.c error.c drop.c \
 				check_syntax.c) \
 				$(patsubst %.c, $(SRC)/Expansions/%.c,\
-				expand.c tilde_expand.c parm_exp.c)
+				expand.c tilde_expand.c parm_exp.c \
+				quote_removal.c)
 
 
 OBJS		=	$(foreach dir, $(SUBDIRS), \
@@ -66,7 +67,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -g3  -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror #-g3  -fsanitize=address
 
 INVOKE		=	libft printf
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 21:40:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 15:30:11 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_list	*env_init(char **env)
 	}
 	hist = ft_strjoin("TILDE=", getenv("HOME"));
 	lst_push_back(&var_list, lst_new(PRIVATE, hist));
-	lst_push_back(&var_list, lst_new(SHELL, ft_strdup("?=0")));
+	lst_push_back(&var_list, lst_new(PRIVATE, ft_strdup("?=0")));
 	lst_push_back(&var_list, lst_new(SHELL, ft_strdup(IFS)));
 	lst_push_back(&var_list, lst_new(SHELL, ft_strdup(PS1)));
 	lst_push_back(&var_list, lst_new(SHELL, ft_strdup(PS2)));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 15:27:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/05 15:18:24 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 14:44:00 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ t_token	*lex(char *s)
 		tok_push(&tokens, wordl, type);
 	}
 	print_tokens(tokens);
+	if (check_tokens(tokens))
+	{
+		while(tokens)
+			tok_pop(&(tokens));
+	}
 	return (tokens);
 }
 
