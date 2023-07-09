@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 17:57:15 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 18:51:02 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define ERROR_EOL "minishell: syntax error: unexpected end of line."
 # define ERROR_QUOTES "minishell: unexpected EOL while looking for matching `"
 # define ERROR_HIS "numeric argument required"
+
+# define ERR_UNSET "unset: %s: invalid parameter name\n"
 
 # define TILDE_VAR "TILDE"
 # define HISTFILE "/.minishell_history"
