@@ -51,8 +51,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				constructors.c constructors_2.c \
 				constructors_3.c error.c drop.c \
 				check_syntax.c) \
-				$(patsubst %.c, $(SRC)/Expansions/%.c,\
-				expand.c tilde_expand.c)
+				# $(patsubst %.c, $(SRC)/Expansions/%.c,\
+				# expand.c tilde_expand.c)
 
 
 OBJS		=	$(foreach dir, $(SUBDIRS), \

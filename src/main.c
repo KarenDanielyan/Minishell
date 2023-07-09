@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/08 21:20:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 00:45:34 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	true_loop(t_list *var_list, int fd)
 		ctl.tree = parse(ctl.scanner, ctl.var_list);
 		if (ctl.tree == NULL)
 			continue ;
-		visit(&ctl, ctl.tree, expand);
+		//visit(&ctl, ctl.tree, expand);
 		printf("After expansion:\n");
 		print_tree(ctl.tree, "", 1);
 		switch_case(ctl.var_list, ctl.input);

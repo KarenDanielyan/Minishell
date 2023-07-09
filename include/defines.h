@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 00:24:34 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 01:08:17 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@
 
 /* Special Symbols */
 # define TILDE '~'
+# define CURL_BRACE_L '{'
+# define CURL_BRACE_R '}'
 
 /* Platform Specific Defines */
 # ifdef __linux__
