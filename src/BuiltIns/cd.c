@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/07 22:25:04 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 13:48:51 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  */
 void	cd(t_wordl *wordl, t_list *var_list)
 {
-	char 	*path;
+	char	*path;
 	char	*current_pwd;
 	char	*new_pwd;
 
@@ -44,4 +44,6 @@ void	cd(t_wordl *wordl, t_list *var_list)
 		perror("getcwd()");
 	lst_set(var_list, "PWD", new_pwd);
 	lst_set(var_list, "OLDPWD", current_pwd);
+	free(new_pwd);
+	free(current_pwd);
 }

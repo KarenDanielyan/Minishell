@@ -6,18 +6,18 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/05 20:33:42 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/08 20:30:16 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lex.h"
 
-void ft_sort(char **env)
+void	ft_sort(char **env)
 {
-	int len;
-	int i;
-	int j;
+	int	len;
+	int	i;
+	int	j;
 
 	len = ft_strlen_2d((const char **)env);
 	i = 0;
@@ -27,18 +27,18 @@ void ft_sort(char **env)
 		while (j < len)
 		{
 			if (ft_strcmp(env[i], env[j]) > 0)
-				ft_swap((void **)&env[i],(void **)&env[j]);
+				ft_swap((void **)&env[i], (void **)&env[j]);
 			j++;
 		}
 		i++;
 	}
 }
 
-void ft_default(char **env, t_list *var_list)
+void	ft_default(char **env, t_list *var_list)
 {
 	int		i;
 	t_list	*tmp;
-	
+
 	i = 0;
 	ft_sort(env);
 	while (env[i])
@@ -48,7 +48,7 @@ void ft_default(char **env, t_list *var_list)
 		if (ft_strchr(tmp->joined, EQUALS))
 		{
 			printf("=\"");
-			if(tmp->value)
+			if (tmp->value)
 				printf("%s", tmp->value);
 			printf("\"");
 		}
@@ -57,11 +57,11 @@ void ft_default(char **env, t_list *var_list)
 	}
 }
 
-void export(t_list *var_list, t_wordl* args)
+void	export(t_list *var_list, t_wordl *args)
 {
 	char	**split;
 	char	**env;
-	t_wordl *temp;
+	t_wordl	*temp;
 
 	temp = args->next;
 	env = get_env_key(var_list);

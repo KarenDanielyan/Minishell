@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 20:22:03 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/06/28 17:19:47 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/08 20:28:15 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	echo(t_wordl *wordl)
 	int		flag;
 	char	*word;
 	t_wordl	*temp;
-	
+
 	word = NULL;
 	temp = NULL;
 	if (wordl->next)

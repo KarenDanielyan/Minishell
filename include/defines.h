@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 15:30:44 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 14:22:38 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 
 # define ERROR_MSG "minishell: syntax error near unexpected token `"
 # define ERROR_EOL "minishell: syntax error: unexpected end of line."
-# define ERROR_QUOTES "minishell: syntax error: quotes are not closed."
-# define ERROR_PAREN "minishell: syntax error: parenthesis are not closed."
+# define ERROR_QUOTES "minishell: unexpected EOL while looking for matching `"
 
 # define HISTFILE "/.minishell_history"
 # define IFS "IFS= \t\n"

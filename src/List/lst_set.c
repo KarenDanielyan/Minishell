@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:37:46 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/05 16:51:42 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 13:47:29 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	lst_set(t_list *var_list, char *key, char *value)
 	{
 		free(i->value);
 		free(i->joined);
-		i->value = value;
+		i->value = ft_strdup(value);
 		i->joined = ft_strjoin(tmp, value);
 	}
 	free(tmp);

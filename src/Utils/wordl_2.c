@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:02:25 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 19:11:13 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:18:37 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	wordl_size(t_wordl *head)
 	}
 	return (i);
 }
-
 
 /**
  * @brief	wordl_join() allocates and return a word,

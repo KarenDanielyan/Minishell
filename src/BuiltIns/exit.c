@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/04 21:09:05 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/08 20:28:26 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	my_exit(t_list *var_list, t_wordl *wordl)
 		ft_dprintf(STDERR_FILENO, EINARG, wordl->next->word->value);
 		exit(1);
 	}
-	rv = ft_atul(wordl->next->word->value); 
+	rv = ft_atul(wordl->next->word->value);
 	s = ft_itul(rv);
 	if (ft_strcmp(s, siz) != 0)
 	{
