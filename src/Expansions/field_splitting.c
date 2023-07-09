@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:25:50 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 01:22:55 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 02:03:19 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ void	field_splitting(t_node *node, t_list *var_list)
 		else
 			node->value.word = current;
 		if (before_replace != current)
-		{
-			before_replace = wordl_last(current);
-			before_replace->next = next;
-		}
+			wordl_last(current)->next = next;
 		current = next;
 	}
 }
