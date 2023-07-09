@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 23:31:36 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/09 23:36:58 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "lex.h"
 
 static char	*check_size(char *num);
-static void	check_valid(t_wordl *wordl);
+static void	check_valid(t_wordl *wordl, t_list *var_list);
 
 void	my_exit(t_list *var_list, t_wordl *wordl)
 {
@@ -22,7 +22,7 @@ void	my_exit(t_list *var_list, t_wordl *wordl)
 	char		*siz;
 	char		*s;
 
-	check_valid(wordl);
+	check_valid(wordl, var_list);
 	siz = check_size(wordl->next->word->value);
 	if (ft_strlen(siz) > 19)
 	{
@@ -59,13 +59,14 @@ static char	*check_size(char *num)
 	return (ft_strjoin(sign, (num + i)));
 }
 
-static void	check_valid(t_wordl *wordl)
+static void	check_valid(t_wordl *wordl, t_list *var_list)
 {
 	if (!wordl->next)
 		exit(EXIT_SUCCESS);
 	if (wordl_size(wordl) > 2 && ft_isdigit(wordl->next->word->value[0]))
 	{
 		ft_dprintf(STDERR_FILENO, "Minishell: exit: too many arguments\n");
+		lst_set(var_list, ECODE, "1");
 		return ;
 	}
 }
