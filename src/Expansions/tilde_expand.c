@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 20:24:49 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 21:39:17 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 15:35:43 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 /**
  * @brief	tilde_expand() performs tilde-expansion on the word.
- * 			This is overly simplified version on tilde expansion,
+ * 			This is overly simplified version of tilde expansion,
  * 			as most of the functions needed to properly implement
  * 			this feature are forbidden.
  * 			In our version, we only look in duplicated version of

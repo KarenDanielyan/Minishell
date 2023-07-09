@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 01:08:17 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/09 14:50:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define QUOTES "\'\""
 
 /* Terminal Symbols */
+# define SYMBS "=<>|()&\'\"$"
 # define EQUALS '='
 # define PIPE_OP '|'
 # define LESS '<'
