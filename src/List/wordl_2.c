@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:02:25 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 03:04:10 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:05:46 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,24 @@ t_wordl	*wordl_dup_one(t_wordl *node)
 {
 	t_wordl	*new;
 
-	new = (t_wordl *)malloc(sizeof(t_wordl));
-	if (!new)
-		return (NULL);
-	new->word = word_new(node->word->value, node->word->flags);
-	new->next = NULL;
+	new = NULL;
+	if (node)
+		new = wordl_new(word_new(node->word->value, node->word->flags));
+	return (new);
+}
+
+t_wordl	*wordl_dup(t_wordl *head)
+{
+	t_wordl	*new;
+
+	new = NULL;
+	while (head)
+	{
+		if (new)
+			wordl_last(new)->next = wordl_dup_one(head);
+		else
+			new = wordl_dup_one(head);
+		head = head ->next;
+	}
 	return (new);
 }

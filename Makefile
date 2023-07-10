@@ -29,7 +29,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/List/%.c,\
 				lst_clear.c lst_get.c lst_last.c \
 				lst_new.c lst_pop.c lst_push.c \
-				lst_set.c lst_size.c) \
+				lst_set.c lst_size.c \
+				wordl.c wordl_2.c wordl_3.c) \
 				$(patsubst %.c, $(SRC)/BuiltIns/%.c,\
 				history.c env.c pwd.c cd.c unset.c \
 				echo.c exit.c export.c) \
@@ -38,8 +39,7 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				input.c ) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
 				get_env.c print_logo.c is_token.c \
-				wordl.c wordl_2.c var_asign.c \
-				visit.c) \
+				var_asign.c visit.c) \
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
 				word_lists.c operator_token.c \
 				word_token.c lex.c \
