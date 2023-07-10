@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/10 14:36:38 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/10 21:19:03 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,24 @@
 #include <stdio.h>
 
 void	glob_exp(t_node *node)
-{
-	(void)node;
-	// char **split;
-	// t_wordl *args;
-	// struct dirent *temp;
+{	DIR *dir;
+	char **split;
+	char *str;
+	t_wordl *args;
+	struct dirent *temp;
+	str = "";
 	
-	// dir = opendir(".");
-	// split = ft_split(node->value.word->word->value);
-	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%s\n",node->value.word->word->value);
-	// while ((temp = readdir(dir)) != NULL) 
-    //     printf("%s\n", temp->d_name);
+	args =  node->value.word;
+	while ()
+	{
+		
+	}
+	
+	// str 
+	// while ((temp = readdir(dir)) != NULL)
+	// 
+	// temp = readdir(dir);
+	// temp = readdir(dir);
+	// temp = readdir(dir);
+        printf("%s\n", temp->d_name);
 }
