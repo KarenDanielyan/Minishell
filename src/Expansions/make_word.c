@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 02:15:33 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 16:51:29 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:40:46 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,12 @@ static t_wordl	*get_sublist(t_wordl *head, t_wordl **next)
 		*next = head->next;
 	else
 		*next = NULL;
-	tmp = wordl_sublist(tmp, wordl_find_prev(tmp, from));
-	(wordl_last(tmp))->next = wordl_join_free(wordl_sublist(from, to));
+	if (tmp != from)
+	{
+		tmp = wordl_sublist(tmp, wordl_find_prev(tmp, from));
+		(wordl_last(tmp))->next = wordl_join_free(wordl_sublist(from, to));
+	}
+	else
+		tmp = wordl_join_free(wordl_sublist(from, to));
 	return (tmp);
 }

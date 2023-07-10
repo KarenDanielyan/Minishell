@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 00:28:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 23:27:35 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:07:03 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ static void	replace(t_word *word, char *dollar_loc, char *replace_with, int len)
 	temp = ft_strjoin_free(temp, (dollar_loc + len));
 	free(word->value);
 	word->value = temp;
+	word->flags = word->flags | W_PARMEXP;
 }

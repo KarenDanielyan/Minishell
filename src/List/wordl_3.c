@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:24:45 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 17:33:14 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:54:44 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,18 @@ t_wordl	*wordl_sublist(t_wordl *from, t_wordl *to)
 	t_wordl	*new;
 
 	new = NULL;
-	while (1)
+	if (from)
 	{
-		if (new)
-			wordl_last(new)->next = wordl_dup_one(from);
-		else
-			new = wordl_dup_one(from);
-		if (from == to)
-			break ;
-		from = from->next;
+		while (1)
+		{
+			if (new)
+				wordl_last(new)->next = wordl_dup_one(from);
+			else
+				new = wordl_dup_one(from);
+			if (from == to)
+				break ;
+			from = from->next;
+		}
 	}
 	return (new);
 }
@@ -49,8 +52,14 @@ t_wordl	*wordl_sublist(t_wordl *from, t_wordl *to)
 t_wordl	*wordl_join_free(t_wordl *list)
 {
 	t_word	*word;
+	t_wordl	*new;
 
-	word = wordl_join(list);
-	wordl_clear(list);
-	return (wordl_new(word));
+	new = NULL;
+	if (list)
+	{
+		word = wordl_join(list);
+		wordl_clear(list);
+		new = wordl_new(word);
+	}
+	return (new);
 }
