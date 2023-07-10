@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 02:15:33 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 21:17:11 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/10 21:23:05 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,20 @@ t_wordl	*make_word(t_wordl *head)
 	return (new_list);
 }
 
+/**
+ * @brief	get_sublist() will find from/until where we should start joining,
+ * 			It will then create a list that contains non-joined nodes with 
+ * 			joinded node at the end.
+ * 
+ * @param head 
+ * @param next 
+ * @return t_wordl* 
+ */
 static t_wordl	*get_sublist(t_wordl *head, t_wordl **next)
 {
 	t_wordl	*from;
-	t_wordl	*to;
 	t_wordl	*tmp;
+	t_wordl	*to;
 
 	tmp = head;
 	while (head && (head->word->flags & (W_SPLIT | W_FILEEXP)))
@@ -64,7 +73,12 @@ static t_wordl	*get_sublist(t_wordl *head, t_wordl **next)
 		*next = head->next;
 	else
 		*next = NULL;
-	tmp = wordl_sublist(tmp, wordl_find_prev(tmp, from));
-	(wordl_last(tmp))->next = wordl_join_free(wordl_sublist(from, to));
+	if (tmp != from)
+	{
+		tmp = wordl_sublist(tmp, wordl_find_prev(tmp, from));
+		(wordl_last(tmp))->next = wordl_join_free(wordl_sublist(from, to));
+	}
+	else
+		tmp = wordl_join_free(wordl_sublist(from, to));
 	return (tmp);
 }

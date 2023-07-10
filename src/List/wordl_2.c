@@ -6,13 +6,19 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:02:25 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 14:05:46 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 16:54:17 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include <libft.h>
 
+/**
+ * @brief	wordl_size() returns the number of elements
+ * 			inside the word list.
+ * 
+ * @param head	Pointer to the first element of the list.
+ */
 int	wordl_size(t_wordl *head)
 {
 	int	i;
@@ -50,6 +56,15 @@ t_word	*wordl_join(t_wordl *wordl)
 	return (word);
 }
 
+/**
+ * @brief	wordl_fing_prev() return a previous node of the current node.
+ * 			if the current node if the head of the list,
+ * 			It will return NULL.
+ * 
+ * @param head 
+ * @param current 
+ * @return t_wordl* 
+ */
 t_wordl	*wordl_find_prev(t_wordl *head, t_wordl *current)
 {
 	if (head)
@@ -60,6 +75,13 @@ t_wordl	*wordl_find_prev(t_wordl *head, t_wordl *current)
 	return (head);
 }
 
+/**
+ * @brief	wordl_dup_one() duplicates word list node node, 
+ * 			without the references to the next node in the list.
+ * 
+ * @param node 
+ * @return t_wordl* 
+ */
 t_wordl	*wordl_dup_one(t_wordl *node)
 {
 	t_wordl	*new;
@@ -70,6 +92,13 @@ t_wordl	*wordl_dup_one(t_wordl *node)
 	return (new);
 }
 
+/**
+ * @brief	wordl_dup() duplicates word list pointed by head, and
+ * 			returns it. If malloc fails, it will return (NULL);
+ * 
+ * @param head 
+ * @return t_wordl* 
+ */
 t_wordl	*wordl_dup(t_wordl *head)
 {
 	t_wordl	*new;
