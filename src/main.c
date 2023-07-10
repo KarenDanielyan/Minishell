@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/10 21:09:27 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/11 00:32:50 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,16 @@ void	true_loop(t_list *var_list, int fd)
 			continue ;
 		ctl.scanner = lex(ctl.input, var_list);
 		if (ctl.scanner == NULL)
+		{
+			free(ctl.input);
 			continue ;
+		}
 		ctl.tree = parse(ctl.scanner, ctl.var_list);
 		if (ctl.tree == NULL)
+		{
+			free(ctl.input);
 			continue ;
+		}
 		visit(&ctl, ctl.tree, expand);
 		visit(NULL, ctl.tree, preprocess);
 		printf("After expansion:\n");

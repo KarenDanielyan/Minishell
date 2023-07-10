@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 20:48:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 21:10:53 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 23:55:46 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void	cleanup_helper(t_node *self)
 	if (wordl_size(word->value.word) != 1)
 	{
 		new_head = new_node_list(new_word_node(word->value.word->next));
-		new_head->node->is_last = 0;
+		if (suffix->value.suffix)
+			new_head->node->is_last = 0;
 		word->value.word->next = NULL;
 		new_head->next = suffix->value.suffix;
 		suffix->value.suffix = new_head;

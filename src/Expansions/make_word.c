@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 02:15:33 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 22:28:57 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/11 00:25:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 #include "expand.h"
 #include <libft.h>
 
+static int		is_join_required(t_wordl *head);
+static t_wordl	*get_joined_word(t_wordl *head);
 static t_wordl	*get_sublist(t_wordl *head, t_wordl **next);
+static void		get_dimensions(t_wordl *head, t_wordl **from, \
+	t_wordl **to, t_wordl **next);
 
 /**
  * @brief	As in our implementation each word is represented
@@ -26,25 +30,53 @@ static t_wordl	*get_sublist(t_wordl *head, t_wordl **next);
 */
 t_wordl	*make_word(t_wordl *head)
 {
-	t_wordl	*tmp;
-	t_wordl	*next;
-	t_wordl	*sub_list;
 	t_wordl	*new_list;
 
-	tmp = head;
+	if (is_join_required(head))
+	{
+		new_list = get_joined_word(head);
+		wordl_clear(head);
+	}
+	else
+		new_list = head;
+	return (new_list);
+}
+
+static int	is_join_required(t_wordl *head)
+{
+	while (head)
+	{
+		if (!(head->word->flags & (W_SPLIT | W_FILEEXP)))
+			break ;
+		head = head->next;
+	}
+	if (head)
+		return (1);
+	return (0);
+}
+
+/**
+ * @brief	get_joined_word() will return a version of the
+ * 			list that has the appropriate fields joined together.
+*/
+static t_wordl	*get_joined_word(t_wordl *head)
+{
+	t_wordl	*sub_list;
+	t_wordl	*next;
+	t_wordl	*new;
+
+	new = NULL;
 	next = NULL;
-	new_list = NULL;
-	while (tmp)
+	while (head)
 	{
 		sub_list = get_sublist(head, &next);
-		if (new_list)
-			wordl_last(new_list)->next = sub_list;
+		if (new)
+			wordl_last(new)->next = sub_list;
 		else
-			new_list = sub_list;
-		tmp = next;
+			new = sub_list;
+		head = next;
 	}
-	wordl_clear(head);
-	return (new_list);
+	return (new);
 }
 
 /**
@@ -58,27 +90,38 @@ t_wordl	*make_word(t_wordl *head)
  */
 static t_wordl	*get_sublist(t_wordl *head, t_wordl **next)
 {
+	t_wordl	*sublist;
 	t_wordl	*from;
-	t_wordl	*tmp;
 	t_wordl	*to;
+
+	sublist = NULL;
+	get_dimensions(head, &from, &to, next);
+	if (head != from)
+		sublist = wordl_sublist(head, wordl_find_prev(head, from));
+	if (sublist)
+		(wordl_last(sublist))->next = wordl_join_free(wordl_sublist(from, to));
+	else
+		sublist = wordl_join_free(wordl_sublist(from, to));
+	return (sublist);
+}
+
+static void	get_dimensions(t_wordl *head, t_wordl **from, \
+	t_wordl **to, t_wordl **next)
+{
+	t_wordl	*tmp;
 
 	tmp = head;
 	while (head && (head->word->flags & (W_SPLIT | W_FILEEXP)))
 		head = head->next;
-	from = wordl_find_prev(tmp, head);
+	if (tmp != head)
+		*from = wordl_find_prev(tmp, head);
+	else
+		*from = head;
 	while (head && !(head->word->flags & (W_SPLIT | W_FILEEXP)))
 		head = head->next;
-	to = head;
+	*to = head;
 	if (head)
 		*next = head->next;
 	else
 		*next = NULL;
-	if (from)
-	{
-		tmp = wordl_sublist(tmp, wordl_find_prev(tmp, from));
-		(wordl_last(tmp))->next = wordl_join_free(wordl_sublist(from, to));
-	}
-	else
-		tmp = wordl_join_free(wordl_sublist(tmp, to));
-	return (tmp);
 }
