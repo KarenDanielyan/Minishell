@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 20:48:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 23:55:46 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/11 02:38:58 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <libft.h>
 
 static void	cleanup_helper(t_node *self);
+static void	empty_cmd_handler(t_node *self);
 
 /**
  * @brief		Preprocessor module is responsible for moving the multiple
@@ -32,8 +33,30 @@ void	preprocess(t_control *ctl, t_node *self)
 {
 	(void)ctl;
 	if (self->type == SimpleCommandNode)
+	{
 		cleanup_helper(self);
+		empty_cmd_handler(self);
+	}
 	return ;
+}
+
+static void	empty_cmd_handler(t_node *self)
+{
+	t_wordl	*word;
+	t_nodel	*suffix;
+
+	word = self->value.s_cmd.word->value.word;
+	suffix = self->value.s_cmd.suffix->value.suffix;
+	if (!word && suffix)
+	{
+		while (suffix && suffix->node->type != WordNode)
+			suffix = suffix->next;
+		if (suffix->node->value.word)
+		{
+			self->value.s_cmd.word->value.word = suffix->node->value.word;
+			suffix->node->value.word = (suffix->node->value.word)->next;
+		}
+	}
 }
 
 static void	cleanup_helper(t_node *self)
@@ -44,7 +67,7 @@ static void	cleanup_helper(t_node *self)
 
 	word = self->value.s_cmd.word;
 	suffix = self->value.s_cmd.suffix;
-	if (wordl_size(word->value.word) != 1)
+	if (word->value.word && wordl_size(word->value.word) != 1)
 	{
 		new_head = new_node_list(new_word_node(word->value.word->next));
 		if (suffix->value.suffix)
