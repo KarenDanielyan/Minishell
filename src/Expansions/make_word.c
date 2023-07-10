@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 02:15:33 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 16:26:03 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 16:51:29 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,20 @@ t_wordl	*make_word(t_wordl *head)
 	return (new_list);
 }
 
+/**
+ * @brief	get_sublist() will find from/until where we should start joining,
+ * 			It will then create a list that contains non-joined nodes with 
+ * 			joinded node at the end.
+ * 
+ * @param head 
+ * @param next 
+ * @return t_wordl* 
+ */
 static t_wordl	*get_sublist(t_wordl *head, t_wordl **next)
 {
 	t_wordl	*from;
-	t_wordl	*to;
 	t_wordl	*tmp;
+	t_wordl	*to;
 
 	tmp = head;
 	while (head && (head->word->flags & (W_SPLIT | W_FILEEXP)))
