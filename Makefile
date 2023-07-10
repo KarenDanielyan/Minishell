@@ -13,7 +13,8 @@ BUILD		=	./build
 SRC			=	./src
 
 SUBDIRS		=	BuiltIns Debug Expansions \
-				Init Lexer List Parse Utils
+				Init Lexer List Parse Utils \
+				Preprocessor
 
 DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 				debug.h defines.h list.h \
@@ -53,7 +54,10 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				check_syntax.c) \
 				$(patsubst %.c, $(SRC)/Expansions/%.c,\
 				expand.c tilde_expand.c parm_exp.c \
-				quote_removal.c field_splitting.c make_word.c) \
+				quote_removal.c field_splitting.c \
+				make_word.c) \
+				$(patsubst %.c, $(SRC)/Preprocessor/%.c,\
+				cleanup.c) \
 				# glob_exp.c)
 
 
@@ -68,7 +72,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
 INVOKE		=	libft printf
 
