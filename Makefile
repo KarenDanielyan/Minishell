@@ -57,8 +57,7 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				quote_removal.c field_splitting.c \
 				make_word.c) \
 				$(patsubst %.c, $(SRC)/Preprocessor/%.c,\
-				cleanup.c) \
-				# glob_exp.c)
+				cleanup.c glob_exp.c) \
 
 
 OBJS		=	$(foreach dir, $(SUBDIRS), \

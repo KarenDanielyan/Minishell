@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:40:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 19:55:00 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/11 19:38:54 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static int	check_quotes(t_wordl *args)
 				ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, DQUOTE);
 				return (0);
 			}
+			args = args->next;
 		}
 		if (ft_strchr(args->word->value, SQUOTE))
 		{
@@ -55,8 +56,10 @@ static int	check_quotes(t_wordl *args)
 				ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, SQUOTE);
 				return (0);
 			}
+			args = args->next;
 		}
-		args = args->next;
+		else
+			args = args->next;
 	}
 	return (1);
 }
