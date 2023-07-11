@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/11 18:09:52 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/11 23:14:16 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,81 @@
 #include <dirent.h>
 #include <stdio.h>
 
-int if_pattern_in_couts(t_wordl *args)
-{
-	int flag;
+static void	replace(t_wordl *head, t_wordl *to_replace, t_wordl *replace_with);
+static int	is_glob_required(t_wordl *head);
+static void	quote_remove(t_word *word);
+static t_wordl	*apply(t_word *args);
 
-	flag = 0;
+/**
+ * @brief		glob_exp() performes filename expansion on the provided word.
+ * 				This is very simplistic implementation of shell 
+ * 				filename expansion. It only performs it on current working
+ * 				directory.
+ * 				The only pattern supported is `*` <asterisk>, which matches 
+ * 				any string, including the null string.
+ *
+ * @param node	The node on which the filename expansion is applied.
+ */
+void	glob_exp(t_node *node)
+{
+	t_wordl	*args;
+	t_wordl	*temp;
+	t_wordl	*head;
+
+	args =  wordl_dup(node->value.word);
+	args = make_word(args);
+	head = args;
 	while (args)
 	{
-		if(ft_strchr(args->word->value, '*'))
+		if (is_glob_required(args)) 
 		{
-			flag = 1;
-			if ((args->word->flags & W_DQUOTE) || (args->word->flags & W_SQUOTE))
-				return(0);
+			quote_removal(args->word);
+			temp = apply(args->word);
+			replace(head, args, temp);
 		}
 		args = args->next;
 	}
-	if (!flag)
-		return (0);
-	return (1);
+	wordl_clear(node->value.word);
+	node->value.word = head;
 }
 
-void	glob_exp(t_node *node)
+/**
+ * @brief		is_glob_required() will check whether filename expansion
+ * 				is required on the provided word.
+ * 
+ * 
+ * @param head	The word node we check.
+ * @return int	Returns 1 if filename expansion should be applied,
+ * 				0 otherwise.
+ */
+static int	is_glob_required(t_wordl *head)
 {
-	// DIR *dir;
-	// char **split;
-	char *str;
-	t_wordl *args;
-	// struct dirent *temp;
-	str = "";
-	
-	args =  node->value.word;
-	if (!if_pattern_in_couts(args))
-		return ;
-	while (args)
+	int		quote_lvl;
+	char	*s;
+
+	s = head->word->value;
+	quote_lvl = 0;
+	while (s)
 	{
-		
+		if (*s == SQUOTE && !(quote_lvl & W_DQUOTE))
+			quote_lvl = quote_lvl ˆ W_SQUOTE;
+		if (*s == DQUOTE && !(quote_lvl & W_SQUOTE))
+			quote_lvl = quote_lvl ˆ W_DQUOTE;
+		if (*s == WILDCARD && !quote_lvl)
+			return (1);
+		s++;
+	}
+	return (0);
+}
+
+static t_wordl *apply(t_wordl *args)
+{
+	char *str;
+
+	while (1)
+	{
+		if (str == NULL)
+			break;
 	}
 	
-	// str 
-	// while ((temp = readdir(dir)) != NULL)
-	// 
-	// temp = readdir(dir);
-	// temp = readdir(dir);
-	// temp = readdir(dir);
-        // printf("%s\n", temp->d_name);
 }
