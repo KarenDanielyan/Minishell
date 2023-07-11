@@ -97,7 +97,9 @@
     "memory": "c",
     "tuple": "c",
     "type_traits": "c",
-    "vector": "c"
+    "vector": "c",
+    "dirent.h": "c",
+    "__config": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

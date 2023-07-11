@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 02:55:38 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 21:22:58 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:44:41 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	expand(t_control *ctl, t_node *self)
 		field_splitting(self, ctl->var_list);
 		glob_exp(self);
 		quote_removal(self);
-		// self->value.word = make_word(self->value.word);
+		self->value.word = make_word(self->value.word);
 	}
 	return ;
 }
