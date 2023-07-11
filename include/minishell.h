@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/10 21:09:18 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/12 02:51:44 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	mode_init(int ac, char **av);
 char	*get_line(t_list *var_list, int fd);
 
 /* Lexical Analysis */
-t_token	*lex(char *s,t_list *var_list);
+t_token	*lex(char *s, t_list *var_list);
 
 /* Parsing */
 void	drop(t_control *ctl, t_node *self);

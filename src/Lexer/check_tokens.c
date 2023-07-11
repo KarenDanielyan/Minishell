@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:40:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 19:55:00 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/12 02:51:10 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	check_tokens(t_token *scanner)
 		}
 		temp = temp->next;
 	}
-	
 	return (0);
 }
 

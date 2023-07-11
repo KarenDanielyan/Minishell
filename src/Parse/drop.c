@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 02:25:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 15:36:21 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/12 01:20:32 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	drop(t_control *ctl, t_node *self)
 		else if (self->type == ErrorNode)
 			free(self->value.error);
 		else if (self->type == CmdPrefixNode)
-			node_list_clear(self->value.prefix, NULL);
+			nodel_clear(self->value.prefix, NULL);
 		else if (self->type == CmdSuffixNode)
-			node_list_clear(self->value.suffix, NULL);
+			nodel_clear(self->value.suffix, NULL);
 		free(self);
 	}
 }
