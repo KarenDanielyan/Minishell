@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 16:34:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 15:33:53 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/12 01:24:25 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <libft.h>
 #include <stdio.h>
 
-t_nodel	*list_last(t_nodel *head)
+t_nodel	*nodel_last(t_nodel *head)
 {
 	if (head)
 	{
@@ -25,7 +25,7 @@ t_nodel	*list_last(t_nodel *head)
 	return (head);
 }
 
-t_nodel	*new_node_list(t_node *node)
+t_nodel	*nodel_new(t_node *node)
 {
 	t_nodel	*nodel;
 
@@ -40,7 +40,7 @@ t_nodel	*new_node_list(t_node *node)
 	return (nodel);
 }
 
-void	node_list_clear(t_nodel *list, void (*del)(t_node *node))
+void	nodel_clear(t_nodel *list, void (*del)(t_node *node))
 {
 	t_nodel	*tmp;
 
@@ -54,7 +54,7 @@ void	node_list_clear(t_nodel *list, void (*del)(t_node *node))
 	}
 }
 
-void	node_list_check_syntax(t_nodel *list, void (*check)(t_node *node))
+void	nodel_check_syntax(t_nodel *list, void (*check)(t_node *node))
 {
 	while (list)
 	{
@@ -64,7 +64,7 @@ void	node_list_check_syntax(t_nodel *list, void (*check)(t_node *node))
 	}
 }
 
-void	node_list_visit(t_control *ctl, t_nodel *list, \
+void	nodel_visit(t_control *ctl, t_nodel *list, \
 	void (*op)(t_control *ctl, t_node *self))
 {
 	while (list)

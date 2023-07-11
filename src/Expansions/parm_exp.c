@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 00:28:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 18:07:03 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/12 02:57:34 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,12 @@ void	param_exp(t_node *self, t_list *var_list)
 	len = 0;
 	while (tmp)
 	{
-		if (tmp->word->flags & W_HASDOLLAR && !(tmp->word->flags & W_SQUOTE))
-		{
-			dollar_loc = ft_strrchr(tmp->word->value, DOLLAR_SIGN);
-			word = get_param_word(var_list, dollar_loc, &len);
-			replace(tmp->word, dollar_loc, word, len);
-			free(word);
-		}
-		tmp = tmp->next;
+		dollar_loc = ft_strrchr(head->word->value, DOLLAR_SIGN);
+		word = get_param_word(var_list, dollar_loc, &len);
+		replace(head->word, dollar_loc, word, len);
+		free(word);
+		if (!head->word->value || *(head->word->value) == 0)
+			wordl_pop(&(self->value.word), head);
 	}
 }
 

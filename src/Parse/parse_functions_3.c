@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:13:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 21:23:42 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/12 01:20:13 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,15 @@ static t_nodel	*parse_helper(t_token **scanner, int type, int *err)
 			if ((*scanner)->type == IO_FILE || (*scanner)->type == IO_APPEND \
 				|| (*scanner)->type == IO_HERE)
 				nodelist_push(&node_list, \
-					new_node_list(parse_ioredirect(scanner, err)));
+					nodel_new(parse_ioredirect(scanner, err)));
 			else if ((*scanner)->type == WORD && type == CmdSuffixNode)
 				nodelist_push(&node_list, \
-				new_node_list(parse_word(scanner, err)));
+				nodel_new(parse_word(scanner, err)));
 			else
 				break ;
 		}
 		if (node_list)
-			list_last(node_list)->node->is_last = 1;
+			nodel_last(node_list)->node->is_last = 1;
 	}
 	return (node_list);
 }
@@ -93,7 +93,7 @@ static void	nodelist_push(t_nodel **head, t_nodel *to_push)
 	if (head)
 	{
 		if (*head)
-			list_last(*head)->next = to_push;
+			nodel_last(*head)->next = to_push;
 		else
 			*head = to_push;
 		to_push->node->is_last = 0;

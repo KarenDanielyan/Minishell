@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:24:45 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 19:54:44 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/12 02:54:51 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,20 @@ t_wordl	*wordl_join_free(t_wordl *list)
 		new = wordl_new(word);
 	}
 	return (new);
+}
+
+void	wordl_pop(t_wordl **head, t_wordl *to_pop)
+{
+	t_wordl	*prev;
+
+	if (to_pop)
+	{
+		prev = wordl_find_prev(*head, to_pop);
+		if (prev)
+			prev->next = to_pop->next;
+		if (*head == to_pop)
+			*head = to_pop->next;
+		word_delete(to_pop->word);
+		free(to_pop);
+	}
 }

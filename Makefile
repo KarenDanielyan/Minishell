@@ -51,13 +51,14 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				parse_functions_3.c parse_functions_4.c \
 				constructors.c constructors_2.c \
 				constructors_3.c error.c drop.c \
-				check_syntax.c) \
+				check_syntax.c node_list_2.c) \
 				$(patsubst %.c, $(SRC)/Expansions/%.c,\
 				expand.c tilde_expand.c parm_exp.c \
 				quote_removal.c field_splitting.c \
 				make_word.c) \
 				$(patsubst %.c, $(SRC)/Preprocessor/%.c,\
-				cleanup.c glob_exp.c) \
+				preprocess.c) \
+				# glob_exp.c)
 
 
 OBJS		=	$(foreach dir, $(SUBDIRS), \

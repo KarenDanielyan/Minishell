@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:02:25 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/10 16:54:17 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/12 01:28:58 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,14 @@ t_word	*wordl_join(t_wordl *wordl)
  * 			if the current node if the head of the list,
  * 			It will return NULL.
  * 
- * @param head 
- * @param current 
+ * @param head		Pointer to the first element of a list.
+ * @param current	The element which previous element we want to find.
  * @return t_wordl* 
  */
 t_wordl	*wordl_find_prev(t_wordl *head, t_wordl *current)
 {
-	if (head)
-	{
-		while (head && head->next != current)
-			head = head->next;
-	}
+	while (head && head->next != current)
+		head = head->next;
 	return (head);
 }
 

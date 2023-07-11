@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 19:11:44 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/12 01:41:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "lex.h"
 
 /* Constructors */
-t_nodel		*new_node_list(t_node *node);
+t_nodel		*nodel_new(t_node *node);
 
 t_node		*new_error_node(char *msg);
 t_node		*new_word_node(t_wordl *word);
@@ -47,18 +47,20 @@ t_node		*parse_list(t_token **scanner, int *err);
 void		token_consume(t_token **scanner);
 
 /* Utils */
-t_nodel		*list_last(t_nodel *head);
+t_nodel		*nodel_last(t_nodel *head);
+t_nodel		*nodel_prev(t_nodel *head, t_nodel *current);
 
 /* Drop Functions */
 void		drop(t_control *ctl, t_node *self);
-void		node_list_clear(t_nodel *list, void (*del)(t_node *node));
+void		nodel_clear(t_nodel *list, void (*del)(t_node *node));
+void		nodel_pop(t_nodel **head, t_nodel *to_pop);
 
 /* Syntax Checkers */
 void		check_syntax(t_control *ctl, t_node *self);
-void		node_list_check_syntax(t_nodel *list, void (*check)(t_node *node));
+void		nodel_check_syntax(t_nodel *list, void (*check)(t_node *node));
 
 /* Visit Function for nodelists */
-void		node_list_visit(t_control *ctl, t_nodel *list, \
+void		nodel_visit(t_control *ctl, t_nodel *list, \
 			void (*op)(t_control *ctl, t_node *self));
 
 #endif

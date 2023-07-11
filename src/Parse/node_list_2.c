@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_syntax.c                                     :+:      :+:    :+:   */
+/*   node_list_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 02:27:37 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/12 01:21:10 by kdaniely         ###   ########.fr       */
+/*   Created: 2023/07/12 01:24:55 by kdaniely          #+#    #+#             */
+/*   Updated: 2023/07/12 01:48:41 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "minishell.h"
-#include <ft_printf.h>
+#include <libft.h>
 
-void	check_syntax(t_control *ctl, t_node *self)
+void	nodel_pop(t_nodel **head, t_nodel *to_pop)
 {
-	(void)ctl;
-	if (self)
+	t_nodel	*prev;
+
+	if (to_pop)
 	{
-		if (self->type == ErrorNode)
-			ft_dprintf(2, "%s\n", self->value.error);
-		else if (self->type == CmdPrefixNode)
-			nodel_check_syntax(self->value.prefix, NULL);
-		else if (self->type == CmdSuffixNode)
-			nodel_check_syntax(self->value.suffix, NULL);
+		prev = nodel_prev(*head, to_pop);
+		if (prev)
+			prev->next = to_pop->next;
+		if (*head == to_pop)
+			*head = to_pop->next;
+		to_pop->next = NULL;
+		drop(NULL, to_pop->node);
+		free(to_pop);
 	}
-	else
-		return ;
+}
+
+t_nodel	*nodel_prev(t_nodel *head, t_nodel *current)
+{
+	while (head && head->next != current)
+		head = head->next;
+	return (head);
 }
