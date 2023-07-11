@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/11 23:14:16 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/11 23:28:58 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,32 @@ static t_wordl *apply(t_wordl *args)
 			break;
 	}
 	
+}
+
+/**
+ * @brief	quote_remove() removes quotes from the word.
+ * 
+ */
+static void	quote_remove(t_word *word)
+{
+	char	*s;
+	char	*unquoted_word;
+	int		quote_lvl;
+	
+	
+	unquoted_word = NULL;
+	s = word->value;
+	quote_lvl = 0;
+	while (s)
+	{
+		if (*s == DQUOTE && !(quote_lvl & W_SQUOTE))
+			quote_lvl = quote_lvl ^ W_DQUOTE;
+		else if (*s == SQUOTE && !(quote_lvl & W_DQUOTE))
+			quote_lvl = quote_lvl ^ W_SQUOTE;
+		else
+			ft_strappend(&unquoted_word, *s);
+		s++;
+	}
+	free(word->value);
+	word->value = unquoted_word;
 }
