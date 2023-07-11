@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:40:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/11 19:38:54 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/11 19:56:44 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,23 @@ static int	check_quotes(t_wordl *args)
 {
 	while (args)
 	{
-		if (ft_strchr(args->word->value, DQUOTE))
+		if (args->word->flags & W_SQUOTE)
 		{
-			if (ft_strchr(args->word->value, DQUOTE) \
-				== ft_strrchr(args->word->value, DQUOTE))
-			{
-				ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, DQUOTE);
-				return (0);
-			}
-			args = args->next;
-		}
-		if (ft_strchr(args->word->value, SQUOTE))
-		{
-			if (ft_strchr(args->word->value, SQUOTE) \
-				== ft_strrchr(args->word->value, SQUOTE))
+			if (args->word->value[0] == SQUOTE && args->word->value[ft_strlen(args->word->value) - 1] != SQUOTE)
 			{
 				ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, SQUOTE);
 				return (0);
 			}
-			args = args->next;
 		}
-		else
-			args = args->next;
+		if (args->word->flags & W_DQUOTE)
+		{
+			if (args->word->value[0] == DQUOTE && args->word->value[ft_strlen(args->word->value) - 1] != DQUOTE)
+			{
+				ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, DQUOTE);
+				return (0);
+			}
+		}
+		args = args->next;
 	}
 	return (1);
 }
