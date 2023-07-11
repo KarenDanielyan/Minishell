@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:42:04 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 15:35:24 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/12 01:21:33 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ static void	visit_prime2(t_control *ctl, t_node *self, \
 		visit(ctl, self->value.s_cmd.suffix, op);
 	}
 	else if (self->type == CmdPrefixNode)
-		node_list_visit(ctl, self->value.prefix, op);
+		nodel_visit(ctl, self->value.prefix, op);
 	else if (self->type == CmdSuffixNode)
-		node_list_visit(ctl, self->value.suffix, op);
+		nodel_visit(ctl, self->value.suffix, op);
 	else if (self->type == IORedirectNode)
 		visit(ctl, self->value.io.filename, op);
 	else if (self->type == WordNode)
