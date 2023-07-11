@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 02:15:33 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/11 01:14:28 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/11 00:25:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ static int	is_join_required(t_wordl *head)
 	while (head)
 	{
 		if (!(head->word->flags & (W_SPLIT | W_FILEEXP)))
-			return (1);
+			break ;
 		head = head->next;
 	}
+	if (head)
+		return (1);
 	return (0);
 }
 
@@ -88,20 +90,18 @@ static t_wordl	*get_joined_word(t_wordl *head)
  */
 static t_wordl	*get_sublist(t_wordl *head, t_wordl **next)
 {
-	t_wordl	*joined_sublist;
 	t_wordl	*sublist;
 	t_wordl	*from;
 	t_wordl	*to;
 
 	sublist = NULL;
 	get_dimensions(head, &from, &to, next);
-	joined_sublist = wordl_join_free(wordl_sublist(from, to));
 	if (head != from)
 		sublist = wordl_sublist(head, wordl_find_prev(head, from));
 	if (sublist)
-		(wordl_last(sublist))->next = joined_sublist;
+		(wordl_last(sublist))->next = wordl_join_free(wordl_sublist(from, to));
 	else
-		sublist = joined_sublist;
+		sublist = wordl_join_free(wordl_sublist(from, to));
 	return (sublist);
 }
 

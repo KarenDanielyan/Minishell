@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 17:43:01 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/11 01:38:54 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/06 01:01:50 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ t_word	*word_new(char *str, int flags)
 
 void	word_delete(t_word *word)
 {
-	if (word->value)
-		free(word->value);
+	free(word->value);
 	free(word);
 }
 

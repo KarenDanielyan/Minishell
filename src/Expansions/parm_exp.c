@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 00:28:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/11 01:58:38 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:07:03 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "expand.h"
 #include <libft.h>
 
-static void	apply(t_wordl *head, t_node *self, t_list *var_list);
 static char	*get_param_word(t_list *var_list, char *dollar_loc, int *len);
 static void	replace(t_word *word, char *dollar_loc, \
 	char *replace_with, int len);
@@ -28,33 +27,23 @@ static void	replace(t_word *word, char *dollar_loc, \
 */
 void	param_exp(t_node *self, t_list *var_list)
 {
-	t_wordl	*tmp;
-	t_wordl	*next;
-
-	tmp = self->value.word;
-	while (tmp)
-	{
-		next = tmp->next;
-		apply(tmp, self, var_list);
-		tmp = next;
-	}
-}
-
-static void	apply(t_wordl *head, t_node *self, t_list *var_list)
-{
 	char	*dollar_loc;
 	char	*word;
+	t_wordl	*tmp;
 	int		len;
 
+	tmp = self->value.word;
 	len = 0;
-	if (head->word->flags & W_HASDOLLAR && !(head->word->flags & W_SQUOTE))
+	while (tmp)
 	{
-		dollar_loc = ft_strrchr(head->word->value, DOLLAR_SIGN);
-		word = get_param_word(var_list, dollar_loc, &len);
-		replace(head->word, dollar_loc, word, len);
-		free(word);
-		if(!head->word->value || *(head->word->value) == 0)
-			wordl_pop(&(self->value.word), head);
+		if (tmp->word->flags & W_HASDOLLAR && !(tmp->word->flags & W_SQUOTE))
+		{
+			dollar_loc = ft_strrchr(tmp->word->value, DOLLAR_SIGN);
+			word = get_param_word(var_list, dollar_loc, &len);
+			replace(tmp->word, dollar_loc, word, len);
+			free(word);
+		}
+		tmp = tmp->next;
 	}
 }
 
@@ -86,11 +75,6 @@ static void	replace(t_word *word, char *dollar_loc, char *replace_with, int len)
 	temp = ft_strjoin_free(temp, replace_with);
 	temp = ft_strjoin_free(temp, (dollar_loc + len));
 	free(word->value);
-	if (temp && *temp == 0)
-	{
-		free(temp);
-		temp = NULL;
-	}
 	word->value = temp;
 	word->flags = word->flags | W_PARMEXP;
 }
