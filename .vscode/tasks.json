@@ -5,7 +5,7 @@
             "type": "shell",
             "command": "make",
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceFolder}/philo"
             },
             "problemMatcher": [
                 "$gcc"
