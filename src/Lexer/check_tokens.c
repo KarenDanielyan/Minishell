@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:40:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/12 02:54:59 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/12 02:51:10 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,21 @@ static int	check_quotes(t_wordl *args)
 {
 	while (args)
 	{
-		if (args->word->flags & W_SQUOTE)
+		if (ft_strchr(args->word->value, DQUOTE))
 		{
-			if (args->word->value[0] == SQUOTE && args->word->value[ft_strlen(args->word->value) - 1] != SQUOTE)
+			if (ft_strchr(args->word->value, DQUOTE) \
+				== ft_strrchr(args->word->value, DQUOTE))
 			{
-				ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, SQUOTE);
+				ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, DQUOTE);
 				return (0);
 			}
 		}
-		if (args->word->flags & W_DQUOTE)
+		if (ft_strchr(args->word->value, SQUOTE))
 		{
-			if (args->word->value[0] == DQUOTE && args->word->value[ft_strlen(args->word->value) - 1] != DQUOTE)
+			if (ft_strchr(args->word->value, SQUOTE) \
+				== ft_strrchr(args->word->value, SQUOTE))
 			{
-				ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, DQUOTE);
+				ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, SQUOTE);
 				return (0);
 			}
 		}
