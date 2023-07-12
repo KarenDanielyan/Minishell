@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/11 23:28:58 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/13 00:18:46 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <dirent.h>
 #include <stdio.h>
 
-static void	replace(t_wordl *head, t_wordl *to_replace, t_wordl *replace_with);
+// static void	replace(t_wordl *head, t_wordl *to_replace, t_wordl *replace_with);
 static int	is_glob_required(t_wordl *head);
 static void	quote_remove(t_word *word);
 static t_wordl	*apply(t_word *args);
@@ -44,9 +44,18 @@ void	glob_exp(t_node *node)
 	{
 		if (is_glob_required(args)) 
 		{
-			quote_removal(args->word);
+			printf("%d\n",__LINE__);
+			quote_remove(args->word);
+			printf("%d\n",__LINE__);
 			temp = apply(args->word);
-			replace(head, args, temp);
+			printf("%d\n",__LINE__);
+			// while (temp)
+			// {
+			// 	printf("%s\n",temp->word->value);
+			// 	temp = head->next;
+			// }
+			
+			//replace(head, args, temp);
 		}
 		args = args->next;
 	}
@@ -70,12 +79,12 @@ static int	is_glob_required(t_wordl *head)
 
 	s = head->word->value;
 	quote_lvl = 0;
-	while (s)
+	while (*s)
 	{
 		if (*s == SQUOTE && !(quote_lvl & W_DQUOTE))
-			quote_lvl = quote_lvl ˆ W_SQUOTE;
+			quote_lvl = quote_lvl ^ W_SQUOTE;
 		if (*s == DQUOTE && !(quote_lvl & W_SQUOTE))
-			quote_lvl = quote_lvl ˆ W_DQUOTE;
+			quote_lvl = quote_lvl ^ W_DQUOTE;
 		if (*s == WILDCARD && !quote_lvl)
 			return (1);
 		s++;
@@ -83,17 +92,79 @@ static int	is_glob_required(t_wordl *head)
 	return (0);
 }
 
-static t_wordl *apply(t_wordl *args)
+static t_wordl *apply(t_word *args)
 {
-	char *str;
+	int				i;
+	int				j;
+	char			*res;
+	char			*str;
+	DIR				*dir;
+	struct dirent	*temp;
+	t_wordl			*word;
+	char 			**split;
+	int				first_flag;
+	int				end_flag;
+			printf("%d\n",__LINE__);
 
+	first_flag = 0;
+	end_flag = 0;
+	dir = opendir(".");
+	word = NULL;
+	i = 0;
+	j = 0;
+	str = NULL;
+	res = NULL;
+	
+	if (args->value[0] == WILDCARD)
+		first_flag = 1;
+	if(args->value[ft_strlen(args->value) - 1] == WILDCARD)
+		end_flag = 1;
+	split = ft_split(args->value, WILDCARD);
 	while (1)
 	{
+		temp = readdir(dir);
+		str = temp->d_name;
 		if (str == NULL)
 			break;
+		while (str[i])
+		{
+						printf("%d\n",__LINE__);
+
+			if (args->value[i] == WILDCARD)
+				i++;
+			printf("%d\n",__LINE__);
+			while (str[i + j] == args->value[j] && str[i + j])
+				j++;
+						printf("%d\n",__LINE__);
+			if (args->value[j] == '\0')
+			{
+				printf("%d\n",__LINE__);
+				wordl_push_back(&word, word_new(str, (W_FILEEXP | args->flags)));
+				printf("------------%s\n",str);
+			}
+						printf("%d\n",__LINE__);
+
+			i++;
+			j = 0;
+		}
+		free (str);
+		i = 0;
+		j = 0;
 	}
-	
+	return (word);
 }
+
+// while (str[i] != '\0')
+// 	{
+// 		while (str[i + j] == to_find[j] && str[i + j] != '\0')
+// 		{
+// 			j++;
+// 		}
+// 		if (to_find[j] == '\0')
+// 			return (str + i);
+// 		i++;
+// 		j = 0;
+// 	}
 
 /**
  * @brief	quote_remove() removes quotes from the word.
@@ -109,7 +180,7 @@ static void	quote_remove(t_word *word)
 	unquoted_word = NULL;
 	s = word->value;
 	quote_lvl = 0;
-	while (s)
+	while (*s)
 	{
 		if (*s == DQUOTE && !(quote_lvl & W_SQUOTE))
 			quote_lvl = quote_lvl ^ W_DQUOTE;
@@ -122,3 +193,8 @@ static void	quote_remove(t_word *word)
 	free(word->value);
 	word->value = unquoted_word;
 }
+
+// static void	replace(t_wordl *head, t_wordl *to_replace, t_wordl *replace_with)
+// {
+	
+// }
