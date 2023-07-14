@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/13 00:18:46 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:34:05 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,8 @@ void	glob_exp(t_node *node)
 	{
 		if (is_glob_required(args)) 
 		{
-			printf("%d\n",__LINE__);
 			quote_remove(args->word);
-			printf("%d\n",__LINE__);
 			temp = apply(args->word);
-			printf("%d\n",__LINE__);
 			// while (temp)
 			// {
 			// 	printf("%s\n",temp->word->value);
@@ -59,8 +56,10 @@ void	glob_exp(t_node *node)
 		}
 		args = args->next;
 	}
+	
 	wordl_clear(node->value.word);
 	node->value.word = head;
+
 }
 
 /**
@@ -92,29 +91,51 @@ static int	is_glob_required(t_wordl *head)
 	return (0);
 }
 
-static t_wordl *apply(t_word *args)
+char *reverce_str(char *str)
 {
-	int				i;
-	int				j;
-	char			*res;
-	char			*str;
-	DIR				*dir;
+	int len;
+	int i;
+	char s1;
+
+	len = ft_strlen(str);
+	i = 0;
+	int j = len - 1;
+	while (i < len / 2)
+	{
+		s1 = str[i];
+		str[i] = str[j];
+		str[j] = s1;
+		i++;
+		j--;
+	}
+	return (str);
+}
+
+static t_wordl *apply(t_word *args)
+{	
 	struct dirent	*temp;
+	DIR				*dir;
 	t_wordl			*word;
+	char			*to_reverce;
+	char			*to_find;
 	char 			**split;
+	char			*res;
 	int				first_flag;
 	int				end_flag;
-			printf("%d\n",__LINE__);
+	int				i;
 
-	first_flag = 0;
-	end_flag = 0;
 	dir = opendir(".");
-	word = NULL;
-	i = 0;
-	j = 0;
-	str = NULL;
-	res = NULL;
 	
+	to_reverce = NULL;
+	char *line = NULL;
+	split = NULL;
+	first_flag = 0;
+	to_find = NULL;
+	end_flag = 0;
+	word = NULL;
+	res = NULL;
+	i = 0;
+
 	if (args->value[0] == WILDCARD)
 		first_flag = 1;
 	if(args->value[ft_strlen(args->value) - 1] == WILDCARD)
@@ -123,35 +144,50 @@ static t_wordl *apply(t_word *args)
 	while (1)
 	{
 		temp = readdir(dir);
-		str = temp->d_name;
-		if (str == NULL)
+		if (temp != NULL)
+		to_find =  temp->d_name;
+		if (temp == NULL)
 			break;
-		while (str[i])
+		line = ft_strdup(temp->d_name);
+		while (split[i])
 		{
-						printf("%d\n",__LINE__);
-
-			if (args->value[i] == WILDCARD)
-				i++;
-			printf("%d\n",__LINE__);
-			while (str[i + j] == args->value[j] && str[i + j])
-				j++;
-						printf("%d\n",__LINE__);
-			if (args->value[j] == '\0')
+			if(!first_flag && split[i])
 			{
-				printf("%d\n",__LINE__);
-				wordl_push_back(&word, word_new(str, (W_FILEEXP | args->flags)));
-				printf("------------%s\n",str);
+				res = ft_strnstr(to_find, split[i],ft_strlen(split[i]));
+				if (res == NULL)
+					break;
+				to_find = res;
+				i++;
 			}
-						printf("%d\n",__LINE__);
-
-			i++;
-			j = 0;
+			if(!end_flag && split[i])
+			{
+				to_find = reverce_str(to_find);
+				to_reverce = reverce_str(split[ft_strlen_2d((const char **)split) - 1]);
+				res = ft_strnstr(to_find, to_reverce, ft_strlen(to_reverce));
+				if (res == NULL)
+					break;
+				res = reverce_str(res);
+				split[ft_strlen_2d((const char **)split) - 1] = reverce_str(split[ft_strlen_2d((const char **)split) - 1]);
+				to_find = res;
+				i++;
+			}
+			if (split[i])
+			{
+				res = ft_strstr(to_find, split[i]);
+				if (res == NULL)
+					break;
+				to_find = res;
+				i++;
+			}
 		}
-		free (str);
+		if (i == ft_strlen_2d((const char **)split))
+			printf("%s\n",line);
 		i = 0;
-		j = 0;
+		free(line);
 	}
-	return (word);
+	free_2d(split);
+	closedir(dir);
+	return (NULL);
 }
 
 // while (str[i] != '\0')

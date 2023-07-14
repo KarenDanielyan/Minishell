@@ -229,7 +229,7 @@ rl_gather_tyi (void)
   FD_SET (tty, &readfds);
   FD_SET (tty, &exceptfds);
   USEC_TO_TIMEVAL (_keyboard_input_timeout, timeout);
-  result = select (tty + 1, &readfds, (fd_set *)NULL, &exceptfds, &timeout);
+ result = select (tty + 1, &readfds, (fd_set *)NULL, &exceptfds, &timeout);
   if (result <= 0)
     return 0;	/* Nothing to read. */
 #endif
