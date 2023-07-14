@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/14 20:34:05 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/14 23:48:09 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	glob_exp(t_node *node)
 			temp = apply(args->word);
 			// while (temp)
 			// {
-			// 	printf("%s\n",temp->word->value);
+			// 	printf("----%s\n",temp->word->value);
 			// 	temp = head->next;
 			// }
 			
@@ -151,15 +151,14 @@ static t_wordl *apply(t_word *args)
 		line = ft_strdup(temp->d_name);
 		while (split[i])
 		{
-			if(!first_flag && split[i])
+			if(!first_flag )
 			{
 				res = ft_strnstr(to_find, split[i],ft_strlen(split[i]));
 				if (res == NULL)
 					break;
 				to_find = res;
-				i++;
 			}
-			if(!end_flag && split[i])
+			if(!end_flag)
 			{
 				to_find = reverce_str(to_find);
 				to_reverce = reverce_str(split[ft_strlen_2d((const char **)split) - 1]);
@@ -169,7 +168,6 @@ static t_wordl *apply(t_word *args)
 				res = reverce_str(res);
 				split[ft_strlen_2d((const char **)split) - 1] = reverce_str(split[ft_strlen_2d((const char **)split) - 1]);
 				to_find = res;
-				i++;
 			}
 			if (split[i])
 			{
@@ -177,17 +175,23 @@ static t_wordl *apply(t_word *args)
 				if (res == NULL)
 					break;
 				to_find = res;
-				i++;
 			}
+				i++;
 		}
 		if (i == ft_strlen_2d((const char **)split))
-			printf("%s\n",line);
+				wordl_push_back(&word,word_new(line, args->flags | W_FILEEXP));
 		i = 0;
 		free(line);
 	}
+	while (word)
+	{
+		printf("%s\n",word->word->value);
+		word = word->next;
+	}
+	
 	free_2d(split);
 	closedir(dir);
-	return (NULL);
+	return (word);
 }
 
 // while (str[i] != '\0')

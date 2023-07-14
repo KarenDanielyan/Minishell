@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:04:29 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 17:18:21 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/15 00:11:57 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_name(char *str)
 		{
 			while (*str)
 			{
-				if (!ft_isalnum(*str) && !ft_isalpha(*str))
+				if (!ft_isalnum(*str) && !ft_isalpha(*str) && *str != USCORE)
 					break ;
 				str ++;
 			}
