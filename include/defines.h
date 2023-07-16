@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/12 02:30:21 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/17 01:45:55 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,8 @@ typedef enum e_type
  * @def W_NOTILDE			Do not perform tilde expansion.
  * @def W_SPLIT				Field splitting was performed on the word.
  * @def W_FILEEXP			Filename expansion was performed on the word.
+ * @def W_JOIN				This word should be joined with the parts of the
+ * 							word that were not field splitted.
  * @def W_ASSIGNMENT		This word is a variable assignment.
  * @def W_ASSIGNRHS			Word is rhs of an assignment statement.
  * 							(NOTE: DEPRICATED)
@@ -196,7 +198,8 @@ enum e_flags
 	W_CHKLOCAL			= (1 << 18),
 	W_FORCELOCAL		= (1 << 19),
 	W_SUBSHELL_PAREN	= (1 << 20),
-	W_SUBSHELL_PIPE		= (1 << 21)
+	W_SUBSHELL_PIPE		= (1 << 21),
+	W_JOIN				= (1 << 22),
 };
 
 typedef struct s_pipe

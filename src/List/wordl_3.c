@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:24:45 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/12 02:50:09 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/17 02:20:19 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 /**
  * @brief	wordl_sublist() create a sub list that contains
  * 			elements from `from` to `to` elements of the list.
+ * 
+ * 			NOTE: if word is to not be joined as indicated in
+ * 			W_JOIN flag, to will not be part of the list.
  * 
  * @param from 
  * @param to 
@@ -34,7 +37,12 @@ t_wordl	*wordl_sublist(t_wordl *from, t_wordl *to)
 				wordl_last(new)->next = wordl_dup_one(from);
 			else
 				new = wordl_dup_one(from);
-			if (from == to)
+			if (!to || to->word->flags & W_JOIN)
+			{
+				if (from == to)
+					break ;
+			}
+			else if (!from || from->next == to)
 				break ;
 			from = from->next;
 		}
