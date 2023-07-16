@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/17 01:45:55 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/17 02:34:22 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 /* Everything related to field splitting */
 # define IFS "IFS"
 # define IFS_VAL " \t\n"
-# define IFS_INIT "IFS=/"
+# define IFS_INIT "IFS= \t\n"
 
 /* Implemented Operators */
 # define OPERATORS "<>|()&"

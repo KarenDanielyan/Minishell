@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 15:33:30 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/10 00:09:47 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/17 02:27:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,44 @@
 #include "expand.h"
 #include <libft.h>
 
+static void	remove_quotes(t_word *word);
+
 void	quote_removal(t_node *self)
 {
 	t_wordl	*temp;
-	char	*tmp;
 
-	tmp = NULL;
 	temp = self->value.word;
 	while (temp)
 	{
-		if (temp->word->flags & W_DQUOTE)
-			tmp = ft_strtrim(temp->word->value, DQUOTE_S);
-		if (temp->word->flags & W_SQUOTE)
-			tmp = ft_strtrim(temp->word->value, SQUOTE_S);
-		if (tmp != NULL)
-		{
-			free(temp->word->value);
-			temp->word->value = tmp;
-		}
-		tmp = NULL;
+		remove_quotes(temp->word);
 		temp = temp->next;
 	}
+}
+
+/**
+ * @brief	remove_quotes() removes quotes from the word.
+ * 
+ */
+static void	remove_quotes(t_word *word)
+{
+	char	*s;
+	char	*unquoted_word;
+	int		quote_lvl;
+	
+	
+	unquoted_word = NULL;
+	s = word->value;
+	quote_lvl = 0;
+	while (*s)
+	{
+		if (*s == DQUOTE && !(quote_lvl & W_SQUOTE))
+			quote_lvl = quote_lvl ^ W_DQUOTE;
+		else if (*s == SQUOTE && !(quote_lvl & W_DQUOTE))
+			quote_lvl = quote_lvl ^ W_SQUOTE;
+		else
+			ft_strappend(&unquoted_word, *s);
+		s++;
+	}
+	free(word->value);
+	word->value = unquoted_word;
 }

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:25:50 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/17 02:21:21 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/17 02:30:05 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	set_split_flags(t_wordl *current, t_wordl *replace)
 		if (!prev)
 		{
 			if (*cur_val == *split_val)
-				tmp->word->flags = prev->word->flags | W_JOIN;
+				tmp->word->flags = tmp->word->flags | W_JOIN;
 		}
 		if (!(tmp->next))
 		{
