@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/14 23:48:09 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:29:40 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <dirent.h>
 #include <stdio.h>
 
-// static void	replace(t_wordl *head, t_wordl *to_replace, t_wordl *replace_with);
+static void	replace(t_wordl **head, t_wordl *to_replace, t_wordl *replace_with);
 static int	is_glob_required(t_wordl *head);
 static void	quote_remove(t_word *word);
 static t_wordl	*apply(t_word *args);
@@ -46,13 +46,7 @@ void	glob_exp(t_node *node)
 		{
 			quote_remove(args->word);
 			temp = apply(args->word);
-			// while (temp)
-			// {
-			// 	printf("----%s\n",temp->word->value);
-			// 	temp = head->next;
-			// }
-			
-			//replace(head, args, temp);
+			replace(&head, args, temp);
 		}
 		args = args->next;
 	}
@@ -123,9 +117,11 @@ static t_wordl *apply(t_word *args)
 	int				first_flag;
 	int				end_flag;
 	int				i;
+	int 			mgea_flag;
+	int 			rem1;
+	int				rem2;
 
 	dir = opendir(".");
-	
 	to_reverce = NULL;
 	char *line = NULL;
 	split = NULL;
@@ -134,6 +130,7 @@ static t_wordl *apply(t_word *args)
 	end_flag = 0;
 	word = NULL;
 	res = NULL;
+	mgea_flag = 0;
 	i = 0;
 
 	if (args->value[0] == WILDCARD)
@@ -141,70 +138,82 @@ static t_wordl *apply(t_word *args)
 	if(args->value[ft_strlen(args->value) - 1] == WILDCARD)
 		end_flag = 1;
 	split = ft_split(args->value, WILDCARD);
+	rem1 = first_flag;
+	rem2 = end_flag;
 	while (1)
 	{
+		first_flag =rem1;
+		end_flag = rem2;
+		mgea_flag = 0;
 		temp = readdir(dir);
-		if (temp != NULL)
+		if (temp)
 		to_find =  temp->d_name;
 		if (temp == NULL)
 			break;
 		line = ft_strdup(temp->d_name);
+		printf("%s\n",line);
 		while (split[i])
 		{
-			if(!first_flag )
+			if(!first_flag && split[i])
 			{
-				res = ft_strnstr(to_find, split[i],ft_strlen(split[i]));
+				printf("do res = %s\n",res);
+				res = ft_strnstr(to_find, split[i],ft_strlen(split[0]));
+				if(res != NULL)
+				res +=ft_strlen(split[0]);
+				printf("posel res = %s\n",res);
 				if (res == NULL)
 					break;
 				to_find = res;
+				first_flag = 1;
+				i++;
 			}
-			if(!end_flag)
+			if(!end_flag && split[i])
 			{
 				to_find = reverce_str(to_find);
 				to_reverce = reverce_str(split[ft_strlen_2d((const char **)split) - 1]);
+				printf("do res = %s\n",res);
 				res = ft_strnstr(to_find, to_reverce, ft_strlen(to_reverce));
+				if(res != NULL)
+				res +=ft_strlen(to_reverce);
 				if (res == NULL)
 					break;
 				res = reverce_str(res);
-				split[ft_strlen_2d((const char **)split) - 1] = reverce_str(split[ft_strlen_2d((const char **)split) - 1]);
+				printf("do res = %s\n",res);
+				split[ft_strlen_2d((const char **)split) - 1] = reverce_str(to_reverce);
 				to_find = res;
+				end_flag = 1;
+				mgea_flag = 1;
+				i++;
 			}
-			if (split[i])
+			if(split[i])
 			{
-				res = ft_strstr(to_find, split[i]);
+				if (mgea_flag == 1)
+					i--;
+				printf("do res = %s\n",res);
+				res = (ft_strstr(to_find, split[i]));
+				printf("posle res = %s\n",res);
+				if (res != NULL)
+					res++;
 				if (res == NULL)
 					break;
 				to_find = res;
+				if (mgea_flag == 1)
+					i+=2;
+				else
+					i++;
 			}
-				i++;
 		}
 		if (i == ft_strlen_2d((const char **)split))
 				wordl_push_back(&word,word_new(line, args->flags | W_FILEEXP));
+			// printf("%s\n",line);
 		i = 0;
 		free(line);
 	}
-	while (word)
-	{
-		printf("%s\n",word->word->value);
-		word = word->next;
-	}
-	
+
 	free_2d(split);
 	closedir(dir);
 	return (word);
 }
-
-// while (str[i] != '\0')
-// 	{
-// 		while (str[i + j] == to_find[j] && str[i + j] != '\0')
-// 		{
-// 			j++;
-// 		}
-// 		if (to_find[j] == '\0')
-// 			return (str + i);
-// 		i++;
-// 		j = 0;
-// 	}
 
 /**
  * @brief	quote_remove() removes quotes from the word.
@@ -234,7 +243,8 @@ static void	quote_remove(t_word *word)
 	word->value = unquoted_word;
 }
 
-// static void	replace(t_wordl *head, t_wordl *to_replace, t_wordl *replace_with)
-// {
-	
-// }
+static void	replace(t_wordl **head, t_wordl *to_replace, t_wordl *replace_with)
+{
+	wordl_clear(to_replace);
+	*head = replace_with;
+}
