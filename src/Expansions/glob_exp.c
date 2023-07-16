@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/16 16:29:40 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/16 18:27:31 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,11 +156,9 @@ static t_wordl *apply(t_word *args)
 		{
 			if(!first_flag && split[i])
 			{
-				printf("do res = %s\n",res);
 				res = ft_strnstr(to_find, split[i],ft_strlen(split[0]));
 				if(res != NULL)
 				res +=ft_strlen(split[0]);
-				printf("posel res = %s\n",res);
 				if (res == NULL)
 					break;
 				to_find = res;
@@ -171,14 +169,12 @@ static t_wordl *apply(t_word *args)
 			{
 				to_find = reverce_str(to_find);
 				to_reverce = reverce_str(split[ft_strlen_2d((const char **)split) - 1]);
-				printf("do res = %s\n",res);
 				res = ft_strnstr(to_find, to_reverce, ft_strlen(to_reverce));
 				if(res != NULL)
 				res +=ft_strlen(to_reverce);
 				if (res == NULL)
 					break;
 				res = reverce_str(res);
-				printf("do res = %s\n",res);
 				split[ft_strlen_2d((const char **)split) - 1] = reverce_str(to_reverce);
 				to_find = res;
 				end_flag = 1;
@@ -189,9 +185,7 @@ static t_wordl *apply(t_word *args)
 			{
 				if (mgea_flag == 1)
 					i--;
-				printf("do res = %s\n",res);
 				res = (ft_strstr(to_find, split[i]));
-				printf("posle res = %s\n",res);
 				if (res != NULL)
 					res++;
 				if (res == NULL)

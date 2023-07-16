@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:34:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 19:09:08 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/16 18:56:42 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,24 @@ t_list	*lst_new(int type, char *key_val)
 	t_list	*new;
 	char	**split;
 
+	split = NULL;
+	new = NULL;
 	new = (t_list *)malloc(sizeof(t_list));
 	if (!new)
 	{
 		perror("malloc");
-		return (NULL);
+		exit(EXIT_FAILURE);
 	}
 	new->key = NULL;
 	new->value = NULL;
 	split = ft_split(key_val, EQUALS);
 	new->joined = key_val;
 	if (split[0])
+	{
 		new->key = ft_strdup(split[0]);
-	if (split[1])
-		new->value = ft_strdup(split[1]);
+		if (split[1])
+			new->value = ft_strdup(split[1]);
+	}
 	new->type = type;
 	new->prev = NULL;
 	new->next = NULL;

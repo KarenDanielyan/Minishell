@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:10:00 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 21:43:25 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/16 18:36:04 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	env(t_list *env)
 	temp = env;
 	while (temp)
 	{
-		if (temp->type == EXPORT)
+		if (temp->type == EXPORT && ft_strchr(temp->joined, EQUALS))
 		{
 			printf("%s=", temp->key);
-			if (temp->value)
+			if(temp->value)
 				printf("%s", temp->value);
 			printf("\n");
 		}
