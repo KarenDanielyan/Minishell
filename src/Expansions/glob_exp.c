@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   glob_exp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/16 16:29:40 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:16:46 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,24 @@ static t_wordl	*apply(t_word *args);
  */
 void	glob_exp(t_node *node)
 {
+	t_wordl	*head;
 	t_wordl	*args;
 	t_wordl	*temp;
-	t_wordl	*head;
+	t_wordl	*next;
 
 	args =  wordl_dup(node->value.word);
 	args = make_word(args);
 	head = args;
 	while (args)
 	{
+		next = args->next;
 		if (is_glob_required(args)) 
 		{
 			quote_remove(args->word);
 			temp = apply(args->word);
 			replace(&head, args, temp);
 		}
-		args = args->next;
+		args = next;
 	}
 	
 	wordl_clear(node->value.word);
@@ -90,8 +92,7 @@ char *reverce_str(char *str)
 	int len;
 	int i;
 	char s1;
-
-	len = ft_strlen(str);
+len = ft_strlen(str);
 	i = 0;
 	int j = len - 1;
 	while (i < len / 2)
@@ -151,16 +152,13 @@ static t_wordl *apply(t_word *args)
 		if (temp == NULL)
 			break;
 		line = ft_strdup(temp->d_name);
-		printf("%s\n",line);
 		while (split[i])
 		{
 			if(!first_flag && split[i])
 			{
-				printf("do res = %s\n",res);
 				res = ft_strnstr(to_find, split[i],ft_strlen(split[0]));
 				if(res != NULL)
 				res +=ft_strlen(split[0]);
-				printf("posel res = %s\n",res);
 				if (res == NULL)
 					break;
 				to_find = res;
@@ -171,14 +169,12 @@ static t_wordl *apply(t_word *args)
 			{
 				to_find = reverce_str(to_find);
 				to_reverce = reverce_str(split[ft_strlen_2d((const char **)split) - 1]);
-				printf("do res = %s\n",res);
 				res = ft_strnstr(to_find, to_reverce, ft_strlen(to_reverce));
 				if(res != NULL)
 				res +=ft_strlen(to_reverce);
 				if (res == NULL)
 					break;
 				res = reverce_str(res);
-				printf("do res = %s\n",res);
 				split[ft_strlen_2d((const char **)split) - 1] = reverce_str(to_reverce);
 				to_find = res;
 				end_flag = 1;
@@ -189,23 +185,20 @@ static t_wordl *apply(t_word *args)
 			{
 				if (mgea_flag == 1)
 					i--;
-				printf("do res = %s\n",res);
 				res = (ft_strstr(to_find, split[i]));
-				printf("posle res = %s\n",res);
 				if (res != NULL)
 					res++;
 				if (res == NULL)
 					break;
 				to_find = res;
 				if (mgea_flag == 1)
-					i+=2;
+					i += 2;
 				else
 					i++;
 			}
 		}
 		if (i == ft_strlen_2d((const char **)split))
 				wordl_push_back(&word,word_new(line, args->flags | W_FILEEXP));
-			// printf("%s\n",line);
 		i = 0;
 		free(line);
 	}
@@ -245,6 +238,16 @@ static void	quote_remove(t_word *word)
 
 static void	replace(t_wordl **head, t_wordl *to_replace, t_wordl *replace_with)
 {
+	t_wordl	*prev;
+	t_wordl	*next;
+
+	prev = wordl_find_prev(*head, to_replace);
+	next = to_replace->next;
+	if (prev)
+		prev->next = replace_with;
+	else
+		*head = replace_with;
+	wordl_last(replace_with)->next = next;
+	to_replace->next = NULL;
 	wordl_clear(to_replace);
-	*head = replace_with;
 }
