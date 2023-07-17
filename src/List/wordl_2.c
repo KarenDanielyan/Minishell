@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:02:25 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/12 01:28:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 00:47:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	wordl_size(t_wordl *head)
 }
 
 /**
- * @brief	wordl_join() allocates and return a word,
- * 			this is composed of the words contained inside,
+ * @brief	wordl_join() allocates and returns a word,
+ * 			which is composed of the words contained inside
  * 			the word list.
 */
 t_word	*wordl_join(t_wordl *wordl)

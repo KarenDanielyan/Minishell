@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:13:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/12 01:20:13 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 00:40:21 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "list.h"
 
 static t_nodel	*parse_helper(t_token **scanner, int type, int *err);
-static void		nodelist_push(t_nodel **head, t_nodel *to_push);
 
 t_node	*parse_prefix(t_token **scanner, int *err)
 {
@@ -74,10 +73,10 @@ static t_nodel	*parse_helper(t_token **scanner, int type, int *err)
 		{
 			if ((*scanner)->type == IO_FILE || (*scanner)->type == IO_APPEND \
 				|| (*scanner)->type == IO_HERE)
-				nodelist_push(&node_list, \
+				nodel_push(&node_list, \
 					nodel_new(parse_ioredirect(scanner, err)));
 			else if ((*scanner)->type == WORD && type == CmdSuffixNode)
-				nodelist_push(&node_list, \
+				nodel_push(&node_list, \
 				nodel_new(parse_word(scanner, err)));
 			else
 				break ;
@@ -86,16 +85,4 @@ static t_nodel	*parse_helper(t_token **scanner, int type, int *err)
 			nodel_last(node_list)->node->is_last = 1;
 	}
 	return (node_list);
-}
-
-static void	nodelist_push(t_nodel **head, t_nodel *to_push)
-{
-	if (head)
-	{
-		if (*head)
-			nodel_last(*head)->next = to_push;
-		else
-			*head = to_push;
-		to_push->node->is_last = 0;
-	}
 }
