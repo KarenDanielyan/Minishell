@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 14:48:15 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:07:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,16 @@ void	*parse(t_token *scanner, t_list *var_list)
 	err = 0;
 	node = parse_list(&scanner, &err);
 	print_tree(node, "", 1);
-	if (err != 0)
+	if (err != 0 || scanner)
 	{
-		visit(NULL, node, check_syntax);
+		if (err != 0)
+			visit(NULL, node, check_syntax);
+		else
+		{
+			ft_dprintf(2, "%s%s\'\n", ERROR_MSG, scanner->wordl->word->value);
+			while (scanner)
+				tok_pop(&scanner);
+		}
 		visit(NULL, node, drop);
 		lst_set(var_list, "?", SYNTAX_ERR);
 		node = NULL;
