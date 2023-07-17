@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 02:15:33 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/11 01:14:28 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:28:38 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ static void		get_dimensions(t_wordl *head, t_wordl **from, \
  * 			unless, our list contains entries generated from,
  * 			filename expansion or field splitting.
 */
-t_wordl	*make_word(t_wordl *head)
+void	join(t_node *self)
 {
 	t_wordl	*new_list;
+	t_wordl	*head;
 
+	head = self->value.word;
 	if (is_join_required(head))
 	{
 		new_list = get_joined_word(head);
@@ -39,7 +41,7 @@ t_wordl	*make_word(t_wordl *head)
 	}
 	else
 		new_list = head;
-	return (new_list);
+	self->value.word = new_list;
 }
 
 static int	is_join_required(t_wordl *head)
