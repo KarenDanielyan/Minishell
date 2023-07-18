@@ -14,7 +14,7 @@ SRC			=	./src
 
 SUBDIRS		=	BuiltIns Debug Expansions \
 				Init Lexer List Parse Utils \
-				Preprocessor
+				Preprocessor Execute
 
 DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 				debug.h defines.h list.h \
@@ -23,7 +23,8 @@ DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 
 SRCS		=	$(patsubst %.c, $(SRC)/Debug/%.c,\
 				get_type.c print_messages.c \
-				tree_print.c tree_print_utils.c)
+				tree_print.c tree_print_utils.c \
+				print_value.c)
 
 SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				main.c) \
