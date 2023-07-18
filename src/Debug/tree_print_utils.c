@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:01:47 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/07 21:23:09 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:09:14 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	print_value(t_node *node)
 			if (node->value.io.type == APPEND)
 				printf("\033[37m%s\033[0m", DGREAT);
 			if (node->value.io.type == HERE)
-				printf("\033[37m%s\033[0m", DGREAT);
+				printf("\033[37m%s\033[0m", DLESS);
 		}
 		else if (node->type == WordNode)
 			print_word_node(node->value.word);
