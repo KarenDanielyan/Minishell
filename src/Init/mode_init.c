@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mode_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:36:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 16:56:07 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:25:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	mode_init(int ac, char **av)
 		fd = open(av[1], O_RDONLY);
 		if (fd < 0)
 		{
-			perror("open");
+			perror(EPERROR);
 			exit(EXIT_FAILURE);
 		}
 		if (dup2(fd, STDIN_FILENO) < 0)
 		{
-			perror("dup2");
+			perror(EPERROR);
 			exit(EXIT_FAILURE);
 		}
 		close(fd);

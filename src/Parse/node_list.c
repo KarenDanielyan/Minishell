@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 16:34:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/12 01:24:25 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:26:39 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_nodel	*nodel_new(t_node *node)
 	nodel = (t_nodel *)malloc(sizeof(t_nodel));
 	if (!node)
 	{
-		perror("malloc()");
+		perror(EPERROR);
 		exit(EXIT_FAILURE);
 	}
 	nodel->node = node;

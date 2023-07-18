@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/17 02:34:22 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:34:03 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define ERROR_EOL "minishell: syntax error: unexpected end of line."
 # define ERROR_QUOTES "minishell: unexpected EOL while looking for matching `"
 # define ERROR_HIS "numeric argument required"
+# define EPERROR "minishell: "
 
 # define ERR_UNSET "unset: %s: invalid parameter name\n"
 
@@ -65,6 +66,9 @@
 # define TILDE '~'
 # define CURL_BRACE_L '{'
 # define CURL_BRACE_R '}'
+
+# define FD_INIT -42
+# define LAST_INIT -24
 
 /* Platform Specific Defines */
 # ifdef __linux__
@@ -321,6 +325,8 @@ typedef struct s_PipelineNode
 
 typedef struct s_CommandNode
 {
+	int			in_fd;
+	int			out_fd;
 	t_cmdtype	type;
 	t_node		*prefix;
 	t_node		*command;
@@ -328,13 +334,16 @@ typedef struct s_CommandNode
 
 typedef struct s_sCommandNode
 {
-	t_pipe		pipe;
+	int			in_fd;
+	int			out_fd;
 	t_node		*word;
 	t_node		*suffix;
 }	t_scnode;
 
 typedef struct s_cCommandNode
 {
+	int		in_fd;
+	int		out_fd;
 	t_node	*list;
 	t_node	*suffix;
 }	t_ccnode;

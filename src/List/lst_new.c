@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:34:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/06/30 19:09:08 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:25:32 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_list	*lst_new(int type, char *key_val)
 	new = (t_list *)malloc(sizeof(t_list));
 	if (!new)
 	{
-		perror("malloc");
+		perror(EPERROR);
 		return (NULL);
 	}
 	new->key = NULL;

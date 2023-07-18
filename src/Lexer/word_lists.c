@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 17:43:01 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/11 01:38:54 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 22:25:23 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_word	*word_new(char *str, int flags)
 	word = (t_word *)malloc(sizeof(t_word));
 	if (!word)
 	{
-		perror("malloc()");
+		perror(EPERROR);
 		exit(EXIT_FAILURE);
 	}
 	word->value = ft_strdup(str);
