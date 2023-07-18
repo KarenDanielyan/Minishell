@@ -60,7 +60,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/Preprocessor/%.c,\
 				preprocess.c) \
 				$(patsubst %.c, $(SRC)/Execute/%.c,\
-				execute.c)
+				execute.c exec_functions.c \
+				exec_functions_2.c)
 
 
 OBJS		=	$(foreach dir, $(SUBDIRS), \
@@ -111,6 +112,7 @@ $(BUILD)/%.o:	$(SRC)/*/%.c $(DEP)
 					@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(NAME):	$(BUILD) $(OBJS) $(LIBFT) $(PRINTF)
+				@cp -f $(NAME) $(NAME)_old 2> /dev/null || :
 				@echo "${GREEN}Building minishell.${RESET}"
 				@$(CC) $(CFLAGS) $(OBJS) $(IFLAGS) -o $(NAME) $(LFLAGS)
 				@echo "${GREEN}Build Successfull.${RESET}"
