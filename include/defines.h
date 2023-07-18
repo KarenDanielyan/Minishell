@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/18 22:34:03 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 01:49:11 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@
 # define PS4 "PS4=+ "
 # define DL "declare -x"
 # define NEWLINE '\n'
+
+/* Built-Ins */
+# define CD "cd"
+# define ENV "env"
+# define PWD "pwd"
+# define ECHO "echo"
+# define EXIT "exit"
+# define UNSET "unset"
+# define XPORT "export"
+# define HISTORY "history"
 
 /* Everything related to field splitting */
 # define IFS "IFS"
@@ -206,12 +216,6 @@ enum e_flags
 	W_JOIN				= (1 << 22),
 };
 
-typedef struct s_pipe
-{
-	int	in;
-	int	out;
-}	t_pipe;
-
 /* ****** Defines for lexical analyzer ****** */
 
 /**
@@ -378,10 +382,19 @@ typedef struct s_Node
 
 typedef struct s_control
 {
-	t_list	*var_list;
-	char	*input;
-	t_token	*scanner;
-	t_node	*tree;
+	int				hist_fd;
+	char			*input;
+	struct s_flist	*built_ins;
+	t_list			*var_list;
+	t_token			*scanner;
+	t_node			*tree;
 }	t_control;
+
+typedef struct s_flist
+{
+	char	*name;
+	void	(*cmd)(t_wordl *cmd, t_control *ctl);
+	struct s_flist	*next;
+}	t_flist;
 
 #endif
