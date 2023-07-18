@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:50:38 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 14:33:33 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:21:05 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_node	*new_io_redirect_node(t_IOType type, t_node *filename)
 
 	node = alloc_and_check();
 	node->type = IORedirectNode;
+	node->value.io.fd = -42;
 	node->value.io.type = type;
 	node->value.io.filename = filename;
 	return (node);
