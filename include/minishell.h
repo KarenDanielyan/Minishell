@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/12 02:51:44 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:41:34 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ void	*parse(t_token	*scanner, t_list *var_list);
 /* Expansions */
 void	expand(t_control *ctl, t_node *self);
 void	preprocess(t_control *ctl, t_node *self);
+
+/* Execution */
+void	execute(t_control *ctl, t_node *self);
 
 /* Tree Visit Function */
 void	visit(t_control *ctl, t_node *self, \

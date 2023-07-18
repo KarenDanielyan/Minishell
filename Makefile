@@ -59,7 +59,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				make_word.c) \
 				$(patsubst %.c, $(SRC)/Preprocessor/%.c,\
 				preprocess.c) \
-				# glob_exp.c)
+				$(patsubst %.c, $(SRC)/Execute/%.c,\
+				execute.c)
 
 
 OBJS		=	$(foreach dir, $(SUBDIRS), \
