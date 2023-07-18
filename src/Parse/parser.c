@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/18 01:04:35 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:11:48 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "parser.h"
 #include "debug.h"
 
-static void handle_syntax_errors(t_node **tree, t_token *scanner, \
+static void	handle_syntax_errors(t_node **tree, t_token *scanner, \
 	t_list *var_list, int err);
 
 /**
@@ -36,7 +36,7 @@ void	*parse(t_token *scanner, t_list *var_list)
 	return ((void *)node);
 }
 
-static void handle_syntax_errors(t_node **tree, t_token *scanner, \
+static void	handle_syntax_errors(t_node **tree, t_token *scanner, \
 	t_list *var_list, int err)
 {
 	if (err != 0 || scanner)

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:58:40 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/18 01:02:18 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:11:10 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,3 @@ static void	set_error_msg(t_nodel **node_list, t_token **scanner)
 	while (*scanner)
 		tok_pop(scanner);
 }
-

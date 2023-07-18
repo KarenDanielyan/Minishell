@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 15:33:30 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/17 02:27:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:10:41 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static void	remove_quotes(t_word *word)
 	char	*s;
 	char	*unquoted_word;
 	int		quote_lvl;
-	
-	
+
 	unquoted_word = NULL;
 	s = word->value;
 	quote_lvl = 0;
