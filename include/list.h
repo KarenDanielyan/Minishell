@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:15:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/11 01:41:30 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 01:53:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,12 @@ int		wordl_size(t_wordl *head);
 t_word	*word_new(char *str, int flags);
 
 void	word_delete(t_word *word);
+
+/* flist API */
+t_flist	*flist_new(char *name, void (*cmd)(t_wordl *command, t_control *ctl));
+t_flist	*flist_last(t_flist *head);
+
+void	flist_push_back(t_flist **head, t_flist *new);
+void	flist_clear(t_flist *head);
 
 #endif

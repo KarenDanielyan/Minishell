@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/12 01:46:03 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 01:55:01 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,58 +49,40 @@ static void	switch_case(t_list *var_list, char *str)
 /**
  * @brief	Readline while loop
  */
-void	true_loop(t_list *var_list, int fd)
+void	true_loop(t_control *ctl)
 {
-	t_control	ctl;
-
-	sig_init();
-	ctl.var_list = var_list;
 	while (1)
 	{
-		ctl.input = get_line(ctl.var_list, fd);
-		if (!ctl.input)
+		ctl->input = get_line(ctl->var_list, ctl->hist_fd);
+		if (!ctl->input)
 			continue ;
-		ctl.scanner = lex(ctl.input, var_list);
-		if (ctl.scanner == NULL)
+		ctl->scanner = lex(ctl->input, ctl->var_list);
+		if (ctl->scanner == NULL)
 		{
-			free(ctl.input);
+			free(ctl->input);
 			continue ;
 		}
-		ctl.tree = parse(ctl.scanner, ctl.var_list);
-		if (ctl.tree == NULL)
+		ctl->tree = parse(ctl->scanner, ctl->var_list);
+		if (ctl->tree == NULL)
 		{
-			free(ctl.input);
+			free(ctl->input);
 			continue ;
 		}
-		visit(&ctl, ctl.tree, expand);
-		printf("After expansion:\n");
-		print_tree(ctl.tree, "", 1);
-		printf("After preprocessing:\n");
-		visit(NULL, ctl.tree, preprocess);
-		print_tree(ctl.tree, "", 1);
-		switch_case(ctl.var_list, ctl.input);
-		visit(NULL, ctl.tree, drop);
-		free(ctl.input);
+		visit(ctl, ctl->tree, expand);
+		visit(ctl, ctl->tree, preprocess);
+		switch_case(ctl->var_list, ctl->input);
+		visit(NULL, ctl->tree, drop);
+		free(ctl->input);
 	}
 }
 
-/* TODO: proper non-Interactive mode */
 int	main(int ac, char **av, char **env)
 {
-	int		fd;
-	t_list	*var_list;
-	char	*filename;
+	t_control	ctl;
 
-	print_logo();
-	rl_readline_name = "Minishell";
-	rl_instream = stdin;
-	if (isatty(STDERR_FILENO))
-		rl_outstream = stderr;
-	mode_init(ac, av);
-	var_list = env_init(env);
-	filename = lst_get_by_key(var_list, "HISTFILE")->value;
-	fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0666);
-	true_loop(var_list, fd);
-	lst_clear(&var_list, &free);
+	ctl = init(ac, av, env);
+	true_loop(&ctl);
+	lst_clear(&(ctl.var_list), &free);
+	flist_clear(ctl.built_ins);
 	return (0);
 }

@@ -18,7 +18,8 @@ SUBDIRS		=	BuiltIns Debug Expansions \
 
 DEP			=	$(patsubst %.h, $(INCLUDE)/%.h,\
 				debug.h defines.h list.h \
-				lex.h minishell.h parser.h) \
+				lex.h minishell.h parser.h \
+				execute.h init.h) \
 				Makefile
 
 SRCS		=	$(patsubst %.c, $(SRC)/Debug/%.c,\
@@ -31,14 +32,14 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/List/%.c,\
 				lst_clear.c lst_get.c lst_last.c \
 				lst_new.c lst_pop.c lst_push.c \
-				lst_set.c lst_size.c \
+				lst_set.c lst_size.c flist.c \
 				wordl.c wordl_2.c wordl_3.c) \
 				$(patsubst %.c, $(SRC)/BuiltIns/%.c,\
 				history.c env.c pwd.c cd.c unset.c \
 				echo.c exit.c export.c) \
 				$(patsubst %.c, $(SRC)/Init/%.c,\
 				env_init.c mode_init.c sig_init.c \
-				input.c ) \
+				input.c init.c builtin_init.c) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
 				get_env.c print_logo.c is_token.c \
 				var_asign.c visit.c) \
@@ -134,7 +135,7 @@ clean:		$(INVOKE)
 fclean:		libft
 				@echo "${YELLOW}Cleaning Everyting...${RESET}"
 				@$(RM) $(BUILD)
-				@$(RM) $(NAME)
+				@$(RM) $(NAME) $(NAME)_old
 				@echo "${GREEN}Done.${RESET}"
 
 configure:

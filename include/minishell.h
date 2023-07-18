@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/18 21:41:34 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 01:30:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@
 */
 
 /* Initialization */
-void	sig_init(void);
-t_list	*env_init(char **env);
-void	mode_init(int ac, char **av);
+t_control	init(int ac, char **av, char **env);
 
 /* Get next prompt*/
 char	*get_line(t_list *var_list, int fd);
