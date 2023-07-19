@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:44:43 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 15:06:09 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:04:18 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static void	handle_fork(int pid, t_node *self, \
 		execute(ctl, self->value.s_cmd.suffix);
 		if (builtin_cmd)
 			builtin_cmd->cmd(cmd->value.word, ctl);
+		else if (is_assignment(cmd->value.word->word))
+			set(cmd->value.word, ctl);
 		else
 			exec(self->value.s_cmd.word->value.word, ctl);
 	}
