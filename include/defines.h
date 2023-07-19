@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/11 22:58:31 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/20 02:03:46 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@
 # define DQUOTE_S "\""
 # define ECODE "?"
 # define WILDCARD '*'
+# define DOT '.'
 
 /* Special Symbols */
 # define TILDE '~'

@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/20 00:54:24 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/20 02:04:51 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	glob_exp(t_node *node)
 	args =  wordl_dup(node->value.word);
 	args = make_word(args);
 	head = args;
+
 	while (args)
 	{
 		next = args->next;
@@ -48,7 +49,8 @@ void	glob_exp(t_node *node)
 		{
 			quote_remove(args->word);
 			temp = apply(args->word);
-			replace(&head, args, temp);
+			if (temp)
+				replace(&head, args, temp);
 		}
 		args = next;
 	}
@@ -89,7 +91,7 @@ static int	is_glob_required(t_wordl *head)
 }
 
 
-int wildcard_match(const char *pattern, const char *string) 
+int wildcard_match(const char *pattern, const char *string)
 {
 	const char *p = NULL;
 	const char *s = NULL;
@@ -129,15 +131,18 @@ static t_wordl *apply(t_word *args)
 
 	word = NULL;
 	dir = opendir(".");
-	
 	if (dir == NULL)
 	{
-		perror("Unable to open directory");
+		perror("minishell: ");
  		exit(EXIT_FAILURE);
 	}
-	while ((entry = readdir(dir)) != NULL)
+	while (1)
 	{
-		if (entry->d_name[0] != '.')//hastat chi entry->d_type != DT_DIR es pah@
+		entry = readdir(dir);
+		if(entry == NULL)
+			break;
+
+		if (ft_strchr(args->value, DOT) || entry->d_name[0] != '.')
 			if (wildcard_match(args->value, entry->d_name))
 				wordl_push_back(&word, word_new(entry->d_name, args->flags | W_FILEEXP));
 	}
