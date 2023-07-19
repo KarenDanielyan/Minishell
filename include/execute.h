@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:17:41 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 15:59:05 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:17:02 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	execute_pipeline(t_control *ctl, t_node *self);
 void	execute_scommand(t_control *ctl, t_node *self);
 void	execute_ccommand(t_control *ctl, t_node *self);
 void	execute_command(t_control *ctl, t_node *self);
-void	execute_prefix(t_control *ctl, t_node *self);
-void	execute_suffix(t_control *ctl, t_node *self);
 void	execute_list(t_control *ctl, t_node *self);
-void	execute_io(t_control *ctl, t_node *self);
+
+int		execute_prefix(t_control *ctl, t_node *self);
+int		execute_suffix(t_control *ctl, t_node *self);
+int		execute_io(t_control *ctl, t_node *self);
 
 /* Utils */
 char	*get_file_path(char **path, char *file);
