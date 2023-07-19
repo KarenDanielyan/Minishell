@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 14:27:41 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:17:01 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,34 +162,13 @@ typedef enum e_type
  * @def W_NOTILDE			Do not perform tilde expansion.
  * @def W_SPLIT				Field splitting was performed on the word.
  * @def W_FILEEXP			Filename expansion was performed on the word.
- * @def W_JOIN				This word should be joined with the parts of the
- * 							word that were not field splitted.
  * @def W_ASSIGNMENT		This word is a variable assignment.
- * @def W_ASSIGNRHS			Word is rhs of an assignment statement.
- * 							(NOTE: DEPRICATED)
- * @def W_ASSIGNLHS			Word is lhs of an assignment statement.
- * 							(NOTE: DEPRICATED)
- * @def W_ASSIGNBLTIN		Word is a builtin command that takes assignments.
- * 							(NOTE: DEPRICATED)
- * @def W_NOASSNTILDE		Don't do tilde expansion like an assignment statement.
- * 							(NOTE: DEPRICATED)
  * @def W_PARAMEXP			Expanding word in $param.
- * @def W_ASSIGNARG			Word is assignment argument to command.
- * 							(NOTE: DEPRICATED)
- * @def W_HASQUOTEDNULL		Word has a quoted null.
- * 							(NOTE: DEPRICATED)
- * @def W_SAWQUOTEDNULL		Word contained a quoted null that was removed.
- * 							(NOTE: DEPRICATED)
- * @def W_NOBRACE			Do not perform brace expansion.
- * 							(NOTE: DEPRICATED)
- * @def W_COMPLETE			Word is being expansed for completetion.
- * 							(NOTE: DEPRICATED)
- * @def W_CHKLOCAL			Check for loacal variables on assignment.
- * 							(NOTE: DEPRICATED)
- * @def W_FORCELOCAL		Force assignment to be local variables.
- * 							(NOTE: DEPRICATED)
  * @def W_SUBSHELL_PIPE		Subshell from a pipeline element.
  * @def W_SUBSHELL_PAREN	Subshell caused by ( ... ).
+ * @def W_JOIN				This word should be joined with the parts of the
+ * 							word that were not field splitted.
+ * @def W_EXPAND			Word was already expanded.
  */
 enum e_flags
 {
@@ -201,21 +180,11 @@ enum e_flags
 	W_SPLIT				= (1 << 5),
 	W_FILEEXP			= (1 << 6),
 	W_ASSIGNMENT		= (1 << 7),
-	W_ASSIGNRHS			= (1 << 8),
-	W_ASSIGNLHS			= (1 << 9),
-	W_ASSIGNBLTIN		= (1 << 10),
-	W_NOASSNTILDE		= (1 << 11),
-	W_PARMEXP			= (1 << 12),
-	W_ASSIGNARG			= (1 << 13),
-	W_HASQUOTEDNULL		= (1 << 14),
-	W_SAWQUOTEDNULL		= (1 << 15),
-	W_NOBRACE			= (1 << 16),
-	W_COMPLETE			= (1 << 17),
-	W_CHKLOCAL			= (1 << 18),
-	W_FORCELOCAL		= (1 << 19),
-	W_SUBSHELL_PAREN	= (1 << 20),
-	W_SUBSHELL_PIPE		= (1 << 21),
-	W_JOIN				= (1 << 22),
+	W_PARMEXP			= (1 << 8),
+	W_SUBSHELL_PAREN	= (1 << 9),
+	W_SUBSHELL_PIPE		= (1 << 10),
+	W_JOIN				= (1 << 11),
+	W_EXPAND			= (1 << 12)
 };
 
 /* ****** Defines for lexical analyzer ****** */
