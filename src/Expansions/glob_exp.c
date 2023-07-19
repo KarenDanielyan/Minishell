@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/16 21:07:28 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/20 00:22:35 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ void	glob_exp(t_node *node)
 		}
 		args = args->next;
 	}
-	
 	wordl_clear(node->value.word);
 	node->value.word = head;
-
 }
 
 /**
@@ -72,15 +70,18 @@ static int	is_glob_required(t_wordl *head)
 
 	s = head->word->value;
 	quote_lvl = 0;
-	while (*s)
+	if (!(head->word->flags & W_ASSIGNMENT))
 	{
-		if (*s == SQUOTE && !(quote_lvl & W_DQUOTE))
-			quote_lvl = quote_lvl ^ W_SQUOTE;
-		if (*s == DQUOTE && !(quote_lvl & W_SQUOTE))
-			quote_lvl = quote_lvl ^ W_DQUOTE;
-		if (*s == WILDCARD && !quote_lvl)
-			return (1);
-		s++;
+		while (*s)
+		{
+			if (*s == SQUOTE && !(quote_lvl & W_DQUOTE))
+				quote_lvl = quote_lvl ^ W_SQUOTE;
+			if (*s == DQUOTE && !(quote_lvl & W_SQUOTE))
+				quote_lvl = quote_lvl ^ W_DQUOTE;
+			if (*s == WILDCARD && !quote_lvl)
+				return (1);
+			s++;
+		}
 	}
 	return (0);
 }
@@ -105,106 +106,58 @@ char *reverce_str(char *str)
 	return (str);
 }
 
+int wildcard_match(const char *pattern, const char *string) 
+{
+	const char *p = NULL;
+	const char *s = NULL;
+	int star = 0;
+
+	while (*string != '\0')
+	{
+		if ( *pattern == *string)
+		{
+			pattern++;
+			string++;
+		} 
+		else if (*pattern == '*')
+		{
+			star = 1;
+			p = pattern++;
+			s = string;
+		} 
+		else if (star)
+		{
+			pattern = p + 1;
+			string = ++s;
+		}
+		else
+			return 0;
+	}
+	while (*pattern == '*')
+		pattern++;
+	return (*pattern == '\0');
+}
+
 static t_wordl *apply(t_word *args)
 {	
-	struct dirent	*temp;
-	DIR				*dir;
-	t_wordl			*word;
-	char			*to_reverce;
-	char			*to_find;
-	char 			**split;
-	char			*res;
-	int				first_flag;
-	int				end_flag;
-	int				i;
-	int 			mgea_flag;
-	int 			rem1;
-	int				rem2;
+ 	DIR *dir;
+	t_wordl *word;
+	struct dirent *entry;
 
-	dir = opendir(".");
-	to_reverce = NULL;
-	char *line = NULL;
-	split = NULL;
-	first_flag = 0;
-	to_find = NULL;
-	end_flag = 0;
 	word = NULL;
-	res = NULL;
-	mgea_flag = 0;
-	i = 0;
-
-	if (args->value[0] == WILDCARD)
-		first_flag = 1;
-	if(args->value[ft_strlen(args->value) - 1] == WILDCARD)
-		end_flag = 1;
-	split = ft_split(args->value, WILDCARD);
-	rem1 = first_flag;
-	rem2 = end_flag;
-	while (1)
+	dir = opendir(".");
+	
+	if (dir == NULL)
 	{
-		first_flag =rem1;
-		end_flag = rem2;
-		mgea_flag = 0;
-		temp = readdir(dir);
-		if (temp)
-		to_find =  temp->d_name;
-		if (temp == NULL)
-			break;
-		line = ft_strdup(temp->d_name);
-		printf("%s\n",line);
-		while (split[i])
-		{
-			if(!first_flag && split[i])
-			{
-				res = ft_strnstr(to_find, split[i],ft_strlen(split[0]));
-				if(res != NULL)
-				res +=ft_strlen(split[0]);
-				if (res == NULL)
-					break;
-				to_find = res;
-				first_flag = 1;
-				i++;
-			}
-			if(!end_flag && split[i])
-			{
-				to_find = reverce_str(to_find);
-				to_reverce = reverce_str(split[ft_strlen_2d((const char **)split) - 1]);
-				res = ft_strnstr(to_find, to_reverce, ft_strlen(to_reverce));
-				if(res != NULL)
-				res +=ft_strlen(to_reverce);
-				if (res == NULL)
-					break;
-				res = reverce_str(res);
-				split[ft_strlen_2d((const char **)split) - 1] = reverce_str(to_reverce);
-				to_find = res;
-				end_flag = 1;
-				mgea_flag = 1;
-				i++;
-			}
-			if(split[i])
-			{
-				if (mgea_flag == 1)
-					i--;
-				res = (ft_strstr(to_find, split[i]));
-				if (res != NULL)
-					res++;
-				if (res == NULL)
-					break;
-				to_find = res;
-				if (mgea_flag == 1)
-					i+=2;
-				else
-					i++;
-			}
-		}
-		if (i == ft_strlen_2d((const char **)split))
-				wordl_push_back(&word,word_new(line, args->flags | W_FILEEXP));
-			// printf("%s\n",line);
-		i = 0;
-		free(line);
+		perror("Unable to open directory");
+ 		exit(EXIT_FAILURE);
 	}
-
-	free_2d(split);
+	while ((entry = readdir(dir)) != NULL)
+	{
+		if (entry->d_name[0] != '.')//hastat chi entry->d_type != DT_DIR es pah@
+			if (wildcard_match(args->value, entry->d_name))
+				wordl_push_back(&word, word_new(entry->d_name, args->flags | W_FILEEXP));
+	}
 	closedir(dir);
 	return (word);
 }

@@ -1,33 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 17:25:08 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 18:02:46 by dohanyan         ###   ########.fr       */
+/*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
+/*   Updated: 2023/07/18 19:33:23 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
+#include <libft.h>
 
-char	*get_line(t_list *var_list, int fd)
-{
-	char	*str;
-
-	str = readline(lst_get_by_key(var_list, "PS1")->value);
-	if (!str)
-	{
-		write (2, "exit\n", 5);
-		exit(EXIT_SUCCESS);
-	}
-	if (!(*str))
-	{
-		free(str);
-		return (NULL);
-	}
-	add_history(str);
-	ft_putendl_fd(str, fd);
-	return (str);
-}
+int	parce_heredoc(t_wordl *word)
