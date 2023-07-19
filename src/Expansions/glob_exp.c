@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/20 00:22:35 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/20 00:54:24 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,24 @@ static t_wordl	*apply(t_word *args);
  */
 void	glob_exp(t_node *node)
 {
+	t_wordl	*head;
 	t_wordl	*args;
 	t_wordl	*temp;
-	t_wordl	*head;
+	t_wordl	*next;
 
 	args =  wordl_dup(node->value.word);
 	args = make_word(args);
 	head = args;
 	while (args)
 	{
+		next = args->next;
 		if (is_glob_required(args)) 
 		{
 			quote_remove(args->word);
 			temp = apply(args->word);
 			replace(&head, args, temp);
 		}
-		args = args->next;
+		args = next;
 	}
 	wordl_clear(node->value.word);
 	node->value.word = head;
@@ -86,25 +88,6 @@ static int	is_glob_required(t_wordl *head)
 	return (0);
 }
 
-char *reverce_str(char *str)
-{
-	int len;
-	int i;
-	char s1;
-
-	len = ft_strlen(str);
-	i = 0;
-	int j = len - 1;
-	while (i < len / 2)
-	{
-		s1 = str[i];
-		str[i] = str[j];
-		str[j] = s1;
-		i++;
-		j--;
-	}
-	return (str);
-}
 
 int wildcard_match(const char *pattern, const char *string) 
 {
@@ -192,6 +175,16 @@ static void	quote_remove(t_word *word)
 
 static void	replace(t_wordl **head, t_wordl *to_replace, t_wordl *replace_with)
 {
+	t_wordl	*prev;
+	t_wordl	*next;
+
+	prev = wordl_find_prev(*head, to_replace);
+	next = to_replace->next;
+	if (prev)
+		prev->next = replace_with;
+	else
+		*head = replace_with;
+	wordl_last(replace_with)->next = next;
+	to_replace->next = NULL;
 	wordl_clear(to_replace);
-	*head = replace_with;
 }
