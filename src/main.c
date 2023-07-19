@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/19 15:17:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:03:43 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	true_loop(t_control *ctl)
 			free(ctl->input);
 			continue ;
 		}
-		visit(ctl, ctl->tree, expand);
-		visit(ctl, ctl->tree, preprocess);
 		execute(ctl, ctl->tree);
 		while (wait(NULL) != -1)
 			;
