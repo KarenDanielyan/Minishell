@@ -36,7 +36,7 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				wordl.c wordl_2.c wordl_3.c) \
 				$(patsubst %.c, $(SRC)/BuiltIns/%.c,\
 				history.c env.c pwd.c cd.c unset.c \
-				echo.c exit.c export.c) \
+				echo.c exit.c export.c set.c) \
 				$(patsubst %.c, $(SRC)/Init/%.c,\
 				env_init.c mode_init.c sig_init.c \
 				input.c init.c builtin_init.c) \

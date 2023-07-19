@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/19 01:30:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:01:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ void	visit(t_control *ctl, t_node *self, \
 
 /* Built-Ins */
 void	history(t_wordl *wordl, t_list *var_list);
-void	pwd(void);
-void	cd(t_wordl *wordl, t_list *var_list);
-void	env(t_list *env);
-void	unset(t_list **var_list, t_wordl *wordl);
 void	my_exit(t_list *var_list, t_wordl *wordl);
-void	echo(t_wordl *wordl);
+void	unset(t_list **var_list, t_wordl *wordl);
 void	export(t_list *var_list, t_wordl *args);
+void	cd(t_wordl *wordl, t_list *var_list);
+void	set(t_wordl *cmd, t_control *ctl);
+void	echo(t_wordl *wordl);
+void	env(t_list *env);
+void	pwd(void);
 
 /* Utils */
 void	print_logo(void);
