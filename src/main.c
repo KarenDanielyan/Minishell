@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/19 01:55:01 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:17:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "lex.h"
 #include "minishell.h"
 #include "debug.h"
+#include <sys/wait.h>
 
 static void	switch_case(t_list *var_list, char *str)
 {
@@ -70,6 +71,10 @@ void	true_loop(t_control *ctl)
 		}
 		visit(ctl, ctl->tree, expand);
 		visit(ctl, ctl->tree, preprocess);
+		execute(ctl, ctl->tree);
+		while (wait(NULL) != -1)
+			;
+		print_tree(ctl->tree, "", 1);
 		switch_case(ctl->var_list, ctl->input);
 		visit(NULL, ctl->tree, drop);
 		free(ctl->input);

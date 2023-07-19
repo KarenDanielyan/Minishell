@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:25:50 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/17 02:30:05 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:03:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	field_splitting(t_node *node, t_list *var_list)
 	while (current)
 	{
 		next = current->next;
-		if (current->word->flags & W_PARMEXP && *(current->word->value))
+		if ((current->word->flags & (W_PARMEXP | W_ASSIGNMENT)) == W_PARMEXP \
+			&& *(current->word->value))
 		{
 			prev = wordl_find_prev(node->value.word, current);
 			before_replace = current;
