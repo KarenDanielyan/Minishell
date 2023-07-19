@@ -62,7 +62,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				preprocess.c) \
 				$(patsubst %.c, $(SRC)/Execute/%.c,\
 				execute.c exec_functions.c exec_utils.c \
-				exec_functions_2.c exec_functions_3.c)
+				exec_functions_2.c exec_functions_3.c \
+				exec_functions_4.c)
 
 
 OBJS		=	$(foreach dir, $(SUBDIRS), \

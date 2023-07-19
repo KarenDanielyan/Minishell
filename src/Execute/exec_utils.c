@@ -6,10 +6,11 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:45:51 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 14:51:51 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:58:31 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "execute.h"
 #include <libft.h>
 #include <stdlib.h>
@@ -55,4 +56,23 @@ char	**get_path(t_list *var_list)
 			split = ft_split(value, PATH_DELIM);
 	}
 	return (split);
+}
+
+int	is_assignment(t_word *word)
+{
+	char	**split;
+
+	if (word)
+	{
+		if (word->value)
+		{
+			if (ft_strchr(word->value, EQUALS))
+			{
+				split = ft_split(word->value, EQUALS);
+				if (is_name(split[0]))
+					return (1);
+			}
+		}
+	}
+	return (0);
 }

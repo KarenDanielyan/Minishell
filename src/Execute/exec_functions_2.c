@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:01:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 00:42:33 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:50:48 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	execute_ccommand(t_control *ctl, t_node *self)
 
 static void	set_child_fds(t_node *self)
 {
-	t_node *cmd;
+	t_node	*cmd;
 
 	cmd = self->value.cmd.command;
 	if (cmd->type == CompoundCommandNode)
