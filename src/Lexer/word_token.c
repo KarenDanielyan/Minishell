@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 22:57:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/08 21:21:49 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:14:19 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ static void	check_flag_change(char c, int *flags, int *flag)
 		*flag = *flag | W_HASDOLLAR | W_PARMEXP;
 	if (c == TILDE && !(*flag & (W_SQUOTE | W_DQUOTE)))
 			*flag = *flag | W_TILDEEXP;
-	if (c == EQUALS && !(*flag & (W_SQUOTE | W_DQUOTE)))
-		*flag = *flag | W_ASSIGNMENT;
 }
 
 static t_word	*get_quoted_word(char **s, int *flags)

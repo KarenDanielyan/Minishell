@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:24:45 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/17 02:20:19 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:37:32 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,23 @@ void	wordl_pop(t_wordl **head, t_wordl *to_pop)
 		word_delete(to_pop->word);
 		free(to_pop);
 	}
+}
+
+char	**wordl_to_array(t_wordl *word)
+{
+	int		len;
+	char	**arr;
+	char	**tmp;
+
+	len = wordl_size(word);
+	arr = (char **)malloc((len + 1) * sizeof(char *));
+	tmp = arr;
+	while (word)
+	{
+		*tmp = ft_strdup(word->word->value);
+		tmp ++;
+		word = word->next;
+	}
+	*tmp = NULL;
+	return (arr);
 }

@@ -32,6 +32,9 @@
       "externalConsole": false,
       "cwd": "${workspaceFolder}",
       "program": "${workspaceFolder}/minishell",
+      "environment": [
+        {"name": "ABBB", "value": "among    us"}
+      ],
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

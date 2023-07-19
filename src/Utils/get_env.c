@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:42:52 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/06 02:22:00 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:38:31 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	get_env_len(t_list *var_list);
  * @param var_list	A variable linked list.
  * @return char**	Environment variables represented as a string array.
  * 
- * WARNING:			This array works directily with the variable list
+ * WARN:			This array works directily with the variable list
  * 					and should not be freed.
  */
 char	**get_env(t_list	*var_list)

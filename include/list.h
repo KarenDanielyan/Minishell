@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:15:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 01:53:49 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:36:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	wordl_push_back(t_wordl **wordl, t_word *word);
 void	wordl_push_front(t_wordl **wordl, t_word *word);
 
 int		wordl_size(t_wordl *head);
+
+char	**wordl_to_array(t_wordl *word);
 
 /* Words */
 t_word	*word_new(char *str, int flags);
