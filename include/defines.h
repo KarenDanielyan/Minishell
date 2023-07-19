@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 01:49:11 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:27:41 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 
 # define ERR_UNSET "unset: %s: invalid parameter name\n"
 
+# define PATH "PATH"
+#define PATH_DELIM ':'
 # define TILDE_VAR "TILDE"
 # define HISTFILE "/.minishell_history"
 # define PS1 "PS1=minishell-4.2$ "

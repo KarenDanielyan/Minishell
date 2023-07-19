@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:36:18 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/18 21:46:16 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:06:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	execute(t_control *ctl, t_node *self)
 		execute_scommand(ctl, self);
 	else if (self->type == CompoundCommandNode)
 		execute_ccommand(ctl, self);
-	else if (self->type == CmdPrefixNode)
-		execute_prefix(ctl, self);
-	else if (self->type == CmdSuffixNode)
-		execute_suffix(ctl, self);
-	else if (self->type == IORedirectNode)
-		execute_io(ctl, self);
+	// else if (self->type == CmdPrefixNode)
+	// 	execute_prefix(ctl, self);
+	// else if (self->type == CmdSuffixNode)
+	// 	execute_suffix(ctl, self);
+	// else if (self->type == IORedirectNode)
+	// 	execute_io(ctl, self);
 }
