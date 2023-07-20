@@ -42,7 +42,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				input.c init.c builtin_init.c) \
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
 				get_env.c print_logo.c is_token.c \
-				var_asign.c visit.c) \
+				var_asign.c visit.c my_fork.c \
+				set_ecode.c) \
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
 				word_lists.c operator_token.c \
 				word_token.c lex.c \
@@ -57,13 +58,13 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/Expansions/%.c,\
 				expand.c tilde_expand.c parm_exp.c \
 				quote_removal.c field_splitting.c \
-				make_word.c) \
+				join.c) \
 				$(patsubst %.c, $(SRC)/Preprocessor/%.c,\
 				preprocess.c) \
 				$(patsubst %.c, $(SRC)/Execute/%.c,\
 				execute.c exec_functions.c exec_utils.c \
 				exec_functions_2.c exec_functions_3.c \
-				exec_functions_4.c)
+				exec_functions_4.c exec_functions_5.c)
 
 
 OBJS		=	$(foreach dir, $(SUBDIRS), \
