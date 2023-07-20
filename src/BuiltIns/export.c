@@ -6,35 +6,40 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/20 01:00:47 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 01:49:29 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lex.h"
 
-void	ft_sort(char **env)
-{
-	int	len;
-	int	i;
-	int	j;
+static void	ft_sort(char **env);
+static void	ft_default(char **env, t_list *var_list);
 
-	len = ft_strlen_2d((const char **)env);
-	i = 0;
-	while (i < len -1)
+void	export(t_wordl *args, t_control *ctl)
+{
+	char	**split;
+	char	**env;
+	t_wordl	*temp;
+
+	temp = args->next;
+	env = get_env_key(ctl->var_list);
+	if (!temp)
+		ft_default(env, ctl->var_list);
+	while (temp)
 	{
-		j = i + 1;
-		while (j < len)
-		{
-			if (ft_strcmp(env[i], env[j]) > 0)
-				ft_swap((void **)&env[i], (void **)&env[j]);
-			j++;
-		}
-		i++;
+		split = ft_split(temp->word->value, EQUALS);
+		if (!is_name(split[0]))
+			printf("Minishell: export: `%s': not a valid identifier\n", \
+				temp->word->value);
+		lst_set_by_word(ctl->var_list, temp->word->value);
+		free_2d(split);
+		temp = temp->next;
 	}
+	free(env);
 }
 
-void	ft_default(char **env, t_list *var_list)
+static void	ft_default(char **env, t_list *var_list)
 {
 	int		i;
 	t_list	*tmp;
@@ -57,25 +62,23 @@ void	ft_default(char **env, t_list *var_list)
 	}
 }
 
-void	export(t_list *var_list, t_wordl *args)
+static void	ft_sort(char **env)
 {
-	char	**split;
-	char	**env;
-	t_wordl	*temp;
+	int	len;
+	int	i;
+	int	j;
 
-	temp = args->next;
-	env = get_env_key(var_list);
-	if (!temp)
-		ft_default(env, var_list);
-	while (temp)
+	len = ft_strlen_2d((const char **)env);
+	i = 0;
+	while (i < len -1)
 	{
-		split = ft_split(temp->word->value, EQUALS);
-		if (!is_name(split[0]))
-			printf("Minishell: export: `%s': not a valid identifier\n", \
-				temp->word->value);
-		lst_set_by_word(var_list, temp->word->value);
-		free_2d(split);
-		temp = temp->next;
+		j = i + 1;
+		while (j < len)
+		{
+			if (ft_strcmp(env[i], env[j]) > 0)
+				ft_swap((void **)&env[i], (void **)&env[j]);
+			j++;
+		}
+		i++;
 	}
-	free(env);
 }

@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 23:36:58 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 01:33:39 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@
 static char	*check_size(char *num);
 static void	check_valid(t_wordl *wordl, t_list *var_list);
 
-void	my_exit(t_list *var_list, t_wordl *wordl)
+void	my_exit(t_wordl *args, t_control *ctl)
 {
 	uint64_t	rv;
 	char		*siz;
 	char		*s;
 
-	check_valid(wordl, var_list);
-	siz = check_size(wordl->next->word->value);
+	check_valid(args, ctl->var_list);
+	siz = check_size(args->next->word->value);
 	if (ft_strlen(siz) > 19)
 	{
-		ft_dprintf(STDERR_FILENO, EINARG, wordl->next->word->value);
+		ft_dprintf(STDERR_FILENO, EINARG, args->next->word->value);
 		exit(1);
 	}
-	rv = ft_atul(wordl->next->word->value);
+	rv = ft_atul(args->next->word->value);
 	s = ft_itul(rv);
 	if (ft_strcmp(s, siz) != 0)
 	{
-		ft_dprintf(STDERR_FILENO, EINARG, wordl->next->word->value);
+		ft_dprintf(STDERR_FILENO, EINARG, args->next->word->value);
 		exit(EXIT_FAILURE);
 	}
 	exit(rv % 256);

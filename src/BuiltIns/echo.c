@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 20:22:03 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/09 15:10:32 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 01:49:10 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 static int	check_flag(t_wordl *temp);
 static char	*create(t_wordl *temp);
 
-void	echo(t_wordl *wordl)
+void	echo(t_wordl *args, t_control *ctl)
 {
 	int		flag;
 	char	*word;
 	t_wordl	*temp;
 
+	(void)ctl;
 	word = NULL;
 	temp = NULL;
-	if (wordl->next)
-		temp = wordl->next;
+	if (args->next)
+		temp = args->next;
 	if (!temp)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);

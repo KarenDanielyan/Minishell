@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/20 22:25:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 01:27:38 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ void	visit(t_control *ctl, t_node *self, \
 	void (*op)(t_control *ctl, t_node *self));
 
 /* Built-Ins */
-void	history(t_wordl *wordl, t_list *var_list);
-void	my_exit(t_list *var_list, t_wordl *wordl);
-void	unset(t_list **var_list, t_wordl *wordl);
-void	export(t_list *var_list, t_wordl *args);
-void	cd(t_wordl *wordl, t_list *var_list);
+void	history(t_wordl *args, t_control *ctl);
+void	my_exit(t_wordl *args, t_control *ctl);
+void	unset(t_wordl *args, t_control *ctl);
+void	export(t_wordl *args, t_control *ctl);
+void	cd(t_wordl *args, t_control *ctl);
 void	set(t_wordl *cmd, t_control *ctl);
-void	echo(t_wordl *wordl);
-void	env(t_list *env);
-void	pwd(void);
+void	echo(t_wordl *cmd, t_control *ctl);
+void	env(t_wordl *cmd, t_control *ctl);
+void	pwd(t_wordl *cmd, t_control *ctl);
 
 /* Utils */
 void	set_ecode(t_control *ctl);

@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   quote_removal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 15:33:30 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/20 23:26:34 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 01:50:00 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "expand.h"
 #include <libft.h>
-
-static void	remove_quotes(t_word *word);
 
 void	quote_removal(t_node *self)
 {
@@ -32,7 +30,7 @@ void	quote_removal(t_node *self)
  * @brief	remove_quotes() removes quotes from the word.
  * 
  */
-static void	remove_quotes(t_word *word)
+void	remove_quotes(t_word *word)
 {
 	char	*s;
 	char	*unquoted_word;

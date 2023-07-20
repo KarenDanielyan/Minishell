@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 23:22:46 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 01:46:57 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@
 # define TILDE '~'
 # define CURL_BRACE_L '{'
 # define CURL_BRACE_R '}'
+
+# define SUCCESS "0"
+# define FAIL "1"
 
 # define FD_INIT -42
 # define LAST_INIT -24
