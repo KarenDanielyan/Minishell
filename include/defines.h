@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 16:17:01 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:05:13 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # define ERROR_EOL "minishell: syntax error: unexpected end of line."
 # define ERROR_QUOTES "minishell: unexpected EOL while looking for matching `"
 # define ERROR_HIS "numeric argument required"
+# define ENOCMD "command not found"
 # define EPERROR "minishell: "
+# define ERROR_IO "minishell: ambiguous redirect\n"
 
 # define ERR_UNSET "unset: %s: invalid parameter name\n"
 
@@ -353,6 +355,7 @@ typedef struct s_Node
 
 typedef struct s_control
 {
+	int				estat;
 	int				hist_fd;
 	char			*input;
 	struct s_flist	*built_ins;

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:17:41 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 18:17:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:17:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "defines.h"
 # include "list.h"
 
-void	execute(t_control *ctl, t_node *self);
+int		execute(t_control *ctl, t_node *self);
 
 void	execute_pipeline(t_control *ctl, t_node *self);
 void	execute_scommand(t_control *ctl, t_node *self);
@@ -31,8 +31,9 @@ int		execute_suffix(t_control *ctl, t_node *self);
 int		execute_io(t_control *ctl, t_node *self);
 
 /* Utils */
-char	*get_file_path(char **path, char *file);
-char	**get_path(t_list *var_list);
+char	*cmd_search(t_wordl *cmd, t_list *var_list);
+
+void	execute_and_check(char *cmd, char **args, char **env);
 
 int		is_assignment(t_word *word);
 

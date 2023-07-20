@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/19 16:01:45 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:25:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "defines.h"
 # include "list.h"
+# include <errno.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <libft.h>
@@ -45,7 +46,7 @@ void	expand(t_control *ctl, t_node *self);
 void	preprocess(t_control *ctl, t_node *self);
 
 /* Execution */
-void	execute(t_control *ctl, t_node *self);
+int	execute(t_control *ctl, t_node *self);
 
 /* Tree Visit Function */
 void	visit(t_control *ctl, t_node *self, \
@@ -63,6 +64,7 @@ void	env(t_list *env);
 void	pwd(void);
 
 /* Utils */
+void	set_ecode(t_control *ctl);
 void	print_logo(void);
 
 char	**get_env(t_list *var_list);
@@ -72,6 +74,7 @@ char	**get_key_value(char *assign_word);
 int		is_assign_word(t_wordl *head);
 int		is_quote(char c, int *flags);
 int		is_name(char *str);
+int		my_fork(void);
 
 /* Signal */
 int		handler(void);

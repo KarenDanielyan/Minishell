@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 02:56:09 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/17 19:29:03 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:21:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXPAND_H
 
 # include "defines.h"
+# include "list.h"
 
 void	tilde_exp(t_node *node, t_list *var_list);
 void	param_exp(t_node *node, t_list *var_list);
