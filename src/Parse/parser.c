@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/18 21:11:48 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:29:06 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	*parse(t_token *scanner, t_list *var_list)
 
 	err = 0;
 	node = parse_list(&scanner, &err);
-	print_tree(node, "", 1);
 	handle_syntax_errors(&node, scanner, var_list, err);
 	return ((void *)node);
 }

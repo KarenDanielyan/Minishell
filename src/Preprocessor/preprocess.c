@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 20:48:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/12 02:49:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:07:09 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ void	preprocess(t_control *ctl, t_node *self)
 {
 	(void)ctl;
 	if (self->type == SimpleCommandNode)
-	{
 		move_args(self);
-	}
 	return ;
 }
 
