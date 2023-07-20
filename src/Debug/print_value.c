@@ -6,16 +6,16 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:22:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/18 21:32:07 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:49:54 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "debug.h"
 
 static void	print_word_node(t_wordl *head);
-static void print_pipe(t_node *self);
+static void	print_pipe(t_node *self);
 static void	print_list(t_node *self);
-static void print_io(t_node *self);
+static void	print_io(t_node *self);
 
 void	print_value(t_node *node)
 {
@@ -39,10 +39,10 @@ static void	print_list(t_node *self)
 	if (self->value.list.type == AND)
 		printf("\033[37m{%s}\033[0m", AND_IF);
 	else
-	printf("\033[37m{%s}\033[0m", OR_IF);
+		printf("\033[37m{%s}\033[0m", OR_IF);
 }
 
-static void print_pipe(t_node *self)
+static void	print_pipe(t_node *self)
 {
 	printf("\033[37m{%d -> %d}\033[0m", \
 		self->value.pipeline.in_fd, self->value.pipeline.out_fd);

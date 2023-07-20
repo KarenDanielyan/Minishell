@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:44:43 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 21:47:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:51:57 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	execute_scommand(t_control *ctl, t_node *self)
 		handle_command(ctl, self);
 }
 
-static void handle_builtin(t_control *ctl, t_node *self, t_flist *builtin)
+static void	handle_builtin(t_control *ctl, t_node *self, t_flist *builtin)
 {
 	int	pid;
 
@@ -73,16 +73,14 @@ static void	handle_command(t_control *ctl, t_node *self)
 	{
 		dup2(self->value.s_cmd.in_fd, STDIN_FILENO);
 		dup2(self->value.s_cmd.out_fd, STDOUT_FILENO);
+		handle_suffix(ctl, self, pid);
 	}
 	if (self->value.s_cmd.in_fd != STDIN_FILENO)
 		close(self->value.s_cmd.in_fd);
 	if (self->value.s_cmd.out_fd != STDOUT_FILENO)
 		close(self->value.s_cmd.out_fd);
 	if (pid == 0)
-	{
-		handle_suffix(ctl, self, pid);
 		execute_and_check(cmd, args, env);
-	}
 	free(cmd);
 	free(env);
 	free_2d(args);
@@ -115,4 +113,3 @@ static t_flist	*get_builtin(t_control *ctl, t_node *word)
 	}
 	return (builtins);
 }
-

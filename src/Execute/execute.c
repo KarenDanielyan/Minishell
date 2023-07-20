@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:36:18 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 16:43:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:50:14 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	execute(t_control *ctl, t_node *self)
 	else if (self->type == CommandNode)
 		execute_command(ctl, self);
 	else if (self->type == SimpleCommandNode)
-	execute_scommand(ctl, self);
+		execute_scommand(ctl, self);
 	else if (self->type == CompoundCommandNode)
 		execute_ccommand(ctl, self);
 	else if (self->type == CmdPrefixNode)

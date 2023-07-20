@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 01:10:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 22:05:31 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:52:36 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,3 @@ t_control	init(int ac, char **av, char **env)
 	sig_init();
 	return (ctl);
 }
-
-
