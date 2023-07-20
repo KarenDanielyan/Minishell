@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:37:10 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/20 02:04:51 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/20 23:36:50 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include <dirent.h>
 #include <stdio.h>
 
-static void	replace(t_wordl **head, t_wordl *to_replace, t_wordl *replace_with);
-static int	is_glob_required(t_wordl *head);
-static void	quote_remove(t_word *word);
+static int		is_glob_required(t_wordl *head);
 static t_wordl	*apply(t_word *args);
+static void		replace(t_wordl **head, t_wordl *to_replace, \
+				t_wordl *replace_with);
 
 /**
  * @brief		glob_exp() performes filename expansion on the provided word.
@@ -38,16 +38,14 @@ void	glob_exp(t_node *node)
 	t_wordl	*temp;
 	t_wordl	*next;
 
-	args =  wordl_dup(node->value.word);
-	args = make_word(args);
+	args = wordl_dup(node->value.word);
 	head = args;
-
 	while (args)
 	{
 		next = args->next;
-		if (is_glob_required(args)) 
+		if (is_glob_required(args))
 		{
-			quote_remove(args->word);
+			remove_quotes(args->word);
 			temp = apply(args->word);
 			if (temp)
 				replace(&head, args, temp);
@@ -90,61 +88,28 @@ static int	is_glob_required(t_wordl *head)
 	return (0);
 }
 
-
-int wildcard_match(const char *pattern, const char *string)
-{
-	const char *p = NULL;
-	const char *s = NULL;
-	int star = 0;
-
-	while (*string != '\0')
-	{
-		if ( *pattern == *string)
-		{
-			pattern++;
-			string++;
-		} 
-		else if (*pattern == '*')
-		{
-			star = 1;
-			p = pattern++;
-			s = string;
-		} 
-		else if (star)
-		{
-			pattern = p + 1;
-			string = ++s;
-		}
-		else
-			return 0;
-	}
-	while (*pattern == '*')
-		pattern++;
-	return (*pattern == '\0');
-}
-
-static t_wordl *apply(t_word *args)
+static t_wordl	*apply(t_word *args)
 {	
- 	DIR *dir;
-	t_wordl *word;
-	struct dirent *entry;
+	DIR				*dir;
+	t_wordl			*word;
+	struct dirent	*entry;
 
 	word = NULL;
 	dir = opendir(".");
 	if (dir == NULL)
 	{
 		perror("minishell: ");
- 		exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	while (1)
 	{
 		entry = readdir(dir);
-		if(entry == NULL)
-			break;
-
+		if (entry == NULL)
+			break ;
 		if (ft_strchr(args->value, DOT) || entry->d_name[0] != '.')
 			if (wildcard_match(args->value, entry->d_name))
-				wordl_push_back(&word, word_new(entry->d_name, args->flags | W_FILEEXP));
+				wordl_push_back(&word, \
+					word_new(entry->d_name, args->flags | W_FILEEXP));
 	}
 	closedir(dir);
 	return (word);
@@ -154,29 +119,6 @@ static t_wordl *apply(t_word *args)
  * @brief	quote_remove() removes quotes from the word.
  * 
  */
-static void	quote_remove(t_word *word)
-{
-	char	*s;
-	char	*unquoted_word;
-	int		quote_lvl;
-	
-	
-	unquoted_word = NULL;
-	s = word->value;
-	quote_lvl = 0;
-	while (*s)
-	{
-		if (*s == DQUOTE && !(quote_lvl & W_SQUOTE))
-			quote_lvl = quote_lvl ^ W_DQUOTE;
-		else if (*s == SQUOTE && !(quote_lvl & W_DQUOTE))
-			quote_lvl = quote_lvl ^ W_SQUOTE;
-		else
-			ft_strappend(&unquoted_word, *s);
-		s++;
-	}
-	free(word->value);
-	word->value = unquoted_word;
-}
 
 static void	replace(t_wordl **head, t_wordl *to_replace, t_wordl *replace_with)
 {

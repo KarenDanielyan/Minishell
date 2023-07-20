@@ -53,8 +53,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				check_syntax.c) \
 				$(patsubst %.c, $(SRC)/Expansions/%.c,\
 				expand.c tilde_expand.c parm_exp.c \
-				quote_removal.c field_splitting.c make_word.c \
-				glob_exp.c)
+				quote_removal.c field_splitting.c join.c \
+				glob_exp.c wildcard_match.c)
 
 
 OBJS		=	$(foreach dir, $(SUBDIRS), \
