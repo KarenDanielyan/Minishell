@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:37:46 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/12 02:49:47 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 23:27:51 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	lst_set_by_word(t_list *var_list, char *assign_word)
 		lst_push_back(&var_list, lst_new(EXPORT, ft_strjoin(tmp, split[1])));
 	else
 	{
-		free(var->value);
+		free(var->value); 
 		free(var->joined);
 		var->value = ft_strdup(split[1]);
 		var->joined = ft_strjoin(tmp, split[1]);

@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 17:25:08 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 18:02:46 by dohanyan         ###   ########.fr       */
+/*   Created: 2023/07/12 16:11:24 by dohanyan          #+#    #+#             */
+/*   Updated: 2023/07/16 18:09:09 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-char	*get_line(t_list *var_list, int fd)
+char	*ft_strstr(char *str, char *to_find)
 {
-	char	*str;
+	int	i;
+	int	j;
 
-	str = readline(lst_get_by_key(var_list, "PS1")->value);
-	if (!str)
+	i = 0;
+	j = 0;
+	if (to_find[i] == '\0')
+		return (str);
+	while (str[i] != '\0')
 	{
-		write (2, "exit\n", 5);
-		exit(EXIT_SUCCESS);
+		while (str[i + j] == to_find[j] && str[i + j] != '\0')
+		{
+			j++;
+		}
+		if (to_find[j] == '\0')
+			return (str + i);
+		i++;
+		j = 0;
 	}
-	if (!(*str))
-	{
-		free(str);
-		return (NULL);
-	}
-	add_history(str);
-	ft_putendl_fd(str, fd);
-	return (str);
+	return (0);
 }

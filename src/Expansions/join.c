@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_word.c                                        :+:      :+:    :+:   */
+/*   join.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 02:15:33 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/17 19:28:38 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 23:25:47 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 
 static int		is_join_required(t_wordl *head);
 static t_wordl	*get_joined_word(t_wordl *head);
+static int		is_join_required(t_wordl *head);
+static t_wordl	*get_joined_word(t_wordl *head);
 static t_wordl	*get_sublist(t_wordl *head, t_wordl **next);
+static void		get_dimensions(t_wordl *head, t_wordl **from, \
+	t_wordl **to, t_wordl **next);
 static void		get_dimensions(t_wordl *head, t_wordl **from, \
 	t_wordl **to, t_wordl **next);
 

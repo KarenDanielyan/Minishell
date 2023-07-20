@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 22:21:00 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 19:38:29 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/12 16:14:00 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size);
 char		*ft_strdup(const char *s);
 char		*ft_strchr(const char *str, int c);
 char		*ft_strrchr(const char *str, int c);
+char		*ft_strstr(char *str, char *to_find);
 char		*ft_strcpy(char *dest, const char *src);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 

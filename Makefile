@@ -58,7 +58,7 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/Expansions/%.c,\
 				expand.c tilde_expand.c parm_exp.c \
 				quote_removal.c field_splitting.c \
-				join.c) \
+				join.c glob_exp.c wildcard_match.c) \
 				$(patsubst %.c, $(SRC)/Preprocessor/%.c,\
 				preprocess.c) \
 				$(patsubst %.c, $(SRC)/Execute/%.c,\

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 22:05:13 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 23:22:46 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@
 # define DQUOTE '\"'
 # define DQUOTE_S "\""
 # define ECODE "?"
+# define WILDCARD '*'
+# define DOT '.'
 
 /* Special Symbols */
 # define TILDE '~'
