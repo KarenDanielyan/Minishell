@@ -6,10 +6,11 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:50:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 00:25:47 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:25:38 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "execute.h"
 #include <libft.h>
 #include <stdio.h>
@@ -19,18 +20,14 @@ static void	set_fd_values(t_node *self);
 
 void	execute_list(t_control *ctl, t_node *self)
 {
-	int	rv;
-
 	execute(ctl, self->value.list.left);
-	while (wait(&rv) != -1)
+	while (wait(&(ctl->estat)) != -1)
 		;
-	//rv = ft_atoi(lst_get_by_key(ctl->var_list, ECODE)->value);
-	if (rv == 0 && self->value.list.type == AND)
+	set_ecode(ctl);
+	if (ctl->estat == 0 && self->value.list.type == AND)
 		execute(ctl, self->value.list.right);
-	else if (rv != 0 && self->value.list.type == OR)
+	else if (ctl->estat != 0 && self->value.list.type == OR)
 		execute(ctl, self->value.list.right);
-	while (wait(&rv) != -1)
-		;
 }
 
 void	execute_pipeline(t_control *ctl, t_node *self)

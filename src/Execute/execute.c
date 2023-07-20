@@ -6,15 +6,16 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:36:18 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 15:39:03 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:43:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+#include "debug.h"
 #include "minishell.h"
 #include <libft.h>
 
-void	execute(t_control *ctl, t_node *self)
+int	execute(t_control *ctl, t_node *self)
 {
 	if (self->type == SimpleCommandNode || self->type == CmdSuffixNode)
 	{
@@ -28,13 +29,14 @@ void	execute(t_control *ctl, t_node *self)
 	else if (self->type == CommandNode)
 		execute_command(ctl, self);
 	else if (self->type == SimpleCommandNode)
-		execute_scommand(ctl, self);
+	execute_scommand(ctl, self);
 	else if (self->type == CompoundCommandNode)
 		execute_ccommand(ctl, self);
 	else if (self->type == CmdPrefixNode)
-		execute_prefix(ctl, self);
+		return (execute_prefix(ctl, self));
 	else if (self->type == CmdSuffixNode)
-		execute_suffix(ctl, self);
+		return (execute_suffix(ctl, self));
 	else if (self->type == IORedirectNode)
-		execute_io(ctl, self);
+		return (execute_io(ctl, self));
+	return (EXIT_SUCCESS);
 }

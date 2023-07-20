@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:44:43 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 16:04:18 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/20 21:47:02 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,60 @@
 #include <libft.h>
 #include <stdio.h>
 
+static void		handle_builtin(t_control *ctl, t_node *self, t_flist *builtin);
+static int		handle_suffix(t_control *ctl, t_node *self, int pid);
+static void		handle_command(t_control *ctl, t_node *self);
 static t_flist	*get_builtin(t_control *ctl, t_node *word);
-static void		handle_fork(int pid, t_node *self, \
-	t_flist *builtin_cmd, t_control *ctl);
-static void		exec(t_wordl *cmd, t_control *ctl);
 
 void	execute_scommand(t_control *ctl, t_node *self)
 {
 	t_flist	*builtin_cmd;
-	t_node	*word;
-	int		pid;
 
-	pid = 0;
-	word = self->value.s_cmd.word;
-	builtin_cmd = get_builtin(ctl, word);
-	if (!builtin_cmd || \
-		word->value.word->word->flags & (W_SUBSHELL_PAREN | W_SUBSHELL_PIPE))
-		pid = fork();
-	if (pid < 0)
-	{
-		perror(EPERROR);
-		exit(EXIT_FAILURE);
-	}
-	handle_fork(pid, self, builtin_cmd, ctl);
+	builtin_cmd = get_builtin(ctl, self->value.s_cmd.word);
+	if (builtin_cmd || is_assignment(self->value.s_cmd.word->value.word->word))
+		handle_builtin(ctl, self, builtin_cmd);
+	else
+		handle_command(ctl, self);
 }
 
-static void	handle_fork(int pid, t_node *self, \
-	t_flist *builtin_cmd, t_control *ctl)
+static void handle_builtin(t_control *ctl, t_node *self, t_flist *builtin)
 {
-	t_node	*cmd;
+	int	pid;
 
-	cmd = self->value.s_cmd.word;
+	pid = -42;
+	if (self->value.s_cmd.word->value.word->word->flags & W_SUBSHELL_PIPE)
+		pid = my_fork();
+	if (pid == 0 || pid == -42)
+	{
+		dup2(self->value.s_cmd.in_fd, STDIN_FILENO);
+		dup2(self->value.s_cmd.out_fd, STDOUT_FILENO);
+	}
+	if (self->value.s_cmd.in_fd != STDIN_FILENO)
+		close(self->value.s_cmd.in_fd);
+	if (self->value.s_cmd.out_fd != STDOUT_FILENO)
+		close(self->value.s_cmd.out_fd);
+	if (pid == 0 || pid == -42)
+	{
+		if (handle_suffix(ctl, self, pid) == EXIT_FAILURE)
+			return ;
+		if (builtin)
+			builtin->cmd(self->value.s_cmd.word->value.word, ctl);
+		else
+			set(self->value.s_cmd.word->value.word, ctl);
+	}
+}
+
+static void	handle_command(t_control *ctl, t_node *self)
+{
+	int		pid;
+	char	**args;
+	char	**env;
+	char	*cmd;
+
+	args = wordl_to_array(self->value.s_cmd.word->value.word);
+	env = get_env(ctl->var_list);
+	cmd = cmd_search(self->value.s_cmd.word->value.word, ctl->var_list);
+	pid = my_fork();
 	if (pid == 0)
 	{
 		dup2(self->value.s_cmd.in_fd, STDIN_FILENO);
@@ -57,14 +80,24 @@ static void	handle_fork(int pid, t_node *self, \
 		close(self->value.s_cmd.out_fd);
 	if (pid == 0)
 	{
-		execute(ctl, self->value.s_cmd.suffix);
-		if (builtin_cmd)
-			builtin_cmd->cmd(cmd->value.word, ctl);
-		else if (is_assignment(cmd->value.word->word))
-			set(cmd->value.word, ctl);
-		else
-			exec(self->value.s_cmd.word->value.word, ctl);
+		handle_suffix(ctl, self, pid);
+		execute_and_check(cmd, args, env);
 	}
+	free(cmd);
+	free(env);
+	free_2d(args);
+}
+
+static int	handle_suffix(t_control *ctl, t_node *self, int pid)
+{
+	if (execute(ctl, self->value.s_cmd.suffix) == EXIT_FAILURE)
+	{
+		if (pid == 0)
+			exit(EXIT_FAILURE);
+		else
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }
 
 static t_flist	*get_builtin(t_control *ctl, t_node *word)
@@ -83,22 +116,3 @@ static t_flist	*get_builtin(t_control *ctl, t_node *word)
 	return (builtins);
 }
 
-static void	exec(t_wordl *cmd, t_control *ctl)
-{
-	char	**args;
-	char	**path;
-	char	**env;
-	char	*cmd_path;
-
-	if (cmd)
-	{
-		args = wordl_to_array(cmd);
-		path = get_path(ctl->var_list);
-		cmd_path = get_file_path(path, args[0]);
-		env = get_env(ctl->var_list);
-		execve(cmd_path, args, env);
-		perror(EPERROR);
-		exit(EXIT_FAILURE);
-	}
-	exit(EXIT_SUCCESS);
-}
