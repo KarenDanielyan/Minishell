@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:47:20 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 01:47:22 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:53:35 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	unset(t_wordl *args, t_control *ctl)
+int	unset(t_wordl *args, t_control *ctl)
 {
 	t_list	*delete;
 	t_wordl	*temp;
@@ -25,6 +25,7 @@ void	unset(t_wordl *args, t_control *ctl)
 			delete = lst_get_by_key(ctl->var_list, temp->word->value);
 			if (delete && delete->type != PRIVATE)
 				lst_pop(&ctl->var_list, delete);
+			lst_set(ctl->var_list, ECODE, SUCCESS);
 		}
 		else
 		{
@@ -33,5 +34,5 @@ void	unset(t_wordl *args, t_control *ctl)
 		}
 		temp = temp->next;
 	}
-	lst_set(ctl->var_list, ECODE, SUCCESS);
+	return (ft_atoi(lst_get_by_key(ctl->var_list, ECODE)->value));
 }

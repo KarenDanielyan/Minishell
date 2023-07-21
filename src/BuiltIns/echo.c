@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 20:22:03 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 01:49:10 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:53:36 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_flag(t_wordl *temp);
 static char	*create(t_wordl *temp);
 
-void	echo(t_wordl *args, t_control *ctl)
+int	echo(t_wordl *args, t_control *ctl)
 {
 	int		flag;
 	char	*word;
@@ -29,7 +29,7 @@ void	echo(t_wordl *args, t_control *ctl)
 	if (!temp)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	flag = check_flag(temp);
 	if (flag)
@@ -39,6 +39,7 @@ void	echo(t_wordl *args, t_control *ctl)
 	if (!flag)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	free(word);
+	return (EXIT_SUCCESS);
 }
 
 static int	check_flag(t_wordl *temp)

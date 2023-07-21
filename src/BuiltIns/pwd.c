@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:01:08 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 01:37:48 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:51:09 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	pwd(t_wordl *cmd, t_control *ctl)
+int	pwd(t_wordl *cmd, t_control *ctl)
 {
 	char	*pwd;
 
@@ -23,7 +23,8 @@ void	pwd(t_wordl *cmd, t_control *ctl)
 	{
 		printf("%s\n", pwd);
 		free(pwd);
+		return (EXIT_SUCCESS);
 	}
-	else
-		perror("getcwd() error");
+	perror(EPERROR);
+	return (EXIT_FAILURE);
 }

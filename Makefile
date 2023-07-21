@@ -64,7 +64,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/Execute/%.c,\
 				execute.c exec_functions.c exec_utils.c \
 				exec_functions_2.c exec_functions_3.c \
-				exec_functions_4.c exec_functions_5.c)
+				exec_functions_4.c exec_functions_5.c \
+				simple_cmd_handler.c)
 
 
 OBJS		=	$(foreach dir, $(SUBDIRS), \
@@ -78,7 +79,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g3 #-fsanitize=address
 
 INVOKE		=	libft printf
 

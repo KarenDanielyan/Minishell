@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 01:37:31 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 01:54:09 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:01:10 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-t_flist	*flist_new(char *name, void (*cmd)(t_wordl *command, t_control *ctl))
+t_flist	*flist_new(char *name, int (*cmd)(t_wordl *command, t_control *ctl))
 {
 	t_flist	*new;
 

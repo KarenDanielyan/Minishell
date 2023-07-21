@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 13:01:22 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:57:48 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdint.h>
 
 # define EINARG "minishell: exit: %s numeric argument required"
+# define E2MUCH "minishell: exit: too many arguments\n"
 # define ERROR_MSG "minishell: syntax error near unexpected token `"
 # define ERROR_EOL "minishell: syntax error: unexpected end of line."
 # define ERROR_QUOTES "minishell: unexpected EOL while looking for matching `"
@@ -26,6 +27,9 @@
 # define ERROR_IO "minishell: ambiguous redirect\n"
 
 # define ERR_UNSET "unset: %s: invalid parameter name\n"
+# define ERR_EXPORT "minishell: export: `%s': is not valid identifier\n"
+
+# define NOTE_HIST "usage: history\n"
 
 # define PATH "PATH"
 #define PATH_DELIM ':'
@@ -99,6 +103,12 @@
 #  define SYNTAX_ERR "258"
 
 # endif
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
 
 /**
  * @brief	Variable scope enumeration.
@@ -371,8 +381,8 @@ typedef struct s_control
 
 typedef struct s_flist
 {
-	char	*name;
-	void	(*cmd)(t_wordl *cmd, t_control *ctl);
+	char			*name;
+	int				(*cmd)(t_wordl *cmd, t_control *ctl);
 	struct s_flist	*next;
 }	t_flist;
 

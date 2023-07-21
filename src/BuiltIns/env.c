@@ -6,13 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:10:00 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 12:32:43 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:54:16 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env(t_wordl *cmd, t_control *ctl)
+int	env(t_wordl *cmd, t_control *ctl)
 {
 	t_list	*temp;
 
@@ -29,4 +29,5 @@ void	env(t_wordl *cmd, t_control *ctl)
 		}
 		temp = temp->next;
 	}
+	return (EXIT_SUCCESS);
 }

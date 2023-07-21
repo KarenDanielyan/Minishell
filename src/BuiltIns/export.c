@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 01:49:29 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:00:23 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,47 @@
 #include "lex.h"
 
 static void	ft_sort(char **env);
-static void	ft_default(char **env, t_list *var_list);
+static void	estat_set(t_control *ctl, int fail);
+static int	ft_default(char **env, t_list *var_list);
 
-void	export(t_wordl *args, t_control *ctl)
+int	export(t_wordl *args, t_control *ctl)
 {
 	char	**split;
 	char	**env;
 	t_wordl	*temp;
+	int		fail;
 
+	fail = FALSE;
 	temp = args->next;
 	env = get_env_key(ctl->var_list);
 	if (!temp)
-		ft_default(env, ctl->var_list);
+		return (ft_default(env, ctl->var_list));
 	while (temp)
 	{
 		split = ft_split(temp->word->value, EQUALS);
 		if (!is_name(split[0]))
-			printf("Minishell: export: `%s': not a valid identifier\n", \
-				temp->word->value);
+		{
+			ft_dprintf(STDERR_FILENO, ERR_EXPORT, temp->word->value);
+			fail = TRUE;
+		}
 		lst_set_by_word(ctl->var_list, temp->word->value);
 		free_2d(split);
 		temp = temp->next;
 	}
 	free(env);
+	estat_set(ctl, fail);
+	return (ft_atoi(lst_get_by_key(ctl->var_list, ECODE)->value));
 }
 
-static void	ft_default(char **env, t_list *var_list)
+static void	estat_set(t_control *ctl, int fail)
+{
+	if (fail)
+		lst_set(ctl->var_list, ECODE, FAIL);
+	else
+		lst_set(ctl->var_list, ECODE, SUCCESS);
+}
+
+static int	ft_default(char **env, t_list *var_list)
 {
 	int		i;
 	t_list	*tmp;
@@ -60,6 +75,7 @@ static void	ft_default(char **env, t_list *var_list)
 		printf("\n");
 		i ++;
 	}
+	return (EXIT_SUCCESS);
 }
 
 static void	ft_sort(char **env)

@@ -6,14 +6,15 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:00:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 12:32:52 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:32:10 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	set(t_wordl *cmd, t_control *ctl)
+int	set(t_wordl *cmd, t_control *ctl)
 {
 	(void)cmd;
 	(void)ctl;
+	return (EXIT_SUCCESS);
 }

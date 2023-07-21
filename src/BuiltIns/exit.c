@@ -3,43 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 01:33:39 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:26:17 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lex.h"
 
-static char	*check_size(char *num);
-static void	check_valid(t_wordl *wordl, t_list *var_list);
+static char		*jump_zeros(char *num);
+static uint64_t	check_numeric_arg(t_wordl *args, char *val);
+static int		check_valid(t_wordl *args, t_list *var_list, char *val);
 
-void	my_exit(t_wordl *args, t_control *ctl)
+int	my_exit(t_wordl *args, t_control *ctl)
 {
-	uint64_t	rv;
-	char		*siz;
-	char		*s;
+	t_wordl		*tmp;
+	int			rv;
+	char		*jumped;
 
-	check_valid(args, ctl->var_list);
-	siz = check_size(args->next->word->value);
-	if (ft_strlen(siz) > 19)
-	{
-		ft_dprintf(STDERR_FILENO, EINARG, args->next->word->value);
-		exit(1);
-	}
-	rv = ft_atul(args->next->word->value);
-	s = ft_itul(rv);
-	if (ft_strcmp(s, siz) != 0)
-	{
-		ft_dprintf(STDERR_FILENO, EINARG, args->next->word->value);
-		exit(EXIT_FAILURE);
-	}
-	exit(rv % 256);
+	ft_dprintf(2, "%s\n", EXIT);
+	tmp = args->next;
+	if (!tmp)
+		exit(EXIT_SUCCESS);
+	jumped = jump_zeros(tmp->word->value);
+	rv = check_valid(tmp, ctl->var_list, jumped);
+	if (rv < 0)
+		return (EXIT_FAILURE);
+	exit(rv);
+	return (EXIT_SUCCESS);
 }
 
-static char	*check_size(char *num)
+static char	*jump_zeros(char *num)
 {
 	int		i;
 	char	*sign;
@@ -59,14 +55,37 @@ static char	*check_size(char *num)
 	return (ft_strjoin(sign, (num + i)));
 }
 
-static void	check_valid(t_wordl *wordl, t_list *var_list)
+static int	check_valid(t_wordl *args, t_list *var_list, char *val)
 {
-	if (!wordl->next)
-		exit(EXIT_SUCCESS);
-	if (wordl_size(wordl) > 2 && ft_isdigit(wordl->next->word->value[0]))
+	uint64_t	rv;
+
+	rv = check_numeric_arg(args, val);
+	if (wordl_size(args) > 1)
 	{
-		ft_dprintf(STDERR_FILENO, "Minishell: exit: too many arguments\n");
-		lst_set(var_list, ECODE, "1");
-		return ;
+		ft_dprintf(STDERR_FILENO, E2MUCH);
+		lst_set(var_list, ECODE, FAIL);
+		return (-1);
 	}
+	return ((int)(rv % 256));
+}
+
+static uint64_t	check_numeric_arg(t_wordl *args, char *val)
+{
+	uint64_t	rv;
+	char		*s;
+
+	if (ft_strlen(val) > 19)
+	{
+		ft_dprintf(STDERR_FILENO, EINARG, args->word->value);
+		exit(EXIT_FAILURE);
+	}
+	rv = ft_atul(args->word->value);
+	s = ft_itul(rv);
+	if (ft_strcmp(s, val) != 0)
+	{
+		ft_dprintf(STDERR_FILENO, EINARG, args->word->value);
+		exit(EXIT_FAILURE);
+	}
+	free(s);
+	return (rv);
 }
