@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/18 20:00:25 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:24:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/* TODO: Init SHLVL */
 t_list	*env_init(char **env)
 {
 	t_list	*var_list;
@@ -36,6 +37,5 @@ t_list	*env_init(char **env)
 	hist = ft_strjoin(getenv("HOME"), HISTFILE);
 	lst_push_back(&var_list, lst_new(SHELL, ft_strjoin("HISTFILE=", hist)));
 	free(hist);
-	//init SHLVL
 	return (var_list);
 }

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 00:28:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 23:26:03 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:13:56 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,20 @@ static void	apply(t_wordl *head, t_node *self, t_list *var_list)
 	int		len;
 
 	len = 0;
+	dollar_loc = head->word->value;
 	if (head->word->flags & W_HASDOLLAR && !(head->word->flags & W_SQUOTE))
 	{
-		dollar_loc = ft_strrchr(head->word->value, DOLLAR_SIGN);
-		word = get_param_word(var_list, dollar_loc, &len);
-		replace(head->word, dollar_loc, word, len);
-		free(word);
-		if (!head->word->value || *(head->word->value) == 0)
-			wordl_pop(&(self->value.word), head);
+		while (1)
+		{
+			dollar_loc = ft_strchr(head->word->value, DOLLAR_SIGN);
+			if (dollar_loc == NULL)
+				break ;
+			word = get_param_word(var_list, dollar_loc, &len);
+			replace(head->word, dollar_loc, word, len);
+			free(word);
+			if (!head->word->value || *(head->word->value) == 0)
+				wordl_pop(&(self->value.word), head);
+		}
 	}
 }
 
