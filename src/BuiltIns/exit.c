@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 01:33:39 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 02:17:53 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	check_valid(t_wordl *wordl, t_list *var_list)
 	if (wordl_size(wordl) > 2 && ft_isdigit(wordl->next->word->value[0]))
 	{
 		ft_dprintf(STDERR_FILENO, "Minishell: exit: too many arguments\n");
-		lst_set(var_list, ECODE, "1");
+		lst_set(var_list, SHELL, ECODE, FAIL);
 		return ;
 	}
 }

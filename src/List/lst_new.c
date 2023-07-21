@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:34:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 23:27:39 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:34:25 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ t_list	*lst_new(int type, char *key_val)
 	t_list	*new;
 	char	**split;
 
-	split = NULL;
-	new = NULL;
 	new = (t_list *)malloc(sizeof(t_list));
 	if (!new)
 	{

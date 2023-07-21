@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:37:46 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 23:27:51 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 02:16:22 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
  * 
  * @var i is an iterator for variable list.
  */
-void	lst_set(t_list *var_list, char *key, char *value)
+void	lst_set(t_list *var_list, t_scope scope, char *key, char *value)
 {
 	char	*tmp;
 	t_list	*i;
@@ -38,7 +38,7 @@ void	lst_set(t_list *var_list, char *key, char *value)
 	else
 		tmp = ft_strdup(key);
 	if (i == NULL)
-		lst_push_back(&var_list, lst_new(EXPORT, ft_strjoin(tmp, value)));
+		lst_push_back(&var_list, lst_new(scope, ft_strjoin(tmp, value)));
 	else if (i->type != PRIVATE)
 	{
 		free(i->value);
@@ -58,7 +58,7 @@ void	lst_set(t_list *var_list, char *key, char *value)
  * 
  * @var i is an iterator for variable list.
  */
-void	lst_set_by_word(t_list *var_list, char *assign_word)
+void	lst_set_by_word(t_list *var_list, t_scope scope, char *assign_word)
 {
 	char	**split;
 	char	*tmp;
@@ -71,7 +71,7 @@ void	lst_set_by_word(t_list *var_list, char *assign_word)
 	else
 		tmp = ft_strdup(split[0]);
 	if (var == NULL)
-		lst_push_back(&var_list, lst_new(EXPORT, ft_strjoin(tmp, split[1])));
+		lst_push_back(&var_list, lst_new(scope, ft_strjoin(tmp, split[1])));
 	else
 	{
 		free(var->value); 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 16:29:06 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 02:16:43 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	handle_syntax_errors(t_node **tree, t_token *scanner, \
 		while (scanner)
 			tok_pop(&scanner);
 		visit(NULL, *tree, drop);
-		lst_set(var_list, "?", SYNTAX_ERR);
+		lst_set(var_list, SHELL, ECODE, SYNTAX_ERR);
 		*tree = NULL;
 	}
 }

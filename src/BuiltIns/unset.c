@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:47:20 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 01:47:22 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 02:14:14 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	unset(t_wordl *args, t_control *ctl)
 		else
 		{
 			ft_dprintf(2, ERR_UNSET, temp->word->value);
-			lst_set(ctl->var_list, ECODE, FAIL);
+			lst_set(ctl->var_list, SHELL, ECODE, FAIL);
 		}
 		temp = temp->next;
 	}
-	lst_set(ctl->var_list, ECODE, SUCCESS);
+	lst_set(ctl->var_list, SHELL, ECODE, SUCCESS);
 }

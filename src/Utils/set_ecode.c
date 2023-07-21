@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_ecode.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 22:20:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 22:44:22 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 02:17:05 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	set_ecode(t_control *ctl)
 	else
 		stat = WEXITSTATUS(ctl->estat);
 	s = ft_itoa(stat);
-	lst_set(ctl->var_list, ECODE, s);
+	lst_set(ctl->var_list, SHELL, ECODE, s);
 	free(s);
 }

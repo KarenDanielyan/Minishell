@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 01:49:29 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 02:15:15 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	export(t_wordl *args, t_control *ctl)
 		if (!is_name(split[0]))
 			printf("Minishell: export: `%s': not a valid identifier\n", \
 				temp->word->value);
-		lst_set_by_word(ctl->var_list, temp->word->value);
+		lst_set_by_word(ctl->var_list, LOCAL, temp->word->value);
 		free_2d(split);
 		temp = temp->next;
 	}
