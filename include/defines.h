@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 13:01:22 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:52:56 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@
 # define UNSET "unset"
 # define XPORT "export"
 # define HISTORY "history"
+
+/*here_doc*/
+# define HERE_FILE "/tmp/here_doc"
 
 /* Everything related to field splitting */
 # define IFS "IFS"
@@ -97,6 +100,7 @@
 # elif __APPLE__
 
 #  define SYNTAX_ERR "258"
+
 
 # endif
 
