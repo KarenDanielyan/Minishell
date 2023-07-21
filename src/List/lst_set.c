@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:37:46 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 02:16:22 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:45:02 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	lst_set_by_word(t_list *var_list, t_scope scope, char *assign_word)
 		lst_push_back(&var_list, lst_new(scope, ft_strjoin(tmp, split[1])));
 	else
 	{
-		free(var->value); 
+		free(var->value);
 		free(var->joined);
 		var->value = ft_strdup(split[1]);
 		var->joined = ft_strjoin(tmp, split[1]);
