@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:45:51 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 19:11:33 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 19:16:16 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	execute_and_check(char *cmd, char **args, char **env)
 {
 	if (cmd == NULL)
 	{
-		ft_dprintf(2, "%s%s\n", EPERROR, ENOCMD);
+		ft_dprintf(2, "%s: %s\n", EPERROR, ENOCMD);
 		exit(127);
 	}
 	execve(cmd, args, env);

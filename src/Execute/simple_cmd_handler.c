@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:58:17 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 16:53:19 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 19:14:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@ static void	handle_io(t_control *ctl, t_node *self, int pid)
 	(void)ctl;
 	if (pid == 0)
 	{
-		if (dup2(self->value.s_cmd.in_fd, STDIN_FILENO) < 0)
-			perror("dup2");
-		if (dup2(self->value.s_cmd.out_fd, STDOUT_FILENO) < 0)
-			perror("dup2");
+		dup2(self->value.s_cmd.in_fd, STDIN_FILENO);
+		dup2(self->value.s_cmd.out_fd, STDOUT_FILENO);
 		visit(ctl, ctl->tree, close_fifo);
 	}
 	else
