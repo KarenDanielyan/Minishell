@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:17:41 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 13:38:35 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 14:34:38 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	*cmd_search(t_wordl *cmd, t_list *var_list);
 void	handle_builtin(t_control *ctl, t_node *self, t_flist *builtin);
 void	execute_and_check(char *cmd, char **args, char **env);
 void	handle_command(t_control *ctl, t_node *self);
-
 
 int		is_assignment(t_word *word);
 

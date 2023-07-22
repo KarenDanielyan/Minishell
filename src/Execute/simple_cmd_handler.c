@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:58:17 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 13:57:15 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 14:33:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,8 @@ void	handle_command(t_control *ctl, t_node *self)
 	free_2d(args);
 }
 
-static void handle_io(t_control *ctl, t_node *self, int pid)
+static void	handle_io(t_control *ctl, t_node *self, int pid)
 {
-	int	i;
 	(void)ctl;
 	if (pid == 0)
 	{
@@ -75,11 +74,9 @@ static void handle_io(t_control *ctl, t_node *self, int pid)
 	else
 	{
 		if (self->value.s_cmd.in_fd != STDIN_FILENO)
-			if (close(self->value.s_cmd.in_fd) < 0)
-				perror("close");
+			close(self->value.s_cmd.in_fd);
 		if (self->value.s_cmd.out_fd != STDOUT_FILENO)
-			if (close(self->value.s_cmd.out_fd) < 0)
-				perror("close");
+			close(self->value.s_cmd.out_fd);
 	}
 }
 

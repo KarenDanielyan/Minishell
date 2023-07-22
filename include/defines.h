@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 13:51:47 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 14:34:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define NOTE_HIST "usage: history\n"
 
 # define PATH "PATH"
-#define PATH_DELIM ':'
+# define PATH_DELIM ':'
 # define TILDE_VAR "TILDE"
 # define HISTFILE "/.minishell_history"
 # define PS1 "PS1=minishell-4.2$ "
