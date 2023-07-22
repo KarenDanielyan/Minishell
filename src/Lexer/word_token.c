@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 22:57:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/23 00:56:29 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 02:15:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 static t_word	*get_just_word(char **s, int *flags);
 static t_word	*get_quoted_word(char **s, int *flags);
+
+static int		is_special_symb(char c, int *flags);
 
 /**
  * @brief	Everything excepts quotes and operators are words.
@@ -94,16 +96,15 @@ static t_word	*get_quoted_word(char **s, int *flags)
 	if (s && *s)
 	{
 		if (**s == SQUOTE)
-			flag = flag | W_SQUOTE;
+			flag = W_SQUOTE;
 		if (**s == DQUOTE)
-			flag = flag | W_DQUOTE;
+			flag = W_DQUOTE;
 		while (**s)
 		{
 			ft_strappend(&word, **s);
 			check_flag_change(**s, flags, &flag);
 			(*s)++;
-			if ((ft_strchr(OPERATORS, **s) || ft_iswhitespace(**s)) \
-				&& !(*flags & (W_SQUOTE | W_DQUOTE)))
+			if (is_special_symb(**s, flags) || !(flag & *flags))
 				break ;
 		}
 		w = word_new(word, (*flags | flag));
@@ -111,4 +112,12 @@ static t_word	*get_quoted_word(char **s, int *flags)
 		return (w);
 	}
 	return (NULL);
+}
+
+static int	is_special_symb(char c, int *flags)
+{
+	if ((ft_strchr(OPERATORS, c) || ft_iswhitespace(c)) \
+		&& !(*flags & (W_SQUOTE | W_DQUOTE)))
+		return (1);
+	return (0);
 }
