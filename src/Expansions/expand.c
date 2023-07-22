@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 02:55:38 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 23:25:18 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 02:04:50 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ void	expand(t_control *ctl, t_node *self)
 		join(self);
 		glob_exp(self);
 		quote_removal(self);
-		self->value.word->word->flags = \
-			self->value.word->word->flags | W_EXPAND;
+		if (self->value.word)
+		{
+			self->value.word->word->flags = \
+				self->value.word->word->flags | W_EXPAND;
+		}
 	}
 	return ;
 }

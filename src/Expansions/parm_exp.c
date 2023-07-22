@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 00:28:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 13:13:56 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 02:02:19 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,13 @@ static void	apply(t_wordl *head, t_node *self, t_list *var_list)
 				break ;
 			word = get_param_word(var_list, dollar_loc, &len);
 			replace(head->word, dollar_loc, word, len);
-			free(word);
+			if (word)
+				free(word);
 			if (!head->word->value || *(head->word->value) == 0)
+			{
 				wordl_pop(&(self->value.word), head);
+				break ;
+			}
 		}
 	}
 }
