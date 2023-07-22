@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:58:17 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 19:04:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:57:15 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "execute.h"
 
 static int	handle_suffix(t_control *ctl, t_node *self, int pid);
+static void	handle_io(t_control *ctl, t_node *self, int pid);
 static void	handle_builtin_modes(t_control *ctl, t_node *self, \
 	t_flist *builtin, int pid);
 
@@ -47,21 +48,39 @@ void	handle_command(t_control *ctl, t_node *self)
 	env = get_env(ctl->var_list);
 	cmd = cmd_search(self->value.s_cmd.word->value.word, ctl->var_list);
 	pid = my_fork();
+	handle_io(ctl, self, pid);
 	if (pid == 0)
 	{
-		dup2(self->value.s_cmd.in_fd, STDIN_FILENO);
-		dup2(self->value.s_cmd.out_fd, STDOUT_FILENO);
-		handle_suffix(ctl, self, pid);
-	}
-	if (self->value.s_cmd.in_fd != STDIN_FILENO)
-		close(self->value.s_cmd.in_fd);
-	if (self->value.s_cmd.out_fd != STDOUT_FILENO)
-		close(self->value.s_cmd.out_fd);
-	if (pid == 0)
+		if (handle_suffix(ctl, self, pid) == EXIT_FAILURE)
+			exit(EXIT_FAILURE);
 		execute_and_check(cmd, args, env);
+	}
 	free(cmd);
 	free(env);
 	free_2d(args);
+}
+
+static void handle_io(t_control *ctl, t_node *self, int pid)
+{
+	int	i;
+	(void)ctl;
+	if (pid == 0)
+	{
+		if (dup2(self->value.s_cmd.in_fd, STDIN_FILENO) < 0)
+			perror("dup2");
+		if (dup2(self->value.s_cmd.out_fd, STDOUT_FILENO) < 0)
+			perror("dup2");
+		visit(ctl, ctl->tree, close_fifo);
+	}
+	else
+	{
+		if (self->value.s_cmd.in_fd != STDIN_FILENO)
+			if (close(self->value.s_cmd.in_fd) < 0)
+				perror("close");
+		if (self->value.s_cmd.out_fd != STDOUT_FILENO)
+			if (close(self->value.s_cmd.out_fd) < 0)
+				perror("close");
+	}
 }
 
 static void	handle_builtin_modes(t_control *ctl, t_node *self, \

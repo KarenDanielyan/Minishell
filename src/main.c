@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 19:13:55 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 02:30:33 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,18 @@ int	main(int ac, char **av, char **env)
 	true_loop(&ctl);
 	lst_clear(&(ctl.var_list), &free);
 	flist_clear(ctl.built_ins);
+	close(ctl.in_dup);
+	close(ctl.out_dup);
 	return (0);
 }
 
 static void	wait_and_reset(t_control *ctl)
 {
-	int	in;
-	int	out;
-
 	while (wait(&(ctl->estat)) != -1)
 		;
 	set_ecode(ctl);
 	visit(NULL, ctl->tree, drop);
 	free(ctl->input);
-	in = open("/dev/stdin", O_RDONLY);
-	out = open("/dev/stdout", O_TRUNC | O_WRONLY);
-	dup2(in , STDIN_FILENO);
-	dup2(out, STDOUT_FILENO);
-	close(in);
-	close(out);
+	dup2(ctl->in_dup, STDIN_FILENO);
+	dup2(ctl->out_dup, STDOUT_FILENO);
 }

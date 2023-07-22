@@ -6,11 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:20:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 13:21:53 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:49:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+#include <errno.h>
+#include <string.h>
 #include <stdio.h>
 #include <libft.h>
 #include <ft_printf.h>
@@ -32,7 +34,8 @@ int	execute_io(t_control *ctl, t_node *self)
 	}
 	if (access(filename->word->value, F_OK) < 0 && self->value.io.type == IN)
 	{
-		perror(EPERROR);
+		ft_dprintf(STDERR_FILENO, "%s%s: %s\n", EPERROR, \
+			filename->word->value, strerror(errno));
 		return (EXIT_FAILURE);
 	}
 	perform_redirect(ctl, self);

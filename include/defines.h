@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 18:57:48 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:51:47 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define ERROR_QUOTES "minishell: unexpected EOL while looking for matching `"
 # define ERROR_HIS "numeric argument required"
 # define ENOCMD "command not found"
-# define EPERROR "minishell: "
+# define EPERROR "minishell"
 # define ERROR_IO "minishell: ambiguous redirect\n"
 
 # define ERR_UNSET "unset: %s: invalid parameter name\n"
@@ -109,6 +109,12 @@ typedef enum e_bool
 	FALSE,
 	TRUE
 }	t_bool;
+
+typedef struct s_pipe
+{
+	int	in;
+	int	out;
+}	t_pipe;
 
 /**
  * @brief	Variable scope enumeration.
@@ -311,6 +317,7 @@ typedef struct s_PipelineNode
 {
 	int		in_fd;
 	int		out_fd;
+	t_pipe	pip;
 	t_node	*left;
 	t_node	*right;
 }	t_pipenode;
@@ -370,6 +377,8 @@ typedef struct s_Node
 
 typedef struct s_control
 {
+	int				in_dup;
+	int				out_dup;
 	int				estat;
 	int				hist_fd;
 	char			*input;

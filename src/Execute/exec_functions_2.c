@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:01:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 16:50:48 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:47:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,18 @@ static void	set_child_fds(t_node *self);
 
 void	execute_command(t_control *ctl, t_node *self)
 {
-	execute(ctl, self->value.cmd.prefix);
+	if (self->value.cmd.in_fd == FD_INIT)
+		self->value.cmd.in_fd = STDIN_FILENO;
+	if (self->value.cmd.out_fd == FD_INIT)
+		self->value.cmd.out_fd = STDOUT_FILENO;
 	if (self->value.cmd.command)
 	{
 		set_child_fds(self);
+		if (execute(ctl, self->value.cmd.prefix) == EXIT_FAILURE)
+		{
+			lst_set(ctl->var_list, ECODE, FAIL);
+			return ;
+		}
 		execute(ctl, self->value.cmd.command);
 	}
 }

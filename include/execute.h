@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:17:41 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 16:57:38 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:38:35 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ void	handle_command(t_control *ctl, t_node *self);
 
 
 int		is_assignment(t_word *word);
+
+/* Op for visit function */
+void	close_fifo(t_control *ctl, t_node *self);
 
 #endif

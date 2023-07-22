@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:50:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 22:25:38 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:27:06 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static void	set_fd_values(t_node *self)
 	}
 	left = self->value.pipeline.left;
 	right = self->value.pipeline.right;
+	self->value.pipeline.pip.in = pip[0];
+	self->value.pipeline.pip.out = pip[1];
 	set_fd_helper(left, self->value.pipeline.in_fd, IN);
 	set_fd_helper(left, pip[1], OUT);
 	set_fd_helper(right, pip[0], IN);

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 17:06:17 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:38:02 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 /* Initialization */
 t_control	init(int ac, char **av, char **env);
+void		sig_init(void);
 
 /* Get next prompt*/
 char	*get_line(t_list *var_list, int fd);
