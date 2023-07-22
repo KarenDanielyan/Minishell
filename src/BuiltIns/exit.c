@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 22:24:40 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:01:44 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ static uint64_t	check_numeric_arg(t_wordl *args, char *val)
 	}
 	rv = ft_atul(args->word->value);
 	s = ft_itul(rv);
-	printf("s = %s\n",s);
-	printf("val = %s\n",val);
 	if (ft_strcmp(s, val) != 0)
 	{
 		ft_dprintf(STDERR_FILENO, EINARG, args->word->value);
