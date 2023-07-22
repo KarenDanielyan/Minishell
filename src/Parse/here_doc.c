@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 18:57:54 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 19:05:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdio.h>
 
 static void	here_doc(t_wordl *word, int out_fd, t_control *ctl);
+static void	print_ps2(t_control *ctl);
 
 int	parse_heredoc(t_wordl *word, t_control *ctl)
 {
@@ -55,7 +56,7 @@ static void	here_doc(t_wordl *word, int out_fd, t_control *ctl)
 		to_expand = FALSE;
 	while (1)
 	{
-		ft_dprintf(STDERR_FILENO, "%s", lst_get_by_key(ctl->var_list, "PS2")->value);
+		print_ps2(ctl);
 		tmp = get_next_line(STDIN_FILENO);
 		if (tmp == NULL || ft_strcmp(tmp, for_exit->value) == 0)
 			break ;
@@ -68,4 +69,13 @@ static void	here_doc(t_wordl *word, int out_fd, t_control *ctl)
 	if (tmp)
 		free(tmp);
 	word_delete(for_exit);
+}
+
+static void	print_ps2(t_control *ctl)
+{
+	t_list	*ps2;
+
+	ps2 = lst_get_by_key(ctl->var_list, "PS2");
+	if (ps2 && ps2->value)
+		ft_dprintf(STDERR_FILENO, "%s", ps2->value);
 }
