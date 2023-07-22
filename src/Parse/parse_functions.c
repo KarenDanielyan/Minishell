@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:13:45 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 17:34:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 19:06:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_node	*parse_list(t_control *ctl, t_token **scanner, int *err)
 	return (NULL);
 }
 
-t_node	*parse_list_prime(t_control *ctl, t_token **scanner, t_node *expr, int *err)
+t_node	*parse_list_prime(t_control *ctl, t_token **scanner, \
+	t_node *expr, int *err)
 {
 	t_ListType	type;
 	t_node		*pipeline;
@@ -60,7 +61,7 @@ t_node	*parse_pipeline(t_control *ctl, t_token **scanner, int *err)
 	return (NULL);
 }
 
-t_node	*parse_pipeline_prime(t_control *ctl, t_token **scanner,\
+t_node	*parse_pipeline_prime(t_control *ctl, t_token **scanner, \
 	t_node *expr, int *err)
 {
 	t_node	*command;

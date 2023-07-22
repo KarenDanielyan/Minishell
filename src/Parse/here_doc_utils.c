@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:56:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 16:21:36 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 19:07:09 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 static char	*get_param_word(char *dollar_loc, int *len, t_list *var_list);
 static void	replace(char **line, char *dollar_loc, char *word, int len);
 
-char *parmexp(char *line, t_control *ctl)
+char	*parmexp(char *line, t_control *ctl)
 {
 	char	*exp_line;
 	char	*dollar_loc;

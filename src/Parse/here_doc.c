@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 19:05:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 19:06:09 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 	int		in_fd;
 	int		out_fd;
 	int		pip[2];
-	
+
 	pip[0] = -42;
 	out_fd = open(HERE_FILE, O_RDWR | O_CREAT | O_APPEND, 0666);
 	if (out_fd < 0)
@@ -39,7 +39,7 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 	if (in_fd < 0)
 		perror("heredoc");
 	close(out_fd);
-	return(in_fd);
+	return (in_fd);
 }
 
 static void	here_doc(t_wordl *word, int out_fd, t_control *ctl)

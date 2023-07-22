@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:45:51 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 22:50:25 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 19:11:33 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ char	*cmd_search(t_wordl *cmd, t_list *var_list)
 int	is_assignment(t_word *word)
 {
 	char	**split;
+	int		rv;
 
+	rv = 0;
+	split = NULL;
 	if (word)
 	{
 		if (word->value)
@@ -42,11 +45,13 @@ int	is_assignment(t_word *word)
 			{
 				split = ft_split(word->value, EQUALS);
 				if (is_name(split[0]))
-					return (1);
+					rv = 1;
 			}
 		}
 	}
-	return (0);
+	if (split)
+		free_2d(split);
+	return (rv);
 }
 
 void	execute_and_check(char *cmd, char **args, char **env)

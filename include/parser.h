@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 17:37:45 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 19:08:34 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ t_node		*new_list_node(t_ListType type, t_node *left, t_node *right);
 t_node		*new_command_node(t_cmdtype type, t_node *prefix, t_node *command);
 
 /* Parsing Functions */
-t_node		*parse_pipeline_prime(t_control *ctl, t_token **scanner, t_node *expr, int *err);
-t_node		*parse_list_prime(t_control *ctl, t_token **scanner, t_node *expr, int *err);
-t_node		*parse_commpound_command(t_control *ctl, t_token **scanner, int *err);
+t_node		*parse_pipeline_prime(t_control *ctl, t_token **scanner, \
+	t_node *expr, int *err);
+t_node		*parse_list_prime(t_control *ctl, t_token **scanner, \
+	t_node *expr, int *err);
+t_node		*parse_commpound_command(t_control *ctl, t_token **scanner, \
+	int *err);
 t_node		*parse_simple_command(t_control *ctl, t_token **scanner, int *err);
 t_node		*parse_ioredirect(t_control *ctl, t_token **scanner, int *err);
 t_node		*parse_pipeline(t_control *ctl, t_token **scanner, int *err);
