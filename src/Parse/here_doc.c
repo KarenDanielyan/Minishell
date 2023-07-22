@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 23:37:00 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:51:46 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static void	here_doc(t_wordl *word, int out_fd);
 
-int	parce_heredoc(t_wordl *word)
+int	parse_heredoc(t_wordl *word)
 {
 	int		in_fd;
 	int		out_fd;
@@ -39,21 +39,27 @@ int	parce_heredoc(t_wordl *word)
 	return(in_fd);
 }
 
-static void	here_doc(t_wordl *word, int out_fd)
+static void	here_doc(t_wordl *word, int out_fd, t_control *ctl)
 {
 	int		i;
-	char	*for_exit;
 	char	*line;
+	int		to_expand;
+	t_word	*for_exit;
 
 	i = 0;
-	for_exit = word->next->word->value;
-	for_exit = ft_strjoin_free(for_exit, "\n");
+	to_expand = TRUE;
+	for_exit = wordl_join(word);
+	for_exit->value = ft_strjoin_free(for_exit->value, "\n");
+	if (for_exit->flags & (W_SQUOTE | W_DQUOTE))
+		to_expand = FALSE;
 	while (1)
 	{
 		line = get_next_line(0);
-		if (line == NULL || ft_strcmp(line, for_exit) == 0)
+		if (line == NULL || ft_strcmp(line, for_exit->value) == 0)
 			break ;
-		write (out_fd, line, ft_strlen(line));
+		if (to_expand)
+			line = parmexp(line, ctl);
+		ft_putstr_fd(line, out_fd);
 		free(line);
 	}
 }

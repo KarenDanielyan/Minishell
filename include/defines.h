@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 20:52:56 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:15:27 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,23 @@
 # include <stdint.h>
 
 # define EINARG "minishell: exit: %s numeric argument required"
+# define E2MUCH "minishell: exit: too many arguments\n"
 # define ERROR_MSG "minishell: syntax error near unexpected token `"
 # define ERROR_EOL "minishell: syntax error: unexpected end of line."
 # define ERROR_QUOTES "minishell: unexpected EOL while looking for matching `"
 # define ERROR_HIS "numeric argument required"
 # define ENOCMD "command not found"
-# define EPERROR "minishell: "
+# define EPERROR "minishell"
 # define ERROR_IO "minishell: ambiguous redirect\n"
 
 # define ERR_UNSET "unset: %s: invalid parameter name\n"
+# define ERR_EXPORT "minishell: export: `%s': is not valid identifier\n"
+
+# define NOTE_HIST "usage: history\n"
 
 # define PATH "PATH"
-#define PATH_DELIM ':'
+# define SHLVL "SHLVL"
+# define PATH_DELIM ':'
 # define TILDE_VAR "TILDE"
 # define HISTFILE "/.minishell_history"
 # define PS1 "PS1=minishell-4.2$ "
@@ -46,9 +51,6 @@
 # define UNSET "unset"
 # define XPORT "export"
 # define HISTORY "history"
-
-/*here_doc*/
-# define HERE_FILE "/tmp/here_doc"
 
 /* Everything related to field splitting */
 # define IFS "IFS"
@@ -101,8 +103,19 @@
 
 #  define SYNTAX_ERR "258"
 
-
 # endif
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
+
+typedef struct s_pipe
+{
+	int	in;
+	int	out;
+}	t_pipe;
 
 /**
  * @brief	Variable scope enumeration.
@@ -305,6 +318,7 @@ typedef struct s_PipelineNode
 {
 	int		in_fd;
 	int		out_fd;
+	t_pipe	pip;
 	t_node	*left;
 	t_node	*right;
 }	t_pipenode;
@@ -364,6 +378,8 @@ typedef struct s_Node
 
 typedef struct s_control
 {
+	int				in_dup;
+	int				out_dup;
 	int				estat;
 	int				hist_fd;
 	char			*input;
@@ -375,8 +391,8 @@ typedef struct s_control
 
 typedef struct s_flist
 {
-	char	*name;
-	void	(*cmd)(t_wordl *cmd, t_control *ctl);
+	char			*name;
+	int				(*cmd)(t_wordl *cmd, t_control *ctl);
 	struct s_flist	*next;
 }	t_flist;
 
