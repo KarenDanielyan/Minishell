@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 15:15:27 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:27:23 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define ERR_EXPORT "minishell: export: `%s': is not valid identifier\n"
 
 # define NOTE_HIST "usage: history\n"
+
+# define HERE_FILE "/tmp/.minishell_here_file"
 
 # define PATH "PATH"
 # define SHLVL "SHLVL"
@@ -392,7 +394,7 @@ typedef struct s_control
 typedef struct s_flist
 {
 	char			*name;
-	int				(*cmd)(t_wordl *cmd, t_control *ctl);
+	void			(*cmd)(t_wordl *cmd, t_control *ctl);
 	struct s_flist	*next;
 }	t_flist;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 15:51:46 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:17:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include <libft.h>
 #include <stdio.h>
 
-static void	here_doc(t_wordl *word, int out_fd);
+static void	here_doc(t_wordl *word, int out_fd, t_control *ctl);
 
-int	parse_heredoc(t_wordl *word)
+int	parse_heredoc(t_wordl *word, t_control *ctl)
 {
 	int		in_fd;
 	int		out_fd;
@@ -30,7 +30,7 @@ int	parse_heredoc(t_wordl *word)
 		pipe(pip);
 		out_fd = pip[1];
 	}
-	here_doc(word, out_fd);
+	here_doc(word, out_fd, ctl);
 	if (pip[0] > 0)
 		in_fd = pip[0];
 	else
@@ -41,12 +41,10 @@ int	parse_heredoc(t_wordl *word)
 
 static void	here_doc(t_wordl *word, int out_fd, t_control *ctl)
 {
-	int		i;
 	char	*line;
 	int		to_expand;
 	t_word	*for_exit;
 
-	i = 0;
 	to_expand = TRUE;
 	for_exit = wordl_join(word);
 	for_exit->value = ft_strjoin_free(for_exit->value, "\n");
