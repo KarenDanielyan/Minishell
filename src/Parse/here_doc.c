@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 18:54:57 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 18:57:54 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	here_doc(t_wordl *word, int out_fd, t_control *ctl)
 		to_expand = FALSE;
 	while (1)
 	{
+		ft_dprintf(STDERR_FILENO, "%s", lst_get_by_key(ctl->var_list, "PS2")->value);
 		tmp = get_next_line(STDIN_FILENO);
 		if (tmp == NULL || ft_strcmp(tmp, for_exit->value) == 0)
 			break ;
