@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 16:56:59 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:59:51 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 # define ERR_UNSET "unset: %s: invalid parameter name\n"
 # define ERR_EXPORT "minishell: export: `%s': is not valid identifier\n"
+# define ERR_SHLVL "minishell: warning: shell level (%d) too high, resetting to 1\n"
 
 # define NOTE_HIST "usage: history\n"
 

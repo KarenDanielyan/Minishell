@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 16:47:18 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:05:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ t_list	*env_init(char **env)
 
 static void	init_shlvl(t_list	*var_list)
 {
-	t_list	*shlvl;
-	char	*value;
-	char	*res;
+	t_list		*shlvl;
+	int64_t		atoi;
+	char		*value;
+	char		*res;
 
 	res = NULL;
 	value = NULL;
@@ -55,7 +56,14 @@ static void	init_shlvl(t_list	*var_list)
 		value = shlvl->value;
 	else
 		value = "0";
-	res = ft_itoa((ft_atoi(value) % 1000) + 1);
+	atoi = ft_atol(value);
+	if (atoi >= 1000)
+		ft_dprintf(STDERR_FILENO, ERR_SHLVL, (atoi + 1));
+	else if (atoi < 0)
+		atoi = 0;
+	else
+		atoi = atoi % 1000 + 1;
+	res = ft_itoa(atoi);
 	lst_set(var_list, EXPORT, SHLVL, res);
 	free(res);
 }
