@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 17:24:25 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:09:51 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "debug.h"
 
 static void	handle_syntax_errors(t_node **tree, t_token *scanner, \
-	t_list *var_list, int err);
+	t_control *ctl, int err);
 
 /**
  * @brief	parse() consumes the sequence of tokens and returns
@@ -31,12 +31,12 @@ t_node	*parse(t_token *scanner, t_control *ctl)
 
 	err = 0;
 	node = parse_list(ctl, &scanner, &err);
-	handle_syntax_errors(&node, scanner, ctl->var_list, err);
+	handle_syntax_errors(&node, scanner, ctl, err);
 	return ((void *)node);
 }
 
 static void	handle_syntax_errors(t_node **tree, t_token *scanner, \
-	t_list *var_list, int err)
+	t_control *ctl, int err)
 {
 	if (err != 0 || scanner)
 	{
@@ -47,7 +47,7 @@ static void	handle_syntax_errors(t_node **tree, t_token *scanner, \
 		while (scanner)
 			tok_pop(&scanner);
 		visit(NULL, *tree, drop);
-		lst_set(var_list, SHELL, ECODE, SYNTAX_ERR);
+		lst_set(ctl->var_list, SHELL, ECODE, SYNTAX_ERR);
 		*tree = NULL;
 	}
 }

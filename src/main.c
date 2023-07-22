@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 20:09:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:30:58 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,27 @@
 #include <sys/wait.h>
 
 static void	wait_and_reset(t_control *ctl);
+static void	true_loop(t_control *ctl);
 
 int		g_estat = 0;
+
+int	main(int ac, char **av, char **env)
+{
+	t_control	ctl;
+
+	ctl = init(ac, av, env);
+	true_loop(&ctl);
+	lst_clear(&(ctl.var_list), &free);
+	flist_clear(ctl.built_ins);
+	close(ctl.in_dup);
+	close(ctl.out_dup);
+	return (0);
+}
 
 /**
  * @brief	Readline while loop
  */
-void	true_loop(t_control *ctl)
+static void	true_loop(t_control *ctl)
 {
 	while (1)
 	{
@@ -43,19 +57,6 @@ void	true_loop(t_control *ctl)
 		execute(ctl, ctl->tree);
 		wait_and_reset(ctl);
 	}
-}
-
-int	main(int ac, char **av, char **env)
-{
-	t_control	ctl;
-
-	ctl = init(ac, av, env);
-	true_loop(&ctl);
-	lst_clear(&(ctl.var_list), &free);
-	flist_clear(ctl.built_ins);
-	close(ctl.in_dup);
-	close(ctl.out_dup);
-	return (0);
 }
 
 static void	wait_and_reset(t_control *ctl)

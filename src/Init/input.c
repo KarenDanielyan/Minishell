@@ -6,11 +6,12 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:25:08 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 20:09:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:27:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <signal.h>
 
 char	*get_line(t_control *ctl, int fd)
 {
@@ -29,6 +30,7 @@ char	*get_line(t_control *ctl, int fd)
 	}
 	add_history(str);
 	ft_putendl_fd(str, fd);
-	set_ecode(ctl, FALSE);
+	if (WIFSIGNALED(*(ctl->estat)))
+		set_ecode(ctl, FALSE);
 	return (str);
 }
