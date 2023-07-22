@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 22:57:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 14:14:19 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 00:56:29 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ static t_word	*get_quoted_word(char **s, int *flags)
 			ft_strappend(&word, **s);
 			check_flag_change(**s, flags, &flag);
 			(*s)++;
-			if (!ft_strchr(OPERATORS, **s) && !(flag & *flags))
+			if ((ft_strchr(OPERATORS, **s) || ft_iswhitespace(**s)) \
+				&& !(*flags & (W_SQUOTE | W_DQUOTE)))
 				break ;
 		}
 		w = word_new(word, (*flags | flag));
