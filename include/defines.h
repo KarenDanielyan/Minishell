@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 19:09:10 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 19:57:39 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -384,7 +384,7 @@ typedef struct s_control
 {
 	int				in_dup;
 	int				out_dup;
-	int				estat;
+	int				*estat;
 	int				hist_fd;
 	char			*input;
 	struct s_flist	*built_ins;

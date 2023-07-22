@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 18:55:52 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 20:09:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	wait_and_reset(t_control *ctl);
 
-int		*g_estat = NULL;
+int		g_estat = 0;
 
 /**
  * @brief	Readline while loop
@@ -25,7 +25,7 @@ void	true_loop(t_control *ctl)
 {
 	while (1)
 	{
-		ctl->input = get_line(ctl->var_list, ctl->hist_fd);
+		ctl->input = get_line(ctl, ctl->hist_fd);
 		if (!ctl->input)
 			continue ;
 		ctl->scanner = lex(ctl->input, ctl->var_list);
@@ -60,9 +60,9 @@ int	main(int ac, char **av, char **env)
 
 static void	wait_and_reset(t_control *ctl)
 {
-	while (wait(&(ctl->estat)) != -1)
+	while (wait(&(*(ctl->estat))) != -1)
 		;
-	set_ecode(ctl);
+	set_ecode(ctl, TRUE);
 	visit(NULL, ctl->tree, drop);
 	free(ctl->input);
 	dup2(ctl->in_dup, STDIN_FILENO);

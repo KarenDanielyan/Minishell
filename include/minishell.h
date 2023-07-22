@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 17:24:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 20:08:23 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-extern int	*g_estat;
+extern int	g_estat;
 
 /* Initialization */
 t_control	init(int ac, char **av, char **env);
 void		sig_init(void);
 
 /* Get next prompt*/
-char		*get_line(t_list *var_list, int fd);
+char		*get_line(t_control *ctl, int fd);
 
 /* Lexical Analysis */
 t_token		*lex(char *s, t_list *var_list);
@@ -64,7 +64,7 @@ int			env(t_wordl *cmd, t_control *ctl);
 int			pwd(t_wordl *cmd, t_control *ctl);
 
 /* Utils */
-void		set_ecode(t_control *ctl);
+void		set_ecode(t_control *ctl, int after_exec);
 void		print_logo(void);
 
 char		**get_env(t_list *var_list);

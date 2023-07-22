@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:00:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 15:02:39 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 19:56:32 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ void	sig_init(void)
 
 static void	ft_irc(int signum)
 {
+	g_estat = signum;
 	if (signum == SIGINT)
 	{
 		rl_replace_line("", 0);
 		rl_done = 42;
-		*g_estat = 130;
 	}
-	if (signum == SIGQUIT)
-		*g_estat = 131;
 }
