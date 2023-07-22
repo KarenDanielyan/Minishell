@@ -54,7 +54,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				parse_functions_3.c parse_functions_4.c \
 				constructors.c constructors_2.c \
 				constructors_3.c error.c drop.c \
-				check_syntax.c node_list_2.c) \
+				check_syntax.c node_list_2.c here_doc.c \
+				here_doc_utils.c) \
 				$(patsubst %.c, $(SRC)/Expansions/%.c,\
 				expand.c tilde_expand.c parm_exp.c \
 				quote_removal.c field_splitting.c \
