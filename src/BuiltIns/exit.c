@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 18:26:17 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:45:37 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	check_valid(t_wordl *args, t_list *var_list, char *val)
 	if (wordl_size(args) > 1)
 	{
 		ft_dprintf(STDERR_FILENO, E2MUCH);
-		lst_set(var_list, ECODE, FAIL);
+		lst_set(var_list, SHELL, ECODE, FAIL);
 		return (-1);
 	}
 	return ((int)(rv % 256));

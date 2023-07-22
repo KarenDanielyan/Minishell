@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 17:51:03 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:44:18 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	cd(t_wordl *args, t_control *ctl)
 	if (chdir(path->word->value) != 0)
 	{
 		perror("minishell: cd");
-		lst_set(ctl->var_list, ECODE, FAIL);
+		lst_set(ctl->var_list, SHELL, ECODE, FAIL);
 		return (EXIT_FAILURE);
 	}
 	new_pwd = my_get_cwd();
@@ -53,8 +53,8 @@ int	cd(t_wordl *args, t_control *ctl)
 
 static void	set_values(t_list *var_list, char *new_pwd, char *current_pwd)
 {
-	lst_set(var_list, "PWD", new_pwd);
-	lst_set(var_list, "OLDPWD", current_pwd);
+	lst_set(var_list, LOCAL, "PWD", new_pwd);
+	lst_set(var_list, EXPORT, "OLDPWD", current_pwd);
 	free(new_pwd);
 	free(current_pwd);
 }
@@ -64,7 +64,7 @@ static int	cd_default(t_list *path, t_control *ctl)
 	if (!path)
 	{
 		ft_dprintf(STDERR_FILENO, "bash: cd: HOME not set\n");
-		lst_set(ctl->var_list, ECODE, "1");
+		lst_set(ctl->var_list, SHELL, ECODE, "1");
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 19:00:23 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:46:07 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	export(t_wordl *args, t_control *ctl)
 			ft_dprintf(STDERR_FILENO, ERR_EXPORT, temp->word->value);
 			fail = TRUE;
 		}
-		lst_set_by_word(ctl->var_list, temp->word->value);
+		lst_set_by_word(ctl->var_list, EXPORT, temp->word->value);
 		free_2d(split);
 		temp = temp->next;
 	}
@@ -49,9 +49,9 @@ int	export(t_wordl *args, t_control *ctl)
 static void	estat_set(t_control *ctl, int fail)
 {
 	if (fail)
-		lst_set(ctl->var_list, ECODE, FAIL);
+		lst_set(ctl->var_list, SHELL, ECODE, FAIL);
 	else
-		lst_set(ctl->var_list, ECODE, SUCCESS);
+		lst_set(ctl->var_list, SHELL, ECODE, SUCCESS);
 }
 
 static int	ft_default(char **env, t_list *var_list)

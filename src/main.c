@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 15:03:36 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:42:16 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	true_loop(t_control *ctl)
 		execute(ctl, ctl->tree);
 		wait_and_reset(ctl);
 	}
+	system("leasks minishell");
 }
 
 int	main(int ac, char **av, char **env)

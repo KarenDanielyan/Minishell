@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 16:47:20 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 18:53:35 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:44:42 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	unset(t_wordl *args, t_control *ctl)
 			delete = lst_get_by_key(ctl->var_list, temp->word->value);
 			if (delete && delete->type != PRIVATE)
 				lst_pop(&ctl->var_list, delete);
-			lst_set(ctl->var_list, ECODE, SUCCESS);
+			lst_set(ctl->var_list, SHELL, ECODE, SUCCESS);
 		}
 		else
 		{
 			ft_dprintf(2, ERR_UNSET, temp->word->value);
-			lst_set(ctl->var_list, ECODE, FAIL);
+			lst_set(ctl->var_list, SHELL, ECODE, FAIL);
 		}
 		temp = temp->next;
 	}

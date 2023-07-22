@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 15:58:31 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:47:18 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ static void	init_shlvl(t_list	*var_list)
 	else
 		value = "0";
 	res = ft_itoa((ft_atoi(value) % 1000) + 1);
-	lst_set(var_list, SHLVL, res);
+	lst_set(var_list, EXPORT, SHLVL, res);
 	free(res);
 }

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 15:27:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 13:16:03 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:40:35 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_token	*lex(char *s, t_list *var_list)
 	{
 		while (tokens)
 			tok_pop(&(tokens));
-		lst_set(var_list, ECODE, SYNTAX_ERR);
+		lst_set(var_list, SHELL, ECODE, SYNTAX_ERR);
 	}
 	return (tokens);
 }
