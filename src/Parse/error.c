@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 00:20:23 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/18 22:33:53 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:49:11 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ t_node	*new_error_node(char *msg)
 	return (node);
 }
 
-t_node	*parse_error(t_token **scanner, int *err)
+t_node	*parse_error(t_control *ctl, t_token **scanner, int *err)
 {
 	char	*str;
 	t_word	*word;
 	t_node	*node;
 
+	(void)ctl;
 	if (!(*scanner))
 		str = ft_strdup(ERROR_EOL);
 	else

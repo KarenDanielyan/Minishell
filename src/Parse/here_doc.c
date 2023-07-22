@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 16:17:49 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 18:54:57 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 	int		pip[2];
 	
 	pip[0] = -42;
-	out_fd = open(HERE_FILE, O_CREAT | O_TRUNC | O_APPEND, 0666);
+	out_fd = open(HERE_FILE, O_RDWR | O_CREAT | O_APPEND, 0666);
 	if (out_fd < 0)
 	{
 		pipe(pip);
@@ -35,6 +35,8 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 		in_fd = pip[0];
 	else
 		in_fd = open(HERE_FILE, O_RDONLY);
+	if (in_fd < 0)
+		perror("heredoc");
 	close(out_fd);
 	return(in_fd);
 }
@@ -42,6 +44,7 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 static void	here_doc(t_wordl *word, int out_fd, t_control *ctl)
 {
 	char	*line;
+	char	*tmp;
 	int		to_expand;
 	t_word	*for_exit;
 
@@ -52,12 +55,16 @@ static void	here_doc(t_wordl *word, int out_fd, t_control *ctl)
 		to_expand = FALSE;
 	while (1)
 	{
-		line = get_next_line(0);
-		if (line == NULL || ft_strcmp(line, for_exit->value) == 0)
+		tmp = get_next_line(STDIN_FILENO);
+		if (tmp == NULL || ft_strcmp(tmp, for_exit->value) == 0)
 			break ;
 		if (to_expand)
-			line = parmexp(line, ctl);
+			line = parmexp(tmp, ctl);
 		ft_putstr_fd(line, out_fd);
 		free(line);
+		free(tmp);
 	}
+	if (tmp)
+		free(tmp);
+	word_delete(for_exit);
 }

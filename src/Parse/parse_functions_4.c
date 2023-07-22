@@ -6,18 +6,20 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:58:40 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/18 21:11:10 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:44:35 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <libft.h>
 
-static t_nodel	*ccmd_suffix_helper(t_token **scanner, int *err);
 static void		set_error_msg(t_nodel **node_list, t_token **scanner);
-static t_node	*check_type(t_token **scanner, t_IOType *type, int *err);
+static t_node	*check_type(t_control *ctl, t_token **scanner, \
+	t_IOType *type, int *err);
+static t_nodel	*ccmd_suffix_helper(t_control *ctl, \
+	t_token **scanner, int *err);
 
-t_node	*parse_ccmd_suffix(t_token **scanner, int *err)
+t_node	*parse_ccmd_suffix(t_control *ctl, t_token **scanner, int *err)
 {
 	t_nodel	*node_list;
 	t_node	*node;
@@ -25,13 +27,13 @@ t_node	*parse_ccmd_suffix(t_token **scanner, int *err)
 	node = NULL;
 	if (*err == 0)
 	{
-		node_list = ccmd_suffix_helper(scanner, err);
+		node_list = ccmd_suffix_helper(ctl, scanner, err);
 		node = new_suffix_node(node_list);
 	}
 	return (node);
 }
 
-t_node	*parse_ioredirect(t_token **scanner, int *err)
+t_node	*parse_ioredirect(t_control *ctl, t_token **scanner, int *err)
 {
 	t_IOType	type;
 	t_node		*node;
@@ -39,18 +41,22 @@ t_node	*parse_ioredirect(t_token **scanner, int *err)
 	node = NULL;
 	if (*err == 0)
 	{
-		node = check_type(scanner, &type, err);
+		node = check_type(ctl, scanner, &type, err);
 		if (node)
 			return (node);
 		token_consume(scanner);
 		if (!(*scanner) || (*scanner)->type != WORD)
-			return (parse_error(scanner, err));
-		node = new_io_redirect_node(type, parse_word(scanner, err));
+			return (parse_error(ctl, scanner, err));
+		node = new_io_redirect_node(type, parse_word(ctl, scanner, err));
+		if (type == HERE)
+			node->value.io.fd = \
+				parse_heredoc(node->value.io.filename->value.word, ctl);
 	}
 	return (node);
 }
 
-static t_node	*check_type(t_token **scanner, t_IOType *type, int *err)
+static t_node	*check_type(t_control *ctl, t_token **scanner, \
+	t_IOType *type, int *err)
 {
 	if ((*scanner)->type == IO_FILE)
 	{
@@ -64,11 +70,11 @@ static t_node	*check_type(t_token **scanner, t_IOType *type, int *err)
 	else if ((*scanner)->type == IO_HERE)
 		*type = HERE;
 	else
-		return (parse_error(scanner, err));
+		return (parse_error(ctl, scanner, err));
 	return (NULL);
 }
 
-t_nodel	*ccmd_suffix_helper(t_token **scanner, int *err)
+t_nodel	*ccmd_suffix_helper(t_control *ctl, t_token **scanner, int *err)
 {
 	t_nodel	*node_list;
 
@@ -80,7 +86,7 @@ t_nodel	*ccmd_suffix_helper(t_token **scanner, int *err)
 			if ((*scanner)->type == IO_FILE || (*scanner)->type == IO_APPEND \
 				|| (*scanner)->type == IO_HERE)
 				nodel_push(&node_list, \
-					nodel_new(parse_ioredirect(scanner, err)));
+					nodel_new(parse_ioredirect(ctl, scanner, err)));
 			else if ((*scanner)->type == WORD)
 			{
 				set_error_msg(&node_list, scanner);

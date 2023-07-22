@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 16:55:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 18:55:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	true_loop(t_control *ctl)
 			free(ctl->input);
 			continue ;
 		}
-		ctl->tree = parse(ctl->scanner, ctl->var_list);
+		ctl->tree = parse(ctl->scanner, ctl);
 		if (ctl->tree == NULL)
 		{
 			free(ctl->input);
@@ -67,4 +67,5 @@ static void	wait_and_reset(t_control *ctl)
 	free(ctl->input);
 	dup2(ctl->in_dup, STDIN_FILENO);
 	dup2(ctl->out_dup, STDOUT_FILENO);
+	unlink(HERE_FILE);
 }
