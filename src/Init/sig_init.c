@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   sig_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:00:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 18:03:46 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:02:39 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <signal.h>
 
 static void	ft_irc(int signum);
 
@@ -38,5 +39,8 @@ static void	ft_irc(int signum)
 	{
 		rl_replace_line("", 0);
 		rl_done = 42;
+		*g_estat = 130;
 	}
+	if (signum == SIGQUIT)
+		*g_estat = 131;
 }

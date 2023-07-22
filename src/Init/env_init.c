@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 15:21:10 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:58:31 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static void init_shlvl(t_list	*var_list);
+static void	init_shlvl(t_list	*var_list);
 
 t_list	*env_init(char **env)
 {
@@ -42,7 +42,7 @@ t_list	*env_init(char **env)
 	return (var_list);
 }
 
-static void init_shlvl(t_list	*var_list)
+static void	init_shlvl(t_list	*var_list)
 {
 	t_list	*shlvl;
 	char	*value;

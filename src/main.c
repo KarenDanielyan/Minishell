@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 02:30:33 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:03:36 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <sys/wait.h>
 
 static void	wait_and_reset(t_control *ctl);
+
+int		*g_estat = NULL;
 
 /**
  * @brief	Readline while loop

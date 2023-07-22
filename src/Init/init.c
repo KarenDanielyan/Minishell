@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 01:10:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 01:07:42 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:01:59 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_control	init(int ac, char **av, char **env)
 	ctl.out_dup = dup(STDOUT_FILENO);
 	ctl.var_list = env_init(env);
 	ctl.built_ins = builtin_init();
+	g_estat = &ctl.estat;
 	filename = lst_get_by_key(ctl.var_list, "HISTFILE")->value;
 	ctl.hist_fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0666);
 	sig_init();
