@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 17:05:24 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/22 20:38:57 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ static void	init_shlvl(t_list	*var_list)
 		value = "0";
 	atoi = ft_atol(value);
 	if (atoi >= 1000)
+	{
 		ft_dprintf(STDERR_FILENO, ERR_SHLVL, (atoi + 1));
+		atoi = 1;
+	}
 	else if (atoi < 0)
 		atoi = 0;
 	else
