@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/23 14:49:51 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 14:53:41 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void	true_loop(t_control *ctl)
 			continue ;
 		}
 		execute(ctl, ctl->tree);
-		printf("%d\n", *(ctl->estat));
 		wait_and_reset(ctl);
 	}
 }
