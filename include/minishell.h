@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 20:08:23 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 13:24:36 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ char		**get_key_value(char *assign_word);
 
 int			is_assign_word(t_wordl *head);
 int			is_quote(char c, int *flags);
+int			my_fork(t_control *ctl);
 int			is_name(char *str);
-int			my_fork(void);
 
 /* Signal */
 int			handler(void);

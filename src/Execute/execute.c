@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:36:18 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 20:45:48 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 13:18:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 int	execute(t_control *ctl, t_node *self)
 {
+	if (ctl->execute == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	if (self->type == SimpleCommandNode || self->type == CmdSuffixNode \
 		|| self->type == CmdPrefixNode)
 	{

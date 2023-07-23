@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:07:34 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 22:20:01 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 14:20:01 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <libft.h>
 #include <stdio.h>
 
-int	my_fork(void)
+int	my_fork(t_control *ctl)
 {
 	int	pid;
 
@@ -22,7 +22,9 @@ int	my_fork(void)
 	if (pid < 0)
 	{
 		perror(EPERROR);
-		exit(EXIT_FAILURE);
+		lst_set(ctl->var_list, SHELL, ECODE, FAIL);
+		ctl->execute = EXIT_FAILURE;
+		printf("%d\n", *(ctl->estat));
 	}
 	return (pid);
 }

@@ -6,10 +6,11 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:01:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 18:02:31 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 13:28:02 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "execute.h"
 #include <libft.h>
 #include <stdio.h>
@@ -38,12 +39,9 @@ void	execute_ccommand(t_control *ctl, t_node *self)
 {
 	int	pid;
 
-	pid = fork();
+	pid = my_fork(ctl);
 	if (pid < 0)
-	{
-		perror(EPERROR);
-		exit(EXIT_FAILURE);
-	}
+		return ;
 	if (pid == 0)
 	{
 		dup2(self->value.c_cmd.in_fd, STDIN_FILENO);

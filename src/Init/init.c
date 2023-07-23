@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 01:10:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 19:58:32 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 13:17:51 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_control	init(int ac, char **av, char **env)
 		rl_outstream = stderr;
 	mode_init(ac, av);
 	ctl.estat = &g_estat;
+	ctl.execute = 0;
 	ctl.in_dup = dup(STDIN_FILENO);
 	ctl.out_dup = dup(STDOUT_FILENO);
 	ctl.var_list = env_init(env);

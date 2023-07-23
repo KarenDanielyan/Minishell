@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:58:17 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 19:14:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 13:44:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ void	handle_builtin(t_control *ctl, t_node *self, t_flist *buitltin)
 
 	pid = -42;
 	if (self->value.s_cmd.word->value.word->word->flags & W_SUBSHELL_PIPE)
-		pid = my_fork();
+	{
+		pid = my_fork(ctl);
+		if (pid < 0)
+			return ;
+	}
 	if (pid == 0 || pid == -42)
 	{
 		dup2(self->value.s_cmd.in_fd, STDIN_FILENO);
@@ -47,13 +51,16 @@ void	handle_command(t_control *ctl, t_node *self)
 	args = wordl_to_array(self->value.s_cmd.word->value.word);
 	env = get_env(ctl->var_list);
 	cmd = cmd_search(self->value.s_cmd.word->value.word, ctl->var_list);
-	pid = my_fork();
-	handle_io(ctl, self, pid);
-	if (pid == 0)
+	pid = my_fork(ctl);
+	if (pid >= 0)
 	{
-		if (handle_suffix(ctl, self, pid) == EXIT_FAILURE)
-			exit(EXIT_FAILURE);
-		execute_and_check(cmd, args, env);
+		handle_io(ctl, self, pid);
+		if (pid == 0)
+		{
+			if (handle_suffix(ctl, self, pid) == EXIT_FAILURE)
+				exit(EXIT_FAILURE);
+			execute_and_check(cmd, args, env);
+		}
 	}
 	free(cmd);
 	free(env);
