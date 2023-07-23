@@ -6,14 +6,14 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 16:44:18 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 18:45:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	set_values(t_list *var_list, char *new_pwd, char *current_pwd);
-static int	cd_default(t_list *path, t_control *ctl);
+static int	cd_default(t_list *home, t_control *ctl, t_wordl **path);
 static char	*my_get_cwd(void);
 
 /**
@@ -33,7 +33,7 @@ int	cd(t_wordl *args, t_control *ctl)
 	path = args->next;
 	if (!path)
 	{
-		if (cd_default(lst_get_by_key(ctl->var_list, "HOME"), ctl))
+		if (cd_default(lst_get_by_key(ctl->var_list, "HOME"), ctl, &path))
 			return (EXIT_FAILURE);
 	}
 	if (lst_get_by_key(ctl->var_list, "PWD"))
@@ -54,19 +54,20 @@ int	cd(t_wordl *args, t_control *ctl)
 static void	set_values(t_list *var_list, char *new_pwd, char *current_pwd)
 {
 	lst_set(var_list, LOCAL, "PWD", new_pwd);
-	lst_set(var_list, EXPORT, "OLDPWD", current_pwd);
+	lst_set(var_list, LOCAL, "OLDPWD", current_pwd);
 	free(new_pwd);
 	free(current_pwd);
 }
 
-static int	cd_default(t_list *path, t_control *ctl)
+static int	cd_default(t_list *home, t_control *ctl, t_wordl **path)
 {
-	if (!path)
+	if (!home)
 	{
-		ft_dprintf(STDERR_FILENO, "bash: cd: HOME not set\n");
+		ft_dprintf(STDERR_FILENO, ERROR_CD);
 		lst_set(ctl->var_list, SHELL, ECODE, "1");
 		return (EXIT_FAILURE);
 	}
+	*path = wordl_new(word_new(home->value, 0));
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/23 13:16:51 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 18:35:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 # include <stddef.h>
 # include <stdint.h>
 
-# define EINARG "minishell: exit: %s numeric argument required"
-# define E2MUCH "minishell: exit: too many arguments\n"
-# define ERROR_MSG "minishell: syntax error near unexpected token `"
-# define ERROR_EOL "minishell: syntax error: unexpected end of line."
 # define ERROR_QUOTES "minishell: unexpected EOL while looking for matching `"
-# define ERROR_HIS "numeric argument required"
-# define ENOCMD "command not found"
-# define EPERROR "minishell"
+# define ERROR_EOL "minishell: syntax error: unexpected end of line."
+# define ERROR_MSG "minishell: syntax error near unexpected token `"
+# define EINARG "minishell: exit: %s numeric argument required\n"
+# define E2MUCH "minishell: exit: too many arguments\n"
 # define ERROR_IO "minishell: ambiguous redirect\n"
+# define ENOCMD "command not found"
+# define EPERROR "minishell: "
 
+# define ERROR_CD "minishell: cd: HOME is not set\n"
 # define ERR_UNSET "unset: %s: invalid parameter name\n"
 # define ERR_EXPORT "minishell: export: `%s': is not valid identifier\n"
 # define ERR_SHLVL "minishell: warning: shell level (%d) too high, \
