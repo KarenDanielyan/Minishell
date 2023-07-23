@@ -136,7 +136,7 @@ clean:		$(INVOKE)
 				@$(RM) $(BUILD)
 				@echo "${GREEN}Done.${RESET}"
 
-fclean:		libft
+fclean:		$(INVOKE)
 				@echo "${YELLOW}Cleaning Everyting...${RESET}"
 				@$(RM) $(BUILD)
 				@$(RM) $(NAME) $(NAME)_old
