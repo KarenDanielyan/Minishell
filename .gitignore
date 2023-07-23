@@ -19,3 +19,6 @@ lib/readline-8.1/doc/Makefile
 lib/readline-8.1/examples/Makefile
 lib/readline-8.1/readline.pc
 lib/readline-8.1/shlib/Makefile
+lib/readline-8.1/shlib/libhistory.so.8.1
+lib/readline-8.1/config.h
+lib/readline-8.1/shlib/libreadline.so.8.1
