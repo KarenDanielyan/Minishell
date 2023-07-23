@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:56:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/23 14:45:11 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 14:48:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*parmexp(char *line, t_control *ctl)
 	char	*word;
 	int		len;
 
-	exp_line = ft_strdup(line); ft_strtrim(line, "\n");
+	exp_line = ft_strtrim(line, "\n");
 	while (1)
 	{
 		dollar_loc = ft_strchr(exp_line, DOLLAR_SIGN);

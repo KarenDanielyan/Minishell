@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/23 14:09:51 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 14:49:51 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	true_loop(t_control *ctl)
 
 static void	wait_and_reset(t_control *ctl)
 {
-	printf("wait_reset(): %d\n", *(ctl->estat));
 	while (wait(&(*(ctl->estat))) != -1)
 		;
 	set_ecode(ctl, TRUE);
