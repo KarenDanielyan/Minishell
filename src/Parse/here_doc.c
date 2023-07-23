@@ -6,15 +6,17 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 19:06:09 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 18:57:01 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
+#include "expand.h"
 #include <libft.h>
 #include <stdio.h>
 
+static void	setup_hdoc(t_wordl *limiter, t_word **for_exit, int *to_expand);
 static void	here_doc(t_wordl *word, int out_fd, t_control *ctl);
 static void	print_ps2(t_control *ctl);
 
@@ -49,11 +51,8 @@ static void	here_doc(t_wordl *word, int out_fd, t_control *ctl)
 	int		to_expand;
 	t_word	*for_exit;
 
-	to_expand = TRUE;
-	for_exit = wordl_join(word);
-	for_exit->value = ft_strjoin_free(for_exit->value, "\n");
-	if (for_exit->flags & (W_SQUOTE | W_DQUOTE))
-		to_expand = FALSE;
+	line = NULL;
+	setup_hdoc(word, &for_exit, &to_expand);
 	while (1)
 	{
 		print_ps2(ctl);
@@ -62,6 +61,8 @@ static void	here_doc(t_wordl *word, int out_fd, t_control *ctl)
 			break ;
 		if (to_expand)
 			line = parmexp(tmp, ctl);
+		else
+			line = ft_strdup(tmp);
 		ft_putstr_fd(line, out_fd);
 		free(line);
 		free(tmp);
@@ -78,4 +79,15 @@ static void	print_ps2(t_control *ctl)
 	ps2 = lst_get_by_key(ctl->var_list, "PS2");
 	if (ps2 && ps2->value)
 		ft_dprintf(STDERR_FILENO, "%s", ps2->value);
+}
+
+static void	setup_hdoc(t_wordl *limiter, t_word **for_exit, int *to_expand)
+{
+	*for_exit = wordl_join(limiter);
+	remove_quotes(*for_exit);
+	(*for_exit)->value = ft_strjoin_free((*for_exit)->value, "\n");
+	if ((*for_exit)->flags & (W_SQUOTE | W_DQUOTE))
+		*to_expand = FALSE;
+	else
+		*to_expand = TRUE;
 }
