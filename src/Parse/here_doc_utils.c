@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:56:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/23 14:42:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/23 14:45:11 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*parmexp(char *line, t_control *ctl)
 		word = get_param_word(dollar_loc, &len, ctl->var_list);
 		replace(&exp_line, dollar_loc, word, len);
 		free(word);
+		if (!exp_line)
+			break ;
 	}
 	ft_strappend(&exp_line, NEWLINE);
 	return (exp_line);
