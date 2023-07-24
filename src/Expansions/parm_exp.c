@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 00:28:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/23 02:02:19 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:13:21 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static char	*get_param_word(t_list *var_list, char *dollar_loc, int *len)
 		(*len)++;
 	param = ft_substr(dollar_loc, 1, (*len - 1));
 	param_node = lst_get_by_key(var_list, param);
-	if (param_node == NULL)
+	if (param_node == NULL || param_node->type == PRIVATE)
 		word = NULL;
 	else
 		word = ft_strdup(param_node->value);
