@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/24 15:47:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:10:50 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	check_valid(t_wordl *args, char *val)
 
 static uint64_t	check_numeric_arg(t_wordl *args, char *val)
 {
-	uint64_t	rv;
+	int64_t		rv;
 	char		*s;
 
 	if (ft_strlen(val) > 19)
@@ -82,8 +82,8 @@ static uint64_t	check_numeric_arg(t_wordl *args, char *val)
 		ft_dprintf(STDERR_FILENO, EINARG, args->word->value);
 		exit(EXIT_FAILURE);
 	}
-	rv = ft_atul(args->word->value);
-	s = ft_itul(rv);
+	rv = ft_atol(args->word->value);
+	s = ft_itol(rv);
 	if (ft_strcmp(s, val) != 0)
 	{
 		ft_dprintf(STDERR_FILENO, EINARG, args->word->value);
