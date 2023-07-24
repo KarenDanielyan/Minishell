@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:38:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/03/31 17:39:42 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:34:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ void	free_2d(char **s)
 	int	i;
 
 	i = 0;
-	while (*(s + i))
+	if (s)
 	{
-		free(*(s + i));
-		i ++;
+		while (*(s + i))
+		{
+			free(*(s + i));
+			i ++;
+		}
+		free (s);
 	}
-	free (s);
 }
