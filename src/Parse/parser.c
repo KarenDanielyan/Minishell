@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/23 01:09:51 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:10:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ static void	handle_syntax_errors(t_node **tree, t_token *scanner, \
 		if (err != 0)
 			visit(NULL, *tree, check_syntax);
 		else if (scanner)
-			ft_dprintf(2, "%s%s\'\n", ERROR_MSG, scanner->wordl->word->value);
+			ft_dprintf(STDERR_FILENO, "%s%s\'\n", ERROR_MSG, \
+				scanner->wordl->word->value);
 		while (scanner)
 			tok_pop(&scanner);
 		visit(NULL, *tree, drop);
-		lst_set(ctl->var_list, SHELL, ECODE, SYNTAX_ERR);
+		estat_set(ctl->estat, 2);
 		*tree = NULL;
 	}
 }

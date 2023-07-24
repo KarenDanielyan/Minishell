@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 20:22:03 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 20:05:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:45:02 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	echo(t_wordl *args, t_control *ctl)
 	if (!flag)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	free(word);
-	lst_set(ctl->var_list, SHELL, ECODE, SUCCESS);
-	*ctl->estat = EXIT_SUCCESS;
+	estat_set(ctl->estat, EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 22:20:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/23 14:21:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:58:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	set_ecode(t_control *ctl, int after_exec)
 	else
 		stat = WEXITSTATUS(*(ctl->estat));
 	s = ft_itoa(stat);
-	if (ctl->execute == EXIT_SUCCESS)
-		lst_set(ctl->var_list, SHELL, ECODE, s);
+	lst_set(ctl->var_list, SHELL, ECODE, s);
 	free(s);
 }

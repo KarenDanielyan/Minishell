@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 14:30:44 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/21 18:50:42 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:48:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int	history(t_wordl *args, t_control *ctl)
 		}
 		close(fd);
 	}
+	estat_set(ctl->estat, EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }

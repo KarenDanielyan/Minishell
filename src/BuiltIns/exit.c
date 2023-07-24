@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/23 01:01:44 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:47:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "lex.h"
 
 static char		*jump_zeros(char *num);
+static int		check_valid(t_wordl *args, char *val);
 static uint64_t	check_numeric_arg(t_wordl *args, char *val);
-static int		check_valid(t_wordl *args, t_list *var_list, char *val);
 
 int	my_exit(t_wordl *args, t_control *ctl)
 {
@@ -23,14 +23,17 @@ int	my_exit(t_wordl *args, t_control *ctl)
 	int			rv;
 	char		*jumped;
 
-	ft_dprintf(2, "%s\n", EXIT);
+	ft_dprintf(STDERR_FILENO, "%s\n", EXIT);
 	tmp = args->next;
 	if (!tmp)
 		exit(EXIT_SUCCESS);
 	jumped = jump_zeros(tmp->word->value);
-	rv = check_valid(tmp, ctl->var_list, jumped);
+	rv = check_valid(tmp, jumped);
 	if (rv < 0)
+	{
+		estat_set(ctl->estat, EXIT_FAILURE);
 		return (EXIT_FAILURE);
+	}
 	exit(rv);
 	return (EXIT_SUCCESS);
 }
@@ -56,7 +59,7 @@ static char	*jump_zeros(char *num)
 	return (ft_strjoin(sign, (num + i)));
 }
 
-static int	check_valid(t_wordl *args, t_list *var_list, char *val)
+static int	check_valid(t_wordl *args, char *val)
 {
 	uint64_t	rv;
 
@@ -64,7 +67,6 @@ static int	check_valid(t_wordl *args, t_list *var_list, char *val)
 	if (wordl_size(args) > 1)
 	{
 		ft_dprintf(STDERR_FILENO, E2MUCH);
-		lst_set(var_list, SHELL, ECODE, FAIL);
 		return (-1);
 	}
 	return ((int)(rv % 256));

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/23 18:45:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 02:15:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	cd(t_wordl *args, t_control *ctl)
 	if (chdir(path->word->value) != 0)
 	{
 		perror("minishell: cd");
-		lst_set(ctl->var_list, SHELL, ECODE, FAIL);
+		estat_set(ctl->estat, EXIT_FAILURE);
 		return (EXIT_FAILURE);
 	}
 	new_pwd = my_get_cwd();
@@ -64,7 +64,7 @@ static int	cd_default(t_list *home, t_control *ctl, t_wordl **path)
 	if (!home)
 	{
 		ft_dprintf(STDERR_FILENO, ERROR_CD);
-		lst_set(ctl->var_list, SHELL, ECODE, "1");
+		estat_set(ctl->estat, EXIT_FAILURE);
 		return (EXIT_FAILURE);
 	}
 	*path = wordl_new(word_new(home->value, 0));

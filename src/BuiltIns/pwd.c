@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:01:08 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 17:51:09 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:55:09 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ int	pwd(t_wordl *cmd, t_control *ctl)
 	char	*pwd;
 
 	(void)cmd;
-	(void)ctl;
 	pwd = getcwd(NULL, 0);
 	if (pwd != NULL)
 	{
 		printf("%s\n", pwd);
 		free(pwd);
+		estat_set(ctl->estat, EXIT_SUCCESS);
 		return (EXIT_SUCCESS);
 	}
 	perror(EPERROR);
+	estat_set(ctl->estat, EXIT_FAILURE);
 	return (EXIT_FAILURE);
 }

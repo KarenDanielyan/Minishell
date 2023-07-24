@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/22 16:46:07 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:56:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,18 @@
 #include "lex.h"
 
 static void	ft_sort(char **env);
-static void	estat_set(t_control *ctl, int fail);
 static int	ft_default(char **env, t_list *var_list);
 
 int	export(t_wordl *args, t_control *ctl)
 {
 	char	**split;
-	char	**env;
 	t_wordl	*temp;
 	int		fail;
 
 	fail = FALSE;
 	temp = args->next;
-	env = get_env_key(ctl->var_list);
 	if (!temp)
-		return (ft_default(env, ctl->var_list));
+		return (ft_default(get_env_key(ctl->var_list), ctl->var_list));
 	while (temp)
 	{
 		split = ft_split(temp->word->value, EQUALS);
@@ -37,21 +34,13 @@ int	export(t_wordl *args, t_control *ctl)
 			ft_dprintf(STDERR_FILENO, ERR_EXPORT, temp->word->value);
 			fail = TRUE;
 		}
-		lst_set_by_word(ctl->var_list, EXPORT, temp->word->value);
+		else
+			lst_set_by_word(ctl->var_list, EXPORT, temp->word->value);
 		free_2d(split);
 		temp = temp->next;
 	}
-	free(env);
-	estat_set(ctl, fail);
-	return (ft_atoi(lst_get_by_key(ctl->var_list, ECODE)->value));
-}
-
-static void	estat_set(t_control *ctl, int fail)
-{
-	if (fail)
-		lst_set(ctl->var_list, SHELL, ECODE, FAIL);
-	else
-		lst_set(ctl->var_list, SHELL, ECODE, SUCCESS);
+	estat_set(ctl->estat, fail);
+	return (fail);
 }
 
 static int	ft_default(char **env, t_list *var_list)
@@ -75,6 +64,7 @@ static int	ft_default(char **env, t_list *var_list)
 		printf("\n");
 		i ++;
 	}
+	free(env);
 	return (EXIT_SUCCESS);
 }
 

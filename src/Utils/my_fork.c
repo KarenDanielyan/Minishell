@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:07:34 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/23 14:20:01 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:59:21 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	my_fork(t_control *ctl)
 	if (pid < 0)
 	{
 		perror(EPERROR);
-		lst_set(ctl->var_list, SHELL, ECODE, FAIL);
+		estat_set(ctl->estat, EXIT_FAILURE);
 		ctl->execute = EXIT_FAILURE;
 		printf("%d\n", *(ctl->estat));
 	}

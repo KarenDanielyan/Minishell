@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:58:17 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/23 13:44:30 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:59:31 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static void	handle_builtin_modes(t_control *ctl, t_node *self, \
 	t_flist *builtin, int pid)
 {
 	int		estat;
-	char	*itoa;
 
 	if (pid == 0 || pid == -42)
 	{
@@ -97,7 +96,7 @@ static void	handle_builtin_modes(t_control *ctl, t_node *self, \
 		{
 			if (pid == 0)
 				exit(EXIT_FAILURE);
-			lst_set(ctl->var_list, SHELL, ECODE, FAIL);
+			estat_set(ctl->estat, EXIT_FAILURE);
 		}
 		if (builtin)
 			estat = builtin->cmd(self->value.s_cmd.word->value.word, ctl);
@@ -107,11 +106,7 @@ static void	handle_builtin_modes(t_control *ctl, t_node *self, \
 	if (pid == 0)
 		exit(estat);
 	else
-	{
-		itoa = ft_itoa(estat);
-		lst_set(ctl->var_list, SHELL, ECODE, itoa);
-		free(itoa);
-	}
+		estat_set(ctl->estat, estat);
 }
 
 static int	handle_suffix(t_control *ctl, t_node *self, int pid)

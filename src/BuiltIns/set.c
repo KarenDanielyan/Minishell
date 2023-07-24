@@ -6,13 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:00:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 19:07:39 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:56:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	estat_set(t_control *ctl, int fail);
+//static void	estat_set(t_control *ctl, int fail);
 
 int	set(t_wordl *args, t_control *ctl)
 {
@@ -37,14 +37,6 @@ int	set(t_wordl *args, t_control *ctl)
 		temp = temp->next;
 	}
 	free(env);
-	estat_set(ctl, fail);
-	return (ft_atoi(lst_get_by_key(ctl->var_list, ECODE)->value));
-}
-
-static void	estat_set(t_control *ctl, int fail)
-{
-	if (fail)
-		lst_set(ctl->var_list, SHELL, ECODE, FAIL);
-	else
-		lst_set(ctl->var_list, SHELL, ECODE, SUCCESS);
+	estat_set(ctl->estat, fail);
+	return (fail);
 }

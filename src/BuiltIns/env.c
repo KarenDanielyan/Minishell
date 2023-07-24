@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:10:00 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/21 17:54:16 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:45:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int	env(t_wordl *cmd, t_control *ctl)
 		}
 		temp = temp->next;
 	}
+	estat_set(ctl->estat, EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }

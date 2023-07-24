@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:01:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/23 13:28:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:57:06 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	execute_command(t_control *ctl, t_node *self)
 	{
 		if (execute(ctl, self->value.cmd.prefix) == EXIT_FAILURE)
 		{
-			lst_set(ctl->var_list, SHELL, ECODE, FAIL);
+			estat_set(ctl->estat, EXIT_FAILURE);
 			return ;
 		}
 		set_child_fds(self);
