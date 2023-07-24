@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 22:21:00 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/12 16:14:00 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:10:02 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void		ft_putnbr_fd(int n, int fd);
 void		ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 char		*ft_itoa(int n);
-char		*ft_itul(long long n);
+char		*ft_itul(uint64_t n);
+char		*ft_itol(long long n);
 char		**ft_strdup_2d(char const **s);
 char		**ft_split(char const *s, char c);
 char		**ft_split_2(char const *s, char *charset);

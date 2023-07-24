@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itul.c                                          :+:      :+:    :+:   */
+/*   ft_itol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 20:02:20 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/24 18:09:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:10:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	size_t	digit_count(int64_t n)
+static	int	digit_count(long long n)
 {
-	size_t	len;
+	int	len;
 
 	len = 0;
+	if (n < 0)
+		len++;
 	while (n != 0)
 	{
 		n /= 10;
@@ -33,10 +35,23 @@ static char	*zerocase(char *m)
 	return (m);
 }
 
-static char	*line(int len, char *p, uint64_t n)
+static char	*line(int len, char *p, long long n)
 {
+	unsigned long long	a;
+
 	p[len] = '\0';
 	len--;
+	if (n < 0)
+	{
+		p[0] = '-';
+		a = (unsigned long long)(n * -1);
+		while (a != 0)
+		{
+			p[len--] = (a % 10) + '0';
+			a /= 10;
+		}
+	}
+	else
 	{
 		while (n != 0)
 		{
@@ -47,10 +62,10 @@ static char	*line(int len, char *p, uint64_t n)
 	return (p);
 }
 
-char	*ft_itul(uint64_t n)
+char	*ft_itol(long long n)
 {
-	char	*p;
-	size_t	len;
+	char		*p;
+	long long	len;
 
 	p = NULL;
 	if (n == 0)
