@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/24 01:08:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:29:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	true_loop(t_control *ctl)
 		if (ctl->tree == NULL)
 		{
 			free(ctl->input);
+			set_ecode(ctl, FALSE);
 			continue ;
 		}
 		execute(ctl, ctl->tree);

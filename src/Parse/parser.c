@@ -6,10 +6,11 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/24 16:10:45 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:56:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/wait.h>
 #include "minishell.h"
 #include "parser.h"
 #include "debug.h"
@@ -48,7 +49,8 @@ static void	handle_syntax_errors(t_node **tree, t_token *scanner, \
 		while (scanner)
 			tok_pop(&scanner);
 		visit(NULL, *tree, drop);
-		estat_set(ctl->estat, 2);
+		if (WIFEXITED(*(ctl->estat)))
+			estat_set(ctl->estat, 2);
 		*tree = NULL;
 	}
 }
