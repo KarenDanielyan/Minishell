@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:00:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 19:56:32 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:38:36 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	sig_init(void)
 	rl_event_hook = &handler;
 }
 
-static void	ft_irc(int signum)
+void	ft_irc(int signum)
 {
 	g_estat = signum;
 	if (signum == SIGINT)

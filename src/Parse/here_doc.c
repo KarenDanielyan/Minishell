@@ -6,20 +6,20 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/24 17:12:43 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:50:13 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "init.h"
 #include "parser.h"
 #include "expand.h"
 #include <sys/wait.h>
 #include <libft.h>
-#include <stdio.h>
 
 static void		print_ps2(t_control *ctl);
 static void		here_doc(t_control *ctl, t_word *limiter, \
-	int expand, int write_fd);
+	int expand, t_pipe fifo);
 
 static t_word	*setup_hdoc(t_pipe *fifo, t_wordl *word, int *to_expand);
 
@@ -35,7 +35,7 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 	if (pid < 0)
 		return (-1);
 	if (pid == 0)
-		here_doc(limiter, fifo.out, ctl);
+		here_doc(ctl, limiter, to_expand, fifo);
 	waitpid(pid, ctl->estat, 0);
 	if (WIFEXITED(*(ctl->estat)))
 	{
@@ -46,17 +46,18 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 	}
 	else
 		fifo.in = -1;
+	word_delete(limiter);
+	close(fifo.out);
 	return (fifo.in);
 }
 
-static void	here_doc(t_control *ctl, t_word *limiter, int expand, int write_fd)
+static void	here_doc(t_control *ctl, t_word *limiter, int expand, t_pipe fifo)
 {
 	char	*line;
 	char	*tmp;
 
 	signal(SIGINT, SIG_DFL);
 	signal(SIGTERM, SIG_DFL);
-	line = NULL;
 	tmp = NULL;
 	while (1)
 	{
@@ -69,10 +70,12 @@ static void	here_doc(t_control *ctl, t_word *limiter, int expand, int write_fd)
 			line = parmexp(tmp, ctl);
 		else
 			line = ft_strdup(tmp);
-		ft_putstr_fd(line, out_fd);
+		ft_putstr_fd(line, fifo.out);
 		free(tmp);
 		free(line);
 	}
+	close(fifo.in);
+	close(fifo.out);
 	exit(EXIT_SUCCESS);
 }
 
@@ -88,12 +91,11 @@ static void	print_ps2(t_control *ctl)
 static t_word	*setup_hdoc(t_pipe *fifo, t_wordl *word, int *to_expand)
 {
 	t_word	*limiter;
-	int		write_fd;
 	int		pip[2];
 
-	write_fd = open(HERE_FILE, O_RDWR | O_CREAT | O_APPEND, 0666);
+	fifo->out = open(HERE_FILE, O_RDWR | O_CREAT | O_APPEND, 0666);
 	fifo->in = -42;
-	if (write_fd < 0)
+	if (fifo->out < 0)
 	{
 		pipe(pip);
 		fifo->in = pip[0];
@@ -106,4 +108,5 @@ static t_word	*setup_hdoc(t_pipe *fifo, t_wordl *word, int *to_expand)
 		*to_expand = FALSE;
 	else
 		*to_expand = TRUE;
+	return (limiter);
 }

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:58:40 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 17:44:35 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:33:50 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,12 @@ t_node	*parse_ioredirect(t_control *ctl, t_token **scanner, int *err)
 			return (parse_error(ctl, scanner, err));
 		node = new_io_redirect_node(type, parse_word(ctl, scanner, err));
 		if (type == HERE)
+		{
 			node->value.io.fd = \
 				parse_heredoc(node->value.io.filename->value.word, ctl);
+			if (node->value.io.fd < 0)
+				*err = 1;
+		}
 	}
 	return (node);
 }
