@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 20:38:57 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:24:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_list	*env_init(char **env)
 	lst_push_back(&var_list, lst_new(SHELL, ft_strdup(PS2)));
 	lst_push_back(&var_list, lst_new(SHELL, ft_strdup(PS4)));
 	hist = ft_strjoin(getenv("HOME"), HISTFILE);
-	lst_push_back(&var_list, lst_new(SHELL, ft_strjoin("HISTFILE=", hist)));
+	lst_push_back(&var_list, lst_new(PRIVATE, ft_strjoin("HISTFILE=", hist)));
 	free(hist);
 	init_shlvl(var_list);
 	return (var_list);

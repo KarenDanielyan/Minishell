@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 14:30:44 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/24 15:48:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:30:45 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	history(t_wordl *args, t_control *ctl)
 	int		i;
 	int		fd;
 	char	*line;
-	char	*filename;
 
 	i = 1;
 	line = NULL;
@@ -32,8 +31,7 @@ int	history(t_wordl *args, t_control *ctl)
 		ft_dprintf(STDERR_FILENO, NOTE_HIST);
 	else
 	{
-		filename = lst_get_by_key(ctl->var_list, "HISTFILE")->value;
-		fd = open(filename, O_RDONLY);
+		fd = open(lst_get_by_key(ctl->var_list, "HISTFILE")->value, O_RDONLY);
 		while (1)
 		{
 			line = get_next_line(fd);
