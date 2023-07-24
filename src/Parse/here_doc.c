@@ -6,70 +6,74 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/23 18:59:45 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/24 17:12:43 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
 #include "expand.h"
+#include <sys/wait.h>
 #include <libft.h>
 #include <stdio.h>
 
-static void	setup_hdoc(t_wordl *limiter, t_word **for_exit, int *to_expand);
-static void	here_doc(t_wordl *word, int out_fd, t_control *ctl);
-static void	print_ps2(t_control *ctl);
+static void		print_ps2(t_control *ctl);
+static void		here_doc(t_control *ctl, t_word *limiter, \
+	int expand, int write_fd);
+
+static t_word	*setup_hdoc(t_pipe *fifo, t_wordl *word, int *to_expand);
 
 int	parse_heredoc(t_wordl *word, t_control *ctl)
 {
-	int		in_fd;
-	int		out_fd;
-	int		pip[2];
+	t_pipe	fifo;
+	t_word	*limiter;
+	int		to_expand;
+	int		pid;
 
-	pip[0] = -42;
-	out_fd = open(HERE_FILE, O_RDWR | O_CREAT | O_APPEND, 0666);
-	if (out_fd < 0)
+	limiter = setup_hdoc(&fifo, word, &to_expand);
+	pid = my_fork(ctl);
+	if (pid < 0)
+		return (-1);
+	if (pid == 0)
+		here_doc(limiter, fifo.out, ctl);
+	waitpid(pid, ctl->estat, 0);
+	if (WIFEXITED(*(ctl->estat)))
 	{
-		pipe(pip);
-		out_fd = pip[1];
+		if (fifo.in < 0)
+			fifo.in = open(HERE_FILE, O_RDONLY);
+		if (fifo.in < 0)
+			perror(EPERROR);
 	}
-	here_doc(word, out_fd, ctl);
-	if (pip[0] > 0)
-		in_fd = pip[0];
 	else
-		in_fd = open(HERE_FILE, O_RDONLY);
-	if (in_fd < 0)
-		perror("heredoc");
-	close(out_fd);
-	return (in_fd);
+		fifo.in = -1;
+	return (fifo.in);
 }
 
-static void	here_doc(t_wordl *word, int out_fd, t_control *ctl)
+static void	here_doc(t_control *ctl, t_word *limiter, int expand, int write_fd)
 {
 	char	*line;
 	char	*tmp;
-	int		to_expand;
-	t_word	*for_exit;
 
+	signal(SIGINT, SIG_DFL);
+	signal(SIGTERM, SIG_DFL);
 	line = NULL;
-	setup_hdoc(word, &for_exit, &to_expand);
+	tmp = NULL;
 	while (1)
 	{
 		print_ps2(ctl);
-		tmp = get_next_line(STDIN_FILENO);
-		if (tmp == NULL || ft_strcmp(tmp, for_exit->value) == 0)
+		line = get_next_line(STDIN_FILENO);
+		if (line == NULL || ft_strcmp(line, limiter->value) == 0)
 			break ;
-		if (to_expand)
+		tmp = line;
+		if (expand)
 			line = parmexp(tmp, ctl);
 		else
 			line = ft_strdup(tmp);
 		ft_putstr_fd(line, out_fd);
+		free(tmp);
 		free(line);
-		free(tmp);
 	}
-	if (tmp)
-		free(tmp);
-	word_delete(for_exit);
+	exit(EXIT_SUCCESS);
 }
 
 static void	print_ps2(t_control *ctl)
@@ -81,12 +85,24 @@ static void	print_ps2(t_control *ctl)
 		ft_dprintf(STDERR_FILENO, "%s", ps2->value);
 }
 
-static void	setup_hdoc(t_wordl *limiter, t_word **for_exit, int *to_expand)
+static t_word	*setup_hdoc(t_pipe *fifo, t_wordl *word, int *to_expand)
 {
-	*for_exit = wordl_join(limiter);
-	remove_quotes(*for_exit);
-	(*for_exit)->value = ft_strjoin_free((*for_exit)->value, "\n");
-	if ((*for_exit)->flags & (W_SQUOTE | W_DQUOTE))
+	t_word	*limiter;
+	int		write_fd;
+	int		pip[2];
+
+	write_fd = open(HERE_FILE, O_RDWR | O_CREAT | O_APPEND, 0666);
+	fifo->in = -42;
+	if (write_fd < 0)
+	{
+		pipe(pip);
+		fifo->in = pip[0];
+		fifo->out = pip[1];
+	}
+	limiter = wordl_join(word);
+	remove_quotes(limiter);
+	(limiter)->value = ft_strjoin_free(limiter->value, "\n");
+	if (limiter->flags & (W_SQUOTE | W_DQUOTE))
 		*to_expand = FALSE;
 	else
 		*to_expand = TRUE;
