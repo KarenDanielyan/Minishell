@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/24 18:10:50 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 17:01:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static uint64_t	check_numeric_arg(t_wordl *args, char *val)
 	int64_t		rv;
 	char		*s;
 
-	if (ft_strlen(val) > 19)
+	if ((ft_strlen(val) > 19 && *val != '+' && *val != '-') \
+		|| ft_strlen(val) > 20)
 	{
 		ft_dprintf(STDERR_FILENO, EINARG, args->word->value);
 		exit(EXIT_FAILURE);
