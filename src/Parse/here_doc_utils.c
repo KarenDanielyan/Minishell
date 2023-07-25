@@ -6,17 +6,35 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:56:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/23 14:48:49 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:17:22 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <termios.h>
 #include "parser.h"
 #include <libft.h>
 #include <stdio.h>
 
 static char	*get_param_word(char *dollar_loc, int *len, t_list *var_list);
 static void	replace(char **line, char *dollar_loc, char *word, int len);
+
+void	set_attr(t_attrmod mode)
+{
+	struct termios	ts;
+
+	tcgetattr(STDIN_FILENO, &ts);
+	if (mode == SET)
+	{
+		ts.c_lflag &= ~ECHOCTL;
+		tcsetattr(STDIN_FILENO, TCSANOW, &ts);
+	}
+	else if (mode == RESET)
+	{
+		ts.c_lflag |= ECHOCTL;
+		tcsetattr(STDIN_FILENO, TCSANOW, &ts);
+	}
+}
 
 char	*parmexp(char *line, t_control *ctl)
 {

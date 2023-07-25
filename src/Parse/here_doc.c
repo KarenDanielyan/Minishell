@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/25 14:45:11 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:30:06 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,12 @@
 #include <libft.h>
 #include <termios.h>
 
-
 static void		print_ps2(t_control *ctl);
+static void		cleanup(t_word *limiter, t_pipe fifo);
 static void		here_doc(t_control *ctl, t_word *limiter, \
 	int expand, t_pipe fifo);
 
 static t_word	*setup_hdoc(t_pipe *fifo, t_wordl *word, int *to_expand);
-
-void	get_and_set_attr(int flag)
-{
-	struct termios	ts;
-
-	tcgetattr(STDIN_FILENO, &ts);
-	if (flag == 0)
-	{
-		ts.c_lflag &= ~ECHOCTL;
-		tcsetattr(STDIN_FILENO, TCSANOW, &ts);
-	}
-	else if (flag == 1)
-	{
-		ts.c_lflag |= ECHOCTL;
-		tcsetattr(STDIN_FILENO, TCSANOW, &ts);
-	}
-}
 
 int	parse_heredoc(t_wordl *word, t_control *ctl)
 {
@@ -56,21 +39,24 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 	if (pid == 0)
 		here_doc(ctl, limiter, to_expand, fifo);
 	waitpid(pid, ctl->estat, 0);
-	if (WIFSIGNALED(ctl->estat) && WTERMSIG(*(ctl->estat)) == SIGINT)
-		write(1, "\n", 1);
-	if (WIFEXITED(*(ctl->estat)))
+	if (WIFSIGNALED(*(ctl->estat)))
 	{
-		if (fifo.in < 0)
-			fifo.in = open(HERE_FILE, O_RDONLY);
-		if (fifo.in < 0)
-			perror(EPERROR);
+		if (WTERMSIG(*(ctl->estat)))
+			write(1, "\n", 1);
+		return (-1);
 	}
-	else
-		fifo.in = -1;
+	return (fifo.in);
+}
+
+static void	cleanup(t_word *limiter, t_pipe fifo)
+{
+	if (fifo.in < 0)
+		fifo.in = open(HERE_FILE, O_RDONLY);
+	if (fifo.in < 0)
+		perror(EPERROR);
 	get_and_set_attr(1);
 	word_delete(limiter);
 	close(fifo.out);
-	return (fifo.in);
 }
 
 static void	here_doc(t_control *ctl, t_word *limiter, int expand, t_pipe fifo)

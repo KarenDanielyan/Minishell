@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:18:20 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 19:08:34 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:17:48 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_nodel		*nodel_prev(t_nodel *head, t_nodel *current);
 /* here_doc */
 int			parse_heredoc(t_wordl *word, t_control *ctl);
 char		*parmexp(char *line, t_control *ctl);
+
+void		set_attr(t_attrmod mode);
 
 /* Drop Functions */
 void		nodel_clear(t_nodel *list, void (*del)(t_node *node));

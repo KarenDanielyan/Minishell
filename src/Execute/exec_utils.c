@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:45:51 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/24 16:32:46 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:08:56 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,30 @@ char	*cmd_search(t_wordl *cmd, t_list *var_list)
 	char	**path;
 	char	*cmd_loc;
 
+	if (cmd == NULL)
+		return (NULL);
 	path = get_path(var_list);
 	cmd_loc = get_file_path(path, cmd->word->value);
+	if (cmd_loc == NULL)
+		cmd_loc = ft_strdup(cmd->word->value);
 	free_2d(path);
 	return (cmd_loc);
 }
 
-int	is_assignment(t_word *word)
+int	is_assignment(t_wordl *wordl)
 {
 	char	**split;
 	int		rv;
 
 	rv = 0;
 	split = NULL;
-	if (word)
+	if (wordl)
 	{
-		if (word->value)
+		if (wordl->word->value)
 		{
-			if (ft_strchr(word->value, EQUALS))
+			if (ft_strchr(wordl->word->value, EQUALS))
 			{
-				split = ft_split(word->value, EQUALS);
+				split = ft_split(wordl->word->value, EQUALS);
 				if (is_name(split[0]))
 					rv = 1;
 			}
@@ -57,15 +61,16 @@ int	is_assignment(t_word *word)
 void	execute_and_check(char *cmd, char **args, char **env)
 {
 	if (cmd == NULL)
-	{
-		ft_dprintf(STDERR_FILENO, "%s: %s\n", EPERROR, ENOCMD);
-		exit(127);
-	}
+		exit(EXIT_SUCCESS);
 	execve(cmd, args, env);
-	ft_dprintf(STDERR_FILENO, "%s%s: %s\n", EPERROR, cmd, strerror(errno));
+	if (errno == ENOENT)
+		ft_dprintf(STDERR_FILENO, "%s%s: %s\n", EPERROR, cmd, ENOCMD);
+	else
+		ft_dprintf(STDERR_FILENO, "%s%s: %s\n", EPERROR, cmd, strerror(errno));
 	if (errno == EACCES)
 		exit(126);
-	exit(errno);
+	else
+		exit(127);
 }
 
 static char	*get_file_path(char **path, char *file)
