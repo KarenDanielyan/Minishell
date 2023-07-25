@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_ecode.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 22:20:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/24 18:30:35 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:42:23 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	set_ecode(t_control *ctl, int after_exec)
 		if (after_exec == TRUE)
 		{
 			if (WTERMSIG(*(ctl->estat)) == SIGQUIT)
-				ft_putstr_fd("Quit\n", STDERR_FILENO);
+				ft_dprintf(STDERR_FILENO, "Quit: %d\n",WTERMSIG(*(ctl->estat)));
 			if (WTERMSIG(*(ctl->estat)) == SIGINT)
 				ft_putstr_fd("\n", STDERR_FILENO);
 		}
