@@ -43,7 +43,7 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/Utils/%.c,\
 				get_env.c print_logo.c is_token.c \
 				var_asign.c visit.c my_fork.c \
-				set_ecode.c close_fifo.c) \
+				set_ecode.c close_fifo.c print.c) \
 				$(patsubst %.c, $(SRC)/Lexer/%.c,\
 				word_lists.c operator_token.c \
 				word_token.c lex.c \

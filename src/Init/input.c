@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:25:08 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/23 01:27:08 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:07:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 
 char	*get_line(t_control *ctl, int fd)
 {
+	t_list	*ps1;
 	char	*str;
 
-	str = readline(lst_get_by_key(ctl->var_list, "PS1")->value);
+	ps1 = lst_get_by_key(ctl->var_list, "PS1");
+	if (ps1 && ps1->value)
+		str = ps1->value;
+	else
+		str = NULL;
+	str = readline(str);
 	if (!str)
 	{
 		write (2, "exit\n", 5);

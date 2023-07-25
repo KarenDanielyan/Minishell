@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/25 15:35:52 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:01:35 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include <libft.h>
 #include <termios.h>
 
-static void		print_ps2(t_control *ctl);
 static void		cleanup(t_word *limiter, t_pipe fifo);
 static void		here_doc(t_control *ctl, t_word *limiter, \
 	int expand, t_pipe fifo);
@@ -71,7 +70,7 @@ static void	here_doc(t_control *ctl, t_word *limiter, int expand, t_pipe fifo)
 	tmp = NULL;
 	while (1)
 	{
-		print_ps2(ctl);
+		shell_print(ctl, "PS2");
 		line = get_next_line(STDIN_FILENO);
 		if (line == NULL || ft_strcmp(line, limiter->value) == 0)
 			break ;
@@ -87,15 +86,6 @@ static void	here_doc(t_control *ctl, t_word *limiter, int expand, t_pipe fifo)
 	close(fifo.in);
 	close(fifo.out);
 	exit(EXIT_SUCCESS);
-}
-
-static void	print_ps2(t_control *ctl)
-{
-	t_list	*ps2;
-
-	ps2 = lst_get_by_key(ctl->var_list, "PS2");
-	if (ps2 && ps2->value)
-		ft_dprintf(STDERR_FILENO, "%s", ps2->value);
 }
 
 static t_word	*setup_hdoc(t_pipe *fifo, t_wordl *word, int *to_expand)

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/24 16:07:35 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:48:33 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int			pwd(t_wordl *cmd, t_control *ctl);
 
 /* Utils */
 void		set_ecode(t_control *ctl, int after_exec);
+void		shell_print(t_control *ctl, char *key);
 void		print_logo(void);
 
 static inline void	estat_set_sig(int *estat, int signum)
