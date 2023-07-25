@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/25 19:26:23 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:41:00 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char		*get_line(t_control *ctl, int fd);
 t_token		*lex(t_control *ctl);
 
 /* Parsing */
+t_node		*search(t_control *ctl, t_node *self, t_nodetype type);
 t_node		*parse(t_token	*scanner, t_control *ctl);
 
 void		drop(t_control *ctl, t_node *self);
