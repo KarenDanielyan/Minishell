@@ -101,7 +101,8 @@
     "execute.h": "c",
     "init.h": "c",
     "optional": "c",
-    "system_error": "c"
+    "system_error": "c",
+    "kak": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
