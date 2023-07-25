@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:44:43 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 14:34:32 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 23:43:00 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,15 @@ static t_flist	*get_builtin(t_control *ctl, t_node *word);
 void	execute_scommand(t_control *ctl, t_node *self)
 {
 	t_flist	*builtin_cmd;
+	t_wordl	*cmd_args;
+	t_word	*last_arg;
 
+	if (self->value.s_cmd.word)
+		cmd_args = self->value.s_cmd.word->value.word;
+	if (cmd_args)
+		last_arg = wordl_last(cmd_args)->word;
+	if (last_arg && last_arg->value)
+		lst_set(ctl->var_list, EXPORT, "_", last_arg->value);
 	builtin_cmd = get_builtin(ctl, self->value.s_cmd.word);
 	if (builtin_cmd || is_assignment(self->value.s_cmd.word->value.word))
 		handle_builtin(ctl, self, builtin_cmd);
