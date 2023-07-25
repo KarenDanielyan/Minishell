@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/25 15:30:06 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:35:52 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 			write(1, "\n", 1);
 		return (-1);
 	}
+	cleanup(limiter, fifo);
 	return (fifo.in);
 }
 
@@ -54,7 +55,7 @@ static void	cleanup(t_word *limiter, t_pipe fifo)
 		fifo.in = open(HERE_FILE, O_RDONLY);
 	if (fifo.in < 0)
 		perror(EPERROR);
-	get_and_set_attr(1);
+	set_attr(RESET);
 	word_delete(limiter);
 	close(fifo.out);
 }
@@ -66,7 +67,7 @@ static void	here_doc(t_control *ctl, t_word *limiter, int expand, t_pipe fifo)
 
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_IGN);
-	get_and_set_attr(0);
+	set_attr(SET);
 	tmp = NULL;
 	while (1)
 	{
