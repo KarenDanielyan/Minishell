@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 19:30:38 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 23:24:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	handle_syntax_errors(t_node **tree, t_token *scanner, \
 			tok_pop(&scanner);
 		visit(NULL, *tree, drop);
 		if (WIFEXITED(*(ctl->estat)))
-			estat_set(ctl->estat, 2);
+			estat_set(ctl->estat, SYNTAX_ERR);
 		*tree = NULL;
 	}
 }
