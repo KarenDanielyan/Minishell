@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 15:27:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 16:40:35 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:25:13 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	check_flag(t_token *tokens, t_wordl *word);
 
-t_token	*lex(char *s, t_list *var_list)
+t_token	*lex(t_control *ctl)
 {
 	t_token	*tokens;
 	t_wordl	*wordl;
@@ -24,7 +24,9 @@ t_token	*lex(char *s, t_list *var_list)
 
 	tokens = NULL;
 	wordl = NULL;
-	get_next_token(s, NULL);
+	if (!ctl->input)
+		return (NULL);
+	get_next_token(ctl->input, NULL);
 	while (1)
 	{
 		wordl = get_next_token(NULL, &type);
@@ -37,7 +39,7 @@ t_token	*lex(char *s, t_list *var_list)
 	{
 		while (tokens)
 			tok_pop(&(tokens));
-		lst_set(var_list, SHELL, ECODE, SYNTAX_ERR);
+		estat_set(ctl->estat, 2);
 	}
 	return (tokens);
 }

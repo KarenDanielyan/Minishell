@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/25 20:25:31 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:46:31 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <libft.h>
 #include <termios.h>
 
-static void	cleanup(t_word *limiter, t_pipe *fifo);
+static void		cleanup(t_word *limiter, t_pipe *fifo);
 static void		here_doc(t_control *ctl, t_word *limiter, \
 	int expand, t_pipe fifo);
 
@@ -42,6 +42,8 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 	{
 		if (WTERMSIG(*(ctl->estat)) == SIGINT)
 			write(1, "\n", 1);
+		word_delete(limiter);
+		set_attr(RESET);
 		return (-1);
 	}
 	cleanup(limiter, &fifo);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:00:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 18:32:38 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:33:16 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_irc(int signum)
 {
 	if (signum == SIGINT)
 	{
-		g_estat = 1;
+		g_estat = SIGINT;
 		rl_replace_line("", 0);
 		rl_done = 42;
 	}

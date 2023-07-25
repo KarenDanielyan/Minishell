@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:00:54 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/24 18:56:08 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:30:38 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_node	*parse(t_token *scanner, t_control *ctl)
 	int		err;
 
 	err = 0;
+	if (scanner == NULL)
+		return (NULL);
 	node = parse_list(ctl, &scanner, &err);
 	handle_syntax_errors(&node, scanner, ctl, err);
 	return ((void *)node);

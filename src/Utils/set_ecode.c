@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 22:20:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 15:31:32 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:44:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,13 @@ void	set_ecode(t_control *ctl, int after_exec)
 
 	if (WIFSIGNALED(*(ctl->estat)) && WTERMSIG(*(ctl->estat)) != SIGPIPE)
 	{
-		stat = 128 + WTERMSIG(*(ctl->estat));
+		if (WTERMSIG(*(ctl->estat)) == SIGINT)
+			stat = SIGHUP;
+		else
+			stat = 0;
 		if (after_exec == TRUE)
 		{
+			stat = WTERMSIG(*(ctl->estat));
 			if (WTERMSIG(*(ctl->estat)) == SIGQUIT)
 				ft_dprintf(STDERR_FILENO, "Quit: %d\n", WTERMSIG(*(ctl->estat)));
 			if (WTERMSIG(*(ctl->estat)) == SIGINT)

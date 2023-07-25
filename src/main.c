@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/24 18:29:30 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:46:48 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "debug.h"
 #include <sys/wait.h>
 
-static void	wait_and_reset(t_control *ctl);
+static void	wait_and_reset(t_control *ctl, int after_exec);
 static void	true_loop(t_control *ctl);
 
 int		g_estat = 0;
@@ -37,34 +37,28 @@ int	main(int ac, char **av, char **env)
  */
 static void	true_loop(t_control *ctl)
 {
+	int		after_exec;
+
 	while (1)
 	{
+		after_exec = FALSE;
 		ctl->input = get_line(ctl, ctl->hist_fd);
-		if (!ctl->input)
-			continue ;
-		ctl->scanner = lex(ctl->input, ctl->var_list);
-		if (ctl->scanner == NULL)
-		{
-			free(ctl->input);
-			continue ;
-		}
+		ctl->scanner = lex(ctl);
 		ctl->tree = parse(ctl->scanner, ctl);
-		if (ctl->tree == NULL)
+		if (ctl->tree)
 		{
-			free(ctl->input);
-			set_ecode(ctl, FALSE);
-			continue ;
+			execute(ctl, ctl->tree);
+			after_exec = TRUE;
 		}
-		execute(ctl, ctl->tree);
-		wait_and_reset(ctl);
+		wait_and_reset(ctl, after_exec);
 	}
 }
 
-static void	wait_and_reset(t_control *ctl)
+static void	wait_and_reset(t_control *ctl, int after_exec)
 {
 	while (wait(&(*(ctl->estat))) != -1)
 		;
-	set_ecode(ctl, TRUE);
+	set_ecode(ctl, after_exec);
 	ctl->execute = EXIT_SUCCESS;
 	visit(NULL, ctl->tree, drop);
 	free(ctl->input);

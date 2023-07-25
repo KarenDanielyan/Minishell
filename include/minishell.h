@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:00:51 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/25 15:48:33 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:26:23 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		sig_init(void);
 char		*get_line(t_control *ctl, int fd);
 
 /* Lexical Analysis */
-t_token		*lex(char *s, t_list *var_list);
+t_token		*lex(t_control *ctl);
 
 /* Parsing */
 t_node		*parse(t_token	*scanner, t_control *ctl);

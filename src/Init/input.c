@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:25:08 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 16:07:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:10:35 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,5 @@ char	*get_line(t_control *ctl, int fd)
 	}
 	add_history(str);
 	ft_putendl_fd(str, fd);
-	if (WIFSIGNALED(*(ctl->estat)))
-		set_ecode(ctl, FALSE);
 	return (str);
 }
