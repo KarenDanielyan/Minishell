@@ -6,13 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/24 02:15:52 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:57:15 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	set_values(t_list *var_list, char *new_pwd, char *current_pwd);
+static int	set_values(t_list *var_list, char *new_pwd, char *current_pwd);
 static int	cd_default(t_list *home, t_control *ctl, t_wordl **path);
 static char	*my_get_cwd(void);
 
@@ -31,7 +31,7 @@ int	cd(t_wordl *args, t_control *ctl)
 	new_pwd = NULL;
 	current_pwd = NULL;
 	path = args->next;
-	if (!path)
+	if (!path || wordl_size(path) > 1)
 	{
 		if (cd_default(lst_get_by_key(ctl->var_list, "HOME"), ctl, &path))
 			return (EXIT_FAILURE);
@@ -40,30 +40,39 @@ int	cd(t_wordl *args, t_control *ctl)
 		current_pwd = ft_strdup(lst_get_by_key(ctl->var_list, "PWD")->value);
 	if (chdir(path->word->value) != 0)
 	{
-		perror("minishell: cd");
+		ft_dprintf(STDERR_FILENO, "minishell: cd: %s: %s\n", \
+			path->word->value, strerror(errno));
 		estat_set(ctl->estat, EXIT_FAILURE);
+		free(current_pwd);
 		return (EXIT_FAILURE);
 	}
+	args->next = path;
 	new_pwd = my_get_cwd();
-	if (!new_pwd)
-		return (EXIT_FAILURE);
-	set_values(ctl->var_list, new_pwd, current_pwd);
-	return (EXIT_SUCCESS);
+	return (set_values(ctl->var_list, new_pwd, current_pwd));
 }
 
-static void	set_values(t_list *var_list, char *new_pwd, char *current_pwd)
+static int	set_values(t_list *var_list, char *new_pwd, char *current_pwd)
 {
+	if (!new_pwd)
+	{
+		free(current_pwd);
+		return (EXIT_FAILURE);
+	}
 	lst_set(var_list, LOCAL, "PWD", new_pwd);
 	lst_set(var_list, LOCAL, "OLDPWD", current_pwd);
 	free(new_pwd);
 	free(current_pwd);
+	return (EXIT_SUCCESS);
 }
 
 static int	cd_default(t_list *home, t_control *ctl, t_wordl **path)
 {
-	if (!home)
+	if (!home || wordl_size(*path) > 1)
 	{
-		ft_dprintf(STDERR_FILENO, ERROR_CD);
+		if (!home)
+			ft_dprintf(STDERR_FILENO, ERROR_CD);
+		else
+			ft_dprintf(STDERR_FILENO, ERROR_CD2MUCH);
 		estat_set(ctl->estat, EXIT_FAILURE);
 		return (EXIT_FAILURE);
 	}

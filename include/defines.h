@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 15:16:49 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:39:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define EPERROR "minishell: "
 
 # define ERROR_CD "minishell: cd: HOME is not set\n"
+# define ERROR_CD2MUCH "minishell: cd: too many arguments\n"
 # define ERR_UNSET "unset: %s: invalid parameter name\n"
 # define ERR_EXPORT "minishell: export: `%s': is not valid identifier\n"
 # define ERR_SHLVL "minishell: warning: shell level (%d) too high, \
@@ -66,7 +67,7 @@ resetting to 1\n"
 # define QUOTES "\'\""
 
 /* Terminal Symbols */
-# define SYMBS " =<>|()&\'\"$"
+# define SYMBS " /=<>|()&\'\"$"
 # define EQUALS '='
 # define PIPE_OP '|'
 # define LESS '<'
