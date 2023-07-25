@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/25 17:01:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 17:18:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	my_exit(t_wordl *args, t_control *ctl)
 		exit(EXIT_SUCCESS);
 	jumped = jump_zeros(tmp->word->value);
 	rv = check_valid(tmp, jumped);
+	free(jumped);
 	if (rv < 0)
 	{
 		estat_set(ctl->estat, EXIT_FAILURE);
@@ -42,9 +43,13 @@ static char	*jump_zeros(char *num)
 {
 	int		i;
 	char	*sign;
+	char	*zero_loc;
 
 	i = 0;
 	sign = NULL;
+	zero_loc = ft_strchr(num, '0');
+	if (zero_loc && (zero_loc + 1) && *(zero_loc + 1) == 0)
+		return (ft_strdup(num));
 	if (num[i] == '-' || num[i] == '+')
 	{
 		if (num[i] == '-')

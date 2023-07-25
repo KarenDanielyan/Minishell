@@ -68,7 +68,6 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				exec_functions_4.c exec_functions_5.c \
 				simple_cmd_handler.c)
 
-
 OBJS		=	$(foreach dir, $(SUBDIRS), \
 				$(patsubst $(SRC)/$(dir)/%.c, $(BUILD)/%.o, \
 				$(filter $(SRC)/$(dir)/%.c, $(SRCS)))) \
