@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 22:27:17 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:21:31 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ t_node	*parse_command(t_control *ctl, t_token **scanner, int *err)
 			command_node = parse_simple_command(ctl, scanner, err);
 		}
 		else
-		{
-			type = EmptyCommand;
-			command_node = NULL;
-		}
+			command_node = parse_error(ctl, scanner, err);
 		return (new_command_node(type, prefix_node, command_node));
 	}
 	return (NULL);
@@ -54,14 +51,14 @@ t_node	*parse_commpound_command(t_control *ctl, t_token **scanner, int *err)
 	{
 		token_consume(scanner);
 		list_node = parse_list(ctl, scanner, err);
-		list_node->is_last = 0;
-		if (!(*scanner) || (*scanner)->type != SUBSHELL_CLOSE)
+		if (!list_node || !(*scanner) || (*scanner)->type != SUBSHELL_CLOSE)
 		{
 			if (search(ctl, list_node, ErrorNode))
 				return (list_node);
 			visit(ctl, list_node, drop);
 			return (parse_error(ctl, scanner, err));
 		}
+		list_node->is_last = 0;
 		token_consume(scanner);
 		suffix = parse_ccmd_suffix(ctl, scanner, err);
 		suffix->is_last = 1;
