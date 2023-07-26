@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:37:46 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 16:39:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:51:11 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 void	lst_set(t_list *var_list, t_scope scope, char *key, char *value)
 {
 	char	*tmp;
+	char	*join;
 	t_list	*i;
 
 	i = lst_get_by_key(var_list, key);
@@ -38,7 +39,11 @@ void	lst_set(t_list *var_list, t_scope scope, char *key, char *value)
 	else
 		tmp = ft_strdup(key);
 	if (i == NULL)
-		lst_push_back(&var_list, lst_new(scope, ft_strjoin(tmp, value)));
+	{
+		join = ft_strjoin(tmp, value);
+		lst_push_back(&var_list, lst_new(scope, join));
+		free(join);
+	}
 	else if (i->type != PRIVATE)
 	{
 		free(i->value);
