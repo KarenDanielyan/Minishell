@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:45:51 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 19:20:05 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:01:19 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	is_assignment(t_wordl *wordl)
 	split = NULL;
 	if (wordl)
 	{
-		if (wordl->word->value)
+		if (wordl->word->value && wordl->word->flags & W_ASSIGNMENT)
 		{
 			if (ft_strchr(wordl->word->value, EQUALS))
 			{
