@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:32:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/26 15:34:48 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:59:11 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	*env_init(char **env)
 	var_list = NULL;
 	while (*env)
 	{
-		lst_push_back(&var_list, lst_new(EXPORT, ft_strdup(*env)));
+		lst_push_back(&var_list, lst_new(EXPORT, *env));
 		env ++;
 	}
 	init_vars(&var_list);
@@ -35,20 +35,24 @@ t_list	*env_init(char **env)
 static void	init_vars(t_list **var_list)
 {
 	char	*hist;
+	char	*tmp;
 
 	init_shlvl(*var_list);
 	init_oldpwd(*var_list);
 	hist = ft_strjoin("TILDE=", getenv("HOME"));
 	lst_push_back(var_list, lst_new(PRIVATE, hist));
-	if (!lst_get_by_key(*var_list, IFS))
-		lst_push_back(var_list, lst_new(SHELL, ft_strdup(IFS_INIT)));
-	lst_push_back(var_list, lst_new(SHELL, ft_strdup("?=0")));
-	lst_push_back(var_list, lst_new(SHELL, ft_strdup(PS1)));
-	lst_push_back(var_list, lst_new(SHELL, ft_strdup(PS2)));
-	lst_push_back(var_list, lst_new(SHELL, ft_strdup(PS4)));
-	hist = ft_strjoin(getenv("HOME"), HISTFILE);
-	lst_push_back(var_list, lst_new(PRIVATE, ft_strjoin("HISTFILE=", hist)));
 	free(hist);
+	if (!lst_get_by_key(*var_list, IFS))
+		lst_push_back(var_list, lst_new(SHELL, IFS_INIT));
+	lst_push_back(var_list, lst_new(SHELL, "?=0"));
+	lst_push_back(var_list, lst_new(SHELL, PS1));
+	lst_push_back(var_list, lst_new(SHELL, PS2));
+	lst_push_back(var_list, lst_new(SHELL, PS4));
+	hist = ft_strjoin(getenv("HOME"), HISTFILE);
+	tmp = ft_strjoin("HISTFILE=", hist);
+	lst_push_back(var_list, lst_new(PRIVATE, tmp));
+	free(hist);
+	free(tmp);
 }
 
 static void	init_shlvl(t_list	*var_list)

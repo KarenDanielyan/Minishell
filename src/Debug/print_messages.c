@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:59:08 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/04 15:02:53 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:47:40 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,19 @@ void	print_tokens(t_token	*token_list)
 		token_list = token_list->next;
 	}
 	printf("NULL\n");
+}
+
+void	print_env(char **env)
+{
+	char	**tmp;
+
+	tmp = env;
+	while (*tmp)
+	{
+		printf("%p -> ", *tmp);
+		if (*tmp)
+			printf("%s", *tmp);
+		printf("\n");
+		tmp ++;
+	}
 }

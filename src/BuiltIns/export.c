@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/24 15:56:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:48:29 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	ft_default(char **env, t_list *var_list)
 	{
 		tmp = lst_get_by_key(var_list, *(env + i));
 		printf("%s %s", DL, *(env + i));
-		if (ft_strchr(tmp->joined, EQUALS))
+		if (tmp->joined && ft_strchr(tmp->joined, EQUALS))
 		{
 			printf("=\"");
 			if (tmp->value)
