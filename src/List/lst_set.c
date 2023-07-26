@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:37:46 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/26 20:29:55 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:56:26 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	lst_set_by_word(t_list *var_list, t_scope scope, char *assign_word)
 	char	*tmp;
 	t_list	*var;
 
-	split = ft_split(assign_word, EQUALS);
+	split = get_key_value(assign_word);
 	var = lst_get_by_key(var_list, split[0]);
 	if (assign_word && ft_strchr(assign_word, EQUALS))
 		tmp = ft_strjoin(split[0], EQUALS_S);

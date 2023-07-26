@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 22:57:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/23 02:15:40 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:36:00 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ static t_word	*get_just_word(char **s, int *flags)
 			flag = flag | W_HASDOLLAR | W_PARMEXP;
 		if (**s == TILDE)
 			flag = flag | W_TILDEEXP;
+		if (**s == EQUALS)
+			flag = flag | W_ASSIGNMENT;
 		(*s)++;
 	}
 	w = word_new(word, flag);

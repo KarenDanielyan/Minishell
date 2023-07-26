@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/26 17:48:29 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:56:06 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int	export(t_wordl *args, t_control *ctl)
 		return (ft_default(get_env_key(ctl->var_list), ctl->var_list));
 	while (temp)
 	{
-		split = ft_split(temp->word->value, EQUALS);
+		split = get_key_value(temp->word->value);
 		if (!is_name(split[0]))
 		{
 			ft_dprintf(STDERR_FILENO, ERR_EXPORT, temp->word->value);
 			fail = TRUE;
 		}
 		else
-			lst_set_by_word(ctl->var_list, EXPORT, temp->word->value);
+			lst_set(ctl->var_list, EXPORT, split[0], split[1]);
 		free_2d(split);
 		temp = temp->next;
 	}
