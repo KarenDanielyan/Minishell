@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/26 14:21:31 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:38:22 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,27 @@ t_node	*parse_command(t_control *ctl, t_token **scanner, int *err)
 	t_node		*prefix_node;
 	t_node		*command_node;
 
-	if (*err == 0)
+	if (*err)
+		return (NULL);
+	prefix_node = parse_prefix(ctl, scanner, err);
+	if ((*scanner) && (*scanner)->type == SUBSHELL_OPEN)
 	{
-		prefix_node = parse_prefix(ctl, scanner, err);
-		if ((*scanner) && (*scanner)->type == SUBSHELL_OPEN)
-		{
-			type = CompoundCommand;
-			command_node = parse_commpound_command(ctl, scanner, err);
-		}
-		else if (*scanner)
-		{
-			type = SimpleCommand;
-			command_node = parse_simple_command(ctl, scanner, err);
-		}
-		else
-			command_node = parse_error(ctl, scanner, err);
-		return (new_command_node(type, prefix_node, command_node));
+		type = CompoundCommand;
+		command_node = parse_commpound_command(ctl, scanner, err);
 	}
-	return (NULL);
+	else if (*scanner)
+	{
+		type = SimpleCommand;
+		command_node = parse_simple_command(ctl, scanner, err);
+	}
+	else
+	{
+		type = EmptyCommand;
+		command_node = NULL;
+		if (!prefix_node->value.prefix)
+			command_node = parse_error(ctl, scanner, err);
+	}
+	return (new_command_node(type, prefix_node, command_node));
 }
 
 t_node	*parse_commpound_command(t_control *ctl, t_token **scanner, int *err)
