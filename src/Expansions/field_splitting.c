@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:25:50 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/19 14:03:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:13:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include "expand.h"
 #include <libft.h>
 
-static void		set_split_flags(t_wordl *current, t_wordl *replace);
 static t_wordl	*split_and_push(t_wordl **current, t_list *var_list);
+static void		set_split_flags(t_wordl *current, t_wordl *replace);
+static void		set_values(t_node *node, t_wordl *prev, \
+	t_wordl *current, t_wordl *next);
 
 void	field_splitting(t_node *node, t_list *var_list)
 {
@@ -35,14 +37,30 @@ void	field_splitting(t_node *node, t_list *var_list)
 			prev = wordl_find_prev(node->value.word, current);
 			before_replace = current;
 			current = split_and_push(&current, var_list);
-			if (prev)
-				prev->next = current;
-			else
-				node->value.word = current;
-			if (before_replace != current)
+			set_values(node, prev, current, next);
+			if (current && before_replace != current)
 				wordl_last(current)->next = next;
 		}
 		current = next;
+	}
+}
+
+static void	set_values(t_node *node, t_wordl *prev, \
+	t_wordl *current, t_wordl *next)
+{
+	if (current)
+	{
+		if (prev)
+			prev->next = current;
+		else
+			node->value.word = current;
+	}
+	else
+	{
+		if (prev)
+			prev->next = next;
+		else
+			node->value.word = next;
 	}
 }
 
