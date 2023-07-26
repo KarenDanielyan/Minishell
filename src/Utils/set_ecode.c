@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 22:20:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 21:44:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:52:01 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	set_ecode(t_control *ctl, int after_exec)
 			stat = 0;
 		if (after_exec == TRUE)
 		{
-			stat = WTERMSIG(*(ctl->estat));
+			stat = 128 + WTERMSIG(*(ctl->estat));
 			if (WTERMSIG(*(ctl->estat)) == SIGQUIT)
 				ft_dprintf(STDERR_FILENO, "Quit: %d\n", WTERMSIG(*(ctl->estat)));
 			if (WTERMSIG(*(ctl->estat)) == SIGINT)
