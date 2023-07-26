@@ -80,7 +80,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -g -std=gnu99 #-fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address  #-std=gnu99
 
 INVOKE		=	libft printf
 
@@ -99,7 +99,7 @@ MGOALS		=	$(filter-out bonus, $(MAKECMDGOALS))
 RESET	=	\033[0m
 RED		=	\033[31m
 GREEN	=	\033[32m
-YELLOW	=	\033[33m
+CYAN	=	\033[36m
 BLUE	=	\033[34m
 
 # Recipies
@@ -109,11 +109,11 @@ $(BUILD):
 				@mkdir -p $(BUILD)
 
 $(BUILD)/%.o:	$(SRC)/%.c $(DEP)
-					@echo "${YELLOW}Compiling $<.${RESET}"
+					@echo "${CYAN}Compiling $<.${RESET}"
 					@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(BUILD)/%.o:	$(SRC)/*/%.c $(DEP)
-					@echo "${YELLOW}Compiling $<.${RESET}"
+					@echo "${CYAN}Compiling $<.${RESET}"
 					@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(NAME):	$(BUILD) $(OBJS) $(LIBFT) $(PRINTF)
@@ -132,12 +132,12 @@ wait_msg:
 				@echo "${BLUE}Please wait for minishell to compile.${RESET}"
 
 clean:		$(INVOKE)
-				@echo "${YELLOW}Cleaning Build...${RESET}"
+				@echo "${CYAN}Cleaning Build...${RESET}"
 				@$(RM) $(BUILD)
 				@echo "${GREEN}Done.${RESET}"
 
 fclean:		$(INVOKE)
-				@echo "${YELLOW}Cleaning Everyting...${RESET}"
+				@echo "${CYAN}Cleaning Everyting...${RESET}"
 				@$(RM) $(BUILD)
 				@$(RM) $(NAME) $(NAME)_old
 				@echo "${GREEN}Done.${RESET}"

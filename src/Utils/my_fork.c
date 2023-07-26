@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:07:34 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/24 15:59:21 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:22:27 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	my_fork(t_control *ctl)
 		perror(EPERROR);
 		estat_set(ctl->estat, EXIT_FAILURE);
 		ctl->execute = EXIT_FAILURE;
-		printf("%d\n", *(ctl->estat));
 	}
 	return (pid);
 }

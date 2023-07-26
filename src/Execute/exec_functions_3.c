@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_functions_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:44:43 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 23:43:00 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:30:44 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	execute_scommand(t_control *ctl, t_node *self)
 	t_wordl	*cmd_args;
 	t_word	*last_arg;
 
+	cmd_args = NULL;
+	last_arg = NULL;
 	if (self->value.s_cmd.word)
 		cmd_args = self->value.s_cmd.word->value.word;
 	if (cmd_args)

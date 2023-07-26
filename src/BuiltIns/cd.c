@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/25 16:57:15 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:28:08 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	cd(t_wordl *args, t_control *ctl)
 	}
 	if (lst_get_by_key(ctl->var_list, "PWD"))
 		current_pwd = ft_strdup(lst_get_by_key(ctl->var_list, "PWD")->value);
+	else
+		current_pwd = ft_strdup("");
 	if (chdir(path->word->value) != 0)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: cd: %s: %s\n", \
