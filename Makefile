@@ -80,7 +80,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -g -std=gnu99 #-fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g -std=gnu99 -fsanitize=address
 
 INVOKE		=	libft printf
 

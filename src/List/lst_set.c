@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:37:46 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/26 17:51:11 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 20:29:55 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,27 @@ void	lst_set(t_list *var_list, t_scope scope, char *key, char *value)
 void	lst_set_by_word(t_list *var_list, t_scope scope, char *assign_word)
 {
 	char	**split;
+	char	*join;
 	char	*tmp;
 	t_list	*var;
 
-	split = get_key_value(assign_word);
+	split = ft_split(assign_word, EQUALS);
 	var = lst_get_by_key(var_list, split[0]);
-	if (ft_strchr(assign_word, EQUALS))
+	if (assign_word && ft_strchr(assign_word, EQUALS))
 		tmp = ft_strjoin(split[0], EQUALS_S);
 	else
 		tmp = ft_strdup(split[0]);
+	join = ft_strjoin(tmp, split[1]);
 	if (var == NULL)
-		lst_push_back(&var_list, lst_new(scope, ft_strjoin(tmp, split[1])));
+		lst_push_back(&var_list, lst_new(scope, join));
 	else
 	{
 		free(var->value);
 		free(var->joined);
 		var->value = ft_strdup(split[1]);
-		var->joined = ft_strjoin(tmp, split[1]);
+		var->joined = ft_strdup(join);
 	}
+	free(join);
 	free_2d(split);
 	free(tmp);
 }
