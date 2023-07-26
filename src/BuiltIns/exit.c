@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/25 17:18:52 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:05:40 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ static char	*jump_zeros(char *num)
 
 	i = 0;
 	sign = NULL;
-	zero_loc = ft_strchr(num, '0');
-	if (zero_loc && (zero_loc + 1) && *(zero_loc + 1) == 0)
-		return (ft_strdup(num));
 	if (num[i] == '-' || num[i] == '+')
 	{
 		if (num[i] == '-')
 			sign = "-";
 		i++;
 	}
+	zero_loc = ft_strchr((num + i), '0');
+	if (zero_loc && (zero_loc + 1) && *(zero_loc + 1) == 0)
+		return (ft_strdup(num + i));
 	if (num[i] == '0')
 	{
 		while (num[i] == '0' && num[i])
