@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:40:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/12 02:51:10 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/26 00:05:59 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,25 @@ int	check_tokens(t_token *scanner)
 
 static int	check_quotes(t_wordl *args)
 {
+	char	quote_lvl;
+	char	*s;
+
+	quote_lvl = 0;
 	while (args)
 	{
-		if (ft_strchr(args->word->value, DQUOTE))
+		s = args->word->value;
+		while (*s)
 		{
-			if (ft_strchr(args->word->value, DQUOTE) \
-				== ft_strrchr(args->word->value, DQUOTE))
-			{
-				ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, DQUOTE);
-				return (0);
-			}
+			if (*s == SQUOTE && quote_lvl != DQUOTE)
+				quote_lvl ^= SQUOTE;
+			if (*s == DQUOTE && quote_lvl != SQUOTE)
+				quote_lvl ^= DQUOTE;
+			s ++;
 		}
-		if (ft_strchr(args->word->value, SQUOTE))
+		if (quote_lvl != 0)
 		{
-			if (ft_strchr(args->word->value, SQUOTE) \
-				== ft_strrchr(args->word->value, SQUOTE))
-			{
-				ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, SQUOTE);
-				return (0);
-			}
+			ft_dprintf(STDERR_FILENO, "%s%c\'\n", ERROR_QUOTES, quote_lvl);
+			return (0);
 		}
 		args = args->next;
 	}

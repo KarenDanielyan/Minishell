@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 19:40:50 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:27:17 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ t_node	*parse_commpound_command(t_control *ctl, t_token **scanner, int *err)
 		list_node = parse_list(ctl, scanner, err);
 		list_node->is_last = 0;
 		if (!(*scanner) || (*scanner)->type != SUBSHELL_CLOSE)
-			return (list_node);
+		{
+			if (search(ctl, list_node, ErrorNode))
+				return (list_node);
+			visit(ctl, list_node, drop);
+			return (parse_error(ctl, scanner, err));
+		}
 		token_consume(scanner);
 		suffix = parse_ccmd_suffix(ctl, scanner, err);
 		suffix->is_last = 1;

@@ -6,7 +6,7 @@
 /*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/26 14:05:40 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:07:43 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,14 @@ static uint64_t	check_numeric_arg(t_wordl *args, char *val)
 		|| ft_strlen(val) > 20)
 	{
 		ft_dprintf(STDERR_FILENO, EINARG, args->word->value);
-		exit(EXIT_FAILURE);
+		exit(ENUM_ARG);
 	}
 	rv = ft_atol(args->word->value);
 	s = ft_itol(rv);
 	if (ft_strcmp(s, val) != 0)
 	{
 		ft_dprintf(STDERR_FILENO, EINARG, args->word->value);
-		exit(EXIT_FAILURE);
+		exit(ENUM_ARG);
 	}
 	free(s);
 	return (rv);

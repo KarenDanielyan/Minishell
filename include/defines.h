@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 16:39:26 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/25 23:25:30 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,13 @@ resetting to 1\n"
 /* Platform Specific Defines */
 # ifdef __linux__
 
-#  define SYNTAX_ERR "2"
+#  define SYNTAX_ERR 2
+#  define ENUM_ARG 2
 
 # elif __APPLE__
 
-#  define SYNTAX_ERR "258"
-
+#  define SYNTAX_ERR 258
+#  define ENUM_ARG 255
 # endif
 
 typedef enum e_bool
