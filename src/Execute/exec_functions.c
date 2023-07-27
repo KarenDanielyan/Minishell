@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:50:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/22 20:09:54 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/27 13:33:01 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ static void	set_fd_values(t_node *self);
 void	execute_list(t_control *ctl, t_node *self)
 {
 	execute(ctl, self->value.list.left);
-	while (wait(&(*(ctl->estat))) != -1)
-		;
-	set_ecode(ctl, TRUE);
+	dup2(ctl->in_dup, STDIN_FILENO);
+	dup2(ctl->out_dup, STDOUT_FILENO);
 	if (*(ctl->estat) == 0 && self->value.list.type == AND)
 		execute(ctl, self->value.list.right);
 	else if (*(ctl->estat) != 0 && self->value.list.type == OR)
