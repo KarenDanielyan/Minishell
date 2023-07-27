@@ -6,11 +6,12 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/26 20:44:53 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:37:22 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <string.h>
 
 static int	set_values(t_list *var_list, char *new_pwd, char *current_pwd);
 static int	cd_default(t_list *home, t_control *ctl, t_wordl **path);
