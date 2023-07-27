@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/25 21:46:31 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:15:19 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 	int		pid;
 
 	limiter = setup_hdoc(&fifo, word, &to_expand);
+	if (limiter == NULL)
+		return (-1);
 	pid = my_fork(ctl);
 	if (pid < 0)
 		return (-1);
@@ -52,10 +54,6 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 
 static void	cleanup(t_word *limiter, t_pipe *fifo)
 {
-	if (fifo->in < 0)
-		fifo->in = open(HERE_FILE, O_RDONLY);
-	if (fifo->in < 0)
-		perror(EPERROR);
 	set_attr(RESET);
 	word_delete(limiter);
 	close(fifo->out);
@@ -95,14 +93,14 @@ static t_word	*setup_hdoc(t_pipe *fifo, t_wordl *word, int *to_expand)
 	t_word	*limiter;
 	int		pip[2];
 
-	fifo->out = open(HERE_FILE, O_RDWR | O_CREAT | O_APPEND, 0666);
-	fifo->in = -42;
-	if (fifo->out < 0)
+	if (pipe(pip) < 0)
 	{
-		pipe(pip);
-		fifo->in = pip[0];
-		fifo->out = pip[1];
+		ft_dprintf(STDERR_FILENO, "%s%s: %s\n", EPERROR, \
+			"here_doc:", strerror(errno));
+		return (NULL);
 	}
+	fifo->in = pip[0];
+	fifo->out = pip[1];
 	limiter = wordl_join(word);
 	remove_quotes(limiter);
 	(limiter)->value = ft_strjoin_free(limiter->value, "\n");

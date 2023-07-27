@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 01:10:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/23 13:17:51 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:04:07 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@ t_control	init(int ac, char **av, char **env)
 	t_control	ctl;
 	char		*filename;
 
+	(void)av;
+	if (ac != 1)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: non-interactive mode is not \
+supported.\n");
+		exit(EXIT_FAILURE);
+	}
 	print_logo();
 	rl_readline_name = "Minishell";
 	rl_instream = stdin;
-	if (isatty(STDERR_FILENO))
-		rl_outstream = stderr;
-	mode_init(ac, av);
 	ctl.estat = &g_estat;
 	ctl.execute = 0;
 	ctl.in_dup = dup(STDIN_FILENO);

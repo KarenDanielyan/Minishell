@@ -6,12 +6,13 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:36:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/18 22:25:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:05:53 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* NOTE: Depricated */
 void	mode_init(int ac, char **av)
 {
 	int	fd;
