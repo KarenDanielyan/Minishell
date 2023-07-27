@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 00:28:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/24 16:13:21 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:28:49 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "expand.h"
 #include <libft.h>
 
+static void	escape_quotes(char **param);
 static void	apply(t_wordl *head, t_node *self, t_list *var_list);
 static char	*get_param_word(t_list *var_list, char *dollar_loc, int *len);
 static void	replace(t_word *word, char *dollar_loc, \
@@ -35,7 +36,8 @@ void	param_exp(t_node *self, t_list *var_list)
 	while (tmp)
 	{
 		next = tmp->next;
-		apply(tmp, self, var_list);
+		if (tmp->word->flags & W_HASDOLLAR && !(tmp->word->flags & W_SQUOTE))
+			apply(tmp, self, var_list);
 		tmp = next;
 	}
 }
@@ -48,22 +50,21 @@ static void	apply(t_wordl *head, t_node *self, t_list *var_list)
 
 	len = 0;
 	dollar_loc = head->word->value;
-	if (head->word->flags & W_HASDOLLAR && !(head->word->flags & W_SQUOTE))
+	while (1)
 	{
-		while (1)
+		dollar_loc = ft_strchr(head->word->value, DOLLAR_SIGN);
+		if (dollar_loc == NULL)
+			break ;
+		word = get_param_word(var_list, dollar_loc, &len);
+		if (head->word->flags & (W_SQUOTE | W_DQUOTE))
+			escape_quotes(&word);
+		replace(head->word, dollar_loc, word, len);
+		if (word)
+			free(word);
+		if (!head->word->value || *(head->word->value) == 0)
 		{
-			dollar_loc = ft_strchr(head->word->value, DOLLAR_SIGN);
-			if (dollar_loc == NULL)
-				break ;
-			word = get_param_word(var_list, dollar_loc, &len);
-			replace(head->word, dollar_loc, word, len);
-			if (word)
-				free(word);
-			if (!head->word->value || *(head->word->value) == 0)
-			{
-				wordl_pop(&(self->value.word), head);
-				break ;
-			}
+			wordl_pop(&(self->value.word), head);
+			break ;
 		}
 	}
 }
@@ -103,4 +104,22 @@ static void	replace(t_word *word, char *dollar_loc, char *replace_with, int len)
 	}
 	word->value = temp;
 	word->flags = word->flags | W_PARMEXP;
+}
+
+static void	escape_quotes(char **param)
+{
+	char	*escaped_word;
+	char	*i;
+
+	i = *param;
+	escaped_word = NULL;
+	while (*i)
+	{
+		if (*i == SQUOTE || *i == DQUOTE)
+			ft_strappend(&escaped_word, 1);
+		ft_strappend(&escaped_word, *i);
+		i++;
+	}
+	free(*param);
+	*param = escaped_word;
 }

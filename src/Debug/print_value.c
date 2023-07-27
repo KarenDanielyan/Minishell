@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:22:53 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/20 22:49:54 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:14:23 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	print_io(t_node *self)
 	printf(" \033[37m[%d]\033[0m", self->value.io.fd);
 }
 
-static void	print_word_node(t_wordl *head)
+void	print_word_node(t_wordl *head)
 {
 	while (head)
 	{

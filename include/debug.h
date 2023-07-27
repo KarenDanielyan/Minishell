@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:50:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/26 17:45:45 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:14:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 
 void	print_tokens(t_token	*token_list);
 void	print_tree(t_node *node, char *ident, int is_last);
+void	print_wordl(t_wordl *wordl);
 void	print_env(char **env);
 
 /* Utils */
