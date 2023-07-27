@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:52:07 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/26 21:56:06 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:55:59 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 static void	ft_sort(char **env);
 static int	ft_default(char **env, t_list *var_list);
+static void	set_values(t_control *ctl, t_wordl *tmp, char **key_val, int *fail);
 
 int	export(t_wordl *args, t_control *ctl)
 {
@@ -29,18 +30,33 @@ int	export(t_wordl *args, t_control *ctl)
 	while (temp)
 	{
 		split = get_key_value(temp->word->value);
-		if (!is_name(split[0]))
-		{
-			ft_dprintf(STDERR_FILENO, ERR_EXPORT, temp->word->value);
-			fail = TRUE;
-		}
-		else
-			lst_set(ctl->var_list, EXPORT, split[0], split[1]);
+		set_values(ctl, temp, split, &fail);
 		free_2d(split);
 		temp = temp->next;
 	}
 	estat_set(ctl->estat, fail);
 	return (fail);
+}
+
+static void	set_values(t_control *ctl, t_wordl *tmp, char **key_val, int *fail)
+{
+	t_list	*key;
+
+	if (!is_name(key_val[0]))
+	{
+		ft_dprintf(STDERR_FILENO, ERR_EXPORT, tmp->word->value);
+		*fail = TRUE;
+		return ;
+	}
+	key = lst_get_by_key(ctl->var_list, key_val[0]);
+	if (key)
+	{
+		key->type = EXPORT;
+		if (key_val[1])
+			lst_set(ctl->var_list, EXPORT, key_val[0], key_val[1]);
+	}
+	else
+		lst_set(ctl->var_list, EXPORT, key_val[0], key_val[1]);
 }
 
 static int	ft_default(char **env, t_list *var_list)
