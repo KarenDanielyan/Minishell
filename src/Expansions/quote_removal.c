@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 15:33:30 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/27 17:39:14 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:40:53 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	remove_quotes(t_word *word)
 		if ((*s == SQUOTE || *s == DQUOTE) \
 			&& (quote_lvl == 0 || *s == quote_lvl))
 			quote_lvl ^= *s;
-		else 
+		else
 		{
 			if (*s == 1)
 				s++;
