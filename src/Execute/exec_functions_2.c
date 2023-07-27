@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:01:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/26 14:45:41 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/27 13:45:55 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <libft.h>
 #include <stdio.h>
 
+static void	set_ecode_and_exit(t_control *ctl);
 static void	set_child_fds(t_node *self);
 
 void	execute_command(t_control *ctl, t_node *self)
@@ -50,8 +51,10 @@ void	execute_ccommand(t_control *ctl, t_node *self)
 			close(self->value.c_cmd.in_fd);
 		if (self->value.c_cmd.out_fd != STDOUT_FILENO)
 			close(self->value.c_cmd.out_fd);
-		execute(ctl, self->value.c_cmd.suffix);
+		if (execute(ctl, self->value.c_cmd.suffix) == EXIT_FAILURE)
+			exit(EXIT_FAILURE);
 		execute(ctl, self->value.c_cmd.list);
+		set_ecode_and_exit(ctl);
 	}
 	if (self->value.c_cmd.in_fd != STDIN_FILENO)
 		close(self->value.c_cmd.in_fd);
@@ -74,4 +77,14 @@ static void	set_child_fds(t_node *self)
 		cmd->value.s_cmd.in_fd = self->value.cmd.in_fd;
 		cmd->value.s_cmd.out_fd = self->value.cmd.out_fd;
 	}
+}
+
+static void	set_ecode_and_exit(t_control *ctl)
+{
+	while (wait(ctl->estat) != -1)
+		;
+	if (WIFEXITED(*(ctl->estat)))
+		exit(WEXITSTATUS(*(ctl->estat)));
+	else
+		exit(WTERMSIG(*(ctl->estat)));
 }
