@@ -6,19 +6,20 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 00:28:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/27 17:28:49 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/28 23:45:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "parser.h"
 #include "expand.h"
 #include <libft.h>
 
 static void	escape_quotes(char **param);
 static void	apply(t_wordl *head, t_node *self, t_list *var_list);
-static char	*get_param_word(t_list *var_list, char *dollar_loc, int *len);
 static void	replace(t_word *word, char *dollar_loc, \
 	char *replace_with, int len);
+char		*get_param_word(t_list *var_list, char *dollar_loc, int *len);
 
 /**
  * @brief	parm_exp() performs parameter expansion on the word.
@@ -52,7 +53,7 @@ static void	apply(t_wordl *head, t_node *self, t_list *var_list)
 	dollar_loc = head->word->value;
 	while (1)
 	{
-		dollar_loc = ft_strchr(head->word->value, DOLLAR_SIGN);
+		dollar_loc = ft_strchr(dollar_loc, DOLLAR_SIGN);
 		if (dollar_loc == NULL)
 			break ;
 		word = get_param_word(var_list, dollar_loc, &len);
@@ -66,33 +67,16 @@ static void	apply(t_wordl *head, t_node *self, t_list *var_list)
 			wordl_pop(&(self->value.word), head);
 			break ;
 		}
+		dollar_loc++;
 	}
-}
-
-static char	*get_param_word(t_list *var_list, char *dollar_loc, int *len)
-{
-	char	*param;
-	char	*word;
-	t_list	*param_node;
-
-	*len = 1;
-	while (*(dollar_loc + *len) \
-		&& (ft_strchr(SYMBS, *(dollar_loc + *len)) == NULL))
-		(*len)++;
-	param = ft_substr(dollar_loc, 1, (*len - 1));
-	param_node = lst_get_by_key(var_list, param);
-	if (param_node == NULL || param_node->type == PRIVATE)
-		word = NULL;
-	else
-		word = ft_strdup(param_node->value);
-	free(param);
-	return (word);
 }
 
 static void	replace(t_word *word, char *dollar_loc, char *replace_with, int len)
 {
 	char	*temp;
 
+	if (len == 1)
+		return ;
 	temp = ft_substr(word->value, 0, (dollar_loc - word->value));
 	temp = ft_strjoin_free(temp, replace_with);
 	temp = ft_strjoin_free(temp, (dollar_loc + len));
@@ -113,6 +97,8 @@ static void	escape_quotes(char **param)
 
 	i = *param;
 	escaped_word = NULL;
+	if (i == NULL)
+		return ;
 	while (*i)
 	{
 		if (*i == SQUOTE || *i == DQUOTE)

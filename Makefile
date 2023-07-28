@@ -60,7 +60,8 @@ SRCS		+=	$(patsubst %.c, $(SRC)/%.c,\
 				$(patsubst %.c, $(SRC)/Expansions/%.c,\
 				expand.c tilde_expand.c parm_exp.c \
 				quote_removal.c field_splitting.c \
-				join.c glob_exp.c wildcard_match.c) \
+				join.c glob_exp.c wildcard_match.c \
+				parm_utils.c) \
 				$(patsubst %.c, $(SRC)/Preprocessor/%.c,\
 				preprocess.c) \
 				$(patsubst %.c, $(SRC)/Execute/%.c,\
@@ -80,7 +81,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 
 INVOKE		=	libft printf
 
