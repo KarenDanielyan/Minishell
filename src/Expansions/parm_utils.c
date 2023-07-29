@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 21:50:08 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/28 23:44:58 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:47:46 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*get_param_word(t_list *var_list, char *dollar_loc, int *len)
 	*len = 1;
 	param = get_param_name(dollar_loc, len);
 	param_node = lst_get_by_key(var_list, param);
+	printf("param node: %p\n", param_node);
 	if (param_node == NULL || param_node->type == PRIVATE)
 		word = NULL;
 	else
@@ -51,7 +52,13 @@ static char	*get_param_name(char *start, int *len)
 			ft_strappend(&param, *(start + *len));
 			(*len)++;
 		}
-		free(tmp);
+		if (ft_strcmp(tmp, ECODE) == 0)
+		{
+			param = tmp;
+			(*len)++;
+		}
+		else
+			free(tmp);
 	}
 	return (param);
 }
