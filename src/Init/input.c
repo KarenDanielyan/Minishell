@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:25:08 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 20:10:35 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:31:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_line(t_control *ctl, int fd)
 	if (!str)
 	{
 		write (2, "exit\n", 5);
-		exit(EXIT_SUCCESS);
+		exit(ft_atoi(lst_get_by_key(ctl->var_list, ECODE)->value));
 	}
 	if (!(*str))
 	{

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 23:25:30 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:04:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -390,6 +390,7 @@ typedef struct s_Node
 
 typedef struct s_control
 {
+	int				cur_pid;
 	int				in_dup;
 	int				out_dup;
 	int				*estat;

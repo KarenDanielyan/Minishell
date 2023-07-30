@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 00:01:05 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/27 13:45:55 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:16:52 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ void	execute_command(t_control *ctl, t_node *self)
 
 void	execute_ccommand(t_control *ctl, t_node *self)
 {
-	int	pid;
-
-	pid = my_fork(ctl);
-	if (pid < 0)
+	ctl->cur_pid = my_fork(ctl);
+	if (ctl->cur_pid < 0)
 		return ;
-	if (pid == 0)
+	if (ctl->cur_pid == 0)
 	{
 		dup2(self->value.c_cmd.in_fd, STDIN_FILENO);
 		dup2(self->value.c_cmd.out_fd, STDOUT_FILENO);

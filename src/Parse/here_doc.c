@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/30 16:20:53 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:37:51 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <sys/wait.h>
 #include <libft.h>
 #include <termios.h>
+
+static char		*get_here_line(t_list *ps2);
 
 static void		cleanup(t_word *limiter, t_pipe *fifo);
 static void		here_doc(t_control *ctl, t_word *limiter, \
@@ -70,7 +72,7 @@ static void	here_doc(t_control *ctl, t_word *limiter, int expand, t_pipe fifo)
 	tmp = NULL;
 	while (1)
 	{
-		line = readline(lst_get_by_key(ctl->var_list, "PS2")->value);
+		line = get_here_line(lst_get_by_key(ctl->var_list, "PS2"));
 		if (line == NULL || ft_strcmp(line, limiter->value) == 0)
 			break ;
 		tmp = line;
@@ -85,6 +87,17 @@ static void	here_doc(t_control *ctl, t_word *limiter, int expand, t_pipe fifo)
 	close(fifo.in);
 	close(fifo.out);
 	exit(EXIT_SUCCESS);
+}
+
+static char	*get_here_line(t_list *ps2)
+{
+	const char	*arg;
+
+	if (ps2)
+		arg = ps2->value;
+	else
+		arg = NULL;
+	return (readline(arg));
 }
 
 static t_word	*setup_hdoc(t_pipe *fifo, t_wordl *word, int *to_expand)

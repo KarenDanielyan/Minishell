@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 18:00:29 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/26 14:07:43 by dohanyan         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:29:03 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ int	my_exit(t_wordl *args, t_control *ctl)
 	int			rv;
 	char		*jumped;
 
-	ft_dprintf(STDERR_FILENO, "%s\n", EXIT);
+	if (ctl->cur_pid != 0)
+		ft_dprintf(STDERR_FILENO, "%s\n", EXIT);
 	tmp = args->next;
 	if (!tmp)
-		exit(EXIT_SUCCESS);
+		exit(ft_atoi(lst_get_by_key(ctl->var_list, ECODE)->value));
 	jumped = jump_zeros(tmp->word->value);
 	rv = check_valid(tmp, jumped);
 	free(jumped);
