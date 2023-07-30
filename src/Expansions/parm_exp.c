@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 00:28:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/28 23:45:08 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/30 23:04:50 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static void	escape_quotes(char **param);
 static void	apply(t_wordl *head, t_node *self, t_list *var_list);
-static void	replace(t_word *word, char *dollar_loc, \
+static void	replace(t_word *word, char **dollar_loc, \
 	char *replace_with, int len);
 char		*get_param_word(t_list *var_list, char *dollar_loc, int *len);
 
@@ -59,7 +59,7 @@ static void	apply(t_wordl *head, t_node *self, t_list *var_list)
 		word = get_param_word(var_list, dollar_loc, &len);
 		if (head->word->flags & (W_SQUOTE | W_DQUOTE))
 			escape_quotes(&word);
-		replace(head->word, dollar_loc, word, len);
+		replace(head->word, &dollar_loc, word, len);
 		if (word)
 			free(word);
 		if (!head->word->value || *(head->word->value) == 0)
@@ -71,15 +71,19 @@ static void	apply(t_wordl *head, t_node *self, t_list *var_list)
 	}
 }
 
-static void	replace(t_word *word, char *dollar_loc, char *replace_with, int len)
+static void	replace(t_word *word, char **dollar_loc, \
+	char *replace_with, int len)
 {
 	char	*temp;
 
 	if (len == 1)
+	{
+		(*dollar_loc)++;
 		return ;
-	temp = ft_substr(word->value, 0, (dollar_loc - word->value));
+	}
+	temp = ft_substr(word->value, 0, (*dollar_loc - word->value));
 	temp = ft_strjoin_free(temp, replace_with);
-	temp = ft_strjoin_free(temp, (dollar_loc + len));
+	temp = ft_strjoin_free(temp, (*dollar_loc + len));
 	free(word->value);
 	if (temp && *temp == 0)
 	{
@@ -88,6 +92,7 @@ static void	replace(t_word *word, char *dollar_loc, char *replace_with, int len)
 	}
 	word->value = temp;
 	word->flags = word->flags | W_PARMEXP;
+	*dollar_loc = word->value;
 }
 
 static void	escape_quotes(char **param)
