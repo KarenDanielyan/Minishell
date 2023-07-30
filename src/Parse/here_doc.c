@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/27 15:15:19 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/30 16:20:53 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 		return (-1);
 	pid = my_fork(ctl);
 	if (pid < 0)
+	{
+		cleanup(limiter, &fifo);
 		return (-1);
+	}
 	if (pid == 0)
 		here_doc(ctl, limiter, to_expand, fifo);
 	waitpid(pid, ctl->estat, 0);
@@ -44,9 +47,7 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 	{
 		if (WTERMSIG(*(ctl->estat)) == SIGINT)
 			write(1, "\n", 1);
-		word_delete(limiter);
-		set_attr(RESET);
-		return (-1);
+		fifo.in = -1;
 	}
 	cleanup(limiter, &fifo);
 	return (fifo.in);
@@ -54,7 +55,7 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 
 static void	cleanup(t_word *limiter, t_pipe *fifo)
 {
-	set_attr(RESET);
+	set_attr();
 	word_delete(limiter);
 	close(fifo->out);
 }
@@ -66,12 +67,10 @@ static void	here_doc(t_control *ctl, t_word *limiter, int expand, t_pipe fifo)
 
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_IGN);
-	set_attr(SET);
 	tmp = NULL;
 	while (1)
 	{
-		shell_print(ctl, "PS2");
-		line = get_next_line(STDIN_FILENO);
+		line = readline(lst_get_by_key(ctl->var_list, "PS2")->value);
 		if (line == NULL || ft_strcmp(line, limiter->value) == 0)
 			break ;
 		tmp = line;
@@ -103,7 +102,6 @@ static t_word	*setup_hdoc(t_pipe *fifo, t_wordl *word, int *to_expand)
 	fifo->out = pip[1];
 	limiter = wordl_join(word);
 	remove_quotes(limiter);
-	(limiter)->value = ft_strjoin_free(limiter->value, "\n");
 	if (limiter->flags & (W_SQUOTE | W_DQUOTE))
 		*to_expand = FALSE;
 	else
