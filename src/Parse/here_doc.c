@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/30 18:37:51 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/08/01 03:05:08 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	parse_heredoc(t_wordl *word, t_control *ctl)
 
 static void	cleanup(t_word *limiter, t_pipe *fifo)
 {
-	set_attr();
+	set_attr(1);
 	word_delete(limiter);
 	close(fifo->out);
 }
@@ -105,6 +105,7 @@ static t_word	*setup_hdoc(t_pipe *fifo, t_wordl *word, int *to_expand)
 	t_word	*limiter;
 	int		pip[2];
 
+	set_attr(0);
 	if (pipe(pip) < 0)
 	{
 		ft_dprintf(STDERR_FILENO, "%s%s: %s\n", EPERROR, \

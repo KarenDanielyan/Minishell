@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:56:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/30 16:21:15 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/08/01 02:49:38 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@
 static char	*get_param_word(char *dollar_loc, int *len, t_list *var_list);
 static void	replace(char **line, char *dollar_loc, char *word, int len);
 
-void	set_attr(void)
+void	set_attr(int mode)
 {
-	struct termios	ts;
+	static struct termios	ts;
 
-	tcgetattr(STDIN_FILENO, &ts);
-	ts.c_lflag |= (ECHO | ICANON);
-	tcsetattr(STDIN_FILENO, TCSANOW, &ts);
+	if (mode == 0)
+		tcgetattr(STDIN_FILENO, &ts);
+	if (mode == 1)
+		tcsetattr(STDIN_FILENO, TCSANOW, &ts);
 }
 
 char	*parmexp(char *line, t_control *ctl)
