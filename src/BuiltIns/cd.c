@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 20:29:40 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/26 20:44:53 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:23:04 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ int	cd(t_wordl *args, t_control *ctl)
 	new_pwd = NULL;
 	current_pwd = NULL;
 	path = args->next;
-	if (!path || wordl_size(path) > 1)
-	{
-		if (cd_default(lst_get_by_key(ctl->var_list, "HOME"), ctl, &path))
-			return (EXIT_FAILURE);
-	}
+	if (!path)
+		cd_default(lst_get_by_key(ctl->var_list, "HOME"), ctl, &path);
 	if (lst_get_by_key(ctl->var_list, "PWD"))
 		current_pwd = ft_strdup(lst_get_by_key(ctl->var_list, "PWD")->value);
 	if (chdir(path->word->value) != 0)
@@ -69,12 +66,9 @@ static int	set_values(t_list *var_list, char *new_pwd, char *current_pwd)
 
 static int	cd_default(t_list *home, t_control *ctl, t_wordl **path)
 {
-	if (!home || wordl_size(*path) > 1)
+	if (!home)
 	{
-		if (!home)
-			ft_dprintf(STDERR_FILENO, ERROR_CD);
-		else
-			ft_dprintf(STDERR_FILENO, ERROR_CD2MUCH);
+		ft_dprintf(STDERR_FILENO, ERROR_CD);
 		estat_set(ctl->estat, EXIT_FAILURE);
 		return (EXIT_FAILURE);
 	}
