@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:58:17 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/30 18:25:16 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/31 11:48:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ void	handle_command(t_control *ctl, t_node *self)
 	char	**args;
 	char	**env;
 	char	*cmd;
+	int		flags;
 
 	args = wordl_to_array(self->value.s_cmd.word->value.word);
 	env = get_env(ctl->var_list);
-	cmd = cmd_search(self->value.s_cmd.word->value.word, ctl->var_list);
+	cmd = cmd_search(self->value.s_cmd.word->value.word, ctl->var_list, &flags);
 	ctl->cur_pid = my_fork(ctl);
 	if (ctl->cur_pid >= 0)
 	{
@@ -55,7 +56,7 @@ void	handle_command(t_control *ctl, t_node *self)
 		{
 			if (handle_suffix(ctl, self, ctl->cur_pid) == EXIT_FAILURE)
 				exit(EXIT_FAILURE);
-			execute_and_check(cmd, args, env);
+			execute_and_check(cmd, args, env, flags);
 		}
 	}
 	free(cmd);

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:45:51 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/26 16:01:19 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/31 12:08:44 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 static char	*get_file_path(char **path, char *file);
 static char	**get_path(t_list *var_list);
 
-char	*cmd_search(t_wordl *cmd, t_list *var_list)
+char	*cmd_search(t_wordl *cmd, t_list *var_list, int *flags)
 {
 	char	**path;
 	char	*cmd_loc;
 
+	*flags = 0;
 	if (cmd == NULL)
 		return (NULL);
 	path = get_path(var_list);
@@ -31,6 +32,7 @@ char	*cmd_search(t_wordl *cmd, t_list *var_list)
 	if (cmd_loc == NULL)
 		cmd_loc = ft_strdup(cmd->word->value);
 	free_2d(path);
+	*flags = cmd->word->flags;
 	return (cmd_loc);
 }
 
@@ -58,9 +60,9 @@ int	is_assignment(t_wordl *wordl)
 	return (rv);
 }
 
-void	execute_and_check(char *cmd, char **args, char **env)
+void	execute_and_check(char *cmd, char **args, char **env, int cmd_flags)
 {
-	if (cmd == NULL)
+	if (cmd == NULL && !(cmd_flags & W_HASQUOTEDNULL))
 		exit(EXIT_SUCCESS);
 	execve(cmd, args, env);
 	if (errno == ENOENT)
