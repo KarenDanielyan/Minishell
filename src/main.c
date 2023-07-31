@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:18:19 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/25 21:46:48 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:28:15 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	wait_and_reset(t_control *ctl, int after_exec)
 {
 	while (wait(&(*(ctl->estat))) != -1)
 		;
+	ctl->cur_pid = -42;
 	set_ecode(ctl, after_exec);
 	ctl->execute = EXIT_SUCCESS;
 	visit(NULL, ctl->tree, drop);

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 20:24:49 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/09 15:35:43 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/28 23:19:01 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,27 @@
  * 			In our version, we only look in duplicated version of
  * 			home. It does not handle username postfixes. If that
  * 			duplicated version is null, the tilde expansion will
- * 			not be performed.
+ * 			not be performed. The only possible way to use tilde
+ * 			is this:
+ * 			~
+ * 			If word contains any other character except tilde,
+ * 			tilde expansion will not be performed.
  */
 void	tilde_exp(t_node *node, t_list *var_list)
 {
-	char	*tilde_loc;
-	char	*temp;
 	t_list	*tilde;
 	t_wordl	*tmp;
 
 	tmp = node->value.word;
-	while (tmp)
+	if (wordl_size(tmp) == 1)
 	{
-		tilde_loc = ft_strchr(tmp->word->value, TILDE);
-		if ((tmp->word->flags & W_TILDEEXP) && tilde_loc)
+		if (ft_strlen(tmp->word->value) == 1 && *(tmp->word->value) == TILDE)
 		{
 			tilde = lst_get_by_key(var_list, TILDE_VAR);
 			if (!tilde || !(tilde->value))
-				break ;
-			temp = ft_substr(tmp->word->value, 0, \
-				(tilde_loc - tmp->word->value));
-			temp = ft_strjoin_free(temp, tilde->value);
-			temp = ft_strjoin_free(temp, (tilde_loc + 1));
+				return ;
 			free(tmp->word->value);
-			tmp->word->value = temp;
+			tmp->word->value = ft_strdup(tilde->value);
 		}
-		tmp = tmp->next;
 	}
 }

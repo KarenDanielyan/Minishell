@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/25 23:25:30 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/31 11:39:47 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,7 @@ typedef enum e_type
  * @def W_SUBSHELL_PAREN	Subshell caused by ( ... ).
  * @def W_JOIN				This word should be joined with the parts of the
  * 							word that were not field splitted.
+ * @def W_HASQUOTEDNULL		Word contains a quoted NULL character.
  * @def W_EXPAND			Word was already expanded.
  */
 enum e_flags
@@ -220,7 +221,8 @@ enum e_flags
 	W_SUBSHELL_PAREN	= (1 << 9),
 	W_SUBSHELL_PIPE		= (1 << 10),
 	W_JOIN				= (1 << 11),
-	W_EXPAND			= (1 << 12)
+	W_EXPAND			= (1 << 12),
+	W_HASQUOTEDNULL		= (1 << 13)
 };
 
 /* ****** Defines for lexical analyzer ****** */
@@ -390,6 +392,7 @@ typedef struct s_Node
 
 typedef struct s_control
 {
+	int				cur_pid;
 	int				in_dup;
 	int				out_dup;
 	int				*estat;

@@ -6,10 +6,11 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:34:03 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/26 20:45:11 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:44:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "list.h"
 #include <libft.h>
 #include <stdio.h>
@@ -34,7 +35,7 @@ t_list	*lst_new(int type, char *key_val)
 		perror(EPERROR);
 		return (NULL);
 	}
-	split = ft_split(key_val, EQUALS);
+	split = get_key_value(key_val);
 	if (key_val && ft_strchr(key_val, EQUALS))
 		new->joined = ft_strdup(key_val);
 	if (split[0])

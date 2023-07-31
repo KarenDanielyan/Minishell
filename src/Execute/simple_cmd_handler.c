@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:58:17 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/24 15:59:31 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:15:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@ static void	handle_builtin_modes(t_control *ctl, t_node *self, \
 
 void	handle_builtin(t_control *ctl, t_node *self, t_flist *buitltin)
 {
-	int	pid;
+	int	my_pid;
 
-	pid = -42;
+	my_pid = -42;
 	if (self->value.s_cmd.word->value.word->word->flags & W_SUBSHELL_PIPE)
 	{
-		pid = my_fork(ctl);
-		if (pid < 0)
+		my_pid = my_fork(ctl);
+		ctl->cur_pid = my_pid;
+		if (ctl->cur_pid < 0)
 			return ;
 	}
-	if (pid == 0 || pid == -42)
+	if (ctl->cur_pid == 0 || ctl->cur_pid == -42)
 	{
 		dup2(self->value.s_cmd.in_fd, STDIN_FILENO);
 		dup2(self->value.s_cmd.out_fd, STDOUT_FILENO);
@@ -38,28 +39,28 @@ void	handle_builtin(t_control *ctl, t_node *self, t_flist *buitltin)
 		close(self->value.s_cmd.in_fd);
 	if (self->value.s_cmd.out_fd != STDOUT_FILENO)
 		close(self->value.s_cmd.out_fd);
-	handle_builtin_modes(ctl, self, buitltin, pid);
+	handle_builtin_modes(ctl, self, buitltin, my_pid);
 }
 
 void	handle_command(t_control *ctl, t_node *self)
 {
-	int		pid;
 	char	**args;
 	char	**env;
 	char	*cmd;
+	int		flags;
 
 	args = wordl_to_array(self->value.s_cmd.word->value.word);
 	env = get_env(ctl->var_list);
-	cmd = cmd_search(self->value.s_cmd.word->value.word, ctl->var_list);
-	pid = my_fork(ctl);
-	if (pid >= 0)
+	cmd = cmd_search(self->value.s_cmd.word->value.word, ctl->var_list, &flags);
+	ctl->cur_pid = my_fork(ctl);
+	if (ctl->cur_pid >= 0)
 	{
-		handle_io(ctl, self, pid);
-		if (pid == 0)
+		handle_io(ctl, self, ctl->cur_pid);
+		if (ctl->cur_pid == 0)
 		{
-			if (handle_suffix(ctl, self, pid) == EXIT_FAILURE)
+			if (handle_suffix(ctl, self, ctl->cur_pid) == EXIT_FAILURE)
 				exit(EXIT_FAILURE);
-			execute_and_check(cmd, args, env);
+			execute_and_check(cmd, args, env, flags);
 		}
 	}
 	free(cmd);

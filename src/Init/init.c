@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 01:10:22 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/27 15:04:07 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:25:28 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ supported.\n");
 	}
 	print_logo();
 	rl_readline_name = "Minishell";
-	rl_instream = stdin;
+	ctl.cur_pid = -42;
 	ctl.estat = &g_estat;
 	ctl.execute = 0;
 	ctl.in_dup = dup(STDIN_FILENO);
