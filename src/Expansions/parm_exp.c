@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parm_exp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 00:28:56 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/30 23:04:50 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:53:32 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static void	apply(t_wordl *head, t_node *self, t_list *var_list)
 			wordl_pop(&(self->value.word), head);
 			break ;
 		}
-		dollar_loc++;
 	}
 }
 

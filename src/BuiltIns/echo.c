@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dohanyan <dohanyan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 20:22:03 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/07/24 15:45:02 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:19:57 by dohanyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	echo(t_wordl *args, t_control *ctl)
 		return (EXIT_SUCCESS);
 	}
 	flag = check_flag(temp);
-	if (flag)
+	while (check_flag(temp) && temp)
 		temp = temp->next;
 	word = create(temp);
 	ft_putstr_fd(word, STDOUT_FILENO);
