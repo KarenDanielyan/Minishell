@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:58:17 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/31 11:48:12 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:15:12 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ static void	handle_builtin_modes(t_control *ctl, t_node *self, \
 
 void	handle_builtin(t_control *ctl, t_node *self, t_flist *buitltin)
 {
+	int	my_pid;
+
+	my_pid = -42;
 	if (self->value.s_cmd.word->value.word->word->flags & W_SUBSHELL_PIPE)
 	{
-		ctl->cur_pid = my_fork(ctl);
+		my_pid = my_fork(ctl);
+		ctl->cur_pid = my_pid;
 		if (ctl->cur_pid < 0)
 			return ;
 	}
@@ -35,7 +39,7 @@ void	handle_builtin(t_control *ctl, t_node *self, t_flist *buitltin)
 		close(self->value.s_cmd.in_fd);
 	if (self->value.s_cmd.out_fd != STDOUT_FILENO)
 		close(self->value.s_cmd.out_fd);
-	handle_builtin_modes(ctl, self, buitltin, ctl->cur_pid);
+	handle_builtin_modes(ctl, self, buitltin, my_pid);
 }
 
 void	handle_command(t_control *ctl, t_node *self)
