@@ -27,4 +27,102 @@ Minishell's architecture is designed to provide a modular and efficient command-
 
 ![Minishells architecture](Assets/Architecture.svg)
 
-Minishells architecture
+### Module Descriptions
+
+- 	`Input` module reads the user input and displays a prompt when waiting for a new command. This module uses the `readline` library, which provides line editing and command history capabilities. Custom signals required for the project are part of this module as well.
+-	`Lexical Analysis` module generates a list of tokens from the given input to be later used to break it down into an abstract syntax tree from defined `Context-Free Grammar`.
+-	`Parser` interprets the string of tokens and builds an AST according to the Context-Free Grammar.
+-	`Expansion` module is responsible for shell expansions. Our project supports all bash-performed expansions, although on a more limited scale.
+-	`Execution` unit executes the commands in the processed AST. This module handles built-ins, process creation, and process management. Additionally, it handles input/output redirection and pipelines, command lists, and subshell execution.
+-	`Exit Status` unit collects the exit status after execution, storing it in a special variable `?`. It also cleans up the memory that is no longer in use.
+
+## Context-Free Grammar
+
+We will define our grammar in EBNF (Extended Backus-Naur form).
+Symbols come in two forms:
+-	`terminal`-  letter from the grammar alphabet. In this syntactic grammar, the terminals are individual lexeme-tokens from the scanner like `|` or `cat`. We name terminals with all uppercase symbols, with or without underscores. For example: `PIPE_OP` or `WORD`.
+-	`non-terminal` - named reference to another rule in the grammar. It means “play that rule and insert whatever it produces here”. We define non-terminals with all lowercase symbols, with or without underscores.
+- We define the end of the rule with the symbol `;`
+- We allow a series of productions separated by a `|` (pipe).
+- We use the postfix operator * to allow the previous symbol or group to be repeated zero or more times.
+- We use the postfix operator `+` to require the preceding production to appear at least once.
+- We use a postfix operator `?` for optional production. The thing before it can appear as zero or one time, but not more.
+```EBNF
+/* Terminal Symbols */
+ALPHA     :='a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p'
+          | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
+          | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P'
+          | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
+          ;
+DIGIT     :=  '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0'
+          ;
+EQUALS    := '='
+          ;
+PIPE_OP   := '|'
+          ;
+GREAT     := '>'
+          ;
+LESS      := '<'
+          ;
+DGREAT    := '>>'
+          ;
+DLESS     := '<<'
+          ;
+LPAREN    := '('
+          ;
+RPAREN    := ')'
+          ;
+USCORE    := '_'
+          ;
+AND_IF    := '&&'
+          ;
+OR_IF     := '||'
+          ;
+WORD      := (ALPHA | DIGIT | USCORE)+
+          ;
+NAME      := (ALPHA | USCORE) (ALPHA | DIGIT | USCORE)*
+          ;
+
+/* Starting non-terminal */
+program := list
+        ;
+list    := pipeline list'
+        ;
+list'   := (AND_IF | OR_IF) list` | NULL
+        ;
+/* Command Pipelines */
+pipeline          := command pipeline'
+                  ;
+pipeline'         := PIPE_OP command pipeline` | NULL
+                  ;
+command           := cmd_prefix (compound_command | simple_command)
+                  ;
+compound_command  := subshell ccmd_suffix
+                  ;
+subshell          := LPAREN list RPAREN
+                  ;
+simple_command    := cmd_word cmd_suffix
+                  ;
+cmd_word          := WORD | assignment_word
+                  ;
+cmd_prefix        := io_redirect*
+                  ;
+ccmd_suffix       := io_redirect*
+                  ;
+cmd_suffix        := (WORD | io_redirect)*
+                  ;
+assignment_word   := NAME EQUALS WORD
+                  ;
+io_redirect       := io_file | io_here
+                  ;
+io_file           := LESS   filename
+                  |  GREAT  filename
+                  |  DGREAT filename
+                  ;
+filename          := WORD
+                  ;
+io_here           := DLESS  here_end
+                  ;
+here_end          := WORD
+                  ;
+```
