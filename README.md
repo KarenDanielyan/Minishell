@@ -1,4 +1,4 @@
-# Minishell
+# Minishell [![kdaniely's 42 minishell Score](https://badge42.vercel.app/api/v2/cldiw2g0k01220fl8ferid3xf/project/3107292)](https://github.com/JaeSeoKim/badge42)
 
 ## Description
 
@@ -20,6 +20,19 @@ Minishell will support the following features:
 12. Support command lists with `&&` (AND_IF) and `||` (OR_IF) operators.
 13. Wildcard `*` support for current working directory.
 14. Implement built-in commands, including `echo`, `cd`, `pwd`, `export`, `unset`, `env` and `exit`, providing essential shell functionality out-of-the-box.
+
+## Installation
+
+If you don't have `gcc` or GNU `make` do these commands:
+```bash
+sudo apt update
+sudo apt install build-essential
+```
+To install `readline` use this command:
+```bash
+make configure
+```
+To install `minishell` just run `make` in the root of the cloned repository.
 
 ## Architecture
 
