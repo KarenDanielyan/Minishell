@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/08/25 18:19:10 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:20:37 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static void	here_doc(t_control *ctl, t_word *limiter, int expand, t_pipe fifo)
 
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_IGN);
-	tmp = NULL;
 	while (1)
 	{
 		line = get_here_line(lst_get_by_key(ctl->var_list, "PS2"));
