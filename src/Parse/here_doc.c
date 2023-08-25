@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:24:25 by dohanyan          #+#    #+#             */
-/*   Updated: 2023/08/01 03:20:54 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:19:10 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	here_doc(t_control *ctl, t_word *limiter, int expand, t_pipe fifo)
 		else
 		{
 			line = ft_strdup(tmp);
-			ft_strappend(&tmp, NEWLINE);
+			ft_strappend(&line, '\n');
 		}
 		ft_putstr_fd(line, fifo.out);
 		free(tmp);

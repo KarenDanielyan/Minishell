@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:34:35 by kdaniely          #+#    #+#             */
-/*   Updated: 2023/07/31 11:39:47 by kdaniely         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:18:36 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ resetting to 1\n"
 # define PS2 "PS2=> "
 # define PS4 "PS4=+ "
 # define DL "declare -x"
-# define NEWLINE '\n'
 
 /* Built-Ins */
 # define CD "cd"
